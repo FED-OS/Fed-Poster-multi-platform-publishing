@@ -80,7 +80,7 @@ Fed-Poster uses Supabase Edge Functions for Tumblr, SafeW, and DeviantArt OAuth.
 
 For any security‑related inquiries, reach out to us at:
 
-📧 **security@fed-poster.example.com**  
+📧 **business@fedpromptly.com**  
 🔐 PGP key: [available upon request]
 
 ---
