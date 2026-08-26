@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <link rel="stylesheet" href="assets/settings.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="dashboard.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-rocket"></i> Compose</a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container section">
+    <div class="settings-header reveal">
+      <h1>Settings</h1>
+      <p>Manage your connected accounts, preferences, and appearance.</p>
+    </div>
+
+    <div class="settings-layout">
+      <!-- Settings nav -->
+      <aside class="settings-nav">
+        <button class="settings-nav-item active" data-tab="accounts"><i class="fa-solid fa-link"></i> Connected Accounts</button>
+        <button class="settings-nav-item" data-tab="appearance"><i class="fa-solid fa-palette"></i> Appearance</button>
+        <button class="settings-nav-item" data-tab="preferences"><i class="fa-solid fa-sliders"></i> Preferences</button>
+        <button class="settings-nav-item" data-tab="data"><i class="fa-solid fa-database"></i> Data & Privacy</button>
+        <button class="settings-nav-item" data-tab="about"><i class="fa-solid fa-circle-info"></i> About</button>
+      </aside>
+
+      <!-- Settings content -->
+      <div class="settings-content">
+        <!-- ACCOUNTS -->
+        <div class="settings-panel active" id="panel-accounts">
+          <h2>Connected Accounts</h2>
+          <p class="settings-desc">Your credentials are stored locally in your browser. They never leave your device.</p>
+          <div class="accounts-grid" id="accounts-grid"></div>
+        </div>
+
+        <!-- APPEARANCE -->
+        <div class="settings-panel" id="panel-appearance">
+          <h2>Appearance</h2>
+          <p class="settings-desc">Choose from 12 unique themes. Your choice persists across all pages.</p>
+          <div class="theme-gallery" id="theme-gallery"></div>
+        </div>
+
+        <!-- PREFERENCES -->
+        <div class="settings-panel" id="panel-preferences">
+          <h2>Preferences</h2>
+          <p class="settings-desc">Customize your posting experience.</p>
+          <div class="pref-list">
+            <div class="pref-item">
+              <div class="pref-info"><strong>Default character limit display</strong><span>Show character counters on all message fields</span></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="pref-item">
+              <div class="pref-info"><strong>Auto-save credentials</strong><span>Save tokens to localStorage on entry</span></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="pref-item">
+              <div class="pref-info"><strong>Post history logging</strong><span>Keep last 30 posts in history panel</span></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="pref-item">
+              <div class="pref-info"><strong>Keyboard shortcuts</strong><span>Enable global hotkeys (?, H, E, T, 1-8)</span></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="pref-item">
+              <div class="pref-info"><strong>Confirm before Post All</strong><span>Show confirmation dialog before mass posting</span></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="pref-item">
+              <div class="pref-info"><strong>Animations</strong><span>Enable UI transitions and effects</span></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- DATA -->
+        <div class="settings-panel" id="panel-data">
+          <h2>Data & Privacy</h2>
+          <p class="settings-desc">Fed-Poster stores all data locally. Here's what's on your device and how to manage it.</p>
+          <div class="data-card">
+            <div class="data-row"><span><i class="fa-solid fa-key"></i> Stored credentials</span><strong id="data-creds">0 items</strong></div>
+            <div class="data-row"><span><i class="fa-solid fa-clock-rotate-left"></i> Post history entries</span><strong id="data-history">0 entries</strong></div>
+            <div class="data-row"><span><i class="fa-solid fa-calendar"></i> Calendar posts</span><strong id="data-calendar">0 posts</strong></div>
+            <div class="data-row"><span><i class="fa-solid fa-palette"></i> Theme preference</span><strong id="data-theme">dark</strong></div>
+          </div>
+          <div class="data-actions">
+            <button class="btn btn-ghost" id="export-data"><i class="fa-solid fa-download"></i> Export Data</button>
+            <button class="btn btn-ghost" id="clear-history"><i class="fa-solid fa-trash"></i> Clear History</button>
+            <button class="btn btn-outline" id="clear-all" style="border-color:var(--red);color:var(--red)"><i class="fa-solid fa-triangle-exclamation"></i> Clear All Data</button>
+          </div>
+          <div class="privacy-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            <p><strong>Zero servers.</strong> Fed-Poster is 100% client-side. No analytics, no tracking, no telemetry. Everything stays in your browser's localStorage. Clearing your browser data wipes everything.</p>
+          </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="settings-panel" id="panel-about">
+          <h2>About Fed-Poster</h2>
+          <p class="settings-desc">The privacy-first, browser-native, anti-SaaS social media posting platform.</p>
+          <div class="about-grid">
+            <div class="about-card"><i class="fa-solid fa-code-branch"></i><strong>Version</strong><span>v2.0.0</span></div>
+            <div class="about-card"><i class="fa-solid fa-shield-halved"></i><strong>Architecture</strong><span>100% Client-Side</span></div>
+            <div class="about-card"><i class="fa-solid fa-layer-group"></i><strong>Platforms</strong><span>7 Integrated</span></div>
+            <div class="about-card"><i class="fa-solid fa-palette"></i><strong>Themes</strong><span>12 Available</span></div>
+          </div>
+          <div class="about-links">
+            <a href="index.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="pricing.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-tag"></i> Pricing</a>
+            <a href="#" class="btn btn-ghost btn-sm"><i class="fa-brands fa-github"></i> Source</a>
+            <a href="#" class="btn btn-ghost btn-sm"><i class="fa-brands fa-discord"></i> Discord</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a><p>The privacy-first, browser-native, anti-SaaS social media posting platform.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="dashboard.html">Dashboard</a><a href="calendar.html">Calendar</a><a href="analytics.html">Analytics</a><a href="pricing.html">Pricing</a></div>
+      <div class="footer-col"><h4>Platforms</h4><a href="dashboard.html">Telegram</a><a href="dashboard.html">Bluesky</a><a href="dashboard.html">Mastodon</a><a href="dashboard.html">Discord</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="settings.html">Settings</a><a href="#">Documentation</a><a href="#">Changelog</a><a href="#">Community</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Fed-Poster. Built privacy-first.</span><div class="footer-social"><a href="#"><i class="fa-brands fa-github"></i></a><a href="#"><i class="fa-brands fa-discord"></i></a><a href="#"><i class="fa-brands fa-mastodon"></i></a></div></div>
+  </footer>
+
+  <script src="assets/fedposter.js"></script>
+  <script src="assets/settings.js"></script>
+</body>
+</html>
