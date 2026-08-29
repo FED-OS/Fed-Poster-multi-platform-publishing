@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Unified Inbox</title>
+  <meta name="description" content="A single unified inbox that aggregates notifications, mentions, and engagement across Telegram, Bluesky, Mastodon, Discord, and more." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <link rel="stylesheet" href="assets/inbox.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="inbox.html">Inbox</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="dashboard.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-rocket"></i> Compose</a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="inbox-layout">
+    <!-- LEFT: filter rail -->
+    <aside class="inbox-left reveal">
+      <div class="inbox-filter">
+        <div class="inbox-filter-label">Views</div>
+        <div class="inbox-filter-item active" data-filter="all"><i class="fa-solid fa-inbox"></i> All <span class="fi-count" id="cnt-all">0</span></div>
+        <div class="inbox-filter-item" data-filter="unread"><i class="fa-solid fa-envelope"></i> Unread <span class="fi-count" id="cnt-unread">0</span></div>
+        <div class="inbox-filter-item" data-filter="mentions"><i class="fa-solid fa-at"></i> Mentions <span class="fi-count" id="cnt-mentions">0</span></div>
+        <div class="inbox-filter-item" data-filter="pinned"><i class="fa-solid fa-thumbtack"></i> Pinned <span class="fi-count" id="cnt-pinned">0</span></div>
+      </div>
+      <div class="inbox-filter">
+        <div class="inbox-filter-label">Platforms</div>
+        <div class="inbox-filter-item" data-platform="telegram"><span class="fi-dot" style="background:#229ED9"></span> Telegram <span class="fi-count" id="cnt-telegram">0</span></div>
+        <div class="inbox-filter-item" data-platform="bluesky"><span class="fi-dot" style="background:#0EA5E9"></span> Bluesky <span class="fi-count" id="cnt-bluesky">0</span></div>
+        <div class="inbox-filter-item" data-platform="mastodon"><span class="fi-dot" style="background:#6364FF"></span> Mastodon <span class="fi-count" id="cnt-mastodon">0</span></div>
+        <div class="inbox-filter-item" data-platform="discord"><span class="fi-dot" style="background:#5865F2"></span> Discord <span class="fi-count" id="cnt-discord">0</span></div>
+        <div class="inbox-filter-item" data-platform="github"><span class="fi-dot" style="background:#444c56"></span> GitHub <span class="fi-count" id="cnt-github">0</span></div>
+        <div class="inbox-filter-item" data-platform="deviantart"><span class="fi-dot" style="background:#00E59B"></span> DeviantArt <span class="fi-count" id="cnt-deviantart">0</span></div>
+        <div class="inbox-filter-item" data-platform="reddit"><span class="fi-dot" style="background:#FF4500"></span> Reddit <span class="fi-count" id="cnt-reddit">0</span></div>
+        <div class="inbox-filter-item" data-platform="x"><span class="fi-dot" style="background:#000000"></span> X <span class="fi-count" id="cnt-x">0</span></div>
+        <div class="inbox-filter-item" data-platform="linkedin"><span class="fi-dot" style="background:#0A66C2"></span> LinkedIn <span class="fi-count" id="cnt-linkedin">0</span></div>
+        <div class="inbox-filter-item" data-platform="facebook"><span class="fi-dot" style="background:#1877F2"></span> Facebook <span class="fi-count" id="cnt-facebook">0</span></div>
+        <div class="inbox-filter-item" data-platform="pinterest"><span class="fi-dot" style="background:#E60023"></span> Pinterest <span class="fi-count" id="cnt-pinterest">0</span></div>
+        <div class="inbox-filter-item" data-platform="threads"><span class="fi-dot" style="background:#000000"></span> Threads <span class="fi-count" id="cnt-threads">0</span></div>
+        <div class="inbox-filter-item" data-platform="tumblr"><span class="fi-dot" style="background:#36465D"></span> Tumblr <span class="fi-count" id="cnt-tumblr">0</span></div>
+        <div class="inbox-filter-item" data-platform="nostr"><span class="fi-dot" style="background:#8B5CF6"></span> Nostr <span class="fi-count" id="cnt-nostr">0</span></div>
+        <div class="inbox-filter-item" data-platform="instagram"><span class="fi-dot" style="background:#E1306C"></span> Instagram <span class="fi-count" id="cnt-instagram">0</span></div>
+        <div class="inbox-filter-item" data-platform="youtube"><span class="fi-dot" style="background:#FF0000"></span> YouTube <span class="fi-count" id="cnt-youtube">0</span></div>
+        <div class="inbox-filter-item" data-platform="tiktok"><span class="fi-dot" style="background:#25F4EE"></span> TikTok <span class="fi-count" id="cnt-tiktok">0</span></div>
+        <div class="inbox-filter-item" data-platform="snapchat"><span class="fi-dot" style="background:#FFFC00"></span> Snapchat <span class="fi-count" id="cnt-snapchat">0</span></div>
+        <div class="inbox-filter-item" data-platform="whatsapp"><span class="fi-dot" style="background:#25D366"></span> WhatsApp <span class="fi-count" id="cnt-whatsapp">0</span></div>
+        <div class="inbox-filter-item" data-platform="slack"><span class="fi-dot" style="background:#611F69"></span> Slack <span class="fi-count" id="cnt-slack">0</span></div>
+        <div class="inbox-filter-item" data-platform="medium"><span class="fi-dot" style="background:#12100E"></span> Medium <span class="fi-count" id="cnt-medium">0</span></div>
+        <div class="inbox-filter-item" data-platform="wordpress"><span class="fi-dot" style="background:#21759B"></span> WordPress <span class="fi-count" id="cnt-wordpress">0</span></div>
+        <div class="inbox-filter-item" data-platform="vk"><span class="fi-dot" style="background:#0077FF"></span> VKontakte <span class="fi-count" id="cnt-vk">0</span></div>
+        <div class="inbox-filter-item" data-platform="weibo"><span class="fi-dot" style="background:#E6162D"></span> Weibo <span class="fi-count" id="cnt-weibo">0</span></div>
+        <div class="inbox-filter-item" data-platform="nextdoor"><span class="fi-dot" style="background:#8BC53F"></span> Nextdoor <span class="fi-count" id="cnt-nextdoor">0</span></div>
+        <div class="inbox-filter-item" data-platform="flickr"><span class="fi-dot" style="background:#FF0084"></span> Flickr <span class="fi-count" id="cnt-flickr">0</span></div>
+        <div class="inbox-filter-item" data-platform="gbp"><span class="fi-dot" style="background:#4285F4"></span> Google Business <span class="fi-count" id="cnt-gbp">0</span></div>
+        <div class="inbox-filter-item" data-platform="farcaster"><span class="fi-dot" style="background:#855DCD"></span> Farcaster <span class="fi-count" id="cnt-farcaster">0</span></div>
+      </div>
+    </aside>
+
+    <!-- CENTER: feed -->
+    <main class="inbox-center">
+      <div class="inbox-header reveal">
+        <div>
+          <h1>Unified Inbox</h1>
+          <div class="sub">Every mention, reply, and notification across your platforms — in one place.</div>
+        </div>
+        <div class="inbox-header-actions">
+          <div class="inbox-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="inbox-search-input" placeholder="Search inbox…" />
+          </div>
+          <button class="btn btn-ghost btn-sm" id="mark-all-read"><i class="fa-solid fa-check-double"></i> Mark all read</button>
+        </div>
+      </div>
+
+      <div class="inbox-tabs reveal">
+        <button class="inbox-tab active" data-tab="all">All</button>
+        <button class="inbox-tab" data-tab="mentions">Mentions <span class="badge" id="tab-mentions">0</span></button>
+        <button class="inbox-tab" data-tab="replies">Replies</button>
+        <button class="inbox-tab" data-tab="reactions">Reactions</button>
+        <button class="inbox-tab" data-tab="follows">Follows</button>
+      </div>
+
+      <div class="feed-list" id="feed-list">
+        <!-- skeleton loaders injected first, replaced by JS -->
+      </div>
+    </main>
+
+    <!-- RIGHT: activity pulse + stats -->
+    <aside class="inbox-right reveal">
+      <div class="inbox-stat-card">
+        <div class="inbox-pulse"><span class="pulse-dot"></span> Live · updating now</div>
+        <h3><i class="fa-solid fa-fire" style="color:var(--orange)"></i> Engagement Today</h3>
+        <div class="inbox-stat-row"><span class="name"><i class="fa-solid fa-heart" style="color:var(--red)"></i> Likes</span><span class="num" data-counter="184" data-suffix="">0</span></div>
+        <div class="inbox-stat-row"><span class="name"><i class="fa-solid fa-retweet" style="color:var(--green)"></i> Reposts</span><span class="num" data-counter="47" data-suffix="">0</span></div>
+        <div class="inbox-stat-row"><span class="name"><i class="fa-solid fa-comment" style="color:var(--accent)"></i> Replies</span><span class="num" data-counter="63" data-suffix="">0</span></div>
+        <div class="inbox-stat-row"><span class="name"><i class="fa-solid fa-user-plus" style="color:var(--blue, var(--accent))"></i> New followers</span><span class="num" data-counter="12" data-suffix="">0</span></div>
+      </div>
+      <div class="inbox-stat-card">
+        <h3><i class="fa-solid fa-bolt" style="color:var(--accent)"></i> Best Time to Post</h3>
+        <div style="font-size:32px;font-weight:900;color:var(--accent);margin:6px 0 4px;">6:00 PM</div>
+        <div style="font-size:13px;color:var(--text-muted);">Based on when your audience is most active across all platforms.</div>
+        <a href="calendar.html" class="btn btn-ghost btn-sm" style="margin-top:12px;width:100%;justify-content:center;"><i class="fa-solid fa-calendar-plus"></i> Schedule for now</a>
+      </div>
+      <div class="inbox-stat-card">
+        <h3><i class="fa-solid fa-chart-simple" style="color:var(--green)"></i> Sentiment</h3>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div style="flex:0 0 72%;height:10px;border-radius:50px;background:var(--green);"></div>
+          <div style="flex:0 0 20%;height:10px;border-radius:50px;background:var(--orange);"></div>
+          <div style="flex:0 0 8%;height:10px;border-radius:50px;background:var(--red);"></div>
+        </div>
+        <div class="inbox-stat-row"><span class="name"><span class="dot" style="background:var(--green)"></span> Positive</span><span class="num">72%</span></div>
+        <div class="inbox-stat-row"><span class="name"><span class="dot" style="background:var(--orange)"></span> Neutral</span><span class="num">20%</span></div>
+        <div class="inbox-stat-row"><span class="name"><span class="dot" style="background:var(--red)"></span> Negative</span><span class="num">8%</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>
+        <span>Fed-Poster</span>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="inbox.html">Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+        <a href="index.html#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="https://discord.gg/" target="_blank">Discord</a>
+        <a href="https://github.com/" target="_blank">GitHub</a>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="#" aria-label="Bluesky"><i class="fa-solid fa-cloud"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Fed-Poster · Open-source under MIT · Press <kbd style="font-size:10px;padding:1px 5px;border-radius:4px;background:var(--bg-input);border:1px solid var(--accent-bg)">?</kbd> for shortcuts</span>
+    </div>
+  </footer>
+
+  <script src="assets/fedposter.js"></script>
+  <script src="assets/discord-badge.js"></script>
+  <script src="assets/inbox.js"></script>
+  <!-- Ko-fi support widget -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script src="assets/kofi-widget.js"></script>
+</body>
+</html>
