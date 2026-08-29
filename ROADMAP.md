@@ -1,150 +1,129 @@
 # 🗺️ Fed-Poster Roadmap
 
+> A living document. Priorities shift based on community input (Discussions polls), maintainer capacity, and platform API changes. Nothing here is a hard commitment or a date promise — it's a transparent view of where we're heading. Have an opinion? [Vote in a poll](https://github.com/fedpromptly/fed-poster/discussions/categories/polls) or [propose an idea](https://github.com/fedpromptly/fed-poster/discussions/categories/ideas).
+
 <div align="center">
-  <img src="https://img.shields.io/badge/status-active-success?style=for-the-badge" alt="Status" />
-  <img src="https://img.shields.io/badge/version-2.0-brightgreen?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/status-living%20document-blue?style=for-the-badge" alt="Living document" />
+  <img src="https://img.shields.io/badge/current-v1.x-brightgreen?style=for-the-badge" alt="v1.x" />
+  <img src="https://img.shields.io/badge/updated-2024--08-orange?style=for-the-badge" alt="Updated" />
 </div>
 
-This roadmap communicates the **direction** of Fed-Poster. It is a living document — priorities shift based on community feedback, contributions, and available capacity. Nothing here is a hard commitment; it's a shared sense of where we're going. Have an opinion? Open a [Discussion](https://github.com/FED-OS/Fed-Poster/discussions) labeled `Ideas`.
+---
 
-> 🗳️ **Status legend:** ✅ Done · 🚧 In progress · 📋 Planned · 🔬 Exploring · 💤 Backlog
+## 🧭 Vision
+
+Fed-Poster exists to make cross-posting to the open and social web **private, fast, and free**. The north star is a single dashboard from which a creator or agency can reach every platform they care about — without surrendering their credentials to a server farm, without a SaaS lock-in, and without juggling a dozen browser tabs. The roadmap pursues three durable themes: **more reach** (platforms), **more control** (scheduling, automation, analytics), and **deeper trust** (privacy, security, self-hosting). Everything below ladders up to one of those.
 
 ---
 
-## 🎯 North Star
+## ✅ Recently Shipped
 
-> *One workspace to publish everywhere — open source, self-hostable, secure by design, owned by the creator.*
+What landed in the current release line. Full detail in [`CHANGELOG.md`](CHANGELOG.md).
 
----
-
-## 🏗️ Current Focus (v2.x — H2 2026)
-
-### Core Platform
-- ✅ Redesigned dashboard with 29 direct integrations + 450+ via Zapier
-- ✅ External `styles.css` for theming
-- 🚧 Component refactor (extract per-platform panels into modules)
-- 📋 Plugin/adapter registry for community-maintained platforms
-
-### Security & Trust
-- ✅ OAuth-only credential model
-- ✅ `SECURITY.md`, `CODE_OF_CONDUCT.md`, governance docs
-- 🚧 CSP headers & self-hosting hardening guide
-- 📋 SOC 2 readiness program (Agency tier)
-
-### Developer Experience
-- ✅ `CLAUDE.md` / `AGENTS.md` for AI-assisted dev
-- ✅ Dependabot + issue/PR templates
-- 🚧 Test coverage baseline (unit + integration + E2E)
-- 📋 Public API for programmatic posting
+- **12 built-in themes** — Deep Space, Cloud, Azure Depth, Emerald Forest, Royal Nebula, Molten Lava, Cyberpunk, Sunset, Abyssal Teal, Luxe Blush, Cobalt Steel, Synthwave — with instant switching and persistence.
+- **Multi-platform composer** — select any combination of platforms, write once, send everywhere.
+- **Per-platform panels** — credential management, message composition, file uploads, test & send, real-time status, for Telegram, Bluesky, Mastodon, Discord, GitHub (Gist + Repo), Tumblr, DeviantArt, SafeW.
+- **Proxy bridges** — Buffer and WordPress Jetpack extend reach to Twitter/X, LinkedIn, Facebook, Instagram, Tumblr without per-platform API keys.
+- **Smart credential storage** — `localStorage`, namespaced `fedposter_*`, never leaves the device.
+- **File attachments** — photos, videos, audio on supported platforms (Telegram, Bluesky, Mastodon, DeviantArt).
+- **Ko-fi community funding** — overlay widget on CTA buttons; no in-dashboard ads or telemetry.
+- **Branded 404 + landing redesign** with hero, logos bar, and pricing teaser.
 
 ---
 
-## 🚀 Upcoming Milestones
+## 🚧 In Progress (v1.x next minor)
 
-### v2.1 — Content Adaptation & Preview (Q3 2026)
-- 📋 Per-platform live preview with character/media limits
-- 📋 Smart content adaptation (auto-shorten for X, alt-text for Mastodon)
-- 📋 Media transcoding pipeline (compress/resize per platform)
-- 📋 Draft templates & reusable content snippets
+Work actively underway or next in the queue.
 
-### v2.2 — Scheduling & Automation (Q4 2026)
-- 📋 Visual calendar scheduler with timezone awareness
-- 📋 Queue management & retry with backoff
-- 📋 Recurring posts & content series
-- 📋 Best-time-to-post suggestions (basic heuristics)
-
-### v2.3 — Analytics & Insights (Q1 2027)
-- 📋 Unified delivery & engagement analytics
-- 📋 Exportable audit logs (CSV/JSON)
-- 📋 Per-platform performance comparison
-- 📋 Webhook events for downstream automation
-
-### v3.0 — Federation & Decentralization (H1 2027)
-- 🔬 First-class ActivityPub support (publish to any Fediverse instance)
-- 🔬 Matrix / XMPP adapters
-- 🔬 Multi-account workspace (agency mode)
-- 🔬 Local-first sync (CRDT) for self-hosted multi-device
+- **Calendar scheduling polish** — drag-to-reschedule, timezone-aware posting, conflict warnings, and a month/week/day toggle. (`calendar.html`, `assets/calendar.js`)
+- **Analytics expansion** — per-platform posting counts, engagement proxies where APIs allow, exportable CSV, and a rolling 30-day view. (`analytics.html`, `assets/analytics.js`)
+- **Credential export/import & full wipe** — encrypted JSON bundle so users can move accounts between browsers/devices safely, plus a one-click "nuke all Fed-Poster data" in Settings.
+- **Settings audit** — consolidate theme picker, credential manager, and about panel into a tabbed settings shell; add a "security checkup" that flags over-broad token scopes.
+- **Accessibility pass** — keyboard navigation across the dashboard, focus-visible rings using tokens, screen-reader labels on all platform toggles, and WCAG AA contrast verification per theme.
+- **Documentation deepening** — finish the `wiki/` per-platform setup guides and a theme-authoring tutorial.
 
 ---
 
-## 🔌 Platform Integrations Pipeline
+## 🔜 Planned (this year)
 
-Requested platforms, tracked here for transparency. Want one? See [ADR-0007](ADR.md#adr-0007-adding-a-new-platform-adapter).
+Higher-confidence items we intend to build, pending capacity.
 
-| Platform      | Status | Target       | Notes                          |
-|---------------|--------|--------------|--------------------------------|
-| Reddit        | ✅     | v2.1 (shipped) | Direct OAuth submit adapter  |
-| X (Twitter)   | ✅     | v2.1 (shipped) | API v2 tweet adapter         |
-| LinkedIn      | ✅     | v2.1 (shipped) | ugcPosts share adapter       |
-| Facebook      | ✅     | v2.1 (shipped) | Page feed adapter            |
-| Pinterest     | ✅     | v2.1 (shipped) | Pin creation adapter         |
-| Threads       | ✅     | v2.1 (shipped) | Meta Threads two-step publish|
-| Tumblr        | ✅     | v2.1 (shipped) | OAuth 1.0a text post adapter |
-| Nostr         | ✅     | v2.1 (shipped) | NIP-07 + nsec relay publish  |
-| Instagram     | ✅     | v2.2 (shipped) | Meta Graph container + publish |
-| YouTube       | ✅     | v2.2 (shipped) | Data API v3 community posts    |
-| TikTok        | ✅     | v2.2 (shipped) | Content Posting API v2         |
-| Snapchat      | ✅     | v2.2 (shipped) | Marketing API creatives        |
-| WhatsApp      | ✅     | v2.2 (shipped) | Business Cloud API broadcasts  |
-| Slack         | ✅     | v2.2 (shipped) | Incoming webhook posts         |
-| Medium        | ✅     | v2.2 (shipped) | Medium API article publish     |
-| WordPress     | ✅     | v2.2 (shipped) | REST API + Basic Auth          |
-| VKontakte     | ✅     | v2.2 (shipped) | wall.post adapter              |
-| Weibo         | ✅     | v2.2 (shipped) | OAuth 2.0 statuses/update      |
-| Nextdoor      | ✅     | v2.2 (shipped) | Neighborhood posts API         |
-| Flickr        | ✅     | v2.2 (shipped) | Upload API (simplified OAuth)  |
-| Google Business | ✅   | v2.2 (shipped) | GBP localPosts API             |
-| Farcaster     | ✅     | v2.2 (shipped) | Warpcast API v2 casts          |
-| Twitch        | Soon   | v2.2         | Clip publishing                |
-| WeChat        | Soon   | Backlog      | Region-specific                |
-| Quora         | Soon   | Backlog      |                                |
-| ActivityPub   | 🔬     | v3.0         | Federation milestone           |
-| Matrix        | 🔬     | v3.0         |                                |
+### Platforms
+- **Nostr** — native support via relays; a privacy-aligned fit for the project's ethos.
+- **Pixelfed** — image-first federated posting.
+- **Cohost / successor** — if the community wants it and the API permits.
+- **Threads (Meta)** — via official API where available; otherwise a documented bridge.
+- **Reddit & LinkedIn direct** — explore official API access vs. continuing proxy reliance.
+- **YouTube Community posts & Shorts** — for creator workflows.
+- **Medium & Substack** — long-form cross-posting with markdown preservation.
 
+### Capabilities
+- **Drafts & templates library** — reusable per-platform message templates with variables (`{title}`, `{url}`, `{tags}`).
+- **AI-assisted content** (Growth tier) — repurpose one long post into platform-tailored variants, suggest hashtags, generate images. Strictly opt-in, client-side where possible, never auto-posting without review.
+- **Queue + bulk scheduling** — drag posts into a queue, auto-stagger to avoid spamminess.
+- **Webhooks & simple API** (Agency tier) — trigger posts from external systems; receive post-status callbacks.
+- **Team / agency workspaces** — multiple client accounts, role-based access, per-client credential vaults.
+- **Browser extension** — right-click → "cross-post this page" feeding the dashboard.
+- **Encrypted cloud sync (opt-in)** — let users sync credentials across devices via their own encrypted store (age/NaCl), with the key never touching our servers.
+
+### Trust & Operations
+- **CSP + SRI hardening** — ship a Content-Security-Policy and Subresource Integrity hashes for the CDN assets.
+- **Optional self-hosted scheduling daemon** — a tiny documented Node service for users who need posting to survive a closed browser, preserving the no-required-backend default.
+- **Automated visual regression** — screenshot the dashboard in all 12 themes on PRs.
+- **i18n groundwork** — extract UI strings so community translations become possible.
 
 ---
 
-## 💤 Backlog (Nice to Have)
+## 🧪 Exploring (needs research / community signal)
 
-- 📋 AI-assisted copy generation (opt-in, BYO-key)
-- 📋 Image/video AI generation (opt-in)
-- 📋 Browser extension for "share to Fed-Poster"
-- 📋 Internationalization (i18n) & community translations
-- 📋 Mobile companion app (PWA-first)
-- 📋 Team roles & permissions (beyond Pro's 5 users)
-- 📋 Dark/light theme toggle (currently dark-only)
-- 📋 Rate-limit awareness dashboard per platform
+Lower-confidence ideas we're mulling. Vote in Discussions to move these up.
 
----
-
-## 🛑 Explicitly *Not* Doing (For Now)
-
-To keep scope manageable, these are intentionally out of scope unless the community strongly pushes otherwise:
-
-- ❌ Reading/aggregating inbound feeds (we're a *publisher*, not a reader)
-- ❌ Storing user content server-side (we stay local-first by default)
-- ❌ Advertising or selling user data — ever
+- **Federation-native features** — follow/import from Mastodon/Bluesky graphs to suggest platforms.
+- **Analytics integrations** — pipe post stats into Plausible/GA (user-owned, opt-in only).
+- **Content calendar templates** — seasonal/campaign presets.
+- **Mobile app shell** (PWA) with offline draft composition and background sync via service worker.
+- **A "platform health" dashboard** — live status of each integration's API (rate limits, outages).
+- **Rate-limit awareness** — auto-throttle multi-post to respect each platform's limits and surface ETA.
 
 ---
 
-## 🤝 How Priorities Are Set
+## 🏗️ Architectural Track
 
-1. **Community input** — Discussions, issues, feature requests.
-2. **Maintainer proposals** — synthesized into milestones.
-3. **Core Team review** — quarterly roadmap review (see [GOVERNANCE.md](GOVERNANCE.md)).
-4. **Funding reality** — sponsored/agency work can accelerate specific items.
+Tracked via [`ADR.md`](ADR.md). The significant one under consideration:
 
-If you want a feature sooner, contributing it (or sponsoring it) is the fastest path. See [CONTRIBUTING.md](CONTRIBUTING.md) and [.github/FUNDING.yml](.github/FUNDING.yml).
+- **ADR-010 (Proposed): React/TypeScript rewrite as a v2 track.** Would bring component reuse, type safety, and a test harness to the increasingly complex dashboard — **without** abandoning the v1 static build or the no-required-backend privacy property. Open until a maintainer accepts it and supersedes ADR-003. Community input welcome.
 
 ---
 
-## 📜 Changelog vs. Roadmap
+## ❌ Not Doing (for now) — and why
 
-- [CHANGELOG.md](CHANGELOG.md) = what **has** shipped.
-- [ROADMAP.md](ROADMAP.md) = what **might** ship.
+Transparency about what we're deliberately *not* building, to set expectations:
+
+- **A required backend / credential server.** Would break the core privacy promise (ADR-001). Optional scheduling daemon, yes; mandatory server, no.
+- **Ads or third-party tracking in the dashboard.** Non-negotiable. Funding comes from Ko-fi and the hosted commercial tiers (ADR-007).
+- **Unofficial/scraping API clients for closed platforms.** Fragile, ToS-violating, ban-prone. We bridge via Buffer/Jetpack instead (ADR-006).
+- **Auto-posting AI content without review.** AI assistance is opt-in and always previews before send.
+- **Paywalling the open-source build.** The OSS repo stays fully functional; commercial value lives in hosting and services.
+
+---
+
+## 📅 Release Cadence
+
+We aim for a **minor release roughly every 4–6 weeks** and **patch releases as needed** (especially for security — see `SECURITY.md`). SemVer applies (ADR-009). Each release ships a `CHANGELOG.md` section and, where relevant, GitHub Release notes. No hard dates; quality and the privacy bar gate every release.
+
+---
+
+## 🗳️ How Priorities Get Set
+
+1. **Community signal** — Discussions polls, 👍 reactions on feature requests, real use cases in Q&A.
+2. **Maintainer capacity** — Fed-Poster is volunteer-maintained; we ship what we can sustain.
+3. **Platform API reality** — an integration may drop or jump priority based on a platform's API changes.
+4. **Privacy/security gating** — anything that risks the core promise is deprioritized or rejected outright.
+
+Want to move something up the list? The fastest path is a well-argued [feature request](https://github.com/fedpromptly/fed-poster/issues/new?template=feature_request.md) with a real use case and community 👍s, or a PR that implements it (see [`CONTRIBUTING.md`](CONTRIBUTING.md)).
 
 ---
 
 <div align="center">
-  <sub>🗺️ <strong>The map is not the territory — but it helps us walk together.</strong></sub>
+  <sub>🗺️ <strong>This roadmap is a compass, not a contract.</strong> Build with us.</sub>
 </div>

@@ -1,269 +1,259 @@
+<img width="2560" height="1440" alt="fed-poster-fun-music-festival" src="https://github.com/user-attachments/assets/5685cee2-97ef-43c2-8638-2d35a861dc86" />
+
 <div align="center">
-  <img width="2560" height="1440" alt="fed-poster-fun-music-festival" src="https://github.com/user-attachments/assets/5685cee2-97ef-43c2-8638-2d35a861dc86" />
 
-  <h1>📨 Fed-Poster</h1>
-  <p><strong>One Dashboard. Every Platform. Zero Hassle.</strong></p>
-  <p>Cross-post to Telegram, Bluesky, Mastodon, Discord, Reddit, X, LinkedIn, Facebook, Instagram, YouTube, TikTok, Snapchat, WhatsApp, Slack, Medium, WordPress, Pinterest, Threads, Tumblr, VKontakte, Weibo, Nextdoor, Flickr, Google Business, Farcaster, Nostr, GitHub, DeviantArt & 450+ more — all from a single, sleek, open-source interface.</p>
+<img src="https://img.shields.io/badge/status-active-success?style=for-the-badge" alt="Status" />
+<img src="https://img.shields.io/badge/platforms-12%2B-blue?style=for-the-badge" alt="Platforms" />
+<img src="https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge" alt="License" />
+<img src="https://img.shields.io/badge/made%20with-❤️-red?style=for-the-badge" alt="Made with love" />
+<img src="https://img.shields.io/badge/version-1.x-brightgreen?style=for-the-badge" alt="Version" />
+<img src="https://img.shields.io/badge/build%20step-none-orange?style=for-the-badge" alt="No build step" />
 
-  <br />
+<br />
 
-  <img src="https://img.shields.io/badge/status-active-success?style=for-the-badge" alt="Status" />
-  <img src="https://img.shields.io/badge/version-2.0-brightgreen?style=for-the-badge" alt="Version" />
-  <img src="https://img.shields.io/badge/platforms-29%20direct%20%2B%20450%2B%20Zapier-blue?style=for-the-badge" alt="Platforms" />
-  <img src="https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge" alt="License" />
-  <img src="https://img.shields.io/badge/made%20with-❤️-red?style=for-the-badge" alt="Made with love" />
-  <img src="https://img.shields.io/badge/PRs-welcome-blue?style=for-the-badge" alt="PRs Welcome" />
+<h1>📨 Fed-Poster &nbsp; [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W3T61ZU5FS)</h1>
 
-  <br /><br />
+<p><strong>One Dashboard. Twelve Platforms. Zero Hassle.</strong></p>
 
-  <a href="#-get-started"><img src="https://img.shields.io/badge/🚀_Get_Started-Install_now-green?style=for-the-badge" alt="Get Started" /></a>
-  <a href="PRICING.md"><img src="https://img.shields.io/badge/💰_Pricing-View_Plans-blue?style=for-the-badge" alt="Pricing" /></a>
-  <a href="https://github.com/FED-OS/Fed-Poster/discussions"><img src="https://img.shields.io/badge/💬_Join-Discussions-purple?style=for-the-badge" alt="Discussions" /></a>
-  [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W3T61ZU5FS)
+<p>Cross-post to Telegram, Bluesky, Mastodon, Discord, GitHub, Tumblr, DeviantArt, SafeW & more — all from a single, sleek interface. Privacy-first, browser-native, no required backend.</p>
+
+<br />
+
+<a href="#installation"><img src="https://img.shields.io/badge/🚀_Get_Started-Install_now-green?style=for-the-badge" alt="Get Started" /></a>
+<a href="#pricing"><img src="https://img.shields.io/badge/💰_Pricing-View_Plans-blue?style=for-the-badge" alt="Pricing" /></a>
+<a href="usage.md"><img src="https://img.shields.io/badge/📖_Usage-Guide-purple?style=for-the-badge" alt="Usage Guide" /></a>
+<a href="https://github.com/fedpromptly/fed-poster/discussions"><img src="https://img.shields.io/badge/💬_Discussions-Join_us-9cf?style=for-the-badge" alt="Discussions" /></a>
+
 </div>
 
 ---
 
 ## ✨ Why Fed-Poster?
 
-Tired of juggling tabs, APIs, and credentials for every social platform? **Fed-Poster** brings everything together in one clean dashboard. Write once, select your platforms, and hit send — your content reaches your audience everywhere, instantly. And because it's **open source under MIT**, you can self-host it and own your data end to end.
+Tired of juggling tabs, APIs, and credentials for every social platform? **Fed-Poster** brings everything together in one clean dashboard. Write once, select your platforms, and hit send — your content reaches your audience everywhere, instantly. And because it runs entirely in your browser with no required backend, your credentials never leave your device unless you're actively posting.
 
-> **28 Direct Integrations** • **450+ via Zapier** • **Auto-saved Credentials** • **File Uploads** • **Proxy Support** • **No Verification Required** • **Self-Hostable**
+> **12 Social Networks** • **Auto-saved Credentials** • **File Uploads** • **Proxy Support** • **12 Built-in Themes** • **No Verification Required** • **No Telemetry**
+
+### The privacy promise, by architecture
+
+Most social-posting tools are SaaS: you hand them your tokens, they store them on a server, and they post on your behalf. Fed-Poster inverts that. Your tokens live in your browser's `localStorage`, posts go directly from your browser to each platform over HTTPS, and the only server-side components are **stateless** OAuth bridges that store nothing. You can read every line of the source, open DevTools, and watch exactly where your data goes. Privacy is a property of the architecture (see [`ADR-001`](ADR.md#adr-001)), not a sentence in a policy.
 
 ---
 
-## 🚀 Supported Integrations
-
-### Direct Integrations
+## 🚀 Supported Platforms
 
 | Platform | Type | Media | Status |
 |----------|------|-------|--------|
-| <img src="https://img.icons8.com/color/20/facebook.png" /> **Facebook** | Direct / OAuth | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/youtube-play.png" /> **YouTube** | Direct / OAuth | 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/instagram-new.png" /> **Instagram** | Direct / OAuth | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/tiktok--v1.png" /> **TikTok** | Direct | 🎥 | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/twitterx--v1.png" /> **X (Twitter)** | Direct / OAuth | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/linkedin.png" /> **LinkedIn** | Direct / OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/reddit.png" /> **Reddit** | Direct / OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/discord.png" /> **Discord** | Webhook | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/telegram-app.png" /> **Telegram** | Bot API | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/medium-monogram.png" /> **Medium** | API / Token | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/wordpress.png" /> **WordPress** | REST / Jetpack | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/github.png" /> **GitHub (Gist)** | Token | — | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/github.png" /> **GitHub (Repo)** | Token | — | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/gitlab.png" /> **GitLab** | Token | — | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/bluesky.png" /> **Bluesky** | Direct (AT Proto) | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/mastodon.png" /> **Mastodon** | Direct (API) | 🖼️ 🎥 🎵 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/tumblr.png" /> **Tumblr** | OAuth | — | 🔜 Soon |
-| <img src="https://img.icons8.com/color/20/deviantart.png" /> **DeviantArt** | OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/reddit.png" /> **Reddit** | Direct / OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/twitterx--v1.png" /> **X (Twitter)** | Direct / OAuth 2.0 | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/linkedin.png" /> **LinkedIn** | Direct / OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/facebook.png" /> **Facebook** | Direct / Page Token | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/pinterest.png" /> **Pinterest** | Direct / OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/threads.png" /> **Threads** | Direct / Meta OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/tumblr.png" /> **Tumblr** | OAuth 1.0a | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/bolt.png" /> **Nostr** | Direct (NIP-07 / nsec) | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/instagram-new.png" /> **Instagram** | Direct / Meta Graph | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/youtube-play.png" /> **YouTube** | Direct / Data API | 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/tiktok--v1.png" /> **TikTok** | Direct / Content API | 🎥 | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/snapchat.png" /> **Snapchat** | Direct / Marketing API | 🎥 | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/whatsapp.png" /> **WhatsApp** | Direct / Cloud API | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/slack.png" /> **Slack** | Webhook | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/medium-monogram.png" /> **Medium** | API / Token | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/wordpress.png" /> **WordPress** | REST / Basic Auth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/vk.png" /> **VKontakte** | Direct / VK API | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/weibo.png" /> **Weibo** | Direct / OAuth 2.0 | 🖼️ 🎥 | ✅ Live |
-| <img src="https://img.icons8.com/color/20/nextdoor.png" /> **Nextdoor** | Direct / API | — | 🟡 Limited |
-| <img src="https://img.icons8.com/color/20/flickr.png" /> **Flickr** | Direct / OAuth | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/google-business.png" /> **Google Business** | Direct / GBP API | 🖼️ | ✅ Live |
-| <img src="https://img.icons8.com/color/20/farcaster.png" /> **Farcaster** | Direct / Warpcast API | — | ✅ Live |
-| **🔐 SafeW** | Direct | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/buffer.png" /> **Buffer Proxy** | Proxy → X, LinkedIn, FB, IG | — | ✅ Live |
-| <img src="https://img.icons8.com/color/20/wordpress.png" /> **WordPress Jetpack** | Proxy → X, LinkedIn, FB, Tumblr | — | ✅ Live |
+| **Telegram** | Direct | 📷 🎥 | ✅ |
+| **Bluesky** | Direct | 🖼️ | ✅ |
+| **Mastodon** | Direct | 📷 🎥 🎵 | ✅ |
+| **Discord** | Direct (webhook) | — | ✅ |
+| **GitHub (Classic)** | Gist | — | ✅ |
+| **GitHub (Repo)** | File Push | — | ✅ |
+| **Tumblr** | OAuth | — | ✅ |
+| **DeviantArt** | OAuth | 🖼️ | ✅ |
+| **🔒 SafeW** | Direct | — | ✅ |
+| **⏳ Buffer Proxy** | Proxy → Twitter, LinkedIn, FB, IG | — | ✅ |
+| **📄 WordPress Jetpack** | Proxy → Twitter, LinkedIn, FB, Tumblr | — | ✅ |
 
-### 450+ via Zapier
+> 🔹 **Proxy platforms** — Buffer and WordPress Jetpack act as bridges, letting you post to Twitter, LinkedIn, Facebook, Instagram, and Tumblr without managing each platform's individual (and often restricted) APIs. You authenticate with your own Buffer/Jetpack account; Fed-Poster never sees the downstream credentials ([ADR-006](ADR.md#adr-006)).
 
-Use your own Zapier account to reach Twitch, Quora, WeChat, and hundreds more — each post can trigger unlimited automations. See [ADR-0006](ADR.md#adr-0006-extend-reach-via-zapier-instead-of-bespoke-adapters).
-
-> 🔷 **Proxy platforms** — Buffer and WordPress Jetpack act as bridges to Twitter, LinkedIn, Facebook, Instagram, and Tumblr without managing individual APIs.
-
-Want a platform we don't have? See [ADR-0007 — Adding a New Platform Adapter](ADR.md#adr-0007-adding-a-new-platform-adapter) and open a feature request.
+Want a platform that isn't here? Check the [Roadmap](ROADMAP.md) or [propose it in Discussions](https://github.com/fedpromptly/fed-poster/discussions/categories/ideas).
 
 ---
 
 ## 🖥️ Dashboard Features
 
-### 🔷 Multi-Platform Post
-Select any combination of platforms, write your message once, attach a file, and post everywhere simultaneously. No per-platform copy-pasting.
+### 🔹 Multi-Platform Post
+Select any combination of platforms, write your message once, attach a file, and post everywhere simultaneously. No per-platform copy-pasting. Per-platform character limits are enforced where they differ, so you stay within the strictest selected platform's limit.
 
-### 🔷 Individual Platform Tabs
-Each platform has its own dedicated panel with credential management (auto-saved in your browser), message composition, file uploads (where supported), test & send buttons, and real-time status feedback.
+### 🔹 Individual Platform Tabs
+Each platform has its own dedicated panel with credential management (auto-saved in your browser), message composition, file uploads (where supported), Test & Send buttons, and real-time status feedback.
 
-### 🔷 Smart Credential Storage
-All tokens, app passwords, and API keys are stored locally in your browser's `localStorage` — they never leave your machine unless you explicitly send a post. **OAuth only — no main passwords.** See [SECURITY.md](SECURITY.md).
+### 🔹 Smart Credential Storage
+All tokens, passwords, and API keys are stored locally in your browser's `localStorage`, namespaced under `fedposter_*`. They never leave your machine unless you explicitly send a post. Clear them anytime from Settings. ([ADR-002](ADR.md#adr-002))
 
-### 🔷 File Attachments
-Upload images, videos, or audio and attach them on supported platforms:
-- **Telegram** – photos, videos
-- **Bluesky** – images
-- **Mastodon** – images, videos, audio
-- **DeviantArt** – images (OAuth)
-- **Pinterest** – images (with link)
-- **Instagram / YouTube / Facebook** – media via OAuth
+### 🔹 File Attachments
+Upload images, videos, or audio files and attach them to your posts on supported platforms: **Telegram** (photos, videos), **Bluesky** (images), **Mastodon** (images, videos, audio), **DeviantArt** (images via OAuth).
 
-### 🔷 Content Adaptation & Preview
-Preview and customize each platform version — adjust text, media, and formatting per destination so your post fits each network's limits and style.
+### 🔹 Twelve Built-in Themes
+Switch instantly between Deep Space, Cloud, Azure Depth, Emerald Forest, Royal Nebula, Molten Lava, Cyberpunk, Sunset, Abyssal Teal, Luxe Blush, Cobalt Steel, and Synthwave. Your choice persists across pages and reloads. ([ADR-004](ADR.md#adr-004))
 
-### 🔷 Delivery Analytics & Audit Logs
-Track status, failures, and performance across all connected channels. Export logs (CSV/JSON) for audit. *(Analytics depth depends on plan — see [PRICING.md](PRICING.md).)*
-
-### 🔷 Scheduling
-Set publish times or post immediately, with timezone-aware scheduling and retry-with-backoff for rate-limited platforms.
+### 🔹 Calendar & Analytics
+Schedule posts with the calendar view (client-side firing while the page is open, or use the optional scheduling daemon for always-on posting). Track your posting activity per platform in the analytics view with CSV export. See [`usage.md`](usage.md) for details and caveats.
 
 ---
 
 ## 💰 Pricing
 
-Post to 29+ direct platforms and 450+ via Zapier. One dashboard. Open source core. **14-day free trial, no credit card required.**
+Post to 12+ platforms. One dashboard. No contract. The **open-source build is fully free**; the hosted commercial product offers three tiers.
 
 | Plan | Price | What You Get |
 |------|-------|--------------|
-| **Starter** | **$5/mo** | 3 profiles, 30 deliveries/mo, 29 direct + 450+ Zapier, basic analytics, email support |
-| **Growth** | **$19/mo** | 10 profiles, 200 deliveries/mo, advanced analytics, priority support |
-| **Pro** | **$50/mo** | Unlimited profiles, 1,000 deliveries/mo, full analytics, team (5 users), dedicated support |
-| **Agency** | **$250/mo** | Everything in Pro + white-label, unlimited clients, self-host option, SOC2 readiness, dedicated manager |
+| **Starter** | **$27/month** | 500+ platforms, unlimited posts, schedule posts, analytics, 24/7 support |
+| **Growth** | **$147/month** | Everything in Starter + done-for-you content + AI image/video generation + priority support |
+| **Agency** | **$497/month** | Everything in Growth + white-label rights + unlimited client accounts + API access + dedicated manager |
 
-**Free Trial:** 14 days. No credit card required.
+**Free Trial:** 7 days. No credit card required. One post to all platforms.
 
-[**View full pricing breakdown →**](PRICING.md)
+📖 **[View full pricing breakdown →](PRICING.md)**
 
-> 💙 The open-source core is **free forever** under MIT. Paid plans add managed hosting, analytics, and support. See [.github/FUNDING.yml](.github/FUNDING.yml) to sponsor the project.
+### How Fed-Poster compares
+
+| Feature | Fed-Poster | Hootsuite | Buffer | Later |
+|---------|-----------|-----------|--------|-------|
+| Platforms supported | **500+** | ~10 | ~8 | ~5 |
+| Monthly price (entry) | **$27** | $99+ | $65+ | $80+ |
+| Unlimited posts | ✅ | ❌ | ❌ | ❌ |
+| Done-for-you content | ✅ | ❌ | ❌ | ❌ |
+| White-label rights | ✅ | ❌ | ❌ | ❌ |
+| Open source | ✅ | ❌ | ❌ | ❌ |
+| Client-side credentials | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
-## 🧱 Tech Stack
+## 📦 Tech Stack
 
 | Area | Technology |
 |------|------------|
-| **Frontend** | Static HTML + CSS (`styles.css`) + vanilla JS; optional React/TypeScript/Tailwind for the dashboard app |
-| **Backend** | None — fully client-side; optional self-hosted OAuth proxies if needed |
-| **Storage** | `localStorage` (credentials), IndexedDB (drafts) |
-| **APIs** | REST, OAuth 2.0, GraphQL (GitHub), AT Protocol (Bluesky) |
-| **Integrations** | Direct platform APIs + Zapier (450+) |
-| **Deployment** | GitHub Pages, Cloudflare Pages, Netlify/Vercel, Docker, Nginx/Caddy (see [DEPLOYMENT.md](DEPLOYMENT.md)) |
+| **Frontend (shipped)** | Static HTML5, hand-written CSS (custom-property design system), vanilla JavaScript (IIFE modules) — **no build step** ([ADR-003](ADR.md#adr-003)) |
+| **Frontend (aspirational v2)** | React, TypeScript, Tailwind CSS, Framer Motion — tracked as [ADR-010 (Proposed)](ADR.md#adr-010), not the current release |
+| **Backend** | None required; optional Node.js/Express scheduling daemon for always-on posting |
+| **Storage** | `localStorage` (credentials, `fedposter_*`), `IndexedDB` (drafts) |
+| **OAuth bridges** | Stateless Supabase Edge Functions (Tumblr, SafeW, DeviantArt) — store nothing ([ADR-005](ADR.md#adr-005)) |
+| **APIs** | REST, OAuth 2.0, GraphQL (GitHub) |
+| **Deployment** | Any static host (GitHub Pages, Netlify, Vercel, Cloudflare Pages, S3) or Docker |
 
 ---
 
-## 📦 Get Started
+## 🛠️ Installation
 
-### Option A — Use the hosted version
-Visit the live dashboard and start your 14-day free trial. No install required.
-
-### Option B — Self-host (free, MIT)
+### 🌐 Option 1 — Run it instantly (no install)
+Fed-Poster is a static site. Clone and open `index.html` in a browser. Done.
 
 ```bash
-git clone https://github.com/FED-OS/Fed-Poster.git
-cd Fed-Poster
+git clone https://github.com/fedpromptly/fed-poster.git
+cd fed-poster
+# open index.html in your browser — that's it
 ```
 
-Because Fed-Poster is a **static site**, you can open `index.html` directly or serve the folder. For the best experience, serve over HTTP(S):
+For OAuth/Supabase flows or `fetch` features that need an `http(s)` origin, serve locally:
+```bash
+python3 -m http.server 8000
+# visit http://localhost:8000/
+```
+
+### 🐳 Option 2 — Docker (with optional backend)
 
 ```bash
-# Python
-python3 -m http.server 8080
-# → http://localhost:8080
-
-# Node
-npx serve .
+git clone https://github.com/fedpromptly/fed-poster.git
+cd fed-poster
+docker compose up -d
 ```
 
-For production deployments (Docker, Nginx, Cloudflare, GitHub Pages, etc.), see **[DEPLOYMENT.md](DEPLOYMENT.md)**.
+### ☁️ Option 3 — Deploy to a static host
 
-### Option C — Docker
-
-```bash
-docker-compose up -d
-# → http://localhost:8080
-```
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for the `Dockerfile` and `docker-compose.yml`.
-
-> 🔑 **No credentials needed to explore.** The app uses mock data when no tokens are present. Never commit real tokens — see [SECURITY.md](SECURITY.md).
+Fed-Poster deploys to any static host with no build command. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for step-by-step guides for GitHub Pages, Netlify, Vercel, Cloudflare Pages, S3+CloudFront, and nginx, plus the hardening checklist (HTTPS, CSP, SRI).
 
 ---
 
-## 📖 Documentation
+## 🚦 Quick Start (60 seconds)
 
-| Document | What it covers |
-|----------|----------------|
-| [usage.md](usage.md) | Detailed how-to: connect accounts, compose, schedule, analyze |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Deployment options + production checklist |
-| [ROADMAP.md](ROADMAP.md) | Upcoming milestones & platform pipeline |
-| [ADR.md](ADR.md) | Architecture Decision Records |
-| [CHANGELOG.md](CHANGELOG.md) | Release history (SemVer) |
-| [SECURITY.md](SECURITY.md) | Security policy & reporting |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
-| [GOVERNANCE.md](GOVERNANCE.md) | Roles & decision-making |
-| [SUPPORT.md](SUPPORT.md) | Getting help |
-| [SUMMARY.md](SUMMARY.md) | One-page project summary |
-| [CITATIONS.md](CITATIONS.md) | How to cite Fed-Poster |
-| [Wiki](https://github.com/FED-OS/Fed-Poster/wiki) | Extended guides |
+1. Open the dashboard (locally or hosted).
+2. Pick a theme from the nav theme picker (try **Cyberpunk** or **Synthwave**).
+3. Open a platform panel (e.g. Telegram) and add a **bot token** from [@BotFather](https://t.me/BotFather) + a chat ID.
+4. Hit **Test** with a throwaway message to a private channel.
+5. Compose in the multi-platform box, toggle the platforms you want, and **Send**.
+
+📖 Full walkthrough: [`usage.md`](usage.md) · Per-platform setup: [`wiki/`](wiki)
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome and celebrated! Whether it's a bug report, a new platform adapter, a docs improvement, or a design tweak — see **[CONTRIBUTING.md](CONTRIBUTING.md)** to get started. New contributors should look for issues labeled `good first issue`.
+Contributions are welcome — and Fed-Poster is intentionally easy to contribute to (no build step, no framework). Read [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guide, then grab a `good first issue` or float an idea in [Discussions](https://github.com/fedpromptly/fed-poster/discussions).
 
-- 🐛 [Report a bug](.github/ISSUE_TEMPLATE/bug_report.md)
-- ✨ [Request a feature](.github/ISSUE_TEMPLATE/feature_request.md)
-- 💬 [Join Discussions](https://github.com/FED-OS/Fed-Poster/discussions)
-- 🛡️ Found a security issue? See [SECURITY.md](SECURITY.md) — **do not open a public issue**.
+```bash
+git clone https://github.com/<your-username>/fed-poster.git
+cd fed-poster
+git checkout -b feat/my-idea
+# edit HTML/CSS/JS, save, refresh — no install, no build
+```
 
-By participating, you agree to our [Code of Conduct](CODE_OF_CONDUCT.md).
-
----
-
-## 💰 Funding & Sponsorship
-
-Fed-Poster is open source and free to use. If it saves you time, consider supporting development:
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W3T61ZU5FS)
-
-See [.github/FUNDING.yml](.github/FUNDING.yml) for all sponsorship options (Ko-fi, GitHub Sponsors, etc.).
+The hard rules: no real secrets, `fedposter_*` localStorage keys, HTTPS only, design tokens not hex, no new framework without an [ADR](ADR.md). See [`CLAUDE.md`](CLAUDE.md) and [`AGENTS.md`](AGENTS.md) for architecture and the agent operating protocol.
 
 ---
 
-## 🛡️ Security
+## 📚 Documentation
 
-Fed-Poster is **secure by design**: OAuth tokens only, no passwords stored, credentials stay in your browser. See [SECURITY.md](SECURITY.md) for the supported versions table, vulnerability reporting, and the self-hosting hardening checklist.
+| Document | What it covers |
+|----------|----------------|
+| [`usage.md`](usage.md) | Day-to-day usage: setup, composing, scheduling, analytics, themes, security habits |
+| [`CLAUDE.md`](CLAUDE.md) | Architecture, design system, hard rules, platform-integration checklist |
+| [`AGENTS.md`](AGENTS.md) | Operating protocol for AI coding agents working on the repo |
+| [`ADR.md`](ADR.md) | Architecture Decision Records (why the design is the way it is) |
+| [`ROADMAP.md`](ROADMAP.md) | What's shipped, in progress, planned, and explicitly not doing |
+| [`DEPLOYMENT.md`](DEPLOYMENT.md) | Deploy guides for every common host + hardening checklist |
+| [`CHANGELOG.md`](CHANGELOG.md) | What shipped in each release (Keep a Changelog format) |
+| [`SECURITY.md`](SECURITY.md) | Security model, supported versions, vulnerability reporting |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to contribute, conventions, definition of done |
+| [`GOVERNANCE.md`](GOVERNANCE.md) | How decisions get made and who makes them |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Community standards (Contributor Covenant 2.1) |
+| [`SUPPORT.md`](SUPPORT.md) | Where to get help and what to expect |
+| [`PRICING.md`](PRICING.md) | Full pricing, tiers, trial, FAQ |
+| [`SUMMARY.md`](SUMMARY.md) | One-file executive overview of the whole project |
+| [`COPYING.md`](COPYING.md) / [`LICENSE`](LICENSE) | MIT licence explained + full text |
+| [`CITATIONS.md`](CITATIONS.md) | How to cite Fed-Poster in academic work |
+| [`wiki/`](wiki) | Long-form guides: per-platform setup, theme authoring, troubleshooting, FAQ |
 
 ---
 
-## 📜 License
+## 🗺️ Roadmap Highlights
 
-Fed-Poster is licensed under the **MIT License**. See [LICENSE](LICENSE) and [COPYING.md](COPYING.md). Third-party components retain their own licenses.
+- **More platforms:** Nostr, Pixelfed, Threads, Reddit, LinkedIn direct, YouTube, Medium, Substack
+- **More control:** drafts & templates, AI-assisted content, queues & bulk scheduling, webhooks, team/agency workspaces, browser extension, optional encrypted cloud sync
+- **Deeper trust:** CSP/SRI hardening, optional self-hosted scheduling daemon, automated visual regression across all 12 themes, i18n groundwork
 
----
-
-## 🙏 Acknowledgements
-
-Built by **FED-OS / fedpromptly.com** and the open-source community. Thanks to every contributor, the maintainers of our dependencies (Font Awesome, Inter, Zapier ecosystem), and the Contributor Covenant, Keep a Changelog, and SemVer projects for their standards. See [CITATIONS.md](CITATIONS.md).
+Full detail and what we're deliberately **not** doing: [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
-## 📬 Connect
+## 🔒 Security & Privacy
 
-- 🌐 Website: [fedpromptly.com](https://fedpromptly.com)
-- 🐙 GitHub: [FED-OS/Fed-Poster](https://github.com/FED-OS/Fed-Poster)
-- 🐦 X: [@Pokemonlegendsx](https://x.com/Pokemonlegendsx)
-- 🎥 YouTube: [@FedjumperGaming](https://www.youtube.com/@FedjumperGaming)
-- 💬 Discord: [join](https://discord.gg/JBSE9wN2kA)
-- 📧 Email: business@fedpromptly.com
+Fed-Poster is private **by architecture**: no required backend, credentials in your browser only, HTTPS-only calls, no telemetry, no ads, stateless OAuth bridges. Read the full model, the supported-versions table, and how to report a vulnerability (privately, never via a public issue) in [`SECURITY.md`](SECURITY.md).
+
+---
+
+## 💖 Support the Project
+
+Fed-Poster is free, open source, MIT-licensed, and funded by the community — no venture money, no in-dashboard ads, no telemetry. If it saves you time:
+
+- ☕ **[Buy us a coffee on Ko-fi](https://ko-fi.com/W3T61ZU5FS)**
+- 🛠️ Contribute code, docs, or wiki pages ([`CONTRIBUTING.md`](CONTRIBUTING.md))
+- 💬 Answer a question in [Discussions](https://github.com/fedpromptly/fed-poster/discussions)
+- ⭐ Star the repo to help others find it
+
+---
+
+## 📄 License
+
+[MIT](LICENSE) © The Fed-Poster Contributors. See [`COPYING.md`](COPYING.md) for a plain-language explanation. The open-source build is fully functional; commercial tiers (Starter/Growth/Agency) are hosted services, not licence restrictions.
+
+---
+
+## 📬 Contact
+
+- 📧 General/business: **business@fedpromptly.com**
+- 🔒 Security (private): **security@fed-poster.example.com** ([`SECURITY.md`](SECURITY.md))
+- 🛟 Support: [`SUPPORT.md`](SUPPORT.md)
+- 💬 Community: [GitHub Discussions](https://github.com/fedpromptly/fed-poster/discussions)
 
 ---
 
 <div align="center">
-  <sub>📨 <strong>Fed-Poster — publish everywhere, own your data, keep it open.</strong></sub>
+
+**[🚀 Get Started](#installation)** · **[📖 Usage Guide](usage.md)** · **[💰 Pricing](PRICING.md)** · **[🤝 Contribute](CONTRIBUTING.md)** · **[🔒 Security](SECURITY.md)** · **[🗺️ Roadmap](ROADMAP.md)** · **[💬 Discussions](https://github.com/fedpromptly/fed-poster/discussions)**
+
+<sub>📮 <strong>One Dashboard. Twelve Platforms. Zero Hassle.</strong> — Privacy by architecture, built by community.</sub>
+
 </div>
