@@ -1,0 +1,74 @@
+# CODEOWNERS — Fed-Poster
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Each line: <pattern> <owner(s)>
+# Owners are automatically requested for review on PRs touching these paths.
+# Use @username for GitHub users, @org/team for org teams.
+
+# ── Default / global fallback ───────────────────────────────────────────
+*                           @fedpromptly
+
+# ── Core application ────────────────────────────────────────────────────
+# Shared design system & JS used across every page
+/assets/fedposter.css       @fedpromptly
+/assets/fedposter.js        @fedpromptly
+
+# Landing page — primary entry point & SEO surface
+/index.html                 @fedpromptly
+
+# Dashboard — the heart of the product (composition + multi-post)
+# NOTE: dashboard.html / assets/dashboard.* are referenced; if files are
+# named differently, update these patterns to match.
+/assets/dashboard.js        @fedpromptly
+/assets/dashboard.css       @fedpromptly
+
+# Per-page feature modules
+/assets/calendar.js         @fedpromptly
+/assets/calendar.css        @fedpromptly
+/assets/analytics.js        @fedpromptly
+/assets/analytics.css       @fedpromptly
+/assets/settings.js         @fedpromptly
+/assets/settings.css        @fedpromptly
+/assets/pricing.css         @fedpromptly
+/assets/error.css           @fedpromptly
+
+# Standalone HTML pages
+/404.html                   @fedpromptly
+/calendar.html              @fedpromptly
+/analytics.html             @fedpromptly
+/settings.html              @fedpromptly
+/pricing.html               @fedpromptly
+
+# ── Security-sensitive areas ────────────────────────────────────────────
+# Anything touching credential storage, auth flows, or platform tokens.
+/SECURITY.md                @fedpromptly
+/.github/ISSUE_TEMPLATE/    @fedpromptly
+
+# ── Docs & governance ───────────────────────────────────────────────────
+/README.md                  @fedpromptly
+/CONTRIBUTING.md            @fedpromptly
+/CODE_OF_CONDUCT.md         @fedpromptly
+/GOVERNANCE.md              @fedpromptly
+/ROADMAP.md                 @fedpromptly
+/ADR.md                     @fedpromptly
+/CHANGELOG.md               @fedpromptly
+/PRICING.md                 @fedpromptly
+/DEPLOYMENT.md              @fedpromptly
+/SUMMARY.md                 @fedpromptly
+/usage.md                   @fedpromptly
+/SUPPORT.md                 @fedpromptly
+/CITATIONS.md               @fedpromptly
+/COPYING.md                 @fedpromptly
+
+# ── AI agent & automation guides ────────────────────────────────────────
+/CLAUDE.md                  @fedpromptly
+/AGENTS.md                  @fedpromptly
+/.github/                   @fedpromptly
+
+# ── Legal / licensing ───────────────────────────────────────────────────
+/LICENSE                    @fedpromptly
+/COPYING.md                 @fedpromptly
+
+# ── Build & config ──────────────────────────────────────────────────────
+/.gitignore                 @fedpromptly
+/styles.css                 @fedpromptly
