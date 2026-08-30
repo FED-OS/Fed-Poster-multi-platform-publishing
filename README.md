@@ -11,7 +11,9 @@
 
 <br />
 
-<h1>📨 Fed-Poster &nbsp; [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W3T61ZU5FS)</h1>
+<h1>📨 Fed-Poster &nbsp; 
+  
+  [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W3T61ZU5FS)</h1>
 
 <p><strong>One Dashboard. Twelve Platforms. Zero Hassle.</strong></p>
 
