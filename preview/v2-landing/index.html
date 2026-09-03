@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fed-Poster — open-source multi-channel publishing dashboard. One workspace, every platform, zero hassle." />
+    <meta name="theme-color" content="#07090f" />
+
+    <!-- Open Graph / Social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Fed-Poster · Multi-Channel Publishing" />
+    <meta property="og:description" content="One Dashboard. Every Platform. Zero Hassle. Open-source multi-channel publishing." />
+    <meta property="og:image" content="assets/social-preview/social-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fed-Poster · Multi-Channel Publishing" />
+    <meta name="twitter:description" content="One Dashboard. Every Platform. Zero Hassle." />
+    <meta name="twitter:image" content="assets/social-preview/social-preview.png" />
+
+    <link rel="icon" type="image/png" href="assets/social-preview/social-preview.png" />
+    <title>FED-POSTER · Multi-Channel Publishing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> FED-OS
+                <span class="badge">BETA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li>
+                    <a href="https://ko-fi.com/fedpromptly" target="_blank" class="btn btn-gold btn-sm">
+                        <i class="fas fa-heart"></i> Subscribe
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" class="btn btn-outline btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="landingContent">
+
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="tag"><i class="fas fa-rocket"></i> Beta · Early Access</div>
+                <h1>FED<span class="accent">-POSTER</span></h1>
+                <p class="byline">by <span>fedpromptly.com</span></p>
+                <p class="tagline">
+                    <strong>Publish and adapt content</strong> across your connected channels from one workspace.<br />
+                    Manage direct integrations and Zapier workflows, review platform-specific versions, schedule campaigns, and track delivery status.
+                </p>
+                <div class="actions">
+                    <a href="#ko-fi-section" class="btn btn-gold"><i class="fas fa-rocket"></i> Join Beta</a>
+                    <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <div class="stats">
+                    <div><div class="num">20+</div><div class="label">Direct Integrations</div></div>
+                    <div><div class="num">450+</div><div class="label">Via Zapier</div></div>
+                    <div><div class="num">100%</div><div class="label">Open Source Core</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-platforms" id="platforms">
+            <div class="container">
+                <div class="header">
+                    <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800;">Supported Integrations</h2>
+                    <p style="color: var(--text-secondary); font-size: 1rem;">Direct integrations available now. Additional platforms via Zapier.</p>
+                </div>
+                <div class="platform-grid">
+                    <div class="platform-item"><i class="fab fa-facebook"></i> Facebook <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-youtube"></i> YouTube <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-instagram"></i> Instagram <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-tiktok"></i> TikTok <span class="status status-limited">Limited</span></div>
+                    <div class="platform-item"><i class="fab fa-twitter"></i> X <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-linkedin"></i> LinkedIn <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-reddit"></i> Reddit <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-discord"></i> Discord <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-telegram"></i> Telegram <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-medium"></i> Medium <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-wordpress"></i> WordPress <span class="status status-live">Live</span></div>
+                    <div class="platform-item"><i class="fab fa-github"></i> GitHub <span class="status status-limited">Limited</span></div>
+                    <div class="platform-item"><i class="fab fa-gitlab"></i> GitLab <span class="status status-limited">Limited</span></div>
+                    <div class="platform-item"><i class="fab fa-twitch"></i> Twitch <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fab fa-tumblr"></i> Tumblr <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fab fa-quora"></i> Quora <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fab fa-weixin"></i> WeChat <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fab fa-snapchat"></i> Snapchat <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fab fa-pinterest"></i> Pinterest <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fab fa-vk"></i> VK <span class="status status-soon">Soon</span></div>
+                    <div class="platform-item"><i class="fas fa-plug"></i> 450+ via Zapier <span class="status status-zapier">Zapier</span></div>
+                </div>
+                <div class="platforms-footer">
+                    <span style="color: var(--text-secondary);">Direct integrations use official APIs where available. Platform availability varies by account type and region.</span>
+                    <span class="zapier-note">⚡ Zapier account required for the 450+ extension platforms. Each Zapier automation may consume one or more tasks per post.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-features" id="features">
+            <div class="container">
+                <div class="header">
+                    <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800;">How It Works</h2>
+                    <p style="color: var(--text-secondary); font-size: 1rem;">A practical workflow for multi-channel publishing.</p>
+                </div>
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pricing" id="pricing">
+            <div class="container">
+                <div class="header">
+                    <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800;">Simple <span style="color: var(--accent);">Pricing</span></h2>
+                    <p style="color: var(--text-secondary); font-size: 1rem;">14-day free trial. No credit card required.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="ribbon">Beta</div>
+                        <div class="emoji">🚀</div>
+                        <h4>Starter</h4>
+                        <div class="price"><span class="currency">$</span>5<span class="period">/mo</span></div>
+                        <div class="divider"></div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Up to 3 connected profiles</li>
+                            <li><i class="fas fa-check"></i> 30 scheduled deliveries/mo</li>
+                            <li><i class="fas fa-check"></i> 20 direct integrations</li>
+                            <li><i class="fas fa-check"></i> 450+ via Zapier</li>
+                            <li><i class="fas fa-check"></i> Basic analytics</li>
+                            <li><i class="fas fa-check"></i> Email support</li>
+                        </ul>
+                        <a href="#ko-fi-section" class="btn-pricing">Join Beta</a>
+                        <div class="footnote">One delivery = one post to one platform</div>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="ribbon gold">Popular</div>
+                        <div class="emoji">📈</div>
+                        <h4>Growth</h4>
+                        <div class="price"><span class="currency">$</span>19<span class="period">/mo</span></div>
+                        <div class="divider"></div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Up to 10 connected profiles</li>
+                            <li><i class="fas fa-check"></i> 200 scheduled deliveries/mo</li>
+                            <li><i class="fas fa-check"></i> 20 direct integrations</li>
+                            <li><i class="fas fa-check"></i> 450+ via Zapier</li>
+                            <li><i class="fas fa-check"></i> Advanced analytics</li>
+                            <li><i class="fas fa-check"></i> Priority support</li>
+                        </ul>
+                        <a href="#ko-fi-section" class="btn-pricing gold">Join Beta</a>
+                        <div class="footnote">One delivery = one post to one platform</div>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="ribbon purple">Best Value</div>
+                        <div class="emoji">⚡</div>
+                        <h4>Pro</h4>
+                        <div class="price"><span class="currency">$</span>50<span class="period">/mo</span></div>
+                        <div class="divider"></div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Unlimited connected profiles</li>
+                            <li><i class="fas fa-check"></i> 1,000 scheduled deliveries/mo</li>
+                            <li><i class="fas fa-check"></i> 20 direct integrations</li>
+                            <li><i class="fas fa-check"></i> 450+ via Zapier</li>
+                            <li><i class="fas fa-check"></i> Full analytics &amp; reporting</li>
+                            <li><i class="fas fa-check"></i> Dedicated support</li>
+                            <li><i class="fas fa-check"></i> Team collaboration (5 users)</li>
+                        </ul>
+                        <a href="#ko-fi-section" class="btn-pricing gold">Join Beta</a>
+                        <div class="footnote">One delivery = one post to one platform · Fair-use policy applies</div>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="ribbon">Enterprise</div>
+                        <div class="emoji">🏷️</div>
+                        <h4>Agency</h4>
+                        <div class="price"><span class="currency">$</span>250<span class="period">/mo</span></div>
+                        <div class="divider"></div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Everything in Pro</li>
+                            <li><i class="fas fa-check"></i> White-label branding</li>
+                            <li><i class="fas fa-check"></i> Unlimited client accounts</li>
+                            <li><i class="fas fa-check"></i> Self-hosted option available</li>
+                            <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                            <li><i class="fas fa-check"></i> SOC2 readiness program</li>
+                        </ul>
+                        <a href="#ko-fi-section" class="btn-pricing">Contact Sales</a>
+                        <div class="footnote">Self-hosted and dedicated support quoted separately</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-benefits" id="benefits">
+            <div class="container">
+                <div class="header">
+                    <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800;">Built for <span style="color: var(--accent);">Creators</span></h2>
+                    <p style="color: var(--text-secondary); font-size: 1rem;">Practical features that solve real cross-posting problems.</p>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <div class="icon"><i class="fas fa-server"></i></div>
+                        <h3>Flexible Architecture</h3>
+                        <p>Browser-based client with optional Supabase Edge Functions for OAuth token exchange. Self-host or use the managed cloud.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="icon"><i class="fas fa-code"></i></div>
+                        <h3>Open Source Core</h3>
+                        <p>Audit the code on <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" style="color: var(--accent);">GitHub</a>. MIT licensed. Self-host if you prefer full control.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="icon"><i class="fas fa-plug"></i></div>
+                        <h3>Direct + Zapier</h3>
+                        <p>20 direct integrations for major platforms. 450+ more via Zapier for niche networks and custom workflows.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Security-First Design</h3>
+                        <p>OAuth tokens only. No passwords stored. Tokens encrypted at rest. Working toward SOC 2 readiness.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="icon"><i class="fas fa-pen-fancy"></i></div>
+                        <h3>Content Adaptation</h3>
+                        <p>Preview and customize each platform version. Adjust text, media, and formatting per destination.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Delivery Analytics</h3>
+                        <p>Track status, failures, and performance across all connected channels. Export logs for audit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-cta" id="cta">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>Ready to Simplify Your Workflow?</h2>
+                    <p>
+                        <strong>FED-POSTER</strong> is a cross-posting tool for creators.<br />
+                        Try it free for 14 days. No risk. Cancel anytime.
+                    </p>
+                    <div class="actions">
+                        <a href="#ko-fi-section" class="btn btn-gold"><i class="fas fa-rocket"></i> Join Beta</a>
+                        <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                    <div class="fine">
+                        <i class="fas fa-check-circle" style="color:var(--accent);"></i> No credit card required
+                        <span style="margin:0 8px;">·</span>
+                        <i class="fas fa-check-circle" style="color:var(--accent);"></i> 14-day free trial
+                        <span style="margin:0 8px;">·</span>
+                        <i class="fas fa-check-circle" style="color:var(--accent);"></i> Open source core
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── NEW KO-FI WIDGET SECTION ── -->
+        <section class="section-ko-fi" id="ko-fi-section">
+            <div class="container">
+                <div class="header">
+                    <h2>Support <span style="color: var(--accent);">FED-OS</span></h2>
+                    <p>Help us keep the project alive — your support means the world.</p>
+                </div>
+                <a href="https://ko-fi.com/fedpromptly" target="_blank" style="display: block; text-decoration: none;">
+                    <div class="ko-fi-wrapper">
+                        <iframe
+                            src="https://ko-fi.com/fedpromptly/?hidefeed=true&widget=true&embed=true&preview=true"
+                            allowtransparency="true"
+                            title="Support FED-OS on Ko-fi">
+                        </iframe>
+                        <div class="ko-fi-mask"></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="copy">
+                &copy; 2026 <strong>FED-POSTER</strong> by fedpromptly.com.
+                <span style="display:block;font-size:0.65rem;color:var(--text-muted);margin-top:2px;">
+                    Open source: <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" style="color:var(--accent);">github.com/FED-OS/Fed-Poster</a>
+                </span>
+            </div>
+            <div class="socials">
+                <a href="https://x.com/Pokemonlegendsx" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://github.com/FED-OS/Fed-Poster" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@FedjumperGaming" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.gg/JBSE9wN2kA" target="_blank"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Nav Toggle ──
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('is-open');
+            navToggle.querySelector('i').className = navLinks.classList.contains('is-open') ?
+                'fas fa-times' : 'fas fa-bars';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                navToggle.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // ── Smooth scroll for all internal links ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ── Carousel ──
+        (function initCarousel() {
+            const track = document.getElementById('carouselTrack');
+            if (!track) return;
+
+            const cards = [{
+                icon: 'fa-plug',
+                title: '1. Connect Accounts',
+                desc: 'Connect your social accounts, pages, and channels. OAuth only — we never see your password.',
+                chips: ['OAuth', 'Secure']
+            }, {
+                icon: 'fa-pen-fancy',
+                title: '2. Create Campaign',
+                desc: 'Write your master post. Review platform-specific previews and adjust text, media, or formatting per destination.',
+                chips: ['Preview', 'Adapt']
+            }, {
+                icon: 'fa-calendar-check',
+                title: '3. Schedule & Publish',
+                desc: 'Set publish times or post immediately. Monitor delivery status across all platforms.',
+                chips: ['Schedule', 'Track']
+            }, {
+                icon: 'fa-chart-simple',
+                title: '4. Analyze Performance',
+                desc: 'Track reach, engagement, and delivery status. Export logs and reports for audit.',
+                chips: ['Analytics', 'Export']
+            }, {
+                icon: 'fa-rotate',
+                title: 'Zapier Extension',
+                desc: 'Extend to 450+ niche platforms using your own Zapier account. One post can trigger unlimited automations.',
+                chips: ['Zapier', '450+']
+            }, {
+                icon: 'fa-code',
+                title: 'Self-Host Option',
+                desc: 'Deploy the open source core on your own infrastructure. Full control over your data and tokens.',
+                chips: ['Open Source', 'MIT']
+            }];
+
+            function buildCard(card) {
+                const chipsHtml = card.chips.map(chip =>
+                    `<span><i class="fas fa-check-circle"></i> ${chip}</span>`
+                ).join('');
+                return `
+                            <div class="feature-card">
+                                <div class="icon"><i class="fas ${card.icon}"></i></div>
+                                <h3>${card.title}</h3>
+                                <p>${card.desc}</p>
+                                <div class="chips">${chipsHtml}</div>
+                                <a href="#pricing" class="btn-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        `;
+            }
+
+            let allCardsHtml = '';
+            for (let i = 0; i < 2; i++) {
+                cards.forEach(card => {
+                    allCardsHtml += buildCard(card);
+                });
+            }
+            track.innerHTML = allCardsHtml;
+
+            if (cards.length < 2) return;
+            const duration = cards.length * 4.5;
+            track.style.animationDuration = duration + 's';
+
+            track.addEventListener('mouseenter', () => {
+                track.style.animationPlayState = 'paused';
+            });
+            track.addEventListener('mouseleave', () => {
+                track.style.animationPlayState = 'running';
+            });
+        })();
+
+        console.log('🚀 FED-POSTER · Open source multi-channel publishing · Beta launch');
+    </script>
+
+</body>
+</html>

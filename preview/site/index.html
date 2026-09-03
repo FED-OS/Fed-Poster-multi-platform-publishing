@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Post to Every Platform from Your Browser</title>
+  <meta name="description" content="Fed-Poster is a privacy-first, browser-native social media posting tool. Post to Telegram, Bluesky, Mastodon, Discord, GitHub Gist, Stoat, and DeviantArt — all from one dashboard. No servers, no tracking, your credentials never leave your device." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <style>
+    /* ---- LANDING PAGE SPECIFIC ---- */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 80px 0 60px;
+      background: var(--bg-body);
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; right: -100px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, var(--glow), transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -200px; left: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, var(--glow), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: var(--radius-full);
+      background: var(--accent-bg); color: var(--accent);
+      font-size: 13px; font-weight: 700; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 56px; font-weight: 900; line-height: 1.1;
+      margin-bottom: 24px; letter-spacing: -1.5px;
+    }
+    .hero h1 .gradient-text { display: inline; }
+    .hero p.lead {
+      font-size: 20px; color: var(--text-secondary);
+      margin-bottom: 32px; max-width: 560px; line-height: 1.7;
+    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+    .hero-trust {
+      display: flex; align-items: center; gap: 24px;
+      font-size: 14px; color: var(--text-muted);
+    }
+    .hero-trust .trust-item { display: flex; align-items: center; gap: 8px; }
+    .hero-trust i { color: var(--green); }
+
+    /* Hero visual — mock dashboard preview */
+    .hero-visual {
+      position: relative;
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--bg-card);
+      border: 1px solid rgba(0,0,0,0.06);
+      animation: float 5s ease-in-out infinite;
+    }
+    [data-theme="dark"] .hero-visual,
+    [data-theme="cyberpunk"] .hero-visual,
+    [data-theme="midnight"] .hero-visual,
+    [data-theme="synthwave"] .hero-visual { border-color: rgba(255,255,255,0.08); }
+    .hero-visual .mock-topbar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 18px; background: var(--bg-input);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .mock-topbar .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .mock-topbar .dot:nth-child(1) { background: #ff5f57; }
+    .mock-topbar .dot:nth-child(2) { background: #ffbd2e; }
+    .mock-topbar .dot:nth-child(3) { background: #28ca42; }
+    .mock-topbar .mock-title { margin-left: 12px; font-size: 13px; color: var(--text-muted); }
+    .hero-visual .mock-body { padding: 24px; }
+    .mock-composer {
+      background: var(--bg-input); border-radius: var(--radius-sm);
+      padding: 18px; margin-bottom: 16px;
+    }
+    .mock-composer .mock-textarea {
+      height: 54px; background: var(--bg-card); border-radius: 8px;
+      margin-bottom: 12px; padding: 10px 14px;
+      font-size: 14px; color: var(--text-secondary);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .mock-platforms { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mock-platforms .mp-chip {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: var(--radius-full);
+      background: var(--bg-card); font-size: 12px; font-weight: 600;
+      border: 1px solid rgba(0,0,0,0.06); color: var(--text-secondary);
+    }
+    .mock-platforms .mp-chip i { font-size: 14px; }
+    .mock-row { display: flex; gap: 12px; margin-bottom: 12px; }
+    .mock-stat {
+      flex: 1; background: var(--bg-input); border-radius: var(--radius-sm);
+      padding: 16px; text-align: center;
+    }
+    .mock-stat .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+    .mock-stat .lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .mock-btn {
+      display: block; width: 100%; padding: 14px; border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: #fff; font-weight: 700; font-size: 15px; text-align: center;
+      box-shadow: 0 4px 14px var(--glow);
+    }
+
+    /* Logos bar */
+    .logos-bar {
+      padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    [data-theme="dark"] .logos-bar { border-color: rgba(255,255,255,0.06); }
+    .logos-bar p { text-align: center; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; font-weight: 600; }
+    .logos-row { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .logos-row .logo-item { font-size: 28px; color: var(--text-muted); opacity: 0.6; transition: var(--transition); }
+    .logos-row .logo-item:hover { opacity: 1; color: var(--accent); transform: scale(1.1); }
+
+    /* Features grid */
+    .features-head { text-align: center; margin-bottom: 56px; }
+    .features-head h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
+    .features-head p { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .feature-card {
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 32px; box-shadow: var(--shadow-md);
+      transition: var(--transition); border: 1px solid transparent;
+    }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+    .feature-card .ficon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 24px; margin-bottom: 20px;
+      box-shadow: 0 4px 14px var(--glow);
+    }
+    .feature-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .feature-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+
+    /* Platforms showcase */
+    .platforms-showcase { background: var(--bg-card); }
+    .platforms-head { text-align: center; margin-bottom: 48px; }
+    .platforms-head h2 { font-size: 42px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
+    .platforms-head p { font-size: 18px; color: var(--text-secondary); }
+    .platforms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .platform-tile {
+      background: var(--bg-input); border-radius: var(--radius);
+      padding: 28px 20px; text-align: center; transition: var(--transition);
+      border: 2px solid transparent;
+    }
+    .platform-tile:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .platform-tile .pt-icon {
+      width: 60px; height: 60px; border-radius: 16px; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: #fff;
+    }
+    .platform-tile h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .platform-tile p { font-size: 13px; color: var(--text-muted); }
+    .pt-telegram { background: linear-gradient(135deg, #0088cc, #229ED9); }
+    .pt-bluesky { background: linear-gradient(135deg, #0284FE, #0EA5E9); }
+    .pt-mastodon { background: linear-gradient(135deg, #6364FF, #858AFA); }
+    .pt-discord { background: linear-gradient(135deg, #5865F2, #7981F5); }
+    .pt-github { background: linear-gradient(135deg, #24292e, #444c56); }
+    .pt-stoat { background: linear-gradient(135deg, #FF6B35, #FF9558); }
+    .pt-deviantart { background: linear-gradient(135deg, #00E59B, #05CC87); }
+    .pt-more { background: linear-gradient(135deg, var(--accent), var(--accent-light)); }
+
+    /* How it works */
+    .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+    .how-step { text-align: center; position: relative; }
+    .how-step .step-num {
+      width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 20px;
+      background: var(--bg-card); border: 3px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; color: var(--accent);
+      box-shadow: 0 4px 14px var(--glow);
+    }
+    .how-step h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .how-step p { font-size: 15px; color: var(--text-secondary); max-width: 300px; margin: 0 auto; }
+
+    /* Stats band */
+    .stats-band {
+      background: var(--bg-sidebar); color: #fff;
+      padding: 60px 0; border-radius: 0;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+    .stat-item .stat-num { font-size: 48px; font-weight: 900; color: var(--accent-light); }
+    .stat-item .stat-lbl { font-size: 14px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 8px; }
+
+    /* Pricing */
+    .pricing-head { text-align: center; margin-bottom: 56px; }
+    .pricing-head h2 { font-size: 42px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
+    .pricing-head p { font-size: 18px; color: var(--text-secondary); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+    .price-card {
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 36px 32px; box-shadow: var(--shadow-md);
+      transition: var(--transition); border: 2px solid transparent;
+      display: flex; flex-direction: column;
+    }
+    .price-card:hover { transform: translateY(-6px); }
+    .price-card.featured { border-color: var(--accent); box-shadow: 0 8px 40px var(--glow); position: relative; }
+    .price-card.featured::before {
+      content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: #fff; font-size: 11px; font-weight: 800; padding: 5px 16px;
+      border-radius: var(--radius-full); letter-spacing: 1px;
+    }
+    .price-card .plan-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .price-card .plan-price { font-size: 48px; font-weight: 900; margin-bottom: 4px; }
+    .price-card .plan-price .per { font-size: 16px; font-weight: 500; color: var(--text-muted); }
+    .price-card .plan-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+    .price-features { list-style: none; flex: 1; margin-bottom: 28px; }
+    .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; padding: 8px 0; color: var(--text-secondary); }
+    .price-features li i { color: var(--green); font-size: 15px; margin-top: 3px; flex-shrink: 0; }
+    .price-features li.disabled { opacity: 0.4; }
+    .price-features li.disabled i { color: var(--text-muted); }
+    .price-card .btn { width: 100%; }
+
+    /* Testimonials */
+    .testimonials-head { text-align: center; margin-bottom: 48px; }
+    .testimonials-head h2 { font-size: 42px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card {
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 32px; box-shadow: var(--shadow-md); transition: var(--transition);
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .testimonial-card .stars { color: #ffc107; font-size: 16px; margin-bottom: 16px; }
+    .testimonial-card .quote { font-size: 16px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 20px; }
+    .testimonial-card .author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-card .author .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 18px;
+    }
+    .testimonial-card .author .name { font-size: 15px; font-weight: 700; }
+    .testimonial-card .author .role { font-size: 13px; color: var(--text-muted); }
+
+    /* CTA section */
+    .cta-section {
+      text-align: center; padding: 80px 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      border-radius: var(--radius); max-width: 1200px; margin: 0 auto;
+      box-shadow: 0 10px 50px var(--glow); position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -50%; left: -10%;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .cta-section h2 { font-size: 40px; font-weight: 800; color: #fff; margin-bottom: 16px; position: relative; }
+    .cta-section p { font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 32px; position: relative; }
+    .cta-section .btn { position: relative; }
+    .cta-section .btn-ghost { background: #fff; color: var(--accent); }
+    .cta-section .btn-ghost:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 40px; }
+      .features-grid, .how-steps, .pricing-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 32px; }
+      .features-head h2, .platforms-head h2, .pricing-head h2, .testimonials-head h2 { font-size: 30px; }
+      .platforms-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>
+        Fed-Poster
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+        <a href="forum.html">Forum</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="dashboard.html" class="btn btn-primary btn-sm">Open App <i class="fa-solid fa-arrow-right"></i></a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content animate-up">
+          <span class="hero-eyebrow"><i class="fa-solid fa-shield-halved"></i> 100% Client-Side · Zero Servers</span>
+          <h1>Post to <span class="gradient-text">every platform</span> from one private dashboard</h1>
+          <p class="lead">Fed-Poster is a browser-native, privacy-first social media tool. Write once, publish to Telegram, Bluesky, Mastodon, Discord, GitHub Gist, Stoat, and DeviantArt. Your credentials never leave your device — no accounts, no tracking, no SaaS.</p>
+          <div class="hero-cta">
+            <a href="dashboard.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-rocket"></i> Launch Dashboard</a>
+            <a href="#how-it-works" class="btn btn-ghost btn-lg"><i class="fa-solid fa-circle-play"></i> See How It Works</a>
+          </div>
+          <div class="hero-trust">
+            <span class="trust-item"><i class="fa-solid fa-check-circle"></i> No signup required</span>
+            <span class="trust-item"><i class="fa-solid fa-check-circle"></i> Open credentials model</span>
+            <span class="trust-item"><i class="fa-solid fa-check-circle"></i> Works offline</span>
+          </div>
+        </div>
+
+        <div class="hero-visual animate-up" style="animation-delay:0.2s">
+          <div class="mock-topbar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="mock-title">fed-poster — dashboard</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-composer">
+              <div class="mock-textarea">🚀 Launching my new project across all platforms today!</div>
+              <div class="mock-platforms">
+                <span class="mp-chip"><i class="fa-brands fa-telegram" style="color:#229ED9"></i> Telegram</span>
+                <span class="mp-chip"><i class="fa-solid fa-cloud" style="color:#0EA5E9"></i> Bluesky</span>
+                <span class="mp-chip"><i class="fa-brands fa-mastodon" style="color:#6364FF"></i> Mastodon</span>
+                <span class="mp-chip"><i class="fa-brands fa-discord" style="color:#5865F2"></i> Discord</span>
+                <span class="mp-chip"><i class="fa-brands fa-github" style="color:#333"></i> Gist</span>
+              </div>
+            </div>
+            <div class="mock-row">
+              <div class="mock-stat"><div class="num">7</div><div class="lbl">Platforms</div></div>
+              <div class="mock-stat"><div class="num">0</div><div class="lbl">Servers</div></div>
+              <div class="mock-stat"><div class="num">∞</div><div class="lbl">Privacy</div></div>
+            </div>
+            <div class="mock-btn"><i class="fa-solid fa-paper-plane"></i> &nbsp; Post to All Platforms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== LOGOS BAR ====== -->
+  <div class="logos-bar">
+    <div class="container">
+      <p>Works with your favorite platforms</p>
+      <div class="logos-row">
+        <span class="logo-item"><i class="fa-brands fa-telegram"></i></span>
+        <span class="logo-item"><i class="fa-solid fa-cloud"></i></span>
+        <span class="logo-item"><i class="fa-brands fa-mastodon"></i></span>
+        <span class="logo-item"><i class="fa-brands fa-discord"></i></span>
+        <span class="logo-item"><i class="fa-brands fa-github"></i></span>
+        <span class="logo-item"><i class="fa-solid fa-fire"></i></span>
+        <span class="logo-item"><i class="fa-brands fa-deviantart"></i></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== FEATURES ====== -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="features-head reveal">
+        <span class="section-tag">Features</span>
+        <h2>Everything you need to post smarter</h2>
+        <p>A complete toolkit for cross-platform posting — built for creators, developers, and communities who value their privacy.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="ficon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Privacy-First Architecture</h3>
+          <p>Your API tokens and credentials are stored only in your browser's localStorage. No server ever sees them. No account to create, no data harvested, no tracking — ever.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="ficon"><i class="fa-solid fa-layer-group"></i></div>
+          <h3>Multi-Platform Composer</h3>
+          <p>Write your message once and broadcast to all 7 connected platforms simultaneously. Toggle individual platforms on or off per post. Images and video supported.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="ficon"><i class="fa-solid fa-palette"></i></div>
+          <h3>12 Unique Themes</h3>
+          <p>From Deep Space noir to Cyberpunk neon to Synthwave retro — pick your aesthetic. Your theme choice persists across every page automatically.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="ficon"><i class="fa-solid fa-calendar-days"></i></div>
+          <h3>Content Calendar</h3>
+          <p>Plan your content month by month. Visualize scheduled posts, drag to reschedule, and see your publishing pipeline at a glance.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="ficon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Analytics Dashboard</h3>
+          <p>Track posts sent, success rates, and per-platform engagement. Visual charts break down your cross-platform performance over time.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="ficon"><i class="fa-solid fa-keyboard"></i></div>
+          <h3>Keyboard Shortcuts</h3>
+          <p>Power-user speed: press <kbd style="background:var(--bg-input);padding:2px 8px;border-radius:6px;font-family:monospace;font-size:13px;">?</kbd> for shortcuts, <kbd style="background:var(--bg-input);padding:2px 8px;border-radius:6px;font-family:monospace;font-size:13px;">H</kbd> for history, <kbd style="background:var(--bg-input);padding:2px 8px;border-radius:6px;font-family:monospace;font-size:13px;">T</kbd> to cycle themes, and number keys to jump between tabs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PLATFORMS SHOWCASE ====== -->
+  <section class="section platforms-showcase">
+    <div class="container">
+      <div class="platforms-head reveal">
+        <span class="section-tag">Integrations</span>
+        <h2>Seven platforms, one composer</h2>
+        <p>Direct API integrations — no middlemen, no relay servers, your tokens talk straight to each platform.</p>
+      </div>
+      <div class="platforms-grid">
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-telegram"><i class="fa-brands fa-telegram"></i></div>
+          <h4>Telegram</h4>
+          <p>Bot API · Channels & chats</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-bluesky"><i class="fa-solid fa-cloud"></i></div>
+          <h4>Bluesky</h4>
+          <p>AT Protocol · Rich text</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-mastodon"><i class="fa-brands fa-mastodon"></i></div>
+          <h4>Mastodon</h4>
+          <p>Any instance · Media posts</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-discord"><i class="fa-brands fa-discord"></i></div>
+          <h4>Discord</h4>
+          <p>Webhooks · Embedded posts</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-github"><i class="fa-brands fa-github"></i></div>
+          <h4>GitHub Gist</h4>
+          <p>Code snippets · Public/private</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-stoat"><i class="fa-solid fa-comment-dots"></i></div>
+          <h4>Stoat</h4>
+          <p>Image hosting · Supabase</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-deviantart"><i class="fa-brands fa-deviantart"></i></div>
+          <h4>DeviantArt</h4>
+          <p>Art uploads · Status posts</p>
+        </div>
+        <div class="platform-tile reveal">
+          <div class="pt-icon pt-more"><i class="fa-solid fa-plus"></i></div>
+          <h4>More Coming</h4>
+          <p>X, Threads, Nostr & more</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== HOW IT WORKS ====== -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="features-head reveal">
+        <span class="section-tag">How It Works</span>
+        <h2>Three steps to cross-posting</h2>
+        <p>No setup wizard, no email verification, no waiting. Just open and post.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step reveal">
+          <div class="step-num">1</div>
+          <h3>Open the Dashboard</h3>
+          <p>Navigate to the dashboard. No login needed — it runs entirely in your browser. Pick your theme and you're ready.</p>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">2</div>
+          <h3>Enter Your Tokens</h3>
+          <p>Paste your platform API tokens into each tab. They're saved locally and auto-filled next time. Toggle which platforms to post to.</p>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">3</div>
+          <h3>Write & Post All</h3>
+          <p>Compose your message, attach an image, and hit Post All. Fed-Poster sends directly to each platform's API in parallel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== STATS BAND ====== -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-num">7</div>
+          <div class="stat-lbl">Platforms Supported</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-num">0</div>
+          <div class="stat-lbl">Servers Involved</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-num">12</div>
+          <div class="stat-lbl">Theme Variations</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-num"><span id="discord-online-count">…</span></div>
+          <div class="stat-lbl">Discord Online Now</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PRICING PREVIEW ====== -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="pricing-head reveal">
+        <span class="section-tag">Pricing</span>
+        <h2>Simple, honest, anti-SaaS</h2>
+        <p>No per-seat pricing. No usage caps. No data harvesting to subsidize a "free" tier.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <div class="plan-name">Open Source</div>
+          <div class="plan-price">$0<span class="per">/forever</span></div>
+          <div class="plan-desc">The full dashboard, no strings attached.</div>
+          <ul class="price-features">
+            <li><i class="fa-solid fa-check"></i> All 7 platform integrations</li>
+            <li><i class="fa-solid fa-check"></i> Multi-platform composer</li>
+            <li><i class="fa-solid fa-check"></i> All 12 themes</li>
+            <li><i class="fa-solid fa-check"></i> Post history log</li>
+            <li><i class="fa-solid fa-check"></i> Keyboard shortcuts</li>
+            <li class="disabled"><i class="fa-solid fa-xmark"></i> Content calendar</li>
+            <li class="disabled"><i class="fa-solid fa-xmark"></i> Analytics dashboard</li>
+          </ul>
+          <a href="dashboard.html" class="btn btn-ghost">Get Started Free</a>
+        </div>
+        <div class="price-card featured reveal">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">$8<span class="per">/month</span></div>
+          <div class="plan-desc">Everything plus planning & analytics.</div>
+          <ul class="price-features">
+            <li><i class="fa-solid fa-check"></i> Everything in Open Source</li>
+            <li><i class="fa-solid fa-check"></i> Content calendar & scheduling</li>
+            <li><i class="fa-solid fa-check"></i> Full analytics dashboard</li>
+            <li><i class="fa-solid fa-check"></i> Per-platform engagement stats</li>
+            <li><i class="fa-solid fa-check"></i> Post templates & snippets</li>
+            <li><i class="fa-solid fa-check"></i> Priority community support</li>
+          </ul>
+          <a href="pricing.html" class="btn btn-primary">Choose Pro</a>
+        </div>
+        <div class="price-card reveal">
+          <div class="plan-name">Self-Host</div>
+          <div class="plan-price">$0<span class="per">/self-hosted</span></div>
+          <div class="plan-desc">Host it yourself, full control.</div>
+          <ul class="price-features">
+            <li><i class="fa-solid fa-check"></i> All features unlocked</li>
+            <li><i class="fa-solid fa-check"></i> Calendar + analytics</li>
+            <li><i class="fa-solid fa-check"></i> Run on your own domain</li>
+            <li><i class="fa-solid fa-check"></i> Customize the source</li>
+            <li><i class="fa-solid fa-check"></i> No telemetry whatsoever</li>
+            <li><i class="fa-solid fa-check"></i> Community-maintained</li>
+          </ul>
+          <a href="pricing.html" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TESTIMONIALS ====== -->
+  <section class="section" style="background:var(--bg-card)">
+    <div class="container">
+      <div class="testimonials-head reveal">
+        <span class="section-tag">Loved by Creators</span>
+        <h2>What the community says</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="quote">"Fed-Poster saved me 10 hours a week. I post to 7 platforms in seconds, and I love that my tokens never touch a server. This is how social tools should work."</p>
+          <div class="author">
+            <div class="avatar">A</div>
+            <div><div class="name">Alex Rivera</div><div class="role">Content Creator · 120K followers</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="quote">"As a developer, the client-side architecture is exactly what I wanted. No opaque backend, no subscription trap. I can audit exactly what happens with my data."</p>
+          <div class="author">
+            <div class="avatar">M</div>
+            <div><div class="name">Maya Chen</div><div class="role">Open Source Maintainer</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="quote">"We run a community Discord and Telegram. Fed-Poster lets us announce to both at once from the browser. The drag-drop image upload and themes are a chef's kiss."</p>
+          <div class="author">
+            <div class="avatar">J</div>
+            <div><div class="name">Jordan Park</div><div class="role">Community Manager</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-section reveal">
+        <h2>Ready to take control of your social presence?</h2>
+        <p>No signup. No servers. No tracking. Just open and post.</p>
+        <a href="dashboard.html" class="btn btn-ghost btn-lg"><i class="fa-solid fa-rocket"></i> Open the Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>
+          Fed-Poster
+        </a>
+        <p>The privacy-first, browser-native, anti-SaaS social media posting platform. Your credentials, your data, your control.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platforms</h4>
+        <a href="dashboard.html">Telegram</a>
+        <a href="dashboard.html">Bluesky</a>
+        <a href="dashboard.html">Mastodon</a>
+        <a href="dashboard.html">Discord</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="settings.html">Settings</a>
+        <a href="#">Documentation</a>
+        <a href="#">Changelog</a>
+        <a href="#">Community</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Fed-Poster. Built privacy-first. No tracking.</span>
+      <div class="footer-social">
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+        <a href="#"><i class="fa-brands fa-mastodon"></i></a>
+        <a href="#"><i class="fa-solid fa-cloud"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script src="assets/fedposter.js"></script>
+  <script src="assets/kofi-widget.js"></script>
+</body>
+</html>

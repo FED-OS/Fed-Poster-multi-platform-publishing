@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Content Calendar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <link rel="stylesheet" href="assets/calendar.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+        <a href="forum.html">Forum</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="dashboard.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-rocket"></i> Compose</a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container section">
+    <div class="cal-header reveal">
+      <div>
+        <h1>Content Calendar</h1>
+        <p>Plan and visualize your scheduled posts across all platforms.</p>
+      </div>
+      <div class="cal-controls">
+        <button class="icon-btn" id="prev-month"><i class="fa-solid fa-chevron-left"></i></button>
+        <span id="month-label" class="month-label"></span>
+        <button class="icon-btn" id="next-month"><i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn btn-primary btn-sm" id="today-btn">Today</button>
+        <button class="btn btn-ghost btn-sm" id="add-post-btn"><i class="fa-solid fa-plus"></i> New Post</button>
+      </div>
+    </div>
+
+    <div class="cal-stats reveal">
+      <div class="cal-stat-card">
+        <div class="cs-icon" style="background:var(--accent-bg);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div>
+        <div><div class="cs-num" id="stat-scheduled">0</div><div class="cs-lbl">Scheduled</div></div>
+      </div>
+      <div class="cal-stat-card">
+        <div class="cs-icon" style="background:var(--green-bg);color:var(--green)"><i class="fa-solid fa-paper-plane"></i></div>
+        <div><div class="cs-num" id="stat-posted">0</div><div class="cs-lbl">Posted</div></div>
+      </div>
+      <div class="cal-stat-card">
+        <div class="cs-icon" style="background:var(--orange-bg);color:var(--orange)"><i class="fa-solid fa-clock"></i></div>
+        <div><div class="cs-num" id="stat-draft">0</div><div class="cs-lbl">Drafts</div></div>
+      </div>
+      <div class="cal-stat-card">
+        <div class="cs-icon" style="background:var(--blue-bg);color:var(--blue)"><i class="fa-solid fa-layer-group"></i></div>
+        <div><div class="cs-num" id="stat-platforms">7</div><div class="cs-lbl">Platforms</div></div>
+      </div>
+    </div>
+
+    <div class="cal-weekdays reveal">
+      <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+    </div>
+    <div class="cal-grid reveal" id="cal-grid"></div>
+
+    <div class="cal-legend reveal">
+      <span class="legend-item"><span class="legend-dot" style="background:#229ED9"></span> Telegram</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#0EA5E9"></span> Bluesky</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#6364FF"></span> Mastodon</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#5865F2"></span> Discord</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#444c56"></span> GitHub</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#FF6B35"></span> Stoat</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#00E59B"></span> DeviantArt</span>
+    </div>
+  </div>
+
+  <!-- New Post Modal -->
+  <div id="postModal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-calendar-plus"></i> Schedule a Post</h3>
+        <button class="modal-close" onclick="document.getElementById('postModal').classList.remove('open')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label>Post Content</label>
+          <textarea id="cal-post-text" rows="3" placeholder="What do you want to post?"></textarea>
+        </div>
+        <div class="field-grid">
+          <div class="field-group">
+            <label>Date</label>
+            <input type="date" id="cal-post-date" />
+          </div>
+          <div class="field-group">
+            <label>Time</label>
+            <input type="time" id="cal-post-time" value="09:00" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Platforms</label>
+          <div class="modal-platforms" id="modal-platforms"></div>
+        </div>
+        <div class="field-group">
+          <label>Status</label>
+          <select id="cal-post-status">
+            <option value="scheduled">Scheduled</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('postModal').classList.remove('open')">Cancel</button>
+        <button class="btn btn-primary" id="save-post-btn"><i class="fa-solid fa-check"></i> Save Post</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+        <p>The privacy-first, browser-native, anti-SaaS social media posting platform.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="dashboard.html">Dashboard</a><a href="calendar.html">Calendar</a><a href="analytics.html">Analytics</a><a href="pricing.html">Pricing</a></div>
+      <div class="footer-col"><h4>Platforms</h4><a href="dashboard.html">Telegram</a><a href="dashboard.html">Bluesky</a><a href="dashboard.html">Mastodon</a><a href="dashboard.html">Discord</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="settings.html">Settings</a><a href="#">Documentation</a><a href="#">Changelog</a><a href="#">Community</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Fed-Poster. Built privacy-first.</span><div class="footer-social"><a href="#"><i class="fa-brands fa-github"></i></a><a href="#"><i class="fa-brands fa-discord"></i></a><a href="#"><i class="fa-brands fa-mastodon"></i></a></div></div>
+  </footer>
+
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script src="assets/fedposter.js"></script>
+  <script src="assets/calendar.js"></script>
+  <script src="assets/kofi-widget.js"></script>
+</body>
+</html>

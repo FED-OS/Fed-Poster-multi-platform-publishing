@@ -1,0 +1,2977 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FED Ecosystem — Living Objects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Fed-Poster site integration -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/fedposter.css" />
+    <style>
+        /* ───────────── ROOT ───────────── */
+        :root {
+            --bg-base: #05070e;
+            --bg-card: rgba(6, 8, 18, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.04);
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --neon-cyan: #00d4ff;
+            --neon-purple: #b084ff;
+            --neon-orange: #ff6a3d;
+            --neon-green: #00f5a0;
+            --neon-pink: #ff4d94;
+            --silver-start: #d0d5dd;
+            --silver-end: #a0a8b5;
+            --text-primary: #f0f4ff;
+            --text-secondary: #b0bcdd;
+            --text-muted: #5f7299;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --radius: 14px;
+            --radius-pill: 40px;
+            --transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--bg-base);
+            background-image: radial-gradient(ellipse at 10% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 90% 80%, rgba(176, 132, 255, 0.04) 0%, transparent 50%);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            padding: 40px 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+        }
+
+        /* ───────────── BG LAYERS ───────────── */
+        #orb-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at center, black 25%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 70%);
+        }
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+        .ambient-glow.g1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -150px;
+            background: var(--neon-purple);
+            opacity: 0.08;
+        }
+        .ambient-glow.g2 {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: var(--neon-cyan);
+            opacity: 0.06;
+        }
+
+        /* ───────────── FIXED HEADER BUTTONS ───────────── */
+        .header-actions {
+            position: fixed;
+            top: 84px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .header-actions a {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 8px 18px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            transition: all var(--transition);
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+        }
+        .header-actions .btn-subscribe {
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--neon-cyan);
+            border-color: rgba(0, 212, 255, 0.15);
+        }
+        .header-actions .btn-subscribe:hover {
+            background: rgba(0, 212, 255, 0.16);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+        }
+        .header-actions .btn-sponsor {
+            background: rgba(176, 132, 255, 0.08);
+            color: var(--neon-purple);
+            border-color: rgba(176, 132, 255, 0.15);
+        }
+        .header-actions .btn-sponsor:hover {
+            background: rgba(176, 132, 255, 0.16);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(176, 132, 255, 0.08);
+        }
+        @media (max-width: 600px) {
+            .header-actions {
+                top: 76px;
+                right: 12px;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            .header-actions a {
+                font-size: 0.6rem;
+                padding: 6px 12px;
+            }
+        }
+
+        /* ───────────── ECOSYSTEM GRID ───────────── */
+        .ecosystem {
+            position: relative;
+            z-index: 5;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--neon-purple);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(176, 132, 255, 0.15), transparent);
+        }
+        .section-head {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        .section-head .hl {
+            color: var(--neon-cyan);
+        }
+        .section {
+            margin-bottom: 48px;
+        }
+
+        /* ───────────── FED STATIC COLORS ───────────── */
+        .fed-only {
+            display: inline-block;
+            font-weight: 800;
+        }
+        .c-cyan { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0,212,255,0.15); }
+        .c-purple { color: var(--neon-purple); text-shadow: 0 0 15px rgba(176,132,255,0.15); }
+        .c-orange { color: var(--neon-orange); text-shadow: 0 0 15px rgba(255,106,61,0.15); }
+        .c-green { color: var(--neon-green); text-shadow: 0 0 15px rgba(0,245,160,0.15); }
+        .c-pink { color: var(--neon-pink); text-shadow: 0 0 15px rgba(255,77,148,0.15); }
+        .c-red { color: #ff4444; text-shadow: 0 0 15px rgba(255,68,68,0.15); }
+        .c-dark { color: #1a1a2a; text-shadow: none; }
+
+        /* ───────────── JOIN NOW BUTTON & TOGGLE CARD ───────────── */
+        .join-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        .join-btn-wrapper {
+            display: block;
+            width: 100%;
+            max-width: 680px;
+            position: relative;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            margin: 0 auto;
+            border-radius: var(--radius);
+            transition: all var(--transition);
+        }
+        .join-btn-wrapper .btn-inner {
+            position: relative;
+            width: 100%;
+            border-radius: var(--radius);
+            border: 2px solid rgba(0, 212, 255, 0.1);
+            overflow: hidden;
+            background: linear-gradient(145deg, #0a0e1a, #05070e);
+            transition: all var(--transition);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.02);
+        }
+        .join-btn-wrapper:hover .btn-inner {
+            border-color: rgba(0, 212, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 212, 255, 0.04);
+        }
+        .join-btn-wrapper .btn-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(2px);
+            transition: background 0.4s;
+        }
+        .join-btn-wrapper:hover .btn-overlay {
+            background: rgba(0, 0, 0, 0.25);
+        }
+        .join-btn-wrapper .btn-overlay span {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #fff;
+            background: rgba(0, 212, 255, 0.08);
+            padding: 12px 36px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.05);
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+            transition: all 0.4s;
+        }
+        .join-btn-wrapper:hover .btn-overlay span {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.1);
+            transform: scale(1.02);
+        }
+        .join-btn-wrapper iframe {
+            border: none;
+            width: 600px;
+            height: 712px;
+            display: block;
+            position: relative;
+            transform: scale(1.12);
+            transform-origin: top left;
+            pointer-events: none;
+            margin: 0 auto;
+        }
+        .join-btn-wrapper .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            box-shadow:
+                inset 120px 0 0 0 #0a0e1a,
+                inset -150px 0 0 0 #0a0e1a,
+                inset 0 -120px 0 0 #0a0e1a;
+            border-radius: var(--radius);
+        }
+
+        /* Hidden Ko-fi Card */
+        #kofiCard {
+            display: none;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 680px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 2px solid rgba(0, 212, 255, 0.1);
+            background: #0a0e1a;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #kofiCard .card-inner {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 112%;
+            overflow: hidden;
+        }
+        #kofiCard .card-inner iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(1.12);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+        #kofiCard .card-inner .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            box-shadow:
+                inset 120px 0 0 0 #0a0e1a,
+                inset -150px 0 0 0 #0a0e1a,
+                inset 0 -120px 0 0 #0a0e1a;
+            border-radius: var(--radius);
+        }
+
+        @media (max-width: 700px) {
+            .join-btn-wrapper iframe {
+                width: 100%;
+                height: 600px;
+                transform: scale(1);
+                position: relative;
+            }
+            .join-btn-wrapper .mask {
+                display: none;
+            }
+            .join-btn-wrapper .btn-overlay span {
+                font-size: 1.2rem;
+                padding: 8px 20px;
+            }
+            #kofiCard .card-inner {
+                padding-bottom: 150%;
+            }
+            #kofiCard .card-inner iframe {
+                transform: scale(1);
+            }
+            #kofiCard .card-inner .mask {
+                display: none;
+            }
+        }
+
+        /* ───────────── FEATURED CAROUSEL ───────────── */
+        .featured-section {
+            margin-bottom: 40px;
+        }
+        .featured-carousel {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-glass);
+            padding: 12px 0;
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .carousel-container {
+            overflow: hidden;
+            margin: 0 48px;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            padding: 10px;
+            height: 300px;
+            display: flex;
+            align-items: stretch;
+        }
+        .carousel-slide .object {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--radius);
+            animation: none;
+            min-height: unset;
+        }
+        .carousel-slide .object:hover {
+            transform: none;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            font-family: var(--font-sans);
+            line-height: 1;
+        }
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .carousel-btn.prev {
+            left: 8px;
+        }
+        .carousel-btn.next {
+            right: 8px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .carousel-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-subtle);
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .carousel-dots .dot.active {
+            background: var(--neon-cyan);
+            box-shadow: 0 0 16px var(--neon-cyan);
+            border-color: var(--neon-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                margin: 0 16px;
+            }
+            .carousel-slide {
+                height: 240px;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ───────────── GRID LAYOUTS ───────────── */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .grid-masonry {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 1100px) {
+            .grid-4,
+            .grid-masonry {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .grid-3,
+            .grid-2,
+            .grid-4,
+            .grid-masonry {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .span-2 {
+            grid-column: span 2;
+        }
+        @media (max-width: 1100px) {
+            .span-2 {
+                grid-column: span 2;
+            }
+        }
+        @media (max-width: 768px) {
+            .span-2 {
+                grid-column: span 1;
+            }
+        }
+
+        /* ───────────── BASE OBJECT STYLES + ANIMATIONS ───────────── */
+        .object {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 0;
+            overflow: hidden;
+            backdrop-filter: blur(12px) saturate(1.2);
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 160px;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 212, 255, 0.05);
+            animation-play-state: paused;
+        }
+        @keyframes borderPulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(0, 212, 255, 0); }
+            50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.03); }
+        }
+
+        /* ──────── SHARED EXPLANATION STYLE ──────── */
+        .explanation {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-top: 6px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            border-left: 2px solid rgba(0, 212, 255, 0.1);
+            font-family: var(--font-sans);
+        }
+
+        /* ───────────── OBJECT: PREMIUM MODEM (FED-NET) ───────────── */
+        .object-modem-premium {
+            background: linear-gradient(145deg, #0d1520, #080c18);
+            border: 1px solid rgba(0, 212, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(0, 212, 255, 0.04);
+        }
+        .object-modem-premium::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(0, 212, 255, 0.02), transparent 60%);
+            pointer-events: none;
+        }
+        .object-modem-premium .modem-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 2;
+        }
+        .object-modem-premium .modem-antennas {
+            display: flex;
+            gap: 12px;
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+        .object-modem-premium .modem-antennas span {
+            display: inline-block;
+            animation: antennaPulse 2s ease-in-out infinite;
+        }
+        .object-modem-premium .modem-antennas span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        @keyframes antennaPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 1; }
+        }
+        .object-modem-premium .modem-brand {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.05);
+        }
+        .object-modem-premium .modem-brand .tag {
+            font-size: 0.55rem;
+            color: var(--neon-cyan);
+            background: rgba(0, 212, 255, 0.04);
+            border: 1px solid rgba(0, 212, 255, 0.06);
+            padding: 2px 12px;
+            border-radius: var(--radius-pill);
+            margin-left: 6px;
+            font-weight: 500;
+        }
+        .object-modem-premium .modem-lights-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .object-modem-premium .modem-lights-row span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: block;
+        }
+        .object-modem-premium .modem-lights-row .on {
+            background: var(--neon-green);
+            box-shadow: 0 0 12px var(--neon-green);
+        }
+        .object-modem-premium .modem-lights-row .blink {
+            background: var(--neon-cyan);
+            animation: blink 1s infinite;
+        }
+        .object-modem-premium .modem-lights-row .off {
+            background: var(--text-muted);
+            opacity: 0.2;
+        }
+        .object-modem-premium .modem-lights-row .dim {
+            background: var(--neon-orange);
+            opacity: 0.5;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .object-modem-premium .modem-body {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        .object-modem-premium .modem-body .info {
+            flex: 1;
+        }
+        .object-modem-premium .modem-body .info .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        .object-modem-premium .modem-body .info .sub {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+        .object-modem-premium .modem-body .price-badge {
+            background: rgba(0, 212, 255, 0.04);
+            border: 1px solid rgba(0, 212, 255, 0.06);
+            border-radius: var(--radius-pill);
+            padding: 4px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            white-space: nowrap;
+        }
+        .object-modem-premium .modem-footer {
+            margin-top: 12px;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 10px;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+        .object-modem-premium .explanation {
+            margin-top: 8px;
+        }
+
+        /* ───────────── OBJECT: APP STORE (FED-Play) ───────────── */
+        .object-appstore {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: borderPulse 3s ease-in-out infinite;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        .object-appstore:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 77, 148, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-appstore .appstore-header {
+            background: #0d1120;
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+        }
+        .object-appstore .appstore-header .title {
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+        .object-appstore .appstore-header .badge {
+            background: rgba(0, 212, 255, 0.04);
+            border: 1px solid rgba(0, 212, 255, 0.06);
+            padding: 2px 10px;
+            border-radius: var(--radius-pill);
+            font-size: 0.5rem;
+            color: var(--neon-cyan);
+        }
+        .object-appstore .appstore-body {
+            padding: 14px 16px 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .object-appstore .appstore-body .featured-row {
+            display: flex;
+            gap: 10px;
+        }
+        .object-appstore .appstore-body .featured-row .featured-app {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+        }
+        .object-appstore .appstore-body .featured-row .featured-app .app-icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .object-appstore .appstore-body .featured-row .featured-app .app-name {
+            font-family: var(--font-mono);
+            font-size: 0.5rem;
+            color: var(--text-secondary);
+        }
+        .object-appstore .appstore-body .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .object-appstore .appstore-body .app-grid .app-item {
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 6px;
+            padding: 6px 4px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+        }
+        .object-appstore .appstore-body .app-grid .app-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(0, 212, 255, 0.05);
+        }
+        .object-appstore .appstore-body .app-grid .app-item .icon {
+            font-size: 1.2rem;
+            display: block;
+        }
+        .object-appstore .appstore-body .app-grid .app-item .label {
+            font-family: var(--font-mono);
+            font-size: 0.4rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+        .object-appstore .appstore-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 6px 16px 8px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .object-appstore .explanation {
+            padding: 0 16px 8px;
+            margin-top: 0;
+        }
+
+        /* ───────────── OBJECT: PHONE SCREEN (FED-Deck) ───────────── */
+        .object-phone-screen {
+            background: #0a0d18;
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 12px 12px 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(255, 255, 255, 0.02);
+            animation: borderPulse 3s ease-in-out infinite;
+            min-height: 240px;
+        }
+        .object-phone-screen:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 245, 160, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-phone-screen .phone-notch {
+            width: 60px;
+            height: 18px;
+            background: #0a0d18;
+            border-radius: 0 0 10px 10px;
+            margin: -12px auto 6px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid var(--border-subtle);
+            border-top: none;
+            box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+        }
+        .object-phone-screen .phone-notch .camera-dot {
+            width: 6px;
+            height: 6px;
+            background: #1a1a3a;
+            border-radius: 50%;
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+        .object-phone-screen .phone-screen-inner {
+            background: #060810;
+            border-radius: 12px;
+            padding: 12px 14px 10px;
+            border: 1px solid var(--border-subtle);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 140px;
+        }
+        .object-phone-screen .phone-screen-inner .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 6px;
+        }
+        .object-phone-screen .phone-screen-inner .status-bar .time {
+            color: var(--text-secondary);
+        }
+        .object-phone-screen .phone-screen-inner .status-bar .battery {
+            color: var(--neon-green);
+        }
+        .object-phone-screen .phone-screen-inner .features-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 2px 0;
+        }
+        .object-phone-screen .phone-screen-inner .features-list .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            padding: 3px 6px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.01);
+            border-left: 2px solid var(--neon-cyan);
+            transition: all 0.3s;
+        }
+        .object-phone-screen .phone-screen-inner .features-list .feature-item:hover {
+            background: rgba(0, 212, 255, 0.02);
+            border-left-color: var(--neon-green);
+        }
+        .object-phone-screen .phone-screen-inner .features-list .feature-item .icon {
+            font-size: 0.7rem;
+            width: 16px;
+            text-align: center;
+        }
+        .object-phone-screen .phone-screen-inner .features-list .feature-item .label {
+            flex: 1;
+        }
+        .object-phone-screen .phone-screen-inner .features-list .feature-item .tag {
+            font-size: 0.4rem;
+            color: var(--neon-cyan);
+            background: rgba(0, 212, 255, 0.04);
+            padding: 1px 8px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(0, 212, 255, 0.04);
+        }
+        .object-phone-screen .phone-home-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            margin: 6px auto 0;
+            transition: all 0.3s;
+        }
+        .object-phone-screen .phone-home-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.05);
+        }
+        .object-phone-screen .phone-footer-label {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+        .object-phone-screen .explanation {
+            padding: 4px 12px 6px;
+            margin-top: 2px;
+        }
+
+        /* ───────────── OBJECT: RED GLOW (Patreon+) — BLURRED ───────────── */
+        .object-red-glow {
+            background: #0a0e1a;
+            border: 1px solid rgba(255, 77, 77, 0.1);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            animation: redPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.05);
+            transition: all var(--transition);
+            backdrop-filter: blur(16px);
+            filter: blur(0.5px);
+            background: rgba(10, 14, 26, 0.6);
+        }
+        .object-red-glow:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 0, 0, 0.15);
+            animation-play-state: paused;
+            filter: blur(0px);
+            backdrop-filter: blur(8px);
+        }
+        @keyframes redPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.05), 0 0 40px rgba(255, 0, 0, 0.02); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.15), 0 0 80px rgba(255, 0, 0, 0.05); }
+        }
+        .object-red-glow .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #ff4444;
+        }
+        .object-red-glow .sub {
+            font-size: 0.55rem;
+            color: #ff8888;
+            font-family: var(--font-mono);
+        }
+        .object-red-glow .emoji {
+            font-size: 2.4rem;
+            margin-bottom: 4px;
+        }
+        .object-red-glow .explanation {
+            text-align: left;
+            margin-top: 6px;
+            border-left-color: #ff4444;
+            background: rgba(255,0,0,0.02);
+        }
+
+        /* ───────────── OBJECT: FIXED EDU (Book with pages) ───────────── */
+        .object-edu-fixed {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 4px 12px 12px 4px;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            position: relative;
+            box-shadow: inset -4px 0 0 rgba(176, 132, 255, 0.15);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-edu-fixed:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(176, 132, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-edu-fixed .edu-pages {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .object-edu-fixed .edu-pages .page {
+            background: rgba(176, 132, 255, 0.03);
+            border: 1px solid rgba(176, 132, 255, 0.06);
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--text-secondary);
+        }
+        .object-edu-fixed .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-top: 10px;
+        }
+        .object-edu-fixed .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin-top: 2px;
+        }
+        .object-edu-fixed .explanation {
+            text-align: left;
+            margin-top: 6px;
+        }
+
+        /* ───────────── OBJECT: TRUCK (Fed Jumper - Fixed) ───────────── */
+        .object-truck-fixed {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 18px 16px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            position: relative;
+            border-bottom: 4px solid var(--neon-cyan);
+            animation: borderPulse 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .object-truck-fixed:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-truck-fixed .truck-body {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2.6rem;
+        }
+        .object-truck-fixed .truck-body .truck-detail {
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .object-truck-fixed .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-top: 4px;
+        }
+        .object-truck-fixed .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin-top: 2px;
+        }
+        .object-truck-fixed .truck-route {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 2px 12px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-subtle);
+        }
+        .object-truck-fixed .explanation {
+            text-align: left;
+            margin-top: 6px;
+        }
+
+        /* ───────────── OBJECT: COMPLETELY NEW (FED-Verify) ───────────── */
+        .object-verify-new {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            animation: borderPulse 3s ease-in-out infinite;
+            position: relative;
+            background: linear-gradient(135deg, #0a0e1a, #0d1528);
+            border-image: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-green)) 1;
+            border-image-slice: 1;
+        }
+        .object-verify-new:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 212, 255, 0.04);
+            animation-play-state: paused;
+        }
+        .object-verify-new .verify-icon {
+            font-size: 2.6rem;
+            margin-bottom: 2px;
+        }
+        .object-verify-new .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .object-verify-new .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .object-verify-new .verify-badge {
+            margin-top: 6px;
+            background: rgba(0, 212, 255, 0.04);
+            border: 1px solid rgba(0, 212, 255, 0.06);
+            padding: 2px 14px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--neon-cyan);
+        }
+        .object-verify-new .verify-check {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--text-muted);
+        }
+        .object-verify-new .verify-check span {
+            color: var(--neon-green);
+        }
+        .object-verify-new .explanation {
+            text-align: left;
+            margin-top: 6px;
+        }
+
+        /* ───────────── OBJECT: SILVER CARD (FEDCloud) ───────────── */
+        .object-silver {
+            background: linear-gradient(145deg, #d0d5dd, #a0a8b5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            position: relative;
+            overflow: hidden;
+            color: #1a1a2a;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+            backdrop-filter: none;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-silver:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(192, 192, 192, 0.2);
+            animation-play-state: paused;
+        }
+        .object-silver::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: skewX(-25deg);
+            animation: shimmer 4s infinite;
+        }
+        @keyframes shimmer {
+            0% { left: -75%; }
+            100% { left: 125%; }
+        }
+        .object-silver .silver-text {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #1a1a2a;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+        .object-silver .silver-sub {
+            font-size: 0.7rem;
+            color: #2a2a3a;
+            font-family: var(--font-mono);
+            margin-top: 4px;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 2px 14px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            position: relative;
+            z-index: 2;
+        }
+        .object-silver .silver-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+            font-size: 0.55rem;
+            color: #2a2a3a;
+            font-family: var(--font-mono);
+            position: relative;
+            z-index: 2;
+        }
+        .object-silver .explanation {
+            color: #1a1a2a;
+            border-left-color: #1a1a2a;
+            background: rgba(0,0,0,0.03);
+            margin-top: 8px;
+        }
+
+        /* ───────────── OBJECT: MAILBOX (FED-Poster) ───────────── */
+        .object-mailbox {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 8px 8px 0 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-bottom: 4px solid var(--neon-orange);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-mailbox:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 106, 61, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-mailbox .mailbox-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 16px;
+            background: linear-gradient(180deg, #141c2a, #0a0e1a);
+            border-radius: 8px 8px 0 0;
+        }
+        .object-mailbox .mailbox-flag {
+            position: absolute;
+            right: 16px;
+            top: 8px;
+            width: 6px;
+            height: 24px;
+            background: var(--neon-orange);
+            border-radius: 2px;
+            box-shadow: 0 0 12px var(--neon-orange);
+        }
+        .object-mailbox .mailbox-slot {
+            width: 60%;
+            height: 4px;
+            background: var(--border-subtle);
+            margin: 8px 0 12px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .object-mailbox .mailbox-slot::after {
+            content: '';
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: var(--neon-orange);
+            opacity: 0.3;
+            top: 1px;
+        }
+        .object-mailbox .mailbox-text {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .object-mailbox .mailbox-sub {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            margin-top: 2px;
+        }
+        .object-mailbox .mailbox-meta {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 12px;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .object-mailbox .explanation {
+            padding: 6px 16px 8px;
+            margin-top: 0;
+            background: rgba(0,0,0,0.1);
+            border-left: none;
+            border-top: 1px solid var(--border-subtle);
+            border-radius: 0;
+        }
+
+        /* ───────────── OBJECT: BROWSER (Surf FED) ───────────── */
+        .object-browser {
+            background: #0c101f;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-browser:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-browser .browser-bar {
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: #0a0d18;
+            border-bottom: 1px solid var(--border-subtle);
+            gap: 12px;
+        }
+        .object-browser .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .object-browser .browser-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: block;
+            transition: all 0.3s;
+        }
+        .object-browser .browser-dots .r {
+            background: #ff5f56;
+            animation: dotGlow 1.4s ease-in-out infinite;
+        }
+        .object-browser .browser-dots .y {
+            background: #ffbd2e;
+            animation: dotGlow 1.8s ease-in-out infinite 0.3s;
+        }
+        .object-browser .browser-dots .g {
+            background: #27c93f;
+            animation: dotGlow 2.2s ease-in-out infinite 0.6s;
+        }
+        @keyframes dotGlow {
+            0%, 100% { box-shadow: 0 0 4px rgba(255,255,255,0.1); }
+            25% { box-shadow: 0 0 20px rgba(255,95,86,0.6), 0 0 40px rgba(255,95,86,0.2); }
+            50% { box-shadow: 0 0 24px rgba(255,189,46,0.7), 0 0 48px rgba(255,189,46,0.25); }
+            75% { box-shadow: 0 0 28px rgba(39,201,63,0.7), 0 0 56px rgba(39,201,63,0.25); }
+        }
+        .object-browser .browser-tabs {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+        .object-browser .browser-tabs .tab {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 4px 14px;
+            border-radius: 6px 6px 0 0;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            border-bottom: none;
+        }
+        .object-browser .browser-tabs .tab.active {
+            background: rgba(0, 212, 255, 0.04);
+            color: #fff;
+            border-color: rgba(0, 212, 255, 0.08);
+        }
+        .object-browser .browser-nav {
+            display: flex;
+            align-items: center;
+            padding: 4px 12px;
+            gap: 10px;
+            background: #0a0d18;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .object-browser .browser-url {
+            flex: 1;
+            background: #05070e;
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .object-browser .browser-url .lock {
+            color: var(--neon-green);
+        }
+        .object-browser .browser-body {
+            padding: 16px 14px 14px;
+            background: #0c101f;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .object-browser .browser-body .logo {
+            font-size: 2.4rem;
+            margin-bottom: 4px;
+        }
+        .object-browser .browser-body .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .object-browser .browser-body .sub {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .object-browser .explanation {
+            padding: 6px 16px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: TERMINAL (FED-OS) ───────────── */
+        .object-terminal {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 180px;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-terminal:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 245, 160, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-terminal .term-header {
+            background: #0d1120;
+            padding: 6px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+        }
+        .object-terminal .term-body {
+            padding: 16px 18px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            line-height: 1.8;
+            color: var(--neon-green);
+            flex: 1;
+            background: #060810;
+            min-height: 120px;
+        }
+        .object-terminal .term-body .prompt {
+            color: var(--neon-cyan);
+        }
+        .object-terminal .term-body .dim {
+            color: var(--text-muted);
+        }
+        .object-terminal .term-body .line {
+            opacity: 0;
+            animation: typeIn 0.05s forwards;
+        }
+        .object-terminal .term-body .line:nth-child(1) { animation-delay: 0.1s; }
+        .object-terminal .term-body .line:nth-child(2) { animation-delay: 0.8s; }
+        .object-terminal .term-body .line:nth-child(3) { animation-delay: 1.6s; }
+        .object-terminal .term-body .line:nth-child(4) { animation-delay: 2.4s; }
+        @keyframes typeIn {
+            0% { opacity: 0; transform: translateX(-4px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .object-terminal .explanation {
+            padding: 6px 18px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: FOLDER (FedWeb) ───────────── */
+        .object-folder {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 6px 6px 10px 10px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 160px;
+            overflow: hidden;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-folder:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 106, 61, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-folder .folder-tab {
+            background: #141c2a;
+            padding: 6px 16px 4px;
+            border-bottom: 1px solid var(--border-subtle);
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .object-folder .folder-tab .name {
+            color: #fff;
+            font-weight: 700;
+        }
+        .object-folder .folder-body {
+            padding: 14px 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .object-folder .folder-body .file {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.5rem;
+            color: var(--text-secondary);
+            display: inline-block;
+            width: fit-content;
+        }
+        .object-folder .folder-body .sub {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin-top: 6px;
+        }
+        .object-folder .explanation {
+            padding: 6px 16px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: VIDEO PLAYER (SubTube) ───────────── */
+        .object-video {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 160px;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-video:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 77, 148, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-video .video-screen {
+            background: #000;
+            padding: 16px 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+        }
+        .object-video .video-screen .play-icon {
+            font-size: 2.6rem;
+            color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        .object-video:hover .play-icon {
+            color: var(--neon-pink);
+            text-shadow: 0 0 40px rgba(255, 77, 148, 0.2);
+        }
+        .object-video .video-timeline {
+            width: 100%;
+            height: 3px;
+            background: var(--border-subtle);
+            border-radius: 4px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .object-video .video-timeline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--neon-pink);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+        .object-video .video-info {
+            padding: 12px 16px 10px;
+            text-align: center;
+        }
+        .object-video .video-info .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .object-video .video-info .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .object-video .explanation {
+            padding: 6px 16px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: GAME CONSOLE (PokeJumper) ───────────── */
+        .object-game {
+            background: #0e0b1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 180px;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-game:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(176, 132, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-game .game-screen {
+            background: #1a1a2e;
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .object-game .game-screen .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .object-game .game-screen .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+        }
+        .object-game .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 6px 0 4px;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            background: #0a0818;
+        }
+        .object-game .game-controls span {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-subtle);
+        }
+        .object-game .explanation {
+            padding: 6px 16px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: DASHBOARD (FED-SEND) ───────────── */
+        .object-dashboard {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 160px;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-dashboard:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-dashboard .dash-header {
+            background: #0d1120;
+            padding: 6px 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+        }
+        .object-dashboard .dash-body {
+            padding: 14px 16px 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            flex: 1;
+        }
+        .object-dashboard .dash-body .metric {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 6px 8px;
+            text-align: center;
+        }
+        .object-dashboard .dash-body .metric .num {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+        .object-dashboard .dash-body .metric .label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .object-dashboard .explanation {
+            padding: 6px 16px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: BILLBOARD (FEDsense) ───────────── */
+        .object-billboard {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 4px;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            border-left: 4px solid var(--neon-orange);
+            background: linear-gradient(135deg, rgba(255, 106, 61, 0.02), #0a0e1a);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-billboard:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 106, 61, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-billboard .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .object-billboard .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .object-billboard .explanation {
+            text-align: left;
+            margin-top: 6px;
+            border-left-color: var(--neon-orange);
+            background: rgba(255,106,61,0.02);
+        }
+
+        /* ───────────── OBJECT: REMOTE (FED-Deck) ───────────── */
+        .object-remote {
+            background: #0a0e1a;
+            border: 1px solid var(--border-glass);
+            border-radius: 16px 16px 30px 30px;
+            padding: 16px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            border-bottom: 6px solid var(--neon-green);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-remote:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 245, 160, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-remote .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .object-remote .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .object-remote .explanation {
+            text-align: left;
+            margin-top: 6px;
+        }
+
+        /* ───────────── OBJECT: PHONE (FEDAPK) ───────────── */
+        .object-phone {
+            background: #0a0d18;
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 10px 12px 8px;
+            display: flex;
+            flex-direction: column;
+            min-height: 160px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-phone:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 106, 61, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-phone .phone-camera {
+            width: 8px;
+            height: 8px;
+            background: #1a1a2a;
+            border-radius: 50%;
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .object-phone .phone-screen {
+            background: #060810;
+            border-radius: 8px;
+            padding: 16px 10px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .object-phone .phone-screen .phone-text {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+        }
+        .object-phone .phone-screen .phone-sub {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin-top: 2px;
+        }
+        .object-phone .phone-home {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            margin: 6px auto 0;
+        }
+        .object-phone .phone-meta {
+            padding: 4px 0 0;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            text-align: center;
+        }
+        .object-phone .explanation {
+            padding: 4px 12px 6px;
+            margin-top: 2px;
+        }
+
+        /* ───────────── OBJECT: CARD (generic fallback) ───────────── */
+        .object-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            transition: all var(--transition);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-card .name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .object-card .sub {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        .object-card .emoji {
+            font-size: 2.4rem;
+            margin-bottom: 4px;
+        }
+        .object-card .explanation {
+            text-align: left;
+            margin-top: 6px;
+        }
+
+        /* ───────────── ROBOTS (FED-AI / FED-BOT) ───────────── */
+        .object-robots {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 160px;
+            transition: all var(--transition);
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        .object-robots:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-robots .robots-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+        .object-robots .robot-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .object-robots .robot {
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+        .object-robots .robot-name {
+            font-family: var(--font-mono);
+            font-size: 0.5rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        .object-robots .data-stream {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            padding: 0 8px;
+        }
+        .object-robots .stream-line {
+            width: 80%;
+            height: 2px;
+            background: var(--border-subtle);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+        .object-robots .stream-line.active::after {
+            content: '';
+            position: absolute;
+            left: -30%;
+            top: 0;
+            width: 30%;
+            height: 100%;
+            background: var(--neon-cyan);
+            animation: streamMove 1.2s linear infinite;
+            border-radius: 4px;
+        }
+        @keyframes streamMove {
+            0% { left: -30%; }
+            100% { left: 110%; }
+        }
+        .object-robots .particles {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            margin: 2px 0;
+        }
+        .object-robots .particles span {
+            display: block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            opacity: 0.2;
+            animation: particleFade 1.4s ease-in-out infinite;
+        }
+        .object-robots .particles span:nth-child(2) { animation-delay: 0.2s; }
+        .object-robots .particles span:nth-child(3) { animation-delay: 0.4s; }
+        .object-robots .particles span:nth-child(4) { animation-delay: 0.6s; }
+        .object-robots .particles span:nth-child(5) { animation-delay: 0.8s; }
+        @keyframes particleFade {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        .object-robots .data-label {
+            font-family: var(--font-mono);
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .object-robots .explanation {
+            text-align: left;
+            margin-top: 8px;
+        }
+
+        /* ───────────── EYE-CATCHING FED PROMPTLY ───────────── */
+        .object-card.promptly-glow {
+            background: linear-gradient(145deg, #0a1220, #0a0e1a);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            position: relative;
+            overflow: visible;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.05), inset 0 0 60px rgba(0, 212, 255, 0.02);
+            animation: promptlyPulse 2.5s ease-in-out infinite;
+        }
+        .object-card.promptly-glow::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink), var(--neon-cyan));
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: gradientMove 4s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        .object-card.promptly-glow::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: var(--radius);
+            background: #0a0e1a;
+            z-index: -1;
+        }
+        .object-card.promptly-glow:hover::before {
+            opacity: 0.7;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes promptlyPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.04), 0 0 60px rgba(176, 132, 255, 0.02); }
+            50% { box-shadow: 0 0 50px rgba(0, 212, 255, 0.12), 0 0 100px rgba(176, 132, 255, 0.06); }
+        }
+        .object-card.promptly-glow .name {
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+        .object-card.promptly-glow .sub {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        .object-card.promptly-glow .emoji {
+            font-size: 3rem;
+            animation: emojiFloat 3s ease-in-out infinite;
+        }
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
+        }
+        .object-card.promptly-glow .explanation {
+            border-left-color: var(--neon-cyan);
+            background: rgba(0, 212, 255, 0.03);
+        }
+        .object-card.promptly-glow .tag-pill {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.06);
+            border: 1px solid rgba(0, 212, 255, 0.08);
+            border-radius: 4px;
+            padding: 2px 12px;
+            font-size: 0.55rem;
+            color: var(--neon-cyan);
+            transition: all 0.3s;
+        }
+        .object-card.promptly-glow .tag-pill:hover {
+            background: rgba(0, 212, 255, 0.12);
+            border-color: rgba(0, 212, 255, 0.2);
+        }
+
+        /* ───────────── FADE-IN ───────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Fed-Poster navbar integration: map site navbar to the About page neon dark aesthetic ── */
+        body { padding-top: 84px; }
+        @media (max-width: 768px) { body { padding-top: 76px; } }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            background: color-mix(in srgb, var(--bg-base) 80%, transparent);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+        }
+        .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-sans); font-weight: 800; font-size: 1.15rem;
+            color: var(--text-primary); letter-spacing: -0.02em; flex-shrink: 0; text-decoration: none;
+        }
+        .nav-brand:hover { color: var(--neon-cyan); }
+        .nav-brand .logo-mark {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: 9px; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: #05070e;
+            box-shadow: 0 3px 16px rgba(0, 212, 255, 0.25);
+        }
+        .nav-links { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+        .nav-links a {
+            padding: 8px 13px; border-radius: var(--radius);
+            font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500;
+            color: var(--text-secondary); text-decoration: none;
+            transition: all .25s ease; white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+        .nav-links a.active { color: var(--neon-cyan); background: rgba(0,212,255,0.08); font-weight: 600; box-shadow: inset 0 0 0 1px rgba(0,212,255,0.18); }
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .nav-theme-picker { display: flex; gap: 5px; align-items: center; }
+        .nav-theme-picker .swatch {
+            width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
+            border: 2px solid transparent; transition: transform .2s ease, border-color .2s ease; flex-shrink: 0;
+        }
+        .nav-theme-picker .swatch:hover { transform: scale(1.15); }
+        .nav-theme-picker .swatch.active { border-color: var(--text-primary); transform: scale(1.15); box-shadow: 0 0 0 2px rgba(0,212,255,0.18); }
+        .navbar .btn.btn-primary {
+            font-family: var(--font-sans); font-weight: 600; font-size: 0.82rem;
+            padding: 0 16px; height: 36px; border-radius: var(--radius-pill);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: #05070e; border: none; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+            box-shadow: 0 4px 18px rgba(0,212,255,0.22); transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .navbar .btn.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(0,212,255,0.35); }
+        .nav-toggle { display: none; font-size: 22px; color: var(--text-primary); background: none; border: none; cursor: pointer; }
+
+        /* Mobile nav */
+        @media (max-width: 980px) {
+            .nav-links {
+                display: none; position: fixed; top: 64px; left: 0; right: 0;
+                flex-direction: column; align-items: stretch; gap: 0;
+                background: color-mix(in srgb, var(--bg-base) 96%, transparent);
+                backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+                border-bottom: 1px solid rgba(0,212,255,0.1); padding: 10px 20px 18px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 12px 14px; border-radius: 10px; }
+            .nav-toggle { display: block; }
+            .nav-right .btn.btn-primary { display: none; }
+        }
+        /* Hide header-actions on small screens to avoid clutter (Subscribe/Sponsor stay on desktop) */
+        @media (max-width: 600px) {
+            .header-actions { display: none; }
+        }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Fed-Poster site navbar -->
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+          <span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>
+          Fed-Poster
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="calendar.html">Calendar</a>
+          <a href="analytics.html">Analytics</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="settings.html">Settings</a>
+          <a href="forum.html">Forum</a>
+          <a href="about.html" class="active">About</a>
+        </div>
+        <div class="nav-right">
+          <div class="nav-theme-picker"></div>
+          <a href="dashboard.html" class="btn btn-primary btn-sm">Open App <i class="fa-solid fa-arrow-right"></i></a>
+          <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- ─── FIXED HEADER BUTTONS ─── -->
+    <div class="header-actions">
+        <a href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener noreferrer" class="btn-subscribe">❤️ Subscribe</a>
+        <a href="https://github.com/sponsors/FED-OS" target="_blank" rel="noopener noreferrer" class="btn-sponsor">⭐ Sponsor</a>
+    </div>
+
+    <!-- ─── BG LAYERS ─── -->
+    <canvas id="orb-canvas"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="ambient-glow g1"></div>
+    <div class="ambient-glow g2"></div>
+
+    <!-- ─── ECOSYSTEM ─── -->
+    <div class="ecosystem">
+
+        <!-- ═══ FEATURED CAROUSEL ═══ -->
+        <section class="section featured-section">
+            <div class="section-title"><span class="fed-only c-purple">FED</span>-OS by <span class="fed-only c-cyan">FED</span><span class="fed-only c-cyan">Promptly</span></div>
+            <div class="section-head"></div>
+            <div class="featured-carousel">
+                <button class="carousel-btn prev" id="prevBtn">‹</button>
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Slide 1: FED-NET (Premium Modem) -->
+                        <div class="carousel-slide">
+                            <div class="object object-modem-premium" style="height:100%; width:100%; min-height:unset; animation:none;">
+                                <div class="modem-top">
+                                    <div class="modem-antennas">
+                                        <span>📶</span>
+                                        <span>📶</span>
+                                    </div>
+                                    <div class="modem-brand">
+                                        <span class="fed-only c-cyan">FED</span>-NET
+                                        <span class="tag">Inter‑<span class="fed-only c-cyan">FED</span>‑NET</span>
+                                    </div>
+                                </div>
+                                <div class="modem-lights-row">
+                                    <span class="on"></span>
+                                    <span class="blink"></span>
+                                    <span class="dim"></span>
+                                    <span class="on"></span>
+                                    <span class="off"></span>
+                                    <span class="blink"></span>
+                                </div>
+                                <div class="modem-body">
+                                    <div class="info">
+                                        <div class="name">Sovereign Connectivity</div>
+                                        <div class="sub">E‑waste phones → wall‑powered modems</div>
+                                    </div>
+                                    <div class="price-badge">$12.50/mo</div>
+                                </div>
+                                <div class="modem-footer">Off‑grid · TTL · EasyTether · Zero‑lock</div>
+                                <div class="explanation">Upcycles e‑waste phones into wall‑powered modems, enabling off‑grid connectivity for under $13/month.</div>
+                            </div>
+                        </div>
+                        <!-- Slide 2: FED-Poster -->
+                        <div class="carousel-slide">
+                            <div class="object object-mailbox" style="height:100%; width:100%; min-height:unset; animation:none;">
+                                <div class="mailbox-flag" style="height:32px; width:8px; right:24px; top:12px;"></div>
+                                <div class="mailbox-body" style="flex:1; padding:24px 20px;">
+                                    <div class="mailbox-text"><span class="fed-only c-orange">FED</span>-Poster</div>
+                                    <div class="mailbox-slot" style="height:6px; margin:12px 0 16px;"></div>
+                                    <div class="mailbox-sub" style="font-size:1rem;">21+ Platforms · Target 500+</div>
+                                </div>
+                                <div class="mailbox-meta" style="font-size:0.8rem; padding:10px;">Unified posting engine · Open‑source</div>
+                                <div class="explanation">Unified social media posting engine that connects multiple accounts and publishes to 21+ platforms simultaneously.</div>
+                            </div>
+                        </div>
+                        <!-- Slide 3: FED-Play (App Store) -->
+                        <div class="carousel-slide">
+                            <div class="object object-appstore" style="height:100%; width:100%; min-height:unset; animation:none;">
+                                <div class="appstore-header">
+                                    <span class="title">📱 App Store</span>
+                                    <span class="badge"><span class="fed-only c-pink">FED</span>-Play</span>
+                                </div>
+                                <div class="appstore-body">
+                                    <div class="featured-row">
+                                        <div class="featured-app">
+                                            <span class="app-icon">🎮</span>
+                                            <span class="app-name">Arcade</span>
+                                        </div>
+                                        <div class="featured-app">
+                                            <span class="app-icon">🎵</span>
+                                            <span class="app-name">Music</span>
+                                        </div>
+                                        <div class="featured-app">
+                                            <span class="app-icon">📺</span>
+                                            <span class="app-name">TV</span>
+                                        </div>
+                                    </div>
+                                    <div class="app-grid">
+                                        <div class="app-item"><span class="icon">📱</span><span class="label">Social</span></div>
+                                        <div class="app-item"><span class="icon">🎨</span><span class="label">Design</span></div>
+                                        <div class="app-item"><span class="icon">📊</span><span class="label">Analytics</span></div>
+                                        <div class="app-item"><span class="icon">🔒</span><span class="label">Security</span></div>
+                                        <div class="app-item"><span class="icon">📦</span><span class="label">Dev Tools</span></div>
+                                        <div class="app-item"><span class="icon">🌐</span><span class="label">Browser</span></div>
+                                        <div class="app-item"><span class="icon">💬</span><span class="label">Chat</span></div>
+                                        <div class="app-item"><span class="icon">📷</span><span class="label">Camera</span></div>
+                                    </div>
+                                </div>
+                                <div class="appstore-footer">Smart RAM suspension · Native integration</div>
+                                <div class="explanation">Desktop application shell that converts web URLs and HTML projects into isolated, borderless apps with Smart RAM suspension.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" id="nextBtn">›</button>
+            </div>
+            <div class="carousel-dots" id="carouselDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+        </section>
+
+        <!-- ═══ CORE OS ═══ -->
+        <div class="section">
+            <div class="section-title">Core OS &amp; Web Infrastructure</div>
+            <div class="section-head">The <span class="fed-only c-cyan">FED</span> Ghost Stack &amp; Sovereign Backbone</div>
+            <div class="grid-masonry">
+
+                <!-- FED-OS: Terminal with typing effect -->
+                <div class="object-terminal span-2 fade-up">
+                    <div class="term-header"><span><span class="fed-only c-green">FED</span>-OS · Ghost Stack</span><span>⚙️</span></div>
+                    <div class="term-body" id="terminalBody">
+                        <div class="line"><span class="prompt">$</span> booting ghost stack...</div>
+                        <div class="line"><span class="prompt">$</span> host: <span class="dim">google-sites | blogger | cloudflare</span></div>
+                        <div class="line"><span class="prompt">$</span> scaling: <span style="color:var(--neon-cyan);">∞ (zero cost)</span></div>
+                        <div class="line"><span class="prompt">$</span> <span style="color:var(--neon-green);">ready. sovereign.</span></div>
+                    </div>
+                    <div class="explanation">Sovereign web operating system replacing traditional servers with free enterprise pipelines for infinite scaling at zero cost.</div>
+                </div>
+
+                <!-- Surf FED: Browser with glowing dots -->
+                <div class="object-browser span-2 fade-up">
+                    <div class="browser-bar">
+                        <div class="browser-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+                        <div class="browser-tabs"><span class="tab active">Surf <span class="fed-only c-purple">FED</span></span><span class="tab">sovereign</span></div>
+                    </div>
+                    <div class="browser-nav">
+                        <span style="color:var(--text-muted);font-family:var(--font-mono);font-size:0.7rem;">← → ⟳</span>
+                        <div class="browser-url"><span class="lock">🔒</span> https://surf.fed/sovereign</div>
+                    </div>
+                    <div class="browser-body">
+                        <div class="logo">🌐</div>
+                        <div class="name">Surf the Sovereign Web</div>
+                        <div class="sub">Client‑side · Local DB · No third‑party</div>
+                    </div>
+                    <div class="explanation">A client‑side read/write browser with built‑in hosting, local databases, and custom API endpoints — your own operator.</div>
+                </div>
+
+                <!-- FED-V1: AI -->
+                <div class="object-card fade-up" style="background:rgba(255,106,61,0.02); border-color:rgba(255,106,61,0.06);">
+                    <div class="emoji">🤖</div>
+                    <div class="name"><span class="fed-only c-orange">FED</span>-V1</div>
+                    <div class="sub">Multi‑Agent AI · DeepSeek‑R1 + Bolt</div>
+                    <div class="explanation">Multi‑agent developer factory combining DeepSeek‑R1 reasoning with virtual Linux containers to build production‑scale projects from a single prompt.</div>
+                </div>
+
+                <!-- FedWeb: Folder -->
+                <div class="object-folder fade-up">
+                    <div class="folder-tab"><span>📁</span><span class="name"><span class="fed-only c-cyan">FED</span>Web</span> <span style="color:var(--text-muted);">Private Hosting</span></div>
+                    <div class="folder-body">
+                        <span class="file">index.html</span>
+                        <span class="file">style.css</span>
+                        <span class="file">app.js</span>
+                        <div class="sub">Secure · Independent</div>
+                    </div>
+                    <div class="explanation">A secure, user‑friendly HTML website hosting platform — a private alternative to Static.app and GitHub Pages.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SAAS ═══ -->
+        <div class="section">
+            <div class="section-title">SaaS &amp; Applications</div>
+            <div class="section-head">Create, Deploy, <span class="fed-only c-green">FED</span> Monetize</div>
+            <div class="grid-4">
+
+                <!-- FedPromptly — EYE-CATCHING -->
+                <div class="object-card promptly-glow span-2 fade-up">
+                    <div class="emoji">🎨</div>
+                    <div class="name"><span class="fed-only">FED</span>Promptly</div>
+                    <div class="sub">Living Art · 500+ free embeds · Marketplace</div>
+                    <div style="display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; justify-content:center;">
+                        <span class="tag-pill">✨ Marketplace</span>
+                        <span class="tag-pill">⚡ Live Editor</span>
+                        <span class="tag-pill">🎯 500+ Embeds</span>
+                    </div>
+                    <div class="explanation">The world's first social marketplace and free library for interactive HTML/CSS/JS widgets — 500+ free embeds.</div>
+                </div>
+
+                <!-- FEDBOT: Robots -->
+                <div class="object-robots fade-up">
+                    <div class="robots-container">
+                        <div class="robot-wrapper">
+                            <div class="robot left">🤖</div>
+                            <div class="robot-name"><span class="fed-only c-green">FED</span>-AI</div>
+                        </div>
+                        <div class="data-stream">
+                            <div class="stream-line active"></div>
+                            <div class="particles">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                            <div class="data-label">⚡ syncing</div>
+                        </div>
+                        <div class="robot-wrapper">
+                            <div class="robot right">🤖</div>
+                            <div class="robot-name"><span class="fed-only c-pink">FED</span>-BOT</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:6px; font-family:var(--font-mono); font-size:0.55rem; color:var(--text-secondary);">
+                        AI‑assisted · Build · Preview · Monetize
+                    </div>
+                    <div class="explanation">A browser‑like sandbox environment where users can build, preview, edit, and instantly monetize custom widgets with AI assistance.</div>
+                </div>
+
+                <!-- FED-Deck: Phone Screen -->
+                <div class="object-phone-screen fade-up">
+                    <div class="phone-notch"><div class="camera-dot"></div></div>
+                    <div class="phone-screen-inner">
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <span class="battery">🔋 87%</span>
+                        </div>
+                        <div class="features-list">
+                            <div class="feature-item"><span class="icon">🎮</span><span class="label"><span class="fed-only c-purple">FED</span>-Deck</span><span class="tag">USB</span></div>
+                            <div class="feature-item"><span class="icon">🪞</span><span class="label">Real‑time screen mirror</span><span class="tag">Android</span></div>
+                            <div class="feature-item"><span class="icon">⌨️</span><span class="label">Keyboard injection</span><span class="tag">Keystroke</span></div>
+                            <div class="feature-item"><span class="icon">📱</span><span class="label">Mouse navigation</span><span class="tag">Touch</span></div>
+                            <div class="feature-item"><span class="icon">⚡</span><span class="label">Low‑latency streaming</span><span class="tag">60fps</span></div>
+                        </div>
+                    </div>
+                    <div class="phone-home-btn"></div>
+                    <div class="phone-footer-label"><span class="fed-only c-purple">FED</span>‑Deck · Remote Console</div>
+                    <div class="explanation">Low‑latency remote console that captures an Android screen and mirrors it to PC over USB debugging with real‑time mouse and keyboard control.</div>
+                </div>
+
+                <!-- FEDAPK: Phone -->
+                <div class="object-phone fade-up" style="grid-column: span 2;">
+                    <div class="phone-camera"></div>
+                    <div class="phone-screen">
+                        <div class="phone-text"><span class="fed-only c-orange">FED</span>APK</div>
+                        <div class="phone-sub">Compiler · Mass APK production</div>
+                    </div>
+                    <div class="phone-home"></div>
+                    <div class="phone-meta">Web URLs → Android APKs</div>
+                    <div class="explanation">Dedicated compiler pipeline that mass‑produces ready‑to‑install Android APK files directly from raw web URLs or web files.</div>
+                </div>
+
+                <!-- FEDCloud: Silver Card -->
+                <div class="object-silver fade-up">
+                    <div class="silver-text"><span class="fed-only c-dark">FED</span>Cloud</div>
+                    <div class="silver-sub">Widget Hosting · &lt;$2/mo</div>
+                    <div class="silver-meta"><span>🔒 256-bit</span><span>⚡ 99.9%</span></div>
+                    <div class="explanation">High‑utility widget hosting service with watermark‑free hosting for less than $2/month — built for creators.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ ADTECH ═══ -->
+        <div class="section">
+            <div class="section-title">AdTech, Finance &amp; Monetization</div>
+            <div class="section-head">AI‑Powered <span class="fed-only c-purple">FED</span> Revenue Intelligence</div>
+            <div class="grid-2">
+
+                <!-- FED-SEND: Dashboard -->
+                <div class="object-dashboard fade-up">
+                    <div class="dash-header"><span><span class="fed-only c-cyan">FED</span>-SEND</span><span>⚡ live</span></div>
+                    <div class="dash-body">
+                        <div class="metric"><div class="num">$4.2k</div><div class="label">Revenue</div></div>
+                        <div class="metric"><div class="num">3.1%</div><div class="label">Fee leak</div></div>
+                        <div class="metric" style="grid-column:span 2;"><div class="num" style="color:var(--neon-green);">✓ Chargeback defended</div><div class="label">AI evidence packet</div></div>
+                    </div>
+                    <div class="explanation">AI‑powered financial command center aggregating fragmented revenues from Gumroad, Stripe, Ko‑fi, and Link.me into a single dashboard with automated chargeback defense.</div>
+                </div>
+
+                <!-- FEDsense: Billboard -->
+                <div class="object-billboard fade-up">
+                    <div style="font-size:2.4rem;">📟</div>
+                    <div class="name"><span class="fed-only c-orange">FED</span>sense / <span class="fed-only c-orange">FED</span>-CPA</div>
+                    <div class="sub">Ad Network · Privacy‑first · High‑CPM</div>
+                    <div class="explanation">Privacy‑first, results‑focused ad network that replaces spammy links with high‑conversion CPAGrip Content Lockers targeted at high‑CPM regions.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ EDUCATION ═══ -->
+        <div class="section">
+            <div class="section-title">Education, Security &amp; Community</div>
+            <div class="section-head">Digital <span class="fed-only c-orange">FED</span> Street Smarts</div>
+            <div class="grid-3">
+
+                <!-- FED-Edu: Fixed -->
+                <div class="object-edu-fixed span-2 fade-up">
+                    <div class="edu-pages">
+                        <span class="page">📘 AI Prompting</span>
+                        <span class="page">📗 Blogging</span>
+                        <span class="page">📕 Coding</span>
+                    </div>
+                    <div class="name"><span class="fed-only c-purple">FED</span>-Edu Curriculum</div>
+                    <div class="sub">3 Pillars · Multi‑generational</div>
+                    <div style="display:flex; gap:12px; margin-top:6px; font-size:0.5rem; color:var(--text-muted); font-family:var(--font-mono); flex-wrap:wrap; justify-content:center;">
+                        <span><span class="fed-only c-green">FED</span>4Kids · Poké‑Economy</span>
+                        <span><span class="fed-only c-purple">FED</span>-ED · Adult</span>
+                        <span><span class="fed-only c-orange">FED</span>-U · Seniors</span>
+                    </div>
+                    <div class="explanation">Multi‑generational educational framework teaching digital street smarts via AI Prompting, Blogging, and Coding — for all ages.</div>
+                </div>
+
+                <!-- FED-Verify: Completely New -->
+                <div class="object-verify-new fade-up">
+                    <div class="verify-icon">✅</div>
+                    <div class="name"><span class="fed-only c-green">FED</span>-Verify</div>
+                    <div class="sub">Zero‑trust · Identity protection</div>
+                    <div class="verify-badge">🔐 14‑day boot camp</div>
+                    <div class="verify-check">
+                        <span>✔</span> Domain spoof detector
+                        <span>✔</span> Communication encryption
+                    </div>
+                    <div class="explanation">Zero‑trust identity protection with a gamified 14‑day boot camp on Potato Chat — rise from "Sprout" to "Guardian".</div>
+                </div>
+
+                <!-- FED4Kids -->
+                <div class="object-card fade-up" style="background:rgba(0,245,160,0.02); border-color:rgba(0,245,160,0.06);">
+                    <div class="emoji">🧠</div>
+                    <div class="name"><span class="fed-only c-green">FED</span>4Kids</div>
+                    <div class="sub">Poké‑Economy · Under 18</div>
+                    <div class="explanation">Early digital literacy and financial management for youth under 18 using the custom Poké‑Economy curriculum.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ CREATIVE ═══ -->
+        <div class="section">
+            <div class="section-title">Niche Creative Portfolios &amp; Media</div>
+            <div class="section-head">Storytelling <span class="fed-only c-pink">FED</span> Without Borders</div>
+            <div class="grid-masonry">
+
+                <!-- PokeJumper: Game -->
+                <div class="object-game span-2 fade-up">
+                    <div class="game-screen">
+                        <div class="name">🎮 Pokémon War of Legends</div>
+                        <div class="sub">Custom GBA hack · ROM gallery</div>
+                    </div>
+                    <div class="game-controls"><span>←</span><span>→</span><span>A</span><span>B</span><span>Start</span></div>
+                    <div style="padding:6px 16px 8px; text-align:center; font-size:0.55rem; color:var(--text-muted); font-family:var(--font-mono);">
+                        PokeJumper · Documentaries &amp; fusions
+                    </div>
+                    <div class="explanation">SFW gaming hub and ROM hacking gallery distributing custom Pokémon GBA hacks and documentary videos on custom fusions.</div>
+                </div>
+
+                <!-- Patreon+: Red Glow — BLURRED -->
+                <div class="object-red-glow fade-up">
+                    <div class="emoji">🔞</div>
+                    <div class="name">Patreon+</div>
+                    <div class="sub">B2B Production · Age‑gated</div>
+                    <div class="explanation">Age‑gated adult creative portfolio, B2B production system, and adult‑themed monetization network with full creative control.</div>
+                </div>
+
+                <!-- FED-FANS -->
+                <div class="object-card fade-up" style="background:rgba(0,212,255,0.02); border-left:2px solid var(--neon-cyan);">
+                    <div class="emoji">🤝</div>
+                    <div class="name"><span class="fed-only c-pink">FED</span>-FANS</div>
+                    <div class="sub">Creator Match · Secure B2B</div>
+                    <div class="explanation">Secure B2B production and creator matchmaking platform run under Patreon+ framework to coordinate media assets without public exposure.</div>
+                </div>
+
+                <!-- Mutant Loop TCG -->
+                <div class="object-card fade-up" style="background:rgba(255,106,61,0.02); border-color:rgba(255,106,61,0.06);">
+                    <div class="emoji">🃏</div>
+                    <div class="name">Mutant Loop</div>
+                    <div class="sub">TCG · Tactical trap mechanics</div>
+                    <div class="explanation">"Mean Girl" style trading card game with original trap and battle mechanics — includes cards like "She's Mid" and "Break a Leg".</div>
+                </div>
+
+                <!-- FED-TAKU -->
+                <div class="object-card fade-up" style="background:rgba(0,245,160,0.02); border-color:rgba(0,245,160,0.06);">
+                    <div class="emoji">🎵</div>
+                    <div class="name"><span class="fed-only c-purple">FED</span>-TAKU</div>
+                    <div class="sub">J‑Music · Lore analysis</div>
+                    <div class="explanation">Japanese‑music multimedia brand focused on translating and analyzing the background lore of modern Japanese tracks.</div>
+                </div>
+
+                <!-- FEDTOONs -->
+                <div class="object-card fade-up" style="background:rgba(176,132,255,0.02); border-color:rgba(176,132,255,0.06);">
+                    <div class="emoji">📖</div>
+                    <div class="name"><span class="fed-only c-cyan">FED</span>TOONs</div>
+                    <div class="sub">Webtoons · Decentralized</div>
+                    <div class="explanation">Secure, local‑first comic and webtoon hosting setup running entirely on decentralized tunnels like Keet, SimpleX, and Matrix.</div>
+                </div>
+
+                <!-- SubTube: Video -->
+                <div class="object-video span-2 fade-up">
+                    <div class="video-screen">
+                        <div class="play-icon">▶</div>
+                        <div class="video-timeline"></div>
+                    </div>
+                    <div class="video-info">
+                        <div class="name">SubTube</div>
+                        <div class="sub">Unlisted · Censorship‑resistant · Unlimited uploads</div>
+                    </div>
+                    <div class="explanation">Censorship‑resistant media layer utilizing Google Drive backups and unlisted video players for unlimited uploads with no automated Content ID scans.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ PHYSICAL ═══ -->
+        <div class="section">
+            <div class="section-title">Physical Operations</div>
+            <div class="section-head">Real‑World <span class="fed-only c-cyan">FED</span> Logistics</div>
+            <div class="grid-2">
+
+                <!-- Fed Jumper: Fixed -->
+                <div class="object-truck-fixed fade-up">
+                    <div class="truck-body">
+                        🚚
+                        <div class="truck-detail">
+                            <span style="font-size:0.6rem; color:var(--text-secondary);">PWA</span>
+                            <span style="font-size:0.5rem;">Google Sheets</span>
+                        </div>
+                    </div>
+                    <div class="name"><span class="fed-only c-cyan">FED</span> Jumper</div>
+                    <div class="sub">Local Delivery · South Florida</div>
+                    <div class="truck-route">📍 Premium errands · Tech transport · Zero‑Mixing</div>
+                    <div class="explanation">South Florida hyperlocal delivery service operating via a Google Sheets PWA backend — handles premium errands, tech transport, and an independent "Zero‑Mixing" laundry protocol.</div>
+                </div>
+
+                <!-- Zero-Mixing -->
+                <div class="object-card fade-up" style="background:rgba(255,106,61,0.02); border-color:rgba(255,106,61,0.06);">
+                    <div class="emoji">🧺</div>
+                    <div class="name">Zero‑Mixing</div>
+                    <div class="sub">Laundry Tech · Premium care</div>
+                    <div class="explanation">Proprietary, traceable garment care processing protocol integrated with Fed Jumper — guarantees separation, quality, and traceability.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ JOIN NOW BUTTON & TOGGLE CARD ═══ -->
+        <div class="join-section">
+            <!-- Toggle Button -->
+            <button id="toggleKofiBtn" class="join-btn-wrapper" aria-label="Toggle Ko-fi Card">
+                <div class="btn-inner">
+                    <div class="btn-overlay"><span>✦ Join Now ✦</span></div>
+                </div>
+            </button>
+
+            <!-- Hidden Ko-fi Card -->
+            <div id="kofiCard">
+                <div class="card-inner">
+                    <iframe
+                        src="https://ko-fi.com/fedpromptly/?hidefeed=true&widget=true&embed=true&preview=true"
+                        allowtransparency="true"
+                        title="fedpromptly">
+                    </iframe>
+                    <div class="mask"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ─── END ECOSYSTEM ─── -->
+
+    <!-- ─── JAVASCRIPT ─── -->
+    <script src="assets/fedposter.js"></script>
+    <script>
+        // ─── Orb Canvas ───
+        const canvas = document.getElementById('orb-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let w, h;
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Orb {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.size = Math.random() * 2.8 + 0.6;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.alpha = Math.random() * 0.10 + 0.02;
+                const colors = ['rgba(0,212,255,', 'rgba(176,132,255,', 'rgba(0,245,160,'];
+                this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x > w) this.x = 0;
+                else if (this.x < 0) this.x = w;
+                if (this.y > h) this.y = 0;
+                else if (this.y < 0) this.y = h;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.colorBase + this.alpha + ')';
+                ctx.fill();
+                if (this.size > 1.8) {
+                    ctx.shadowColor = this.colorBase + '0.06)';
+                    ctx.shadowBlur = 14;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+        for (let i = 0; i < 50; i++) particles.push(new Orb());
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => { p.update();
+                p.draw(); });
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = 'rgba(0,212,255,0.015)';
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // ─── Fade-up on scroll ───
+        document.addEventListener('DOMContentLoaded', () => {
+            const els = document.querySelectorAll('.fade-up');
+            if ('IntersectionObserver' in window) {
+                const obs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+                els.forEach(el => obs.observe(el));
+            } else {
+                els.forEach(el => el.classList.add('visible'));
+            }
+        });
+
+        // ─── Carousel Logic ───
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('#carouselDots .dot');
+        let currentIndex = 0;
+        const totalSlides = 3;
+
+        function updateCarousel(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            updateCarousel(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            updateCarousel(currentIndex + 1);
+        });
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                updateCarousel(i);
+            });
+        });
+
+        // Auto-slide
+        let autoSlide = setInterval(() => {
+            updateCarousel(currentIndex + 1);
+        }, 6000);
+
+        // Pause on hover
+        const carouselContainer = document.querySelector('.featured-carousel');
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoSlide);
+        });
+        carouselContainer.addEventListener('mouseleave', () => {
+            autoSlide = setInterval(() => {
+                updateCarousel(currentIndex + 1);
+            }, 6000);
+        });
+
+        // ─── Ko-fi Toggle Logic ───
+        document.getElementById('toggleKofiBtn').addEventListener('click', function() {
+            var card = document.getElementById('kofiCard');
+            var btnText = this.querySelector('.btn-overlay span');
+            if (card.style.display === 'none' || card.style.display === '') {
+                card.style.display = 'block';
+                btnText.innerText = '✦ Close ✦';
+            } else {
+                card.style.display = 'none';
+                btnText.innerText = '✦ Join Now ✦';
+            }
+        });
+
+        // ── Theme bridge: About page stays dark (neon showcase) regardless of site theme picker ──
+        (function(){
+            function keepDark(){
+                document.documentElement.setAttribute('data-theme','dark');
+                // Keep the about page's dark base regardless of fedposter.css theme variables
+                document.body.style.background = '';
+            }
+            // Observe data-theme changes made by fedposter.js theme picker
+            const obs = new MutationObserver(keepDark);
+            obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+            window.addEventListener('DOMContentLoaded', keepDark);
+        })();
+    </script>
+
+</body>
+</html>
