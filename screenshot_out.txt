@@ -1,0 +1,15 @@
+Initial page: http://localhost:8765/site/about.html
+Screenshot failed: None
+
+=== Render checks ===
+Navbar present: ERR
+Nav links: ERR
+About active: ERR
+Theme swatches: ERR
+data-theme: ERR
+orb-canvas: ERR
+ecosystem: ERR
+carousel: ERR
+FedPoster: ERR
+header-actions: ERR
+Pre-captured errors (if any hook): ERR

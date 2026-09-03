@@ -1,0 +1,9 @@
+Browser server already running at http://localhost:9222
+Browser server is running (PID: 9016)
+   Browser: Chrome/147.0.7727.15
+   CDP endpoint: http://localhost:9222
+   Open tabs: 1
+     [0] about:blank — about:blank
+   Monitoring existing PID 9016...
+Stopping browser server (PID: 9016)...
+Browser server stopped

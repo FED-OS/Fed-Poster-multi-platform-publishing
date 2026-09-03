@@ -1,0 +1,25 @@
+[5703:5754:0903/232024.080143:ERROR:net/socket/socket_posix.cc:153] bind() failed: Address already in use (98)
+[5703:5754:0903/232024.080205:ERROR:net/socket/socket_posix.cc:153] bind() failed: Address already in use (98)
+[5703:5754:0903/232024.080215:ERROR:content/browser/devtools/devtools_http_handler.cc:313] Cannot start http server for devtools.
+[5703:5703:0903/232024.516800:ERROR:dbus/objWarning: vkCreateInstance: Found no drivers!
+Warning: vkCreateInstance failed with VK_ERROR_INCOMPATIBLE_DRWarning: vkCreateInstance: Found no drivers!
+Warning: vkCreateInstance failed with VK_ERROR_INCOMPATIBLE_DRIVER
+    at CheckVkSuccessImpl (../../thiWarning: vkCreateInstance: Found no drivers!
+Warning: vkCreateInstance failed with VK_ERROR_INCOMPATIBLE_DRIVER
+    at CheckVkSuccessImpl (../../third_party/dawn/src/dawn/native/vulkan/VulkanError.cpp:106)
+
+[5505:5505:0903/232258.773504:ERROR:services/on_device_model/public/cpp/service_client.cc:36] Unexpected on_device_model service disconnect: Error loading backend.
+[5505:5517:0903/232436.085120:ERROR:components/data_sharing/internal/group_data_store.cc:63] Failed to open DB /workspace/.mychrome/Default/DataSharing/DataSharingDB: database is locked
+[5505:5517:0903/232436.085253:ERROR:components/collaboration/internal/messaging/storage/messaging_backend_database_impl.cc:41] Failed to open DB /workspace/.mychrome/Default/Collaboration/MessageDB: database is locked
+Warning: vkCreateInstance: Found no drivers!
+Warning: vkCreateInstance failed with VK[4943:4943:0903/233507.565004:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4943:0903/233507.577402:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4943:0903/233507.649214:ERROR:content/browser/gpu/gpu_process_host.cc:993] GPU process launch failed: error_code=1002
+[4943:4943:0903/233507.650517:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4943:0903/233507.651817:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4943:0903/233507.708609:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4943:0903/233507.709888:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4943:0903/233507.723119:ERROR:content/common/zygote/zygote_communication_linux.cc:291] Failed to send GetTerminationStatus message to zygote
+[4943:4960:0903/233507.738791:ERROR:google_apis/gcm/engine/connection_factory_impl.cc:[5140:5155:0903/233507.748274:FATAL:dbus/bus.cc:1245] D-Bus connection was disconnected. Aborting.
+r/gpu/gpu_process_host.cc:993] GPU process launch failed: error_code=1002
+[4943:4943:0903/233507.746971:ERROR:content/browser/network_service_instance_impl.cc:703] Network service crashed or was t[5322:5337:0903/233507.748486:F[4943:4960:0903/233507.748677:FATAL:dbus/bus.cc:1245] D-Bus connection was disconnected. Aborting.

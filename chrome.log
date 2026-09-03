@@ -1,0 +1,14 @@
+[7205:7218:0903/224221.827100:ERROR:components/segmentation_platform/internal/database/ukm_database_backend.cc:142] Failed to open UKM database: 0 database is locked
+[7205:7248:0903/224221.871709:ERROR:net/socket/socket_posix.cc:153] bind() failed: Address already in use (98)
+
+DevTools listening on ws://[::1]:9222/devtools/browser/8d1b5879-d10f-4b69-a695-43cf57bd86bc
+[7237:7237:0903/224221.921473:ERROR:components/viz/service/main/viz_main_impl.cc:189] Exiting GPU process due to errors during initialization
+[7205:7205:0903/224222.030961:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files
+[7315:7315:0903/224222.092215:ERROR:components/viz/service/main/viz_main_impl.cc:189] Exiting GPU process due to errors during initialization
+[0903/224222.129824:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)
+[0903/224222.129881:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)
+[7205:7205:0903/224222.135444:ERROR:content/browser/gpu/gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=5
+[7294:7312:0903/224222.162235:ERROR:gpu/ipc/client/command_buffer_proxy_impl.cc:287] ContextResult::kTransientFailure: Failed to send GpuControl.CreateCommandBuffer.
+[7205:7230:0903/224226.012350:ERROR:google_apis/gcm/engine/gcm_store_impl.cc:321] Failed to open database /workspace/.browser_data/Default/GCM Store: IO error: /workspace/.browser_data/Default/GCM Store/LOCK: No further details. (ChromeMethodBFE: 15::LockFile::1)
+[7205:7218:0903/224227.021083:ERROR:google_apis/gcm/engine/gcm_store_impl.cc:418] Destroy failed: IO error: /workspace/.browser_data/Default/GCM Store/LOCK: No further details. (ChromeMethodBFE: 15::LockFile::1)
+[7205:7223:0903/224227.021179:ERROR:components/gcm_driver/gcm_client_impl.cc:759] Failed to reset GCM store

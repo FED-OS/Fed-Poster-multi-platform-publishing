@@ -1,0 +1,2940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster – Full Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ================================================================
+       THEME & BASE (YOUR ORIGINAL + UPGRADES)
+       ================================================================ */
+    :root {
+      --bg-body: #f0f2f5;
+      --bg-sidebar: #1a1a2e;
+      --bg-card: #ffffff;
+      --bg-input: #f5f6fa;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a6a;
+      --text-muted: #8a8aaa;
+      --accent: #6c5ce7;
+      --accent-hover: #5a4bd1;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108,92,231,0.08);
+      --green: #00b894;
+      --green-bg: rgba(0,184,148,0.12);
+      --red: #e17055;
+      --red-bg: rgba(225,112,85,0.12);
+      --orange: #fdcb6e;
+      --orange-bg: rgba(253,203,110,0.15);
+      --blue: #0984e3;
+      --blue-bg: rgba(9,132,227,0.10);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-full: 50px;
+      --transition: 0.2s ease;
+      --font: 'Inter', sans-serif;
+      --sidebar-width: 260px;
+      --cursor-size: 24px;
+      --hacker-font: 'Courier New', monospace;
+    }
+    /* ====== DARK — Deep Space ====== */
+    [data-theme="dark"] {
+      --bg-body: #0a0e1a;
+      --bg-sidebar: #060810;
+      --bg-card: #111726;
+      --bg-input: #1a2138;
+      --text-primary: #e8edf5;
+      --text-secondary: #9aabbb;
+      --text-muted: #5a6b7d;
+      --accent: #6c5ce7;
+      --accent-hover: #5a4bd1;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108,92,231,0.10);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.5);
+      --glow: rgba(108,92,231,0.15);
+    }
+    /* ====== LIGHT — Cloud ====== */
+    [data-theme="light"] {
+      --bg-body: #eef1f6;
+      --bg-sidebar: #1a1a2e;
+      --bg-card: #ffffff;
+      --bg-input: #f4f6fb;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a6a;
+      --text-muted: #98a0b5;
+      --accent: #6c5ce7;
+      --accent-hover: #5a4bd1;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108,92,231,0.08);
+      --shadow-sm: 0 1px 3px rgba(26,26,46,0.06);
+      --shadow-md: 0 4px 20px rgba(26,26,46,0.08);
+      --glow: rgba(108,92,231,0.10);
+    }
+    /* ====== BLUE — Azure Depth ====== */
+    [data-theme="blue"] {
+      --bg-body: #e3edf7;
+      --bg-sidebar: #061a2e;
+      --bg-card: #ffffff;
+      --bg-input: #e8f0fa;
+      --text-primary: #08182e;
+      --text-secondary: #244a72;
+      --text-muted: #6088b0;
+      --accent: #0a84ff;
+      --accent-hover: #0066d4;
+      --accent-light: #4da6ff;
+      --accent-bg: rgba(10,132,255,0.10);
+      --glow: rgba(10,132,255,0.18);
+    }
+    /* ====== GREEN — Emerald Forest ====== */
+    [data-theme="green"] {
+      --bg-body: #e4f3ea;
+      --bg-sidebar: #06231a;
+      --bg-card: #ffffff;
+      --bg-input: #e8f5ee;
+      --text-primary: #08231a;
+      --text-secondary: #1f5a42;
+      --text-muted: #5a9078;
+      --accent: #00b87a;
+      --accent-hover: #009966;
+      --accent-light: #4dd9a8;
+      --accent-bg: rgba(0,184,122,0.10);
+      --glow: rgba(0,184,122,0.18);
+    }
+    /* ====== PURPLE — Royal Nebula ====== */
+    [data-theme="purple"] {
+      --bg-body: #ece8f7;
+      --bg-sidebar: #160833;
+      --bg-card: #ffffff;
+      --bg-input: #f1edfa;
+      --text-primary: #1a0a3a;
+      --text-secondary: #4a2a7a;
+      --text-muted: #8060b0;
+      --accent: #8b5cf6;
+      --accent-hover: #7c3aed;
+      --accent-light: #b794f6;
+      --accent-bg: rgba(139,92,246,0.10);
+      --glow: rgba(139,92,246,0.18);
+    }
+    /* ====== ORANGE — Molten Lava ====== */
+    [data-theme="orange"] {
+      --bg-body: #fceee0;
+      --bg-sidebar: #2e1206;
+      --bg-card: #ffffff;
+      --bg-input: #fbf2e8;
+      --text-primary: #2e160a;
+      --text-secondary: #6a4220;
+      --text-muted: #a08060;
+      --accent: #ff6b1a;
+      --accent-hover: #e85a0a;
+      --accent-light: #ff9a5a;
+      --accent-bg: rgba(255,107,26,0.10);
+      --glow: rgba(255,107,26,0.20);
+    }
+    /* ====== CYBERPUNK — Neon Magenta/Cyan ====== */
+    [data-theme="cyberpunk"] {
+      --bg-body: #0d0118;
+      --bg-sidebar: #06000f;
+      --bg-card: #14022a;
+      --bg-input: #1c0538;
+      --text-primary: #f0e6ff;
+      --text-secondary: #b090d0;
+      --text-muted: #6a4a8a;
+      --accent: #ff2e88;
+      --accent-hover: #e60077;
+      --accent-light: #ff6bb0;
+      --accent-bg: rgba(255,46,136,0.12);
+      --green: #00f0ff;
+      --glow: rgba(255,46,136,0.22);
+      --shadow-sm: 0 0 0 1px rgba(255,46,136,0.15), 0 2px 8px rgba(255,46,136,0.10);
+      --shadow-md: 0 0 20px rgba(255,46,136,0.18), 0 4px 30px rgba(0,240,255,0.08);
+    }
+    /* ====== SUNSET — Warm Horizon ====== */
+    [data-theme="sunset"] {
+      --bg-body: #fff0e6;
+      --bg-sidebar: #3d1a2e;
+      --bg-card: #ffffff;
+      --bg-input: #fff5ee;
+      --text-primary: #3d1a2e;
+      --text-secondary: #7a4060;
+      --text-muted: #b08090;
+      --accent: #ff4d6d;
+      --accent-hover: #e63656;
+      --accent-light: #ff8aa0;
+      --accent-bg: rgba(255,77,109,0.10);
+      --glow: rgba(255,77,109,0.18);
+    }
+    /* ====== OCEAN DEEP — Abyssal Teal ====== */
+    [data-theme="ocean"] {
+      --bg-body: #dceeee;
+      --bg-sidebar: #022829;
+      --bg-card: #ffffff;
+      --bg-input: #e0f4f4;
+      --text-primary: #02282a;
+      --text-secondary: #1a5a5c;
+      --text-muted: #508a8c;
+      --accent: #00b8a9;
+      --accent-hover: #009988;
+      --accent-light: #4dd9cc;
+      --accent-bg: rgba(0,184,169,0.10);
+      --glow: rgba(0,184,169,0.18);
+    }
+    /* ====== ROSE GOLD — Luxe Blush ====== */
+    [data-theme="rose"] {
+      --bg-body: #f6e8e4;
+      --bg-sidebar: #3d2a28;
+      --bg-card: #fffaf8;
+      --bg-input: #faeee9;
+      --text-primary: #3d2a28;
+      --text-secondary: #7a5550;
+      --text-muted: #b09088;
+      --accent: #e8a0a0;
+      --accent-hover: #d68080;
+      --accent-light: #f0c0c0;
+      --accent-bg: rgba(232,160,160,0.12);
+      --glow: rgba(232,160,160,0.18);
+    }
+    /* ====== MIDNIGHT — Cobalt Steel ====== */
+    [data-theme="midnight"] {
+      --bg-body: #161b2e;
+      --bg-sidebar: #080b1a;
+      --bg-card: #1e2542;
+      --bg-input: #252e52;
+      --text-primary: #e0e6ff;
+      --text-secondary: #8898c0;
+      --text-muted: #506088;
+      --accent: #4f8cff;
+      --accent-hover: #3a72e6;
+      --accent-light: #80acff;
+      --accent-bg: rgba(79,140,255,0.12);
+      --glow: rgba(79,140,255,0.20);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    /* ====== SYNTHWAVE — Retro 80s ====== */
+    [data-theme="synthwave"] {
+      --bg-body: #1a0a2e;
+      --bg-sidebar: #0d041a;
+      --bg-card: #240f3d;
+      --bg-input: #2e1551;
+      --text-primary: #ffe6f5;
+      --text-secondary: #c090d8;
+      --text-muted: #8060a0;
+      --accent: #ff79c6;
+      --accent-hover: #e6009e;
+      --accent-light: #ffaad8;
+      --accent-bg: rgba(255,121,198,0.12);
+      --green: #8be9fd;
+      --glow: rgba(255,121,198,0.22);
+      --shadow-sm: 0 0 0 1px rgba(255,121,198,0.15), 0 2px 8px rgba(139,233,253,0.10);
+      --shadow-md: 0 0 25px rgba(255,121,198,0.20);
+    }
+
+    * {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+    body {
+      font-family:var(--font);
+      background:var(--bg-body);
+      color:var(--text-primary);
+      display:flex;
+      min-height:100vh;
+      cursor:none;
+      transition:background 0.3s, color 0.3s;
+    }
+
+    /* ---- CUSTOM CURSOR ---- */
+    #customCursor {
+      position:fixed;
+      width:var(--cursor-size);
+      height:var(--cursor-size);
+      border-radius:50%;
+      background:rgba(108,92,231,0.2);
+      border:2px solid var(--accent);
+      pointer-events:none;
+      z-index:99999;
+      transition:transform 0.1s, width 0.15s, height 0.15s;
+      transform:translate(-50%, -50%);
+      mix-blend-mode:screen;
+      box-shadow:0 0 30px rgba(108,92,231,0.2);
+    }
+    #customCursor.active {
+      width:calc(var(--cursor-size) * 1.6);
+      height:calc(var(--cursor-size) * 1.6);
+      background:rgba(108,92,231,0.3);
+    }
+    @media (max-width:768px) { #customCursor { display:none; } body { cursor:auto; } }
+
+    /* ---- SCROLL PROGRESS ---- */
+    #scrollProgress {
+      position:fixed;
+      top:0;
+      left:0;
+      height:3px;
+      background:linear-gradient(90deg, var(--accent), var(--accent-light));
+      z-index:99999;
+      width:0%;
+      transition:width 0.1s;
+    }
+
+    /* ---- BACK TO TOP ---- */
+    #backToTop {
+      position:fixed;
+      bottom:120px;
+      right:24px;
+      z-index:99993;
+      background:var(--bg-card);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:50%;
+      width:44px;
+      height:44px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      color:var(--text-secondary);
+      cursor:pointer;
+      transition:0.2s;
+      font-size:1.2rem;
+      backdrop-filter:blur(8px);
+      box-shadow:var(--shadow-md);
+    }
+    #backToTop:hover {
+      border-color:var(--accent);
+      color:var(--text-primary);
+    }
+    #backToTop.visible { display:flex; }
+
+    /* ---- TOAST CONTAINER ---- */
+    .toast-container {
+      position:fixed;
+      bottom:220px;
+      right:24px;
+      z-index:99994;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      pointer-events:none;
+    }
+    .toast {
+      background:var(--bg-card);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:var(--radius-sm);
+      padding:12px 18px;
+      box-shadow:var(--shadow-lg);
+      color:var(--text-secondary);
+      font-size:0.85rem;
+      animation:slideInToast 0.3s ease;
+      pointer-events:auto;
+      max-width:320px;
+      backdrop-filter:blur(8px);
+    }
+    .toast i { color:var(--accent); margin-right:8px; }
+    @keyframes slideInToast {
+      from { opacity:0; transform:translateX(40px); }
+      to { opacity:1; transform:translateX(0); }
+    }
+
+    /* ---- HACKER MODE ---- */
+    body.hacker-mode {
+      --bg-body: #000000;
+      --bg-sidebar: #0a0a0a;
+      --bg-card: #111111;
+      --bg-input: #1a1a1a;
+      --text-primary: #00ff88;
+      --text-secondary: #88ffcc;
+      --text-muted: #44aa77;
+      --accent: #00ff88;
+      --accent-hover: #00cc66;
+      --accent-light: #66ffaa;
+      --accent-bg: rgba(0,255,136,0.08);
+      --gradient-main: linear-gradient(135deg, #00ff88, #00cc66);
+      font-family:var(--hacker-font);
+    }
+    body.hacker-mode .sidebar {
+      border-right:1px solid rgba(0,255,136,0.1);
+    }
+    body.hacker-mode .nav-item.active {
+      background:rgba(0,255,136,0.15);
+      box-shadow:inset 3px 0 0 #00ff88;
+    }
+    body.hacker-mode .btn-primary {
+      background:var(--gradient-main);
+      color:#000;
+      box-shadow:0 0 20px rgba(0,255,136,0.3);
+    }
+
+    /* ---- SIDEBAR (your original) ---- */
+    .sidebar {
+      width:var(--sidebar-width);
+      height:100vh;
+      position:fixed;
+      top:0;
+      left:0;
+      background:var(--bg-sidebar);
+      padding:24px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      overflow-y:auto;
+      z-index:100;
+      border-right:1px solid rgba(255,255,255,0.04);
+      transition:transform 0.3s, background 0.3s;
+    }
+    .sidebar-brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:4px 10px 20px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-brand .logo-icon {
+      width:40px;
+      height:40px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      border-radius:var(--radius-sm);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:1.2rem;
+    }
+    .sidebar-brand span {
+      color:#fff;
+      font-weight:700;
+      font-size:1.2rem;
+      letter-spacing:-0.3px;
+    }
+    .sidebar-brand span:last-child { color:var(--accent-light); }
+    .sidebar-nav { flex:1; display:flex; flex-direction:column; gap:2px; }
+    .sidebar-nav .nav-label {
+      color:rgba(255,255,255,0.3);
+      font-size:0.65rem;
+      text-transform:uppercase;
+      letter-spacing:0.8px;
+      padding:16px 10px 6px;
+      font-weight:600;
+    }
+    .nav-item {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:10px 14px;
+      border-radius:var(--radius-sm);
+      color:rgba(255,255,255,0.6);
+      font-size:0.9rem;
+      font-weight:500;
+      cursor:pointer;
+      transition:var(--transition);
+      border:none;
+      background:transparent;
+      width:100%;
+      font-family:var(--font);
+    }
+    .nav-item i { width:20px; text-align:center; font-size:1.05rem; }
+    .nav-item:hover { background:rgba(255,255,255,0.06); color:#fff; }
+    .nav-item.active {
+      background:rgba(108,92,231,0.25);
+      color:#fff;
+      box-shadow:inset 3px 0 0 var(--accent);
+    }
+    .nav-item .badge {
+      margin-left:auto;
+      background:var(--accent);
+      color:#fff;
+      font-size:0.6rem;
+      padding:2px 10px;
+      border-radius:var(--radius-full);
+      font-weight:600;
+    }
+    .nav-item .badge.green { background:var(--green); }
+    .nav-item .badge.orange { background:var(--orange); color:#1a1a2e; }
+
+    /* ---- MAIN CONTENT ---- */
+    .main {
+      margin-left:var(--sidebar-width);
+      flex:1;
+      min-height:100vh;
+      padding:28px 36px 40px;
+      background:var(--bg-body);
+      transition:background 0.3s, padding 0.3s;
+    }
+    .topbar {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+      gap:16px;
+    }
+    .topbar-left h1 {
+      font-size:1.6rem;
+      font-weight:700;
+      letter-spacing:-0.5px;
+    }
+    .topbar-left p {
+      color:var(--text-muted);
+      font-size:0.9rem;
+      margin-top:2px;
+    }
+    .topbar-right {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .topbar-right .date-display {
+      color:var(--text-secondary);
+      font-size:0.9rem;
+      font-weight:500;
+      background:var(--bg-card);
+      padding:8px 18px;
+      border-radius:var(--radius-full);
+      box-shadow:var(--shadow-sm);
+      border:1px solid rgba(0,0,0,0.04);
+    }
+    .topbar-right .theme-swatches {
+      display:flex;
+      gap:5px;
+      flex-wrap:wrap;
+      max-width:120px;
+      justify-content:flex-end;
+    }
+    .topbar-right .theme-swatch {
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      border:2px solid transparent;
+      cursor:pointer;
+      transition:all 0.2s;
+      flex-shrink:0;
+    }
+    .topbar-right .theme-swatch:hover {
+      transform:scale(1.18);
+      border-color:#fff;
+      box-shadow:0 0 12px var(--glow,rgba(108,92,231,0.4));
+    }
+    .topbar-right .theme-swatch.active {
+      border-color:#fff;
+      box-shadow:0 0 0 2px var(--accent), 0 0 14px var(--glow,rgba(108,92,231,0.5));
+      transform:scale(1.12);
+    }
+
+    /* ---- PLATFORM SECTIONS (upgraded) ---- */
+    .platform-section {
+      display:none;
+      max-width:880px;
+      margin:0 auto;
+      animation:sectionIn 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes sectionIn {
+      from { opacity:0; transform:translateY(18px) scale(0.99); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+    .platform-section.active { display:block; }
+    .platform-section .card {
+      background:var(--bg-card);
+      border-radius:var(--radius);
+      padding:32px 36px;
+      margin-bottom:28px;
+      box-shadow:var(--shadow-md);
+      border:1px solid rgba(0,0,0,0.04);
+      transition:background 0.3s, transform 0.3s, box-shadow 0.3s;
+      position:relative;
+      overflow:hidden;
+    }
+    /* glowing top accent bar per platform */
+    .platform-section .card::before {
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:4px;
+      background:linear-gradient(90deg,var(--p-accent,var(--accent)),var(--p-accent2,var(--accent-light)));
+      opacity:0.9;
+    }
+    .platform-section .card::after {
+      content:"";
+      position:absolute;
+      top:-60px; right:-60px;
+      width:180px; height:180px;
+      background:radial-gradient(circle,var(--p-glow,var(--glow)) 0%,transparent 70%);
+      opacity:0.5;
+      pointer-events:none;
+    }
+    /* per-platform accent variables */
+    #section-telegram .card      { --p-accent:#29a9eb; --p-accent2:#5fd1ff; --p-glow:rgba(41,169,235,0.18); }
+    #section-bluesky .card       { --p-accent:#0085ff; --p-accent2:#5cf3ff; --p-glow:rgba(0,133,255,0.18); }
+    #section-mastodon .card      { --p-accent:#6364ff; --p-accent2:#9b8cff; --p-glow:rgba(99,100,255,0.18); }
+    #section-discord .card       { --p-accent:#5865f2; --p-accent2:#8a96ff; --p-glow:rgba(88,101,242,0.18); }
+    #section-github-classic .card{ --p-accent:#8b949e; --p-accent2:#c9d1d9; --p-glow:rgba(139,148,158,0.18); }
+    #section-stoat .card         { --p-accent:#ff6b35; --p-accent2:#ffa46b; --p-glow:rgba(255,107,53,0.18); }
+    #section-deviantart .card    { --p-accent:#00e59b; --p-accent2:#5cffc4; --p-glow:rgba(0,229,155,0.18); }
+    /* 3D tilt on cards */
+    .platform-section .card.tilt {
+      transition:transform 0.1s ease;
+      will-change:transform;
+    }
+    .platform-section .card-header {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:26px;
+      flex-wrap:wrap;
+      padding-bottom:18px;
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+    .platform-section .card-header h2 {
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-0.02em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .platform-section .card-header .platform-badge {
+      width:44px; height:44px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      background:linear-gradient(135deg,var(--p-accent,var(--accent)),var(--p-accent2,var(--accent-light)));
+      box-shadow:0 4px 14px var(--p-glow,var(--glow));
+      flex-shrink:0;
+    }
+    .platform-section .label-tag {
+      font-size:10px;
+      padding:5px 13px;
+      border-radius:40px;
+      font-weight:700;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      background:var(--bg-input);
+      color:var(--text-muted);
+    }
+    .platform-section .label-tag.both { background:var(--accent); color:#fff; }
+    .platform-section .label-tag.other { background:var(--bg-input); color:var(--text-muted); }
+    .platform-section .label-tag.stoat { background:#ff6b35; color:#fff; }
+    .platform-section .label-tag.deviantart { background:#00e59b; color:#fff; }
+    .platform-section .label-tag.apps { background:var(--accent); color:#fff; }
+    .platform-section .label-tag.onboarding { background:#fdcb6e; color:#1a1a2e; }
+    .platform-section .label-tag.about { background:#0984e3; color:#fff; }
+    .platform-section .label-tag.donate { background:#e17055; color:#fff; }
+    /* connection status pill */
+    .platform-section .conn-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:11px;
+      font-weight:700;
+      padding:4px 12px;
+      border-radius:40px;
+      margin-left:auto;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+    }
+    .platform-section .conn-pill.online { background:rgba(35,165,90,0.14); color:#23a55a; }
+    .platform-section .conn-pill.online::before { content:""; width:7px;height:7px;border-radius:50%;background:#23a55a;box-shadow:0 0 8px #23a55a;animation:pulseDot 1.6s infinite; }
+    .platform-section .conn-pill.uncertain { background:var(--accent-bg); color:var(--accent); }
+    .platform-section .conn-pill.uncertain::before { content:""; width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:0.6; }
+    @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
+    /* two-column field grid */
+    .platform-section .field-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px 22px;
+    }
+    .platform-section .field-full { grid-column:1 / -1; }
+    @media (max-width:640px){ .platform-section .field-grid { grid-template-columns:1fr; } }
+    .platform-section .field {
+      display:flex;
+      flex-direction:column;
+    }
+    .platform-section label {
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:0.03em;
+      text-transform:uppercase;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin:0 0 7px;
+      color:var(--text-secondary);
+    }
+    .platform-section label i { font-size:11px; color:var(--accent); opacity:0.8; }
+    .platform-section input,
+    .platform-section textarea {
+      width:100%;
+      padding:12px 16px;
+      background:var(--bg-input);
+      border:2px solid transparent;
+      border-radius:var(--radius-sm);
+      color:var(--text-primary);
+      font-size:14px;
+      font-family:inherit;
+      outline:none;
+      transition:border 0.2s, background 0.3s, box-shadow 0.2s;
+    }
+    .platform-section input:focus,
+    .platform-section textarea:focus {
+      border-color:var(--accent);
+      background:var(--bg-card);
+      box-shadow:0 0 0 4px var(--accent-bg), 0 0 18px var(--glow,rgba(108,92,231,0.12));
+    }
+    .platform-section input[type="password"] { font-family:monospace; letter-spacing:0.08em; }
+    .platform-section textarea { min-height:90px; resize:vertical; line-height:1.5; }
+    .platform-section .saved-note {
+      font-size:11px;
+      color:var(--text-muted);
+      margin-top:5px;
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+    .platform-section .saved-note::before { content:"✓"; color:var(--green); font-weight:700; }
+    /* file drop zone */
+    .platform-section .file-drop {
+      position:relative;
+      border:2px dashed rgba(0,0,0,0.12);
+      border-radius:var(--radius-sm);
+      padding:22px;
+      text-align:center;
+      cursor:pointer;
+      transition:all 0.2s;
+      background:var(--bg-input);
+    }
+    .platform-section .file-drop:hover,
+    .platform-section .file-drop.dragover {
+      border-color:var(--accent);
+      background:var(--accent-bg);
+      transform:translateY(-1px);
+    }
+    .platform-section .file-drop i { font-size:24px; color:var(--accent); margin-bottom:8px; display:block; }
+    .platform-section .file-drop .fd-label { font-size:13px; font-weight:600; color:var(--text-secondary); }
+    .platform-section .file-drop .fd-hint { font-size:11px; color:var(--text-muted); margin-top:3px; }
+    .platform-section .file-drop input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+    .platform-section .file-info {
+      font-size:12px;
+      color:var(--accent);
+      margin-top:6px;
+      font-weight:600;
+    }
+    .platform-section .actions {
+      display:flex;
+      gap:12px;
+      margin-top:24px;
+      flex-wrap:wrap;
+    }
+    .platform-section .actions button {
+      flex:1 1 auto;
+      padding:13px 26px;
+      border:none;
+      border-radius:var(--radius-full);
+      font-weight:700;
+      cursor:pointer;
+      font-size:14px;
+      min-width:130px;
+      font-family:inherit;
+      transition:transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .platform-section .actions button:hover { transform:translateY(-2px); }
+    .platform-section .actions button:active { transform:translateY(0) scale(0.98); }
+    .platform-section .btn-primary {
+      background:linear-gradient(135deg,var(--accent),var(--accent-hover));
+      color:#fff;
+      box-shadow:0 4px 16px var(--glow,rgba(108,92,231,0.30));
+      position:relative;
+      overflow:hidden;
+    }
+    .platform-section .btn-primary::before {
+      content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
+      transition:left 0.6s;
+    }
+    .platform-section .btn-primary:hover::before { left:100%; }
+    .platform-section .btn-primary:hover {
+      box-shadow:0 8px 28px var(--glow,rgba(108,92,231,0.45));
+      filter:brightness(1.08);
+    }
+    .platform-section .btn-secondary {
+      background:var(--bg-input);
+      color:var(--text-secondary);
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .platform-section .btn-secondary:hover {
+      background:var(--accent-bg);
+      color:var(--accent);
+      border-color:var(--accent);
+    }
+    .platform-section .status {
+      margin-top:18px;
+      padding:12px 18px;
+      border-radius:var(--radius-sm);
+      font-size:13px;
+      display:none;
+      font-weight:600;
+      align-items:center;
+      gap:8px;
+    }
+    .platform-section .status::before { font-size:15px; }
+    .platform-section .status.success { display:flex; background:var(--green-bg); color:var(--green); border:1px solid var(--green); }
+    .platform-section .status.success::before { content:"✅"; }
+    .platform-section .status.error { display:flex; background:var(--red-bg); color:var(--red); border:1px solid var(--red); }
+    .platform-section .status.error::before { content:"⚠️"; }
+    .platform-section .status.loading { display:flex; background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue); }
+    .platform-section .status.loading::before { content:"⏳"; animation:spin 1s linear infinite; }
+    .platform-section .status.info { display:flex; background:var(--orange-bg); color:#b7950b; border:1px solid var(--orange); }
+    .platform-section .status.info::before { content:"ℹ️"; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .char-counter {
+      font-size:12px;
+      text-align:right;
+      padding:4px 8px;
+      border-radius:var(--radius-sm);
+      margin-top:2px;
+      font-weight:500;
+      color:var(--text-muted);
+    }
+    .char-counter.safe { color:var(--green); }
+    .char-counter.exceeded {
+      color:var(--red);
+      background:var(--red-bg);
+      border:1px solid var(--red);
+    }
+    .char-counter .count { font-weight:700; }
+
+    .check-group {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+      gap:8px;
+      margin:14px 0 18px;
+      background:var(--bg-input);
+      padding:16px;
+      border-radius:var(--radius-sm);
+      border:1px solid rgba(0,0,0,0.04);
+      transition:background 0.3s;
+    }
+    .check-group label {
+      font-weight:400;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:14px;
+      color:var(--text-primary);
+      margin:0;
+      cursor:pointer;
+      padding:4px 8px;
+      border-radius:var(--radius-sm);
+    }
+    .check-group label:hover { background:rgba(108,92,231,0.06); }
+
+    .verify-status .v-item {
+      padding:4px 0;
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      color:var(--text-secondary);
+    }
+    .unified-results .result-item {
+      padding:4px 0;
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      display:flex;
+      gap:10px;
+      color:var(--text-secondary);
+    }
+
+    /* ---- MODAL ---- */
+    .modal-overlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:10002;
+      background:rgba(0,0,0,0.4);
+      backdrop-filter:blur(6px);
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .modal-overlay.active { display:flex; }
+    .modal-card-download {
+      background:var(--bg-card);
+      border-radius:var(--radius);
+      padding:2.5rem 2.8rem;
+      max-width:440px;
+      width:90%;
+      text-align:center;
+      box-shadow:var(--shadow-lg);
+      position:relative;
+      animation:modalPop 0.3s ease;
+    }
+    @keyframes modalPop {
+      from { transform:scale(0.9); opacity:0; }
+      to { transform:scale(1); opacity:1; }
+    }
+    .modal-close {
+      position:absolute;
+      top:16px;
+      right:20px;
+      font-size:24px;
+      color:var(--text-muted);
+      cursor:pointer;
+      background:none;
+      border:none;
+    }
+    .modal-icon { font-size:4rem; display:block; }
+    .modal-download-btn {
+      display:inline-block;
+      background:var(--accent);
+      color:#fff;
+      font-weight:600;
+      padding:14px 48px;
+      border-radius:var(--radius-full);
+      text-decoration:none;
+      font-size:1.1rem;
+      border:none;
+      cursor:pointer;
+      transition:transform 0.2s;
+    }
+    .modal-download-btn:hover { transform:scale(1.05); }
+
+    /* ---- APP BUTTONS ---- */
+    .app-btn {
+      padding:14px 36px;
+      font-size:16px;
+      font-weight:700;
+      border-radius:var(--radius-full);
+      cursor:pointer;
+      border:none;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-family:var(--font);
+      box-shadow:0 4px 14px rgba(0,0,0,0.06);
+      transition:transform 0.2s;
+    }
+    .app-btn:hover { transform:scale(1.04); }
+    .app-btn.mobile { background:var(--bg-sidebar); color:#fff; }
+    .app-btn.desktop { background:var(--bg-card); color:var(--text-primary); border:1px solid rgba(0,0,0,0.04); }
+
+    /* ---- HAMBURGER ---- */
+    .hamburger {
+      display:none;
+      background:transparent;
+      border:none;
+      font-size:1.4rem;
+      color:var(--text-primary);
+      cursor:pointer;
+    }
+    .sidebar-overlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.3);
+      z-index:99;
+    }
+    .sidebar-overlay.open { display:block; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width:768px) {
+      .sidebar { transform:translateX(-100%); width:280px; }
+      .sidebar.open { transform:translateX(0); }
+      .main { margin-left:0; padding:20px 16px; }
+      .hamburger { display:flex !important; }
+      #backToTop { bottom:80px; right:12px; }
+      .toast-container { bottom:100px; right:12px; }
+    }
+
+    /* ---- SCROLLBAR ---- */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-thumb { background:var(--accent-light); border-radius:10px; }
+
+    /* ---- ADDITIONAL UPGRADE STYLES ---- */
+
+    /* Aurora background (subtle) */
+    .aurora {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-1;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(108,92,231,0.05), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(108,92,231,0.04), transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(108,92,231,0.03), transparent 40%);
+      animation:auroraMove 30s infinite alternate ease-in-out;
+      pointer-events:none;
+    }
+    @keyframes auroraMove {
+      0% { background-position:0% 0%; }
+      100% { background-position:100% 100%; }
+    }
+
+    /* Particle canvas */
+    #particleCanvas {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:99992;
+    }
+
+    /* FOMO timer */
+    .fomo-timer {
+      background:var(--bg-card);
+      padding:12px 20px;
+      border-radius:60px;
+      border:1px solid var(--accent);
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-weight:600;
+      font-size:0.9rem;
+      color:var(--text-secondary);
+    }
+    .fomo-timer .countdown { color:var(--accent); font-weight:700; }
+
+    /* Notification bell */
+    #notifBell {
+      position:fixed;
+      top:80px;
+      right:80px;
+      z-index:99995;
+      background:var(--bg-card);
+      border-radius:50%;
+      width:44px;
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,0,0,0.06);
+      cursor:pointer;
+      transition:0.2s;
+      color:var(--text-secondary);
+      box-shadow:var(--shadow-sm);
+    }
+    #notifBell:hover {
+      border-color:var(--accent);
+      color:var(--text-primary);
+    }
+    #notifBell .badge {
+      position:absolute;
+      top:-4px;
+      right:-4px;
+      background:var(--gradient-red, #ef4444);
+      color:#fff;
+      border-radius:50%;
+      width:20px;
+      height:20px;
+      font-size:0.6rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    #notifDropdown {
+      display:none;
+      position:absolute;
+      top:50px;
+      right:0;
+      width:260px;
+      background:var(--bg-card);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:var(--radius-sm);
+      padding:12px;
+      max-height:300px;
+      overflow-y:auto;
+      box-shadow:var(--shadow-lg);
+    }
+    #notifDropdown.is-open { display:block; }
+    #notifDropdown .notif-item {
+      padding:8px 0;
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      font-size:0.85rem;
+      color:var(--text-secondary);
+    }
+    #notifDropdown .notif-item:last-child { border-bottom:none; }
+    #notifDropdown .notif-item i { color:var(--accent); margin-right:8px; }
+
+    /* Terminal */
+    #terminal {
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      max-height:180px;
+      background:rgba(0,0,0,0.92);
+      border-top:1px solid var(--accent);
+      font-family:var(--hacker-font);
+      font-size:0.75rem;
+      color:#00ff88;
+      z-index:99996;
+      transition:max-height 0.3s;
+      overflow:hidden;
+      cursor:pointer;
+      backdrop-filter:blur(4px);
+    }
+    #terminal.collapsed { max-height:28px; }
+    #terminal .terminal-header {
+      background:rgba(255,255,255,0.04);
+      padding:3px 16px;
+      display:flex;
+      justify-content:space-between;
+      font-size:0.65rem;
+      color:var(--text-muted);
+      user-select:none;
+    }
+    #terminal .terminal-body {
+      padding:6px 16px;
+      overflow-y:auto;
+      height:calc(100% - 26px);
+    }
+    #terminal .terminal-body .line { padding:1px 0; opacity:0.9; }
+    #terminal .terminal-body .line .timestamp { color:var(--text-muted); margin-right:12px; }
+    #terminal .terminal-body .line .highlight { color:#ffcc00; }
+
+    /* Global search overlay */
+    #searchOverlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.8);
+      backdrop-filter:blur(10px);
+      z-index:99998;
+      justify-content:center;
+      align-items:flex-start;
+      padding-top:15vh;
+    }
+    #searchOverlay.is-open { display:flex; }
+    #searchOverlay input {
+      width:90%;
+      max-width:600px;
+      padding:18px 24px;
+      border-radius:60px;
+      border:2px solid var(--accent);
+      background:var(--bg-card);
+      color:var(--text-primary);
+      font-size:1.3rem;
+      font-weight:500;
+      outline:none;
+      transition:0.2s;
+    }
+    #searchOverlay input:focus { box-shadow:0 0 40px rgba(108,92,231,0.2); }
+    #searchResults {
+      width:90%;
+      max-width:600px;
+      margin-top:12px;
+      background:var(--bg-card);
+      border-radius:var(--radius-sm);
+      border:1px solid rgba(0,0,0,0.06);
+      max-height:50vh;
+      overflow-y:auto;
+      padding:8px 0;
+    }
+    #searchResults .result-item {
+      padding:12px 20px;
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      color:var(--text-secondary);
+      cursor:pointer;
+      transition:0.2s;
+    }
+    #searchResults .result-item:hover {
+      background:var(--bg-input);
+      color:var(--text-primary);
+    }
+    #searchResults .result-item i { color:var(--accent); width:24px; margin-right:8px; }
+
+    /* Onboarding tour */
+    #tourOverlay {
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:99997;
+      pointer-events:none;
+    }
+    #tourOverlay.is-open { display:block; pointer-events:auto; }
+    #tourOverlay .tour-step {
+      position:absolute;
+      background:var(--bg-card);
+      border:2px solid var(--accent);
+      border-radius:var(--radius-sm);
+      padding:24px;
+      max-width:340px;
+      box-shadow:var(--shadow-lg);
+      color:var(--text-primary);
+      pointer-events:auto;
+      animation:fadeIn 0.3s ease;
+    }
+    #tourOverlay .tour-step h3 { margin-bottom:8px; }
+    #tourOverlay .tour-step p { font-size:0.9rem; color:var(--text-secondary); }
+    #tourOverlay .tour-step .btn { margin-top:12px; padding:8px 20px; font-size:0.8rem; }
+
+    /* Testimonial rotator */
+    .testimonial-rotator {
+      background:var(--bg-card);
+      padding:24px;
+      border-radius:var(--radius);
+      border:1px solid rgba(0,0,0,0.04);
+      min-height:140px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      transition:0.3s;
+      margin:20px 0;
+    }
+    .testimonial-rotator .quote {
+      font-size:1.05rem;
+      font-style:italic;
+      color:var(--text-secondary);
+    }
+    .testimonial-rotator .author {
+      margin-top:12px;
+      font-weight:600;
+      color:var(--text-primary);
+    }
+
+    /* Signup counter in topbar */
+    .signup-counter {
+      font-weight:700;
+      color:var(--accent);
+      font-size:1.1rem;
+    }
+
+    /* Veblen badge on agency card */
+    .veblen-badge {
+      font-size:0.7rem;
+      color:var(--accent);
+      background:rgba(108,92,231,0.1);
+      padding:4px 14px;
+      border-radius:100px;
+      display:inline-block;
+      margin:6px auto;
+      border:1px solid rgba(108,92,231,0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================== -->
+  <!--  CUSTOM CURSOR                                                 -->
+  <!-- ============================================================== -->
+  <div id="customCursor"></div>
+
+  <!-- ============================================================== -->
+  <!--  SCROLL PROGRESS                                               -->
+  <!-- ============================================================== -->
+  <div id="scrollProgress"></div>
+
+  <!-- ============================================================== -->
+  <!--  PARTICLE CANVAS                                               -->
+  <!-- ============================================================== -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- ============================================================== -->
+  <!--  AURORA BACKGROUND                                             -->
+  <!-- ============================================================== -->
+  <div class="aurora"></div>
+
+  <!-- ============================================================== -->
+  <!--  NOTIFICATION BELL                                             -->
+  <!-- ============================================================== -->
+  <div id="notifBell">
+    <i class="fas fa-bell"></i>
+    <span class="badge" id="notifCount">3</span>
+    <div id="notifDropdown">
+      <div class="notif-item"><i class="fas fa-check-circle"></i> Twitter API updated</div>
+      <div class="notif-item"><i class="fas fa-plus-circle"></i> Reddit integration planned</div>
+      <div class="notif-item"><i class="fas fa-clock"></i> Scheduled posts now supported</div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  TOAST CONTAINER                                               -->
+  <!-- ============================================================== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ============================================================== -->
+  <!--  BACK TO TOP                                                   -->
+  <!-- ============================================================== -->
+  <div id="backToTop" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  TERMINAL                                                      -->
+  <!-- ============================================================== -->
+  <div id="terminal" class="collapsed">
+    <div class="terminal-header">
+      <span><i class="fas fa-terminal"></i> Fed-Poster Terminal</span>
+      <span id="terminalToggle" style="cursor:pointer;">[ _ ]</span>
+    </div>
+    <div class="terminal-body" id="terminalBody">
+      <div class="line"><span class="timestamp">[14:02:13]</span> <span class="highlight">→</span> Fed-Poster core loaded.</div>
+      <div class="line"><span class="timestamp">[14:02:15]</span> <span class="highlight">→</span> 7 direct integrations ready.</div>
+      <div class="line"><span class="timestamp">[14:02:18]</span> <span class="highlight">→</span> Webhook listeners active.</div>
+      <div class="line"><span class="timestamp">[14:02:22]</span> <span class="highlight">→</span> localStorage: tokens loaded.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  GLOBAL SEARCH OVERLAY                                         -->
+  <!-- ============================================================== -->
+  <div id="searchOverlay">
+    <div style="width:100%;display:flex;flex-direction:column;align-items:center;">
+      <input type="text" id="searchInput" placeholder="🔍 Search platforms, pages..." autofocus />
+      <div id="searchResults"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  ONBOARDING TOUR                                               -->
+  <!-- ============================================================== -->
+  <div id="tourOverlay">
+    <div class="tour-step" id="tourStep1" style="top:20%;left:10%;">
+      <h3>👋 Welcome to Fed-Poster</h3>
+      <p>Post to multiple platforms from one dashboard. No servers, no cloud dependency.</p>
+      <button class="btn btn-primary btn-sm" id="tourNext1">Next →</button>
+    </div>
+    <div class="tour-step" id="tourStep2" style="top:40%;right:10%;display:none;">
+      <h3>🔒 Privacy First</h3>
+      <p>Your credentials live in your browser — never on our servers.</p>
+      <button class="btn btn-primary btn-sm" id="tourNext2">Next →</button>
+    </div>
+    <div class="tour-step" id="tourStep3" style="bottom:30%;left:20%;display:none;">
+      <h3>⚡ Speed of Light</h3>
+      <p>Client-side execution means no queues, no delays. Instant posting.</p>
+      <button class="btn btn-primary btn-sm" id="tourFinish">🚀 Get Started</button>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  SIDEBAR OVERLAY (mobile)                                      -->
+  <!-- ============================================================== -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ============================================================== -->
+  <!--  EMOJI QUICK-PICKER                                            -->
+  <!-- ============================================================== -->
+  <div id="emojiPicker" style="display:none;position:fixed;bottom:80px;right:24px;background:var(--bg-card);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:14px;z-index:9000;max-width:340px;border:1px solid rgba(0,0,0,0.06);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <strong style="font-size:13px;">Quick Emoji</strong>
+      <button id="emojiClose" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:16px;">✕</button>
+    </div>
+    <div id="emojiGrid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-height:220px;overflow-y:auto;"></div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  KEYBOARD SHORTCUTS OVERLAY                                    -->
+  <!-- ============================================================== -->
+  <div id="shortcutsOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:9500;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-card);border-radius:var(--radius);padding:32px;max-width:480px;width:90%;box-shadow:var(--shadow-lg);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="font-size:20px;font-weight:800;">⌨️ Keyboard Shortcuts</h2>
+        <button id="shortcutsClose" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:20px;">✕</button>
+      </div>
+      <div id="shortcutsList" style="display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  POST HISTORY LOG                                              -->
+  <!-- ============================================================== -->
+  <div id="historyPanel" style="display:none;position:fixed;top:60px;right:24px;background:var(--bg-card);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:20px;z-index:9000;width:380px;max-height:70vh;overflow-y:auto;border:1px solid rgba(0,0,0,0.06);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <strong style="font-size:15px;">📜 Post History</strong>
+      <button id="historyClose" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:16px;">✕</button>
+    </div>
+    <div id="historyList" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  SIDEBAR                                                       -->
+  <!-- ============================================================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="logo-icon"><i class="fas fa-rocket"></i></span>
+      <span>Fed</span><span>Poster</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-label">Platforms</div>
+      <button class="nav-item active" data-target="unified"><i class="fas fa-layer-group"></i> Multi Post <span class="badge">All</span></button>
+      <button class="nav-item" data-target="telegram"><i class="fab fa-telegram-plane"></i> Telegram <span class="badge green">online</span></button>
+      <button class="nav-item" data-target="bluesky"><i class="fas fa-cloud"></i> Bluesky <span class="badge">social</span></button>
+      <button class="nav-item" data-target="mastodon"><i class="fab fa-mastodon"></i> Mastodon <span class="badge">social</span></button>
+      <button class="nav-item" data-target="discord"><i class="fab fa-discord"></i> Discord <span class="badge green">online</span></button>
+      <button class="nav-item" data-target="github-classic"><i class="fab fa-github"></i> GitHub Gist <span class="badge green">online</span></button>
+      <button class="nav-item" data-target="stoat"><i class="fas fa-comment-dots"></i> Stoat <span class="badge orange">Chat</span></button>
+      <button class="nav-item" data-target="deviantart"><i class="fab fa-deviantart"></i> DeviantArt <span class="badge">art</span></button>
+      <div class="nav-label">Tools</div>
+      <button class="nav-item" data-target="apps"><i class="fas fa-mobile-alt"></i> Apps <span class="badge">Download</span></button>
+      <button class="nav-item" data-target="onboarding"><i class="fas fa-compass"></i> Onboarding <span class="badge orange">Guide</span></button>
+      <button class="nav-item" data-target="about"><i class="fas fa-info-circle"></i> About <span class="badge">Info</span></button>
+      <button class="nav-item" data-target="donate"><i class="fas fa-heart"></i> Donate <span class="badge">Support</span></button>
+      <div class="nav-label">Live Stats</div>
+      <div id="discord-count" style="
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        background:rgba(88,101,242,0.12);
+        color:#fff;
+        padding:8px 14px;
+        border-radius:40px;
+        font-family:'Segoe UI',Tahoma,sans-serif;
+        font-size:0.78rem;
+        font-weight:700;
+        border-left:3px solid #23a55a;
+        margin:6px 8px;
+        width:fit-content;
+        transition:all 0.3s;
+        cursor:default;
+      " title="Live Discord online count — updates every 60s">
+        <span style="font-size:0.7rem;line-height:1;">🟢</span>
+        <span id="online-number" style="min-width:18px;text-align:center;">…</span>
+        <span style="opacity:0.85;font-weight:600;">online</span>
+      </div>
+      <div style="margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04);">
+        <button class="nav-item" id="hackerToggle" style="font-family:var(--hacker-font);font-size:0.75rem;">
+          <i class="fas fa-terminal"></i> Hacker Mode
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ============================================================== -->
+  <!--  MAIN CONTENT                                                  -->
+  <!-- ============================================================== -->
+  <main class="main">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <h1 id="pageTitle">Multi Platform Post</h1>
+        <p id="pageSub">Post to all your connected platforms instantly.</p>
+      </div>
+      <div class="topbar-right">
+        <span class="date-display" id="dateDisplay"></span>
+        <div class="theme-swatches" id="themeSwatches">
+          <button class="theme-swatch" data-theme="dark" style="background:linear-gradient(135deg,#0a0e1a,#6c5ce7);" title="Deep Space"></button>
+          <button class="theme-swatch" data-theme="light" style="background:linear-gradient(135deg,#eef1f6,#6c5ce7);" title="Cloud"></button>
+          <button class="theme-swatch" data-theme="blue" style="background:linear-gradient(135deg,#061a2e,#0a84ff);" title="Azure Depth"></button>
+          <button class="theme-swatch" data-theme="green" style="background:linear-gradient(135deg,#06231a,#00b87a);" title="Emerald Forest"></button>
+          <button class="theme-swatch" data-theme="purple" style="background:linear-gradient(135deg,#160833,#8b5cf6);" title="Royal Nebula"></button>
+          <button class="theme-swatch" data-theme="orange" style="background:linear-gradient(135deg,#2e1206,#ff6b1a);" title="Molten Lava"></button>
+          <button class="theme-swatch" data-theme="cyberpunk" style="background:linear-gradient(135deg,#0d0118,#ff2e88);" title="Cyberpunk"></button>
+          <button class="theme-swatch" data-theme="sunset" style="background:linear-gradient(135deg,#3d1a2e,#ff4d6d);" title="Sunset"></button>
+          <button class="theme-swatch" data-theme="ocean" style="background:linear-gradient(135deg,#022829,#00b8a9);" title="Ocean Deep"></button>
+          <button class="theme-swatch" data-theme="rose" style="background:linear-gradient(135deg,#3d2a28,#e8a0a0);" title="Rose Gold"></button>
+          <button class="theme-swatch" data-theme="midnight" style="background:linear-gradient(135deg,#080b1a,#4f8cff);" title="Midnight"></button>
+          <button class="theme-swatch" data-theme="synthwave" style="background:linear-gradient(135deg,#0d041a,#ff79c6);" title="Synthwave"></button>
+        </div>
+        <div class="fomo-timer" style="font-size:0.75rem;padding:6px 14px;">
+          <i class="fas fa-clock"></i> Managed spots refresh: <span class="countdown" id="fomoCountdown">23:59:59</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== UNIFIED ========== -->
+    <div class="platform-section active" id="section-unified">
+      <div class="card tilt">
+        <div class="card-header"><h2>📤 Multi Platform Post</h2><span class="label-tag both">social</span></div>
+        <label>Message / Content</label>
+        <textarea id="unified-msg" placeholder="Write once, post everywhere…">Hello from Fed-Poster! 🚀</textarea>
+        <div id="unified-char-counter" class="char-counter safe"><span class="count">0</span> <span class="limit">/ 300 chars</span></div>
+        <label>Upload Image</label>
+        <input type="file" id="unified-file" accept="image/*,video/*,audio/*" />
+        <div class="file-info" id="unified-file-info">No file selected</div>
+        <div class="check-group">
+          <label><input type="checkbox" id="unified-tg" checked /> Telegram <span class="label-tag other">online</span></label>
+          <label><input type="checkbox" id="unified-bsky" checked /> Bluesky <span class="label-tag both">social</span></label>
+          <label><input type="checkbox" id="unified-mastodon" checked /> Mastodon <span class="label-tag both">social</span></label>
+          <label><input type="checkbox" id="unified-discord" checked /> Discord <span class="label-tag other">online</span></label>
+          <label><input type="checkbox" id="unified-github-classic" checked /> GitHub Gist <span class="label-tag other">online</span></label>
+          <label><input type="checkbox" id="unified-stoat" checked /> Stoat <span class="label-tag stoat">Chat</span></label>
+          <label><input type="checkbox" id="unified-deviantart" checked /> DeviantArt <span class="label-tag deviantart">art</span></label>
+        </div>
+        <div class="verify-status" id="verify-status"><div class="v-item"><span>⏳</span> Use the buttons below.</div></div>
+        <div class="actions">
+          <button class="btn-secondary" id="unified-test">🧪 Test All</button>
+          <button class="btn-primary" id="unified-send">🚀 Post All</button>
+        </div>
+        <div id="unified-status" class="status info">Select platforms, then Post All.</div>
+        <div id="unified-results" class="unified-results"></div>
+      </div>
+      <!-- Testimonial rotator inside unified -->
+      <div class="testimonial-rotator" id="testimonialRotator">
+        <div class="quote">“Fed-Poster saved me 10 hours a week. I post to 7 platforms in seconds.”</div>
+        <div class="author">- Alex, Content Creator</div>
+      </div>
+    </div>
+
+    <!-- ========== TELEGRAM ========== -->
+    <div class="platform-section" id="section-telegram">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge">📱</span>
+          <h2>Telegram</h2>
+          <span class="conn-pill online">Connected</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label><i class="fas fa-key"></i> Bot Token</label>
+            <input id="tg-token" type="password" value="8616411531:AAFfnpAWZBsmtTCsGhZwHGfjDqG1JPJkBX4" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-hashtag"></i> Channel / Chat ID</label>
+            <input id="tg-chat" type="text" value="@wsaegZWS" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-comment-dots"></i> Message</label>
+          <textarea id="tg-msg" placeholder="What to post?">Hello from Telegram! 🚀</textarea>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-paperclip"></i> Upload Image / Video</label>
+          <div class="file-drop" id="tg-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag a file here</div>
+            <div class="fd-hint">Images & videos supported</div>
+            <input type="file" id="tg-file" accept="image/*,video/*" />
+          </div>
+          <div class="file-info" id="tg-file-info">No file selected</div>
+        </div>
+        <div class="actions"><button class="btn-secondary" id="tg-test">🔍 Test</button><button class="btn-primary" id="tg-send">🚀 Send</button></div>
+        <div id="tg-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== BLUESKY ========== -->
+    <div class="platform-section" id="section-bluesky">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge">☁️</span>
+          <h2>Bluesky</h2>
+          <span class="conn-pill online">Connected</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label><i class="fas fa-at"></i> Handle</label>
+            <input id="bsky-handle" type="text" value="pokemonlegendsx.bsky.social" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-lock"></i> App Password</label>
+            <input id="bsky-password" type="password" value="ben4-o63v-b7cv-sxf3" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-comment-dots"></i> Message</label>
+          <textarea id="bsky-msg" placeholder="What to post? (max 300 chars)">Hello from Bluesky! 🚀</textarea>
+          <div id="bsky-char-counter" class="char-counter safe"><span class="count">0</span> <span class="limit">/ 300</span></div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-image"></i> Upload Image</label>
+          <div class="file-drop" id="bsky-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag an image here</div>
+            <div class="fd-hint">Auto-compressed to <1MB · max 4 images</div>
+            <input type="file" id="bsky-file" accept="image/*" />
+          </div>
+          <div class="file-info" id="bsky-file-info">No file selected</div>
+        </div>
+        <div class="actions"><button class="btn-secondary" id="bsky-test">🔍 Test</button><button class="btn-primary" id="bsky-send">🚀 Send</button></div>
+        <div id="bsky-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== MASTODON ========== -->
+    <div class="platform-section" id="section-mastodon">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge">🐘</span>
+          <h2>Mastodon</h2>
+          <span class="conn-pill online">Connected</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label><i class="fas fa-link"></i> Instance URL</label>
+            <input id="mastodon-instance" type="text" value="https://mastodon.social" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-key"></i> Access Token</label>
+            <input id="mastodon-token" type="password" value="uBejszqrVRoafItb9SCC8WvMbMj76qC7Qi6YXi2kyLg" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-comment-dots"></i> Message</label>
+          <textarea id="mastodon-msg" placeholder="What to post?">Hello from Mastodon! 🚀</textarea>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-paperclip"></i> Upload Image / Video / Audio</label>
+          <div class="file-drop" id="mastodon-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag a media file here</div>
+            <div class="fd-hint">Images, videos & audio supported</div>
+            <input type="file" id="mastodon-file" accept="image/*,video/*,audio/*" />
+          </div>
+          <div class="file-info" id="mastodon-file-info">No file selected</div>
+        </div>
+        <div class="actions"><button class="btn-secondary" id="mastodon-test">🔍 Test</button><button class="btn-primary" id="mastodon-send">🚀 Send</button></div>
+        <div id="mastodon-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== DISCORD ========== -->
+    <div class="platform-section" id="section-discord">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge">🎮</span>
+          <h2>Discord</h2>
+          <span class="conn-pill online">Connected</span>
+        </div>
+        <div class="field field-full">
+          <label><i class="fas fa-link"></i> Webhook URL</label>
+          <input id="discord-webhook" type="text" value="https://discord.com/api/webhooks/1533683341818204340/SfIALgn-uSZ-dKSRdPChgsY4yTzFdbAFPAUMXyst_x4d9HpT13cYjDJnoSEOpmh2ygMH" />
+          <div class="saved-note">Auto‑saved</div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-comment-dots"></i> Message</label>
+          <textarea id="discord-msg" placeholder="What to post?">Hello from Discord! 🚀</textarea>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-paperclip"></i> Upload Image / Video</label>
+          <div class="file-drop" id="discord-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag a file here</div>
+            <div class="fd-hint">Images & videos — embedded in webhook</div>
+            <input type="file" id="discord-file" accept="image/*,video/*" />
+          </div>
+          <div class="file-info" id="discord-file-info">No file selected</div>
+        </div>
+        <div class="actions"><button class="btn-secondary" id="discord-test">🔍 Test</button><button class="btn-primary" id="discord-send">🚀 Send</button></div>
+        <div id="discord-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== GITHUB GIST ========== -->
+    <div class="platform-section" id="section-github-classic">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge"><i class="fab fa-github"></i></span>
+          <h2>GitHub Gist</h2>
+          <span class="conn-pill online">Connected</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label><i class="fas fa-key"></i> Token</label>
+            <input id="github-classic-token" type="password" value="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" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-file-code"></i> Filename</label>
+            <input id="github-classic-filename" type="text" value="post.md" />
+          </div>
+          <div class="field field-full">
+            <label><i class="fas fa-align-left"></i> Description</label>
+            <input id="github-classic-desc" type="text" placeholder="My Gist description" />
+          </div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-pen"></i> Content</label>
+          <textarea id="github-classic-msg" placeholder="Write your Gist content…" style="min-height:120px;font-family:monospace;">Hello from GitHub Gist! 🚀</textarea>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-image"></i> Upload Image</label>
+          <div class="file-drop" id="github-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag an image here</div>
+            <div class="fd-hint">Image linked inside the Gist as markdown</div>
+            <input type="file" id="github-classic-file" accept="image/*" />
+          </div>
+          <div class="file-info" id="github-classic-file-info">No file selected</div>
+        </div>
+        <label style="display:flex; align-items:center; gap:8px; margin-top:14px; cursor:pointer; color:var(--text-primary); font-size:13px; font-weight:600;"><input type="checkbox" id="github-classic-public" checked style="width:auto;" /> Public Gist</label>
+        <div class="actions"><button class="btn-secondary" id="github-classic-test">🔍 Test</button><button class="btn-primary" id="github-classic-send">🚀 Send</button></div>
+        <div id="github-classic-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== STOAT ========== -->
+    <div class="platform-section" id="section-stoat">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge">💬</span>
+          <h2>Stoat</h2>
+          <span class="conn-pill online">Connected</span>
+        </div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-bottom:18px; background:var(--bg-input); padding:12px 16px; border-radius:var(--radius-sm); border-left:4px solid #ff6b35; display:flex; align-items:center; gap:8px;">
+          <i class="fas fa-info-circle" style="color:#ff6b35;"></i>
+          <span><strong>Images</strong> are uploaded to Supabase Storage and linked in your message.</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label><i class="fas fa-key"></i> Bot Token</label>
+            <input id="stoat-token" type="password" value="Q7VLhpkk9v8Ej_dzIiHMMsLIalG-BuMLNp007RwKFHVZjYnUNSA3lXGw0uYJXsOU" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-server"></i> Server ID</label>
+            <input id="stoat-server" type="text" value="01KT4YX5VV20GB0275X6XQ46E1" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field field-full">
+            <label><i class="fas fa-hashtag"></i> Channel ID</label>
+            <input id="stoat-channel" type="text" value="01KTC0AGG6WAXVWK1VH2RB66V7" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-comment-dots"></i> Message</label>
+          <textarea id="stoat-msg" placeholder="What to post?">Hello from Stoat! 🚀</textarea>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-image"></i> Upload Image</label>
+          <div class="file-drop" id="stoat-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag an image here</div>
+            <div class="fd-hint">Uploaded to Supabase & linked automatically</div>
+            <input type="file" id="stoat-file" accept="image/*" />
+          </div>
+          <div class="file-info" id="stoat-file-info">No file selected</div>
+        </div>
+        <div class="actions"><button class="btn-secondary" id="stoat-test">🔍 Test</button><button class="btn-primary" id="stoat-send">🚀 Send</button></div>
+        <div id="stoat-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== DEVIANTART ========== -->
+    <div class="platform-section" id="section-deviantart">
+      <div class="card tilt">
+        <div class="card-header">
+          <span class="platform-badge">🎨</span>
+          <h2>DeviantArt</h2>
+          <span class="conn-pill uncertain">Needs Token</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label><i class="fas fa-key"></i> Access Token</label>
+            <input id="deviantart-token" type="password" placeholder="Enter your access token" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-id-badge"></i> Client Key (Client ID)</label>
+            <input id="deviantart-client-key" type="text" value="75400" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+          <div class="field field-full">
+            <label><i class="fas fa-user-secret"></i> Client Secret (reference only)</label>
+            <input id="deviantart-client-secret" type="password" value="e16379a8527f08dbc6de5995e217d57b" />
+            <div class="saved-note">Auto‑saved</div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-comment-dots"></i> Message</label>
+          <textarea id="deviantart-msg" placeholder="What to post?">Hello from DeviantArt! 🚀</textarea>
+        </div>
+        <div class="field" style="margin-top:18px;">
+          <label><i class="fas fa-image"></i> Upload Image</label>
+          <div class="file-drop" id="deviantart-drop">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <div class="fd-label">Click or drag an image here</div>
+            <div class="fd-hint">Posted as a DeviantArt status deviation</div>
+            <input type="file" id="deviantart-file" accept="image/*" />
+          </div>
+          <div class="file-info" id="deviantart-file-info">No file selected</div>
+        </div>
+        <div class="actions"><button class="btn-secondary" id="deviantart-test">🔍 Test</button><button class="btn-primary" id="deviantart-send">🚀 Send</button></div>
+        <div id="deviantart-status" class="status info">Ready.</div>
+      </div>
+    </div>
+
+    <!-- ========== APPS ========== -->
+    <div class="platform-section" id="section-apps">
+      <div class="card tilt">
+        <div class="card-header"><h2>📱 Get FedPromptly</h2><span class="label-tag apps">Download</span></div>
+        <div style="text-align:center;padding:10px 0;">
+          <button class="app-btn mobile" id="mobileAppBtn"><i class="fas fa-mobile-alt"></i> Mobile App</button>
+          <button class="app-btn desktop" id="desktopAppBtn"><i class="fas fa-desktop"></i> Desktop App</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ONBOARDING ========== -->
+    <div class="platform-section" id="section-onboarding">
+      <div class="card tilt">
+        <div class="card-header"><h2>🚀 Welcome</h2><span class="label-tag onboarding">Guide</span></div>
+        <p>Post to multiple networks at once. Connect your accounts, write once, and broadcast everywhere.</p>
+      </div>
+    </div>
+
+    <!-- ========== ABOUT ========== -->
+    <div class="platform-section" id="section-about">
+      <div class="card tilt">
+        <div class="card-header"><h2>ℹ️ About</h2><span class="label-tag about">Info</span></div>
+        <p>Fed-Poster is a self‑contained dashboard for cross‑posting to social platforms.</p>
+      </div>
+    </div>
+
+    <!-- ========== DONATE ========== -->
+    <div class="platform-section" id="section-donate">
+      <div class="card tilt">
+        <div class="card-header"><h2>💝 Support</h2><span class="label-tag donate">Support</span></div>
+        <p>Support the project via PayPal or cryptocurrency.</p>
+        <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://ko-fi.com/fedpromptly" target="_blank" class="btn btn-gold" style="background:var(--accent);color:#fff;padding:10px 24px;border-radius:var(--radius-full);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px;">
+            <i class="fas fa-heart"></i> Ko-fi
+          </a>
+          <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" class="btn btn-secondary" style="background:var(--bg-input);color:var(--text-secondary);padding:10px 24px;border-radius:var(--radius-full);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,0,0,0.04);">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!--  MODAL                                                         -->
+  <!-- ============================================================== -->
+  <div class="modal-overlay" id="appModal">
+    <div class="modal-card-download">
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+      <span class="modal-icon" id="modalIcon">📱</span>
+      <div class="modal-title" id="modalTitle" style="font-size:1.3rem;font-weight:700;margin:8px 0;">Android App</div>
+      <div class="modal-sub" id="modalSub" style="color:var(--text-secondary);margin-bottom:16px;">Download now</div>
+      <a href="#" class="modal-download-btn" id="modalDownloadBtn" target="_blank">⬇ Download</a>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!--  JAVASCRIPT                                                    -->
+  <!-- ============================================================== -->
+  <script>
+    (function() {
+      // =============================================================
+      // 1. THEME
+      // =============================================================
+      const savedTheme = localStorage.getItem('fed_poster_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.querySelectorAll('.theme-swatch').forEach(el => {
+        if (el.dataset.theme === savedTheme) el.classList.add('active');
+        el.addEventListener('click', function() {
+          const t = this.dataset.theme;
+          localStorage.setItem('fed_poster_theme', t);
+          document.documentElement.setAttribute('data-theme', t);
+          document.querySelectorAll('.theme-swatch').forEach(s => s.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+      // =============================================================
+      // 2. HACKER MODE
+      // =============================================================
+      document.getElementById('hackerToggle').addEventListener('click', function() {
+        document.body.classList.toggle('hacker-mode');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-terminal');
+        icon.classList.toggle('fa-moon');
+      });
+
+      // =============================================================
+      // 3. CUSTOM CURSOR
+      // =============================================================
+      const cursor = document.getElementById('customCursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      document.querySelectorAll('a, button, .btn, .nav-item, .card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+      });
+
+      // =============================================================
+      // 4. SCROLL PROGRESS & BACK TO TOP
+      // =============================================================
+      const progressBar = document.getElementById('scrollProgress');
+      const backBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        const st = window.scrollY;
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (st / h * 100) + '%';
+        if (st > 300) backBtn.classList.add('visible');
+        else backBtn.classList.remove('visible');
+      });
+      backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // =============================================================
+      // 5. TERMINAL
+      // =============================================================
+      const terminal = document.getElementById('terminal');
+      const termBody = document.getElementById('terminalBody');
+      document.getElementById('terminalToggle').addEventListener('click', () => {
+        terminal.classList.toggle('collapsed');
+      });
+      const termLines = [
+        '[14:05:12] <span class="highlight">→</span> Webhook received: 200 OK',
+        '[14:05:18] <span class="highlight">→</span> Buffer proxy: rate limit 98%',
+        '[14:05:24] <span class="highlight">→</span> Mastodon: media uploaded',
+        '[14:05:30] <span class="highlight">→</span> GitHub Gist created',
+        '[14:05:36] <span class="highlight">→</span> Telegram: message delivered',
+        '[14:05:42] <span class="highlight">→</span> Discord webhook triggered',
+        '[14:05:48] <span class="highlight">→</span> localStorage: 3 tokens saved'
+      ];
+      setInterval(() => {
+        if (terminal.classList.contains('collapsed')) return;
+        const line = termLines[Math.floor(Math.random() * termLines.length)];
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.innerHTML = `<span class="timestamp">${line.slice(0,9)}</span>${line.slice(9)}`;
+        termBody.appendChild(div);
+        termBody.scrollTop = termBody.scrollHeight;
+        if (termBody.children.length > 50) termBody.removeChild(termBody.firstChild);
+      }, 7000);
+
+      // =============================================================
+      // 6. GLOBAL SEARCH (⌘+K / Ctrl+K)
+      // =============================================================
+      const searchOverlay = document.getElementById('searchOverlay');
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.getElementById('searchResults');
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          searchOverlay.classList.toggle('is-open');
+          if (searchOverlay.classList.contains('is-open')) {
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+            searchInput.focus();
+          }
+        }
+        if (e.key === 'Escape') searchOverlay.classList.remove('is-open');
+      });
+      const searchableItems = [
+        { name: 'Multi Post', id: 'unified', icon: 'fa-layer-group' },
+        { name: 'Telegram', id: 'telegram', icon: 'fa-telegram-plane' },
+        { name: 'Bluesky', id: 'bluesky', icon: 'fa-cloud' },
+        { name: 'Mastodon', id: 'mastodon', icon: 'fa-mastodon' },
+        { name: 'Discord', id: 'discord', icon: 'fa-discord' },
+        { name: 'GitHub Gist', id: 'github-classic', icon: 'fa-github' },
+        { name: 'Stoat', id: 'stoat', icon: 'fa-comment-dots' },
+        { name: 'DeviantArt', id: 'deviantart', icon: 'fa-deviantart' },
+        { name: 'Apps', id: 'apps', icon: 'fa-mobile-alt' },
+        { name: 'Onboarding', id: 'onboarding', icon: 'fa-compass' },
+        { name: 'About', id: 'about', icon: 'fa-info-circle' },
+        { name: 'Donate', id: 'donate', icon: 'fa-heart' }
+      ];
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase().trim();
+        if (q.length < 1) { searchResults.innerHTML = ''; return; }
+        const results = searchableItems.filter(i => i.name.toLowerCase().includes(q));
+        searchResults.innerHTML = results.map(r => `
+          <div class="result-item" data-id="${r.id}">
+            <i class="fas ${r.icon}"></i> ${r.name}
+          </div>
+        `).join('');
+        searchResults.querySelectorAll('.result-item').forEach(el => {
+          el.addEventListener('click', () => {
+            const id = el.dataset.id;
+            switchTab(id);
+            searchOverlay.classList.remove('is-open');
+          });
+        });
+      });
+
+      // =============================================================
+      // 7. NOTIFICATION BELL
+      // =============================================================
+      const notifBell = document.getElementById('notifBell');
+      const notifDropdown = document.getElementById('notifDropdown');
+      notifBell.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notifDropdown.classList.toggle('is-open');
+      });
+      document.addEventListener('click', () => notifDropdown.classList.remove('is-open'));
+
+      // =============================================================
+      // 8. TOASTS (Live Activity Feed)
+      // =============================================================
+      const toastContainer = document.getElementById('toastContainer');
+      const toastMessages = [
+        'Sarah scheduled 47 posts across 7 platforms',
+        'Telegram API response: 200 OK',
+        'Bluesky: post published successfully',
+        'Discord webhook: rate limit 75%',
+        'User @johndoe just connected 8 accounts',
+        'Mastodon: media uploaded (2.4MB)',
+        'GitHub Gist created: post.md',
+        'Stoat: image uploaded to Supabase',
+        'DeviantArt: status posted'
+      ];
+      function addToast() {
+        const msg = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-bolt"></i> ${msg}`;
+        toastContainer.appendChild(toast);
+        setTimeout(() => toast.remove(), 4500);
+      }
+      setInterval(addToast, 8000);
+      setTimeout(addToast, 2000);
+
+      // =============================================================
+      // 9. SIDEBAR NAVIGATION
+      // =============================================================
+      function switchTab(target) {
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        const nav = document.querySelector(`.nav-item[data-target="${target}"]`);
+        if (nav) nav.classList.add('active');
+        document.querySelectorAll('.platform-section').forEach(s => s.classList.remove('active'));
+        const sec = document.getElementById('section-' + target);
+        if (sec) sec.classList.add('active');
+        const titles = {
+          unified:'Multi Platform Post',
+          telegram:'Telegram',
+          bluesky:'Bluesky',
+          mastodon:'Mastodon',
+          discord:'Discord',
+          'github-classic':'GitHub Gist',
+          stoat:'Stoat',
+          deviantart:'DeviantArt',
+          apps:'Apps',
+          onboarding:'Onboarding',
+          about:'About',
+          donate:'Donate'
+        };
+        document.getElementById('pageTitle').textContent = titles[target] || target;
+        document.getElementById('pageSub').textContent = target === 'unified' ? 'Post to all selected platforms.' : 'Configure and send.';
+        if (window.innerWidth <= 768) {
+          document.getElementById('sidebar').classList.remove('open');
+          document.getElementById('sidebarOverlay').classList.remove('open');
+        }
+      }
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const t = this.dataset.target;
+          if (t) switchTab(t);
+        });
+      });
+      window.toggleSidebar = function() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('open');
+      };
+
+      // =============================================================
+      // 10. MODAL (Apps)
+      // =============================================================
+      function openAppModal(type) {
+        const icon = document.getElementById('modalIcon');
+        const title = document.getElementById('modalTitle');
+        const sub = document.getElementById('modalSub');
+        const btn = document.getElementById('modalDownloadBtn');
+        if (type === 'mobile') {
+          icon.textContent = '📱';
+          title.textContent = 'Android App';
+          sub.textContent = 'Download APK';
+          btn.href = 'https://github.com/FED-OS/Fed-Poster/releases/download/coding/fedposterapp-release.apk';
+          btn.textContent = '⬇ Download APK';
+        } else {
+          icon.textContent = '💻';
+          title.textContent = 'Windows Desktop';
+          sub.textContent = 'Download installer';
+          btn.href = 'https://github.com/FED-OS/Fed-Poster/releases/download/coding/FED-OS.Setup.1.0.1.exe';
+          btn.textContent = '⬇ Download Installer';
+        }
+        document.getElementById('appModal').classList.add('active');
+      }
+      document.getElementById('mobileAppBtn').addEventListener('click', () => openAppModal('mobile'));
+      document.getElementById('desktopAppBtn').addEventListener('click', () => openAppModal('desktop'));
+      document.getElementById('modalCloseBtn').addEventListener('click', () => document.getElementById('appModal').classList.remove('active'));
+      document.getElementById('appModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) document.getElementById('appModal').classList.remove('active');
+      });
+
+      // =============================================================
+      // 11. FOMO COUNTDOWN (24h)
+      // =============================================================
+      let fomoTime = 24 * 60 * 60;
+      setInterval(() => {
+        if (fomoTime <= 0) fomoTime = 24 * 60 * 60;
+        fomoTime--;
+        const h = String(Math.floor(fomoTime / 3600)).padStart(2, '0');
+        const m = String(Math.floor((fomoTime % 3600) / 60)).padStart(2, '0');
+        const s = String(fomoTime % 60).padStart(2, '0');
+        document.getElementById('fomoCountdown').textContent = `${h}:${m}:${s}`;
+      }, 1000);
+
+      // =============================================================
+      // 12. ONBOARDING TOUR
+      // =============================================================
+      if (!localStorage.getItem('fedposter_tour_done')) {
+        setTimeout(() => {
+          document.getElementById('tourOverlay').classList.add('is-open');
+          document.getElementById('tourStep1').style.display = 'block';
+        }, 2000);
+      }
+      document.getElementById('tourNext1').addEventListener('click', () => {
+        document.getElementById('tourStep1').style.display = 'none';
+        document.getElementById('tourStep2').style.display = 'block';
+      });
+      document.getElementById('tourNext2').addEventListener('click', () => {
+        document.getElementById('tourStep2').style.display = 'none';
+        document.getElementById('tourStep3').style.display = 'block';
+      });
+      document.getElementById('tourFinish').addEventListener('click', () => {
+        document.getElementById('tourOverlay').classList.remove('is-open');
+        localStorage.setItem('fedposter_tour_done', 'true');
+      });
+
+      // =============================================================
+      // 13. TESTIMONIAL ROTATOR
+      // =============================================================
+      const testimonials = [
+        { quote: "Fed-Poster saved me 10 hours a week. I post to 7 platforms in seconds.", author: "- Alex, Content Creator" },
+        { quote: "The anti-SaaS manifesto made me switch from Buffer. No regrets.", author: "- Jamie, Agency Owner" },
+        { quote: "Client-side execution is genuinely faster than any cloud tool I've used.", author: "- Chris, Developer" },
+        { quote: "White-labeling Fed-Poster for my clients was a game-changer.", author: "- Taylor, Digital Agency" }
+      ];
+      let tIndex = 0;
+      setInterval(() => {
+        const rotator = document.getElementById('testimonialRotator');
+        if (!rotator) return;
+        const t = testimonials[tIndex % testimonials.length];
+        rotator.innerHTML = `
+          <div class="quote">“${t.quote}”</div>
+          <div class="author">${t.author}</div>
+        `;
+        tIndex++;
+      }, 6000);
+
+      // =============================================================
+      // 14. LIVE DISCORD ONLINE COUNT (real widget API)
+      // =============================================================
+      const DISCORD_SERVER_ID = '1400235929154879490';
+      async function getOnlineCount() {
+        try {
+          const response = await fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`);
+          if (!response.ok) throw new Error('widget unavailable');
+          const data = await response.json();
+          const count = data.presence_count || 0;
+          const el = document.getElementById('online-number');
+          if (el) {
+            // animated count up
+            const prev = parseInt(el.textContent) || 0;
+            const step = (count - prev) / 12;
+            let i = 0;
+            const tick = () => { if (i++ < 12) { el.textContent = Math.round(prev + step * i); requestAnimationFrame(tick); } else el.textContent = count; };
+            tick();
+          }
+        } catch(error) {
+          const el = document.getElementById('online-number');
+          if (el) el.textContent = '?';
+          const badge = document.getElementById('discord-count');
+          if (badge) badge.style.opacity = '0.6';
+        }
+      }
+      getOnlineCount();
+      setInterval(getOnlineCount, 60000);
+
+      // =============================================================
+      // 15. PARTICLE BURST on Send/Post buttons
+      // =============================================================
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      function resizeCanvas() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      function particleBurst(x, y) {
+        const emojis = ['🚀', '📱', '💻', '🔥', '⚡', '🎯', '✨', '🌟', '💎', '🔮'];
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+          const angle = Math.random() * 2 * Math.PI;
+          const speed = 2 + Math.random() * 6;
+          const size = 16 + Math.random() * 20;
+          particles.push({
+            x, y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1,
+            life: 1,
+            decay: 0.01 + Math.random() * 0.02,
+            emoji: emojis[Math.floor(Math.random() * emojis.length)],
+            size
+          });
+        }
+        function animateParticles() {
+          ctx.clearRect(0, 0, w, h);
+          let alive = false;
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.05;
+            p.life -= p.decay;
+            if (p.life > 0) {
+              alive = true;
+              ctx.globalAlpha = p.life;
+              ctx.font = p.size + 'px sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(p.emoji, p.x, p.y);
+            }
+          });
+          if (alive) requestAnimationFrame(animateParticles);
+          else ctx.clearRect(0, 0, w, h);
+        }
+        animateParticles();
+      }
+
+      document.querySelectorAll('.btn-primary, .btn-gold, .app-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const rect = btn.getBoundingClientRect();
+          particleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        });
+      });
+
+      // =============================================================
+      // 16. 3D TILT on cards
+      // =============================================================
+      document.querySelectorAll('.card.tilt').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const rotX = y * -6;
+          const rotY = x * 6;
+          card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.01)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+        });
+      });
+
+      // =============================================================
+      // 17. ORIGINAL PLATFORM LOGIC (your existing code)
+      // =============================================================
+
+      // ---- Helpers ----
+      function getFileData(el) { return el && el.files && el.files.length ? el.files[0] : null; }
+      function updateFileInfo(el, info) {
+        const f = getFileData(el);
+        info.textContent = f ? `📎 ${f.name} (${(f.size/1024).toFixed(1)} KB)` : 'No file selected';
+      }
+      // ---- drag & drop for all .file-drop zones ----
+      document.querySelectorAll('.file-drop').forEach(zone => {
+        const input = zone.querySelector('input[type="file"]');
+        if (!input) return;
+        const info = zone.parentElement.querySelector('.file-info');
+        ['dragenter','dragover'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add('dragover'); }));
+        ['dragleave','drop'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove('dragover'); }));
+        zone.addEventListener('drop', e => {
+          if (e.dataTransfer.files.length) { input.files = e.dataTransfer.files; if (info) updateFileInfo(input, info); }
+        });
+      });
+      const BLUESKY_MAX_CHARS = 300;
+      function updateCharCounter(textarea, counter, max) {
+        const len = textarea.value.length, rem = max - len;
+        counter.querySelector('.count').textContent = len;
+        counter.classList.remove('safe','exceeded');
+        if (len > max) {
+          counter.classList.add('exceeded');
+          counter.querySelector('.limit').textContent = `⚠️ ${rem} over`;
+        } else {
+          counter.classList.add('safe');
+          counter.querySelector('.limit').textContent = `/ ${max}`;
+        }
+      }
+
+      // ---- TELEGRAM ----
+      function setupTelegram() {
+        const token = document.getElementById('tg-token'), chat = document.getElementById('tg-chat'), msg = document.getElementById('tg-msg'), file = document.getElementById('tg-file'), fileInfo = document.getElementById('tg-file-info'), status = document.getElementById('tg-status');
+        if (!token) return;
+        token.value = localStorage.getItem('tg_token') || token.value;
+        chat.value = localStorage.getItem('tg_chat') || chat.value;
+        token.addEventListener('input', () => localStorage.setItem('tg_token', token.value));
+        chat.addEventListener('input', () => localStorage.setItem('tg_chat', chat.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        function setStatus(m, type) { status.textContent = m; status.className = 'status ' + (type||'info'); }
+        document.getElementById('tg-test')?.addEventListener('click', async function() {
+          const t = token.value.trim(); if (!t) { setStatus('❌ Enter token.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch(`https://api.telegram.org/bot${t}/getMe`);
+            const data = await res.json();
+            if (data.ok) setStatus(`✅ @${data.result.username}`,'success');
+            else setStatus(`❌ ${data.description}`,'error');
+          } catch(e) { setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('tg-send')?.addEventListener('click', async function() {
+          const t = token.value.trim(), c = chat.value.trim(), text = msg.value.trim(), f = getFileData(file);
+          if (!t || !c) { setStatus('❌ Missing token or chat.','error'); return; }
+          setStatus('⏳ Sending...','loading'); this.disabled = true;
+          try {
+            if (f) {
+              const fd = new FormData(); fd.append('chat_id', c); fd.append('caption', text||''); fd.append('parse_mode','HTML');
+              const isVideo = f.type.startsWith('video/'); fd.append(isVideo ? 'video' : 'photo', f);
+              const res = await fetch(`https://api.telegram.org/bot${t}/${isVideo?'sendVideo':'sendPhoto'}`, { method:'POST', body:fd });
+              const data = await res.json();
+              if (data.ok) { setStatus('✅ Sent!','success'); file.value = ''; updateFileInfo(file, fileInfo); }
+              else { setStatus(`❌ ${data.description}`,'error'); }
+            } else {
+              const res = await fetch(`https://api.telegram.org/bot${t}/sendMessage`, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({ chat_id:c, text:text||'Hello!', parse_mode:'HTML' })
+              });
+              const data = await res.json();
+              if (data.ok) { setStatus('✅ Sent!','success'); msg.value = ''; }
+              else { setStatus(`❌ ${data.description}`,'error'); }
+            }
+          } catch(e) { setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- BLUESKY ----
+      function setupBluesky() {
+        const handle = document.getElementById('bsky-handle'), password = document.getElementById('bsky-password'), msg = document.getElementById('bsky-msg'), file = document.getElementById('bsky-file'), fileInfo = document.getElementById('bsky-file-info'), status = document.getElementById('bsky-status'), counter = document.getElementById('bsky-char-counter');
+        if (!handle) return;
+        handle.value = localStorage.getItem('bsky_handle') || handle.value;
+        password.value = localStorage.getItem('bsky_password') || password.value;
+        handle.addEventListener('input', () => localStorage.setItem('bsky_handle', handle.value));
+        password.addEventListener('input', () => localStorage.setItem('bsky_password', password.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        if (msg) { msg.addEventListener('input', () => updateCharCounter(msg, counter, BLUESKY_MAX_CHARS)); updateCharCounter(msg, counter, BLUESKY_MAX_CHARS); }
+        function setStatus(m,t) { status.textContent = m; status.className = 'status ' + (t||'info'); }
+        function compressImage(f, maxMB=0.9) {
+          return new Promise((r) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = new Image();
+              img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let w=img.width, h=img.height; const md=1200;
+                if (w>h) { if (w>md) { h=(h/w)*md; w=md; } } else { if (h>md) { w=(w/h)*md; h=md; } }
+                canvas.width=w; canvas.height=h;
+                const ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,w,h);
+                const target=maxMB*1024*1024;
+                let q=0.92;
+                const tryC=(q2)=>{ canvas.toBlob((blob)=>{ if (blob.size<=target || q2<=0.1) r(new File([blob], f.name, {type:'image/jpeg'})); else tryC(q2-0.08); }, 'image/jpeg', q2); };
+                tryC(q);
+              };
+              img.src=e.target.result;
+            };
+            reader.readAsDataURL(f);
+          });
+        }
+        async function uploadToBluesky(file, jwt) {
+          let pf = file; if (file.type.startsWith('image/')) { try { pf = await compressImage(file); } catch(e) {} }
+          const buf = await pf.arrayBuffer(); const u8 = new Uint8Array(buf);
+          const res = await fetch('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
+            method:'POST',
+            headers:{'Authorization':`Bearer ${jwt}`,'Content-Type':pf.type||'image/png'},
+            body:u8.buffer
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error('Upload failed: '+(data.message||'Unknown'));
+          return data.blob;
+        }
+        function createFacets(text) {
+          if (!text) return [];
+          const facets=[], enc=new TextEncoder();
+          const urlR=/(https?:\/\/[^\s]+)/g, tagR=/(#[^\s#]+)/g, matches=[];
+          let m;
+          while((m=urlR.exec(text))!==null){ const start=m.index, end=start+m[0].length; const bs=enc.encode(text.slice(0,start)).length, be=bs+enc.encode(m[0]).length; matches.push({start:bs,end:be,type:'link',value:m[0]}); }
+          while((m=tagR.exec(text))!==null){ const start=m.index, end=start+m[0].length; const bs=enc.encode(text.slice(0,start)).length, be=bs+enc.encode(m[0]).length; if(!matches.some(x=>x.start<be && x.end>bs)) matches.push({start:bs,end:be,type:'tag',value:m[0]}); }
+          matches.sort((a,b)=>a.start-b.start);
+          const merged=[]; for(const m of matches){ if(merged.length===0){merged.push(m); continue;} const last=merged[merged.length-1]; if(m.start<last.end) continue; merged.push(m); }
+          for(const m of merged){ if(m.type==='link') facets.push({index:{byteStart:m.start,byteEnd:m.end},features:[{'$type':'app.bsky.richtext.facet#link',uri:m.value}]}); else if(m.type==='tag') facets.push({index:{byteStart:m.start,byteEnd:m.end},features:[{'$type':'app.bsky.richtext.facet#tag',tag:m.value.slice(1)}]}); }
+          return facets;
+        }
+        document.getElementById('bsky-test')?.addEventListener('click', async function() {
+          const h=handle.value.trim(), p=password.value.trim();
+          if(!h||!p){ setStatus('❌ Enter handle & password.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
+              method:'POST', headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({identifier:h,password:p})
+            });
+            const data = await res.json();
+            if(res.ok) setStatus(`✅ ${data.handle}`,'success');
+            else setStatus(`❌ ${data.message||'Invalid'}`,'error');
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('bsky-send')?.addEventListener('click', async function() {
+          const h=handle.value.trim(), p=password.value.trim(), text=msg.value.trim(), f=getFileData(file);
+          if(text.length>BLUESKY_MAX_CHARS){ setStatus(`❌ Exceeds ${BLUESKY_MAX_CHARS} chars.`,'error'); return; }
+          if(!h||!p){ setStatus('❌ Missing credentials.','error'); return; }
+          setStatus('⏳ Sending...','loading'); this.disabled = true;
+          try {
+            const login = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
+              method:'POST', headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({identifier:h,password:p})
+            });
+            const session = await login.json();
+            if(!login.ok) throw new Error('Login: '+session.message);
+            const record = { text: text||'Hello!', createdAt: new Date().toISOString(), facets: createFacets(text||'') };
+            if(f){ const blob = await uploadToBluesky(f, session.accessJwt); if(!blob.mimeType) blob.mimeType=f.type||'image/png'; record.embed = {'$type':'app.bsky.embed.images', images:[{image:blob, alt:text||'Image'}]}; }
+            const post = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+              method:'POST',
+              headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.accessJwt}`},
+              body:JSON.stringify({repo:session.did, collection:'app.bsky.feed.post', record})
+            });
+            const result = await post.json();
+            if(!post.ok) throw new Error('Post: '+result.message);
+            setStatus('✅ Sent!','success');
+            msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); }
+            updateCharCounter(msg, counter, BLUESKY_MAX_CHARS);
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- MASTODON ----
+      function setupMastodon() {
+        const instance = document.getElementById('mastodon-instance'), token = document.getElementById('mastodon-token'), msg = document.getElementById('mastodon-msg'), file = document.getElementById('mastodon-file'), fileInfo = document.getElementById('mastodon-file-info'), status = document.getElementById('mastodon-status');
+        if (!instance) return;
+        instance.value = localStorage.getItem('mastodon_instance') || instance.value;
+        token.value = localStorage.getItem('mastodon_token') || token.value;
+        instance.addEventListener('input', () => localStorage.setItem('mastodon_instance', instance.value));
+        token.addEventListener('input', () => localStorage.setItem('mastodon_token', token.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        function setStatus(m,t) { status.textContent = m; status.className = 'status ' + (t||'info'); }
+        async function uploadToMastodon(file, inst, tok) {
+          const fd = new FormData(); fd.append('file', file);
+          const res = await fetch(`${inst}/api/v2/media`, { method:'POST', headers:{'Authorization':`Bearer ${tok}`}, body:fd });
+          const data = await res.json();
+          if(!res.ok) throw new Error('Upload: '+(data.error||'Unknown'));
+          return data.id;
+        }
+        document.getElementById('mastodon-test')?.addEventListener('click', async function() {
+          const inst=instance.value.trim(), tok=token.value.trim();
+          if(!inst||!tok){ setStatus('❌ Missing instance or token.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch(`${inst}/api/v1/accounts/verify_credentials`, { headers:{'Authorization':`Bearer ${tok}`} });
+            const data = await res.json();
+            if(res.ok) setStatus(`✅ ${data.username}`,'success');
+            else setStatus(`❌ ${data.error||'Invalid'}`,'error');
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('mastodon-send')?.addEventListener('click', async function() {
+          const inst=instance.value.trim(), tok=token.value.trim(), text=msg.value.trim(), f=getFileData(file);
+          if(!inst||!tok){ setStatus('❌ Missing instance or token.','error'); return; }
+          setStatus('⏳ Sending...','loading'); this.disabled = true;
+          try {
+            let mediaIds=[]; if(f){ const id = await uploadToMastodon(f, inst, tok); mediaIds.push(id); }
+            const body = { status: text||'Hello!', visibility:'public' };
+            if(mediaIds.length) body.media_ids = mediaIds;
+            const res = await fetch(`${inst}/api/v1/statuses`, {
+              method:'POST',
+              headers:{'Authorization':`Bearer ${tok}`,'Content-Type':'application/json'},
+              body:JSON.stringify(body)
+            });
+            const data = await res.json();
+            if(!res.ok) throw new Error('Post: '+(data.error||'Unknown'));
+            setStatus('✅ Sent!','success');
+            msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- DISCORD ----
+      function setupDiscord() {
+        const webhook = document.getElementById('discord-webhook'), msg = document.getElementById('discord-msg'), file = document.getElementById('discord-file'), fileInfo = document.getElementById('discord-file-info'), status = document.getElementById('discord-status');
+        if (!webhook) return;
+        webhook.value = localStorage.getItem('discord_webhook') || webhook.value;
+        webhook.addEventListener('input', () => localStorage.setItem('discord_webhook', webhook.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        function setStatus(m,t) { status.textContent = m; status.className = 'status ' + (t||'info'); }
+        async function sendToDiscord(url, text, file) {
+          if (file) {
+            const fd = new FormData();
+            fd.append('payload_json', JSON.stringify({content:text||' '}));
+            fd.append('file', file, file.name);
+            const res = await fetch(url, {method:'POST', body:fd});
+            return res.ok;
+          } else {
+            const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:text||'Hello!'})});
+            return res.ok;
+          }
+        }
+        document.getElementById('discord-test')?.addEventListener('click', async function() {
+          const url=webhook.value.trim(); if(!url){ setStatus('❌ Enter webhook URL.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:'Test'})});
+            if(res.ok) setStatus('✅ Webhook works!','success');
+            else setStatus(`❌ ${res.status}`,'error');
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('discord-send')?.addEventListener('click', async function() {
+          const url=webhook.value.trim(), text=msg.value.trim(), f=getFileData(file);
+          if(!url){ setStatus('❌ Enter webhook URL.','error'); return; }
+          setStatus('⏳ Sending...','loading'); this.disabled = true;
+          try {
+            const ok = await sendToDiscord(url, text, f);
+            if(ok){ setStatus('✅ Sent!','success'); msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); } }
+            else { setStatus('❌ Failed','error'); }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- GITHUB GIST ----
+      function setupGithub() {
+        const token = document.getElementById('github-classic-token'), filename = document.getElementById('github-classic-filename'), desc = document.getElementById('github-classic-desc'), msg = document.getElementById('github-classic-msg'), file = document.getElementById('github-classic-file'), fileInfo = document.getElementById('github-classic-file-info'), publicCheck = document.getElementById('github-classic-public'), status = document.getElementById('github-classic-status');
+        if (!token) return;
+        token.value = localStorage.getItem('github_classic_token') || token.value;
+        filename.value = localStorage.getItem('github_classic_filename') || filename.value || 'post.md';
+        desc.value = localStorage.getItem('github_classic_desc') || desc.value || '';
+        token.addEventListener('input', () => localStorage.setItem('github_classic_token', token.value));
+        filename.addEventListener('input', () => localStorage.setItem('github_classic_filename', filename.value));
+        desc.addEventListener('input', () => localStorage.setItem('github_classic_desc', desc.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        function setStatus(m,t) { status.textContent = m; status.className = 'status ' + (t||'info'); }
+        async function createGist(tok, descr, fname, content, f, isPublic) {
+          const files = {}; files[fname] = { content: content || '' };
+          if (f) { const reader = new FileReader(); const base64 = await new Promise(r => { reader.onload = () => r(reader.result.split(',')[1]); reader.readAsDataURL(f); }); files[f.name] = { content: base64, encoding: 'base64' }; }
+          const res = await fetch('https://api.github.com/gists', {
+            method:'POST',
+            headers:{'Authorization':`Bearer ${tok}`,'Content-Type':'application/json'},
+            body:JSON.stringify({ description:descr, public:isPublic, files })
+          });
+          return res.json();
+        }
+        document.getElementById('github-classic-test')?.addEventListener('click', async function() {
+          const t = token.value.trim(); if (!t) { setStatus('❌ Enter token.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch('https://api.github.com/user', { headers:{'Authorization':`Bearer ${t}`} });
+            if (res.ok) { const data = await res.json(); setStatus(`✅ ${data.login}`,'success'); }
+            else { setStatus(`❌ ${res.status}`,'error'); }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('github-classic-send')?.addEventListener('click', async function() {
+          const t = token.value.trim(), fname = filename.value.trim() || 'post.md', descr = desc.value.trim() || 'Posted from Fed-Poster', content = msg.value.trim() || 'Hello from GitHub Gist!', f = getFileData(file), isPublic = publicCheck.checked;
+          if (!t) { setStatus('❌ Enter token.','error'); return; }
+          if (!content && !f) { setStatus('❌ Write content or attach an image.','error'); return; }
+          setStatus('⏳ Creating Gist...','loading'); this.disabled = true;
+          try {
+            const data = await createGist(t, descr, fname, content, f, isPublic);
+            if (data.id) { setStatus(`✅ Gist created! ${data.html_url}`,'success'); msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); } }
+            else { setStatus(`❌ ${data.message||'Unknown'}`,'error'); }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- STOAT ----
+      function setupStoat() {
+        const token = document.getElementById('stoat-token'), server = document.getElementById('stoat-server'), channel = document.getElementById('stoat-channel'), msg = document.getElementById('stoat-msg'), file = document.getElementById('stoat-file'), fileInfo = document.getElementById('stoat-file-info'), status = document.getElementById('stoat-status');
+        if (!token) return;
+        token.value = localStorage.getItem('stoat_token') || token.value;
+        server.value = localStorage.getItem('stoat_server') || server.value;
+        channel.value = localStorage.getItem('stoat_channel') || channel.value;
+        token.addEventListener('input', () => localStorage.setItem('stoat_token', token.value));
+        server.addEventListener('input', () => localStorage.setItem('stoat_server', server.value));
+        channel.addEventListener('input', () => localStorage.setItem('stoat_channel', channel.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        function setStatus(m,t) { status.textContent = m; status.className = 'status ' + (t||'info'); }
+        const API_BASE = 'https://api.stoat.chat/0.8';
+        const supabase = window.supabase.createClient('https://hzdpomwaqobceldgdzfl.supabase.co', 'sb_publishable_-Zq7X1XmZOTt4mP3yD8TyA_a69kCBOV');
+        async function uploadImage(file, userId='stoat') {
+          const ext = file.name.split('.').pop();
+          const path = `${userId}/${Date.now()}.${ext}`;
+          const { error } = await supabase.storage.from('stoat-attachments').upload(path, file, { cacheControl:'3600', upsert:false });
+          if (error) throw new Error('Upload failed: '+error.message);
+          const { data } = supabase.storage.from('stoat-attachments').getPublicUrl(path);
+          return data.publicUrl;
+        }
+        document.getElementById('stoat-test')?.addEventListener('click', async function() {
+          const t = token.value.trim(), c = channel.value.trim();
+          if (!t || !c) { setStatus('❌ Missing token or channel.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch(`${API_BASE}/channels/${c}`, { headers:{'X-Bot-Token':t} });
+            if (res.ok) setStatus('✅ Connected!','success');
+            else if (res.status===401||res.status===403) setStatus('❌ Invalid token/permissions.','error');
+            else if (res.status===404) setStatus('❌ Channel not found.','error');
+            else { const data = await res.json(); setStatus(`❌ ${res.status}: ${data?.error||'Unknown'}`,'error'); }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('stoat-send')?.addEventListener('click', async function() {
+          const t = token.value.trim(), c = channel.value.trim(), text = msg.value.trim() || 'Hello from Stoat!', f = getFileData(file);
+          if (!t || !c) { setStatus('❌ Missing token or channel.','error'); return; }
+          setStatus('⏳ Sending...','loading'); this.disabled = true;
+          try {
+            let finalContent = text;
+            if (f) { const url = await uploadImage(f, 'stoat-user'); finalContent = `${text}\
+\
+📎 ${url}`; }
+            const res = await fetch(`${API_BASE}/channels/${c}/messages`, {
+              method:'POST',
+              headers:{'Content-Type':'application/json','X-Bot-Token':t},
+              body:JSON.stringify({ content:finalContent })
+            });
+            const data = await res.json();
+            if (res.ok) { setStatus('✅ Sent!','success'); msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); } }
+            else if (res.status===401||res.status===403) setStatus('❌ Invalid token/permissions.','error');
+            else if (res.status===404) setStatus('❌ Channel not found.','error');
+            else { setStatus(`❌ ${res.status}: ${data?.error||data?.message||'Unknown'}`,'error'); }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- DEVIANTART ----
+      function setupDeviantart() {
+        const token = document.getElementById('deviantart-token'), clientKey = document.getElementById('deviantart-client-key'), msg = document.getElementById('deviantart-msg'), file = document.getElementById('deviantart-file'), fileInfo = document.getElementById('deviantart-file-info'), status = document.getElementById('deviantart-status');
+        if (!token) return;
+        token.value = localStorage.getItem('deviantart_token') || token.value;
+        clientKey.value = localStorage.getItem('deviantart_client_key') || clientKey.value;
+        token.addEventListener('input', () => localStorage.setItem('deviantart_token', token.value));
+        clientKey.addEventListener('input', () => localStorage.setItem('deviantart_client_key', clientKey.value));
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+        function setStatus(m,t) { status.textContent = m; status.className = 'status ' + (t||'info'); }
+        async function uploadToStash(file, tok) {
+          const fd = new FormData(); fd.append('file', file);
+          const res = await fetch('https://www.deviantart.com/api/v1/oauth2/stash/submit', {
+            method:'POST', headers:{'Authorization':`Bearer ${tok}`}, body:fd
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error('Stash upload: '+(data.error||data.error_description||'Unknown'));
+          return data;
+        }
+        async function postStatus(tok, text, imageFile) {
+          let mediaId = null;
+          if (imageFile) { const up = await uploadToStash(imageFile, tok); mediaId = up.itemid || up.id || up.submissionid || null; }
+          const body = { body: text || 'Hello from Fed-Poster!' };
+          if (mediaId) body.media = mediaId;
+          const res = await fetch('https://www.deviantart.com/api/v1/oauth2/user/statuses/post', {
+            method:'POST',
+            headers:{'Authorization':`Bearer ${tok}`,'Content-Type':'application/json'},
+            body:JSON.stringify(body)
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error('Post: '+(data.error||data.error_description||'Unknown'));
+          return data;
+        }
+        document.getElementById('deviantart-test')?.addEventListener('click', async function() {
+          const t = token.value.trim(); if (!t) { setStatus('❌ Enter access token.','error'); return; }
+          setStatus('⏳ Testing...','loading');
+          try {
+            const res = await fetch('https://www.deviantart.com/api/v1/oauth2/user/profile', { headers:{'Authorization':`Bearer ${t}`} });
+            const data = await res.json();
+            if (res.ok && data && data.user) {
+              setStatus(`✅ ${data.user.username||data.user.userid||'user'}`,'success');
+            } else if (res.status===401) {
+              setStatus('❌ Invalid/expired token.','error');
+            } else {
+              setStatus(`❌ ${data.error||data.error_description||'Unknown'}`,'error');
+            }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); }
+        });
+        document.getElementById('deviantart-send')?.addEventListener('click', async function() {
+          const t = token.value.trim(), text = msg.value.trim() || 'Hello from DeviantArt!', f = getFileData(file);
+          if (!t) { setStatus('❌ Enter access token.','error'); return; }
+          if (!text && !f) { setStatus('❌ Write a message or attach an image.','error'); return; }
+          setStatus('⏳ Sending...','loading'); this.disabled = true;
+          try {
+            const result = await postStatus(t, text, f);
+            if (result && result.statusid) {
+              setStatus(`✅ Status posted! ID: ${result.statusid}`,'success');
+              msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); }
+            } else if (result && result.error) {
+              setStatus(`❌ ${result.error}`,'error');
+            } else {
+              setStatus('✅ Sent!','success');
+              msg.value=''; if(file){ file.value=''; updateFileInfo(file, fileInfo); }
+            }
+          } catch(e){ setStatus(`❌ ${e.message}`,'error'); } finally { this.disabled = false; }
+        });
+      }
+
+      // ---- UNIFIED ----
+      function setupUnified() {
+        const msg = document.getElementById('unified-msg'), file = document.getElementById('unified-file'), fileInfo = document.getElementById('unified-file-info'), status = document.getElementById('unified-status'), results = document.getElementById('unified-results'), counter = document.getElementById('unified-char-counter');
+        if (!msg) return;
+        const saved = localStorage.getItem('unified_msg') || '';
+        if (saved) msg.value = saved;
+        msg.addEventListener('input', () => {
+          localStorage.setItem('unified_msg', msg.value);
+          updateCharCounter(msg, counter, BLUESKY_MAX_CHARS);
+        });
+        updateCharCounter(msg, counter, BLUESKY_MAX_CHARS);
+        if (file) file.addEventListener('change', () => updateFileInfo(file, fileInfo));
+
+        const platformMap = {
+          'tg': { send: 'tg-send', msg: 'tg-msg', status: 'tg-status' },
+          'bsky': { send: 'bsky-send', msg: 'bsky-msg', status: 'bsky-status' },
+          'mastodon': { send: 'mastodon-send', msg: 'mastodon-msg', status: 'mastodon-status' },
+          'discord': { send: 'discord-send', msg: 'discord-msg', status: 'discord-status' },
+          'github-classic': { send: 'github-classic-send', msg: 'github-classic-msg', status: 'github-classic-status' },
+          'stoat': { send: 'stoat-send', msg: 'stoat-msg', status: 'stoat-status' },
+          'deviantart': { send: 'deviantart-send', msg: 'deviantart-msg', status: 'deviantart-status' }
+        };
+
+        async function sendToPlatform(platform, text) {
+          const ids = platformMap[platform];
+          if (!ids) return false;
+          const sendBtn = document.getElementById(ids.send);
+          const msgField = document.getElementById(ids.msg);
+          const statusEl = document.getElementById(ids.status);
+          if (!sendBtn || !msgField) return false;
+          msgField.value = text;
+          sendBtn.click();
+          await new Promise(r => setTimeout(r, 800));
+          if (statusEl && statusEl.textContent.includes('✅')) return true;
+          return false;
+        }
+
+        document.getElementById('unified-send')?.addEventListener('click', async function() {
+          const text = msg.value.trim();
+          const platforms = [];
+          if (document.getElementById('unified-tg').checked) platforms.push('tg');
+          if (document.getElementById('unified-bsky').checked) platforms.push('bsky');
+          if (document.getElementById('unified-mastodon').checked) platforms.push('mastodon');
+          if (document.getElementById('unified-discord').checked) platforms.push('discord');
+          if (document.getElementById('unified-github-classic').checked) platforms.push('github-classic');
+          if (document.getElementById('unified-stoat').checked) platforms.push('stoat');
+          if (document.getElementById('unified-deviantart').checked) platforms.push('deviantart');
+          if (platforms.length === 0) {
+            status.className = 'status error';
+            status.textContent = '❌ No platforms selected.';
+            return;
+          }
+          status.className = 'status loading';
+          status.textContent = `⏳ Sending to ${platforms.length} platform(s)...`;
+          this.disabled = true;
+          let resultsHtml = '<div style="margin-top:6px;"><strong>Results:</strong></div>';
+          for (const p of platforms) {
+            const ok = await sendToPlatform(p, text);
+            resultsHtml += `<div class="result-item"><span>${p.toUpperCase()}:</span> ${ok ? '✅ Sent' : '⚠️ Check manually'}</div>`;
+            addHistory(p.toUpperCase(), text, ok);
+          }
+          results.innerHTML = resultsHtml;
+          status.className = 'status success';
+          status.textContent = '✅ Post All initiated. Check each tab for confirmation.';
+          this.disabled = false;
+        });
+
+        document.getElementById('unified-test')?.addEventListener('click', async function() {
+          status.className = 'status loading';
+          status.textContent = '⏳ Testing selected platforms...';
+          this.disabled = true;
+          const platforms = [];
+          if (document.getElementById('unified-tg').checked) platforms.push('tg');
+          if (document.getElementById('unified-bsky').checked) platforms.push('bsky');
+          if (document.getElementById('unified-mastodon').checked) platforms.push('mastodon');
+          if (document.getElementById('unified-discord').checked) platforms.push('discord');
+          if (document.getElementById('unified-github-classic').checked) platforms.push('github-classic');
+          if (document.getElementById('unified-stoat').checked) platforms.push('stoat');
+          if (document.getElementById('unified-deviantart').checked) platforms.push('deviantart');
+          let allOk = true;
+          let html = '<div style="margin-top:6px;"><strong>Test Results:</strong></div>';
+          for (const p of platforms) {
+            const testBtn = document.getElementById(p + '-test');
+            if (testBtn) {
+              testBtn.click();
+              await new Promise(r => setTimeout(r, 600));
+              const statusEl = document.getElementById(platformMap[p].status);
+              const ok = statusEl && statusEl.textContent.includes('✅');
+              if (!ok) allOk = false;
+              html += `<div class="v-item"><span>${ok ? '✅' : '❌'}</span> ${p.toUpperCase()}: ${statusEl ? statusEl.textContent : 'unknown'}</div>`;
+            }
+          }
+          results.innerHTML = html;
+          if (allOk) {
+            status.className = 'status success';
+            status.textContent = '✅ All tested platforms passed.';
+          } else {
+            status.className = 'status error';
+            status.textContent = '❌ Some platforms failed – check below.';
+          }
+          this.disabled = false;
+        });
+      }
+
+      // =============================================================
+      // 17b. EMOJI QUICK-PICKER
+      // =============================================================
+      const EMOJIS = ['🚀','🔥','⚡','✨','🌟','💎','🎯','🎲','📱','💬','☁️','🐘','🎮','🐙','🦄','🌈','💯','✅','❌','⚠️','💡','📌','📎','🎉','🙌','👍','❤️','🧡','💛','💚','💙','💜','🤖','👾','🛸','⏳','⏰','🔒','🔑','🛡️','📊','📈','💬','📨','📧','🎬','🎨','🖼️','🎵','🎶'];
+      const emojiGrid = document.getElementById('emojiGrid');
+      let emojiTarget = null;
+      EMOJIS.forEach(e => {
+        const b = document.createElement('button');
+        b.textContent = e;
+        b.style.cssText = 'background:none;border:none;cursor:pointer;font-size:20px;padding:6px;border-radius:8px;transition:background 0.15s;';
+        b.addEventListener('mouseenter', () => b.style.background = 'var(--accent-bg)');
+        b.addEventListener('mouseleave', () => b.style.background = 'none');
+        b.addEventListener('click', () => {
+          if (emojiTarget) { emojiTarget.value += e; emojiTarget.focus(); emojiTarget.dispatchEvent(new Event('input')); }
+        });
+        emojiGrid.appendChild(b);
+      });
+      // add an emoji button next to each message textarea
+      document.querySelectorAll('.platform-section textarea').forEach(ta => {
+        if (ta.id && ta.id.includes('msg')) {
+          const wrap = document.createElement('div');
+          wrap.style.cssText = 'position:relative;';
+          ta.parentElement.insertBefore(wrap, ta);
+          wrap.appendChild(ta);
+          const eb = document.createElement('button');
+          eb.innerHTML = '😀';
+          eb.title = 'Insert emoji';
+          eb.style.cssText = 'position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;font-size:18px;z-index:5;opacity:0.6;transition:opacity 0.2s;';
+          eb.addEventListener('mouseenter', () => eb.style.opacity = '1');
+          eb.addEventListener('mouseleave', () => eb.style.opacity = '0.6');
+          eb.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            emojiTarget = ta;
+            const p = document.getElementById('emojiPicker');
+            p.style.display = p.style.display === 'none' ? 'block' : 'none';
+          });
+          wrap.appendChild(eb);
+        }
+      });
+      document.getElementById('emojiClose').addEventListener('click', () => document.getElementById('emojiPicker').style.display = 'none');
+
+      // =============================================================
+      // 17c. POST HISTORY LOG
+      // =============================================================
+      const historyKey = 'fedposter_history';
+      function getHistory() { try { return JSON.parse(localStorage.getItem(historyKey)) || []; } catch(e) { return []; } }
+      function addHistory(platform, text, ok) {
+        const h = getHistory();
+        h.unshift({ platform, text: text.slice(0,80), ok, time: new Date().toLocaleTimeString() });
+        if (h.length > 30) h.pop();
+        localStorage.setItem(historyKey, JSON.stringify(h));
+        renderHistory();
+      }
+      function renderHistory() {
+        const list = document.getElementById('historyList');
+        const h = getHistory();
+        if (!h.length) { list.innerHTML = '<div style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px;">No posts yet. Your posting history will appear here.</div>'; return; }
+        list.innerHTML = h.map(item => `
+          <div style="padding:10px 12px;border-radius:var(--radius-sm);background:var(--bg-input);border-left:3px solid ${item.ok?'var(--green)':'var(--red)'};">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <strong style="font-size:12px;">${item.ok?'✅':'⚠️'} ${item.platform}</strong>
+              <span style="font-size:10px;color:var(--text-muted);">${item.time}</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.text.replace(/</g,'&lt;')}</div>
+          </div>`).join('');
+      }
+      renderHistory();
+      document.getElementById('historyClose').addEventListener('click', () => document.getElementById('historyPanel').style.display = 'none');
+
+      // =============================================================
+      // 17d. KEYBOARD SHORTCUTS
+      // =============================================================
+      const SHORTCUTS = [
+        { keys:'⌘/Ctrl + K', desc:'Open global search' },
+        { keys:'?', desc:'Show this shortcuts panel' },
+        { keys:'H', desc:'Toggle post history' },
+        { keys:'E', desc:'Toggle emoji picker' },
+        { keys:'T', desc:'Cycle themes' },
+        { keys:'1 – 8', desc:'Jump to platform tabs' },
+        { keys:'Esc', desc:'Close any overlay' },
+      ];
+      const sl = document.getElementById('shortcutsList');
+      SHORTCUTS.forEach(s => {
+        sl.insertAdjacentHTML('beforeend', `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);"><span style="font-size:13px;color:var(--text-secondary);">${s.desc}</span><kbd style="background:var(--bg-input);padding:4px 10px;border-radius:6px;font-size:12px;font-family:monospace;border:1px solid rgba(0,0,0,0.08);font-weight:700;">${s.keys}</kbd></div>`);
+      });
+      document.getElementById('shortcutsClose').addEventListener('click', () => document.getElementById('shortcutsOverlay').style.display = 'none');
+
+      // global key handler
+      const themeOrder = ['dark','light','blue','green','purple','orange','cyberpunk','sunset','ocean','rose','midnight','synthwave'];
+      document.addEventListener('keydown', (e) => {
+        // ignore when typing in inputs (except Esc and the meta combos)
+        const typing = /input|textarea/i.test(e.target.tagName);
+        if (typing && e.key !== 'Escape') return;
+        if (e.key === 'Escape') {
+          ['emojiPicker','historyPanel','shortcutsOverlay','searchOverlay'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+          return;
+        }
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') return; // handled by existing search
+        if (e.key === '?') { document.getElementById('shortcutsOverlay').style.display = 'flex'; return; }
+        if (e.key.toLowerCase() === 'h') { const p = document.getElementById('historyPanel'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; return; }
+        if (e.key.toLowerCase() === 'e') { const p = document.getElementById('emojiPicker'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; return; }
+        if (e.key.toLowerCase() === 't') {
+          const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+          const idx = themeOrder.indexOf(cur);
+          const next = themeOrder[(idx + 1) % themeOrder.length];
+          localStorage.setItem('fed_poster_theme', next);
+          document.documentElement.setAttribute('data-theme', next);
+          document.querySelectorAll('.theme-swatch').forEach(s => s.classList.toggle('active', s.dataset.theme === next));
+          showToast(`🎨 Theme: ${next}`);
+          return;
+        }
+        // number keys 1-8 jump to tabs
+        const num = parseInt(e.key);
+        if (num >= 1 && num <= 8) {
+          const targets = ['unified','telegram','bluesky','mastodon','discord','github-classic','stoat','deviantart'];
+          const btn = document.querySelector(`.nav-item[data-target="${targets[num-1]}"]`);
+          if (btn) btn.click();
+        }
+      });
+
+      // helper: toast (reuse if exists, else define)
+      if (typeof showToast !== 'function') {
+        function showToast(msg) {
+          const c = document.getElementById('toastContainer');
+          if (!c) return;
+          const t = document.createElement('div');
+          t.className = 'toast';
+          t.textContent = msg;
+          t.style.cssText = 'background:var(--bg-card);color:var(--text-primary);padding:12px 18px;border-radius:var(--radius-sm);box-shadow:var(--shadow-md);font-size:13px;font-weight:600;margin-bottom:8px;border-left:3px solid var(--accent);animation:toastIn 0.3s;';
+          c.appendChild(t);
+          setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(40px)'; setTimeout(() => t.remove(), 300); }, 3000);
+        }
+      }
+      // add a history button to the topbar
+      (function addHistoryButton(){
+        const tb = document.querySelector('.topbar-right');
+        if (!tb || document.getElementById('historyBtn')) return;
+        const hb = document.createElement('button');
+        hb.id = 'historyBtn';
+        hb.innerHTML = '📜';
+        hb.title = 'Post history (H)';
+        hb.style.cssText = 'background:var(--bg-input);border:none;border-radius:var(--radius-full);width:34px;height:34px;cursor:pointer;font-size:15px;transition:all 0.2s;';
+        hb.addEventListener('mouseenter', () => { hb.style.transform='scale(1.1)'; hb.style.background='var(--accent-bg)'; });
+        hb.addEventListener('mouseleave', () => { hb.style.transform='scale(1)'; });
+        hb.addEventListener('click', () => { const p = document.getElementById('historyPanel'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; });
+        tb.insertBefore(hb, tb.firstChild);
+      })();
+
+      // =============================================================
+      // 18. INITIALIZE ALL PLATFORMS
+      // =============================================================
+      setupTelegram();
+      setupBluesky();
+      setupMastodon();
+      setupDiscord();
+      setupGithub();
+      setupStoat();
+      setupDeviantart();
+      setupUnified();
+
+      console.log('🚀 Fed-Poster – Full dashboard with all upgrades loaded.');
+    })();
+  </script>
+</body>
+</html>
