@@ -1,0 +1,12 @@
+=== Preview server status ===
+PID 668 running
+=== Quick HTTP check all 9 pages ===
+  index.html: HTTP 200
+  dashboard.html: HTTP 200
+  calendar.html: HTTP 200
+  analytics.html: HTTP 200
+  pricing.html: HTTP 200
+  settings.html: HTTP 200
+  forum.html: HTTP 200
+  about.html: HTTP 200
+  404.html: HTTP 200
