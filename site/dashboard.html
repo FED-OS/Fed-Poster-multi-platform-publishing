@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <link rel="stylesheet" href="assets/dashboard.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="settings.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-gear"></i></a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- APP LAYOUT -->
+  <div class="app-layout">
+    <!-- App Sidebar -->
+    <aside class="app-sidebar">
+      <div class="app-sidebar-section">
+        <div class="app-sidebar-label">PLATFORMS</div>
+        <button class="app-nav-item active" data-section="multi"><i class="fa-solid fa-layer-group"></i> Multi Post <span class="nav-badge">ALL</span></button>
+        <button class="app-nav-item" data-section="telegram"><i class="fa-brands fa-telegram"></i> Telegram <span class="conn-dot online" title="Connected"></span></button>
+        <button class="app-nav-item" data-section="bluesky"><i class="fa-solid fa-cloud"></i> Bluesky <span class="conn-dot online"></span></button>
+        <button class="app-nav-item" data-section="mastodon"><i class="fa-brands fa-mastodon"></i> Mastodon <span class="conn-dot uncertain"></span></button>
+        <button class="app-nav-item" data-section="discord"><i class="fa-brands fa-discord"></i> Discord <span class="conn-dot online"></span></button>
+        <button class="app-nav-item" data-section="github"><i class="fa-brands fa-github"></i> GitHub Gist <span class="conn-dot online"></span></button>
+        <button class="app-nav-item" data-section="stoat"><i class="fa-solid fa-comment-dots"></i> Stoat <span class="conn-dot uncertain"></span></button>
+        <button class="app-nav-item" data-section="deviantart"><i class="fa-brands fa-deviantart"></i> DeviantArt <span class="conn-dot uncertain"></span></button>
+      </div>
+      <div class="app-sidebar-section">
+        <div class="app-sidebar-label">TOOLS</div>
+        <a href="calendar.html" class="app-nav-item"><i class="fa-solid fa-calendar-days"></i> Calendar</a>
+        <a href="analytics.html" class="app-nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a href="settings.html" class="app-nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+      </div>
+      <div class="app-sidebar-bottom">
+        <div class="discord-badge-sidebar" id="discord-sidebar-badge">
+          <span class="dot-live"></span>
+          <span id="discord-online-count">…</span> online
+        </div>
+        <a href="pricing.html" class="upgrade-card">
+          <i class="fa-solid fa-crown"></i>
+          <div><strong>Go Pro</strong><span>Calendar + Analytics</span></div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Topbar -->
+      <div class="app-topbar">
+        <div>
+          <h1 id="page-title">Multi Platform Post</h1>
+          <p id="page-subtitle">Post to all your connected platforms instantly.</p>
+        </div>
+        <div class="app-topbar-right">
+          <button class="icon-btn" id="btn-history" title="Post History (H)"><i class="fa-solid fa-clock-rotate-left"></i></button>
+          <button class="icon-btn" id="btn-emoji" title="Emoji (E)"><i class="fa-solid fa-face-smile"></i></button>
+          <button class="icon-btn" id="btn-shortcuts" title="Shortcuts (?)"><i class="fa-solid fa-keyboard"></i></button>
+          <span class="date-display" id="date-display"></span>
+        </div>
+      </div>
+
+      <!-- Sections container -->
+      <div id="sections-container">
+        <!-- MULTI POST SECTION -->
+        <section class="platform-section active" id="section-multi">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge"><i class="fa-solid fa-layer-group"></i></div>
+              <div><h2>Multi Platform Post</h2><span class="conn-pill online"><span class="pulse-dot"></span> 7 platforms ready</span></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> SOCIAL MESSAGE / CONTENT</label>
+              <div class="textarea-wrap">
+                <textarea id="multi-msg" rows="4" placeholder="What's on your mind? Post to all platforms at once...">Hello from Fed-Poster! 🚀</textarea>
+                <button class="emoji-inject" data-target="multi-msg"><i class="fa-solid fa-face-smile"></i></button>
+              </div>
+              <div class="char-counter"><span id="multi-char">25</span> / 300</div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD IMAGE</label>
+              <div class="file-drop">
+                <input type="file" id="multi-file" accept="image/*,video/*" />
+                <div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag a file here</span><small>Images & videos supported</small></div>
+              </div>
+              <div class="file-info" id="multi-file-info">No file selected</div>
+            </div>
+            <div class="platform-toggles">
+              <label class="ptoggle"><input type="checkbox" data-platform="telegram" checked><span class="pt-chip"><i class="fa-brands fa-telegram"></i> Telegram</span></label>
+              <label class="ptoggle"><input type="checkbox" data-platform="bluesky" checked><span class="pt-chip"><i class="fa-solid fa-cloud"></i> Bluesky</span></label>
+              <label class="ptoggle"><input type="checkbox" data-platform="mastodon" checked><span class="pt-chip"><i class="fa-brands fa-mastodon"></i> Mastodon</span></label>
+              <label class="ptoggle"><input type="checkbox" data-platform="discord" checked><span class="pt-chip"><i class="fa-brands fa-discord"></i> Discord</span></label>
+              <label class="ptoggle"><input type="checkbox" data-platform="github" checked><span class="pt-chip"><i class="fa-brands fa-github"></i> GitHub Gist</span></label>
+              <label class="ptoggle"><input type="checkbox" data-platform="stoat"><span class="pt-chip"><i class="fa-solid fa-comment-dots"></i> Stoat</span></label>
+              <label class="ptoggle"><input type="checkbox" data-platform="deviantart" checked><span class="pt-chip"><i class="fa-brands fa-deviantart"></i> DeviantArt</span></label>
+            </div>
+            <div class="status-msg" id="multi-status">⏳ Select platforms, then Post All.</div>
+            <div class="composer-actions">
+              <button class="btn btn-ghost" id="btn-test-all"><i class="fa-solid fa-vial"></i> Test All</button>
+              <button class="btn btn-primary" id="btn-post-all"><i class="fa-solid fa-rocket"></i> Post All</button>
+            </div>
+            <div id="results-container"></div>
+          </div>
+        </section>
+
+        <!-- TELEGRAM -->
+        <section class="platform-section" id="section-telegram">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-telegram-bg"><i class="fa-brands fa-telegram"></i></div>
+              <div><h2>Telegram</h2><span class="conn-pill online"><span class="pulse-dot"></span> Connected</span></div>
+            </div>
+            <div class="field-grid">
+              <div class="field-group"><label><i class="fa-solid fa-key"></i> BOT TOKEN</label><input type="password" id="tg-token" placeholder="123456:ABC-DEF..." /><small class="field-hint">Auto-saved</small></div>
+              <div class="field-group"><label><i class="fa-solid fa-hashtag"></i> CHANNEL / CHAT ID</label><input type="text" id="tg-chat" placeholder="@channel or -100..." /><small class="field-hint">Auto-saved</small></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> MESSAGE</label>
+              <div class="textarea-wrap"><textarea id="tg-msg" rows="3" placeholder="Your Telegram message...">Hello from Telegram! 🚀</textarea><button class="emoji-inject" data-target="tg-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD IMAGE / VIDEO</label>
+              <div class="file-drop"><input type="file" id="tg-file" accept="image/*,video/*" /><div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag a file here</span><small>Images & videos supported</small></div></div>
+              <div class="file-info" id="tg-file-info">No file selected</div>
+            </div>
+            <div class="status-msg" id="tg-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-ghost" id="tg-test"><i class="fa-solid fa-magnifying-glass"></i> Test</button><button class="btn btn-primary" id="tg-send"><i class="fa-solid fa-rocket"></i> Send</button></div>
+          </div>
+        </section>
+
+        <!-- BLUESKY -->
+        <section class="platform-section" id="section-bluesky">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-bluesky-bg"><i class="fa-solid fa-cloud"></i></div>
+              <div><h2>Bluesky</h2><span class="conn-pill online"><span class="pulse-dot"></span> Connected</span></div>
+            </div>
+            <div class="field-grid">
+              <div class="field-group"><label><i class="fa-solid fa-at"></i> HANDLE</label><input type="text" id="bs-handle" placeholder="user.bsky.social" /><small class="field-hint">Auto-saved</small></div>
+              <div class="field-group"><label><i class="fa-solid fa-key"></i> APP PASSWORD</label><input type="password" id="bs-pass" placeholder="xxxx-xxxx-xxxx-xxxx" /><small class="field-hint">Auto-saved</small></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> MESSAGE</label>
+              <div class="textarea-wrap"><textarea id="bs-msg" rows="3" placeholder="Your Bluesky post..." maxlength="300">Hello from Bluesky! 🚀</textarea><button class="emoji-inject" data-target="bs-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+              <div class="char-counter"><span id="bs-char">22</span> / 300</div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD IMAGE</label>
+              <div class="file-drop"><input type="file" id="bs-file" accept="image/*" /><div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag an image here</span><small>Auto-compressed 512×1024 · max 4 images</small></div></div>
+              <div class="file-info" id="bs-file-info">No file selected</div>
+            </div>
+            <div class="status-msg" id="bs-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-ghost" id="bs-test"><i class="fa-solid fa-magnifying-glass"></i> Test</button><button class="btn btn-primary" id="bs-send"><i class="fa-solid fa-rocket"></i> Send</button></div>
+          </div>
+        </section>
+
+        <!-- MASTODON -->
+        <section class="platform-section" id="section-mastodon">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-mastodon-bg"><i class="fa-brands fa-mastodon"></i></div>
+              <div><h2>Mastodon</h2><span class="conn-pill uncertain"><span class="pulse-dot"></span> Needs token</span></div>
+            </div>
+            <div class="field-grid">
+              <div class="field-group"><label><i class="fa-solid fa-server"></i> INSTANCE URL</label><input type="text" id="ma-instance" placeholder="https://mastodon.social" /><small class="field-hint">Auto-saved</small></div>
+              <div class="field-group"><label><i class="fa-solid fa-key"></i> ACCESS TOKEN</label><input type="password" id="ma-token" placeholder="Your access token" /><small class="field-hint">Auto-saved</small></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> MESSAGE</label>
+              <div class="textarea-wrap"><textarea id="ma-msg" rows="3" placeholder="Your Mastodon toot..." maxlength="500">Hello from Mastodon! 🚀</textarea><button class="emoji-inject" data-target="ma-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+              <div class="char-counter"><span id="ma-char">24</span> / 500</div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD IMAGE</label>
+              <div class="file-drop"><input type="file" id="ma-file" accept="image/*" /><div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag an image here</span><small>Up to 4 images per post</small></div></div>
+              <div class="file-info" id="ma-file-info">No file selected</div>
+            </div>
+            <div class="status-msg" id="ma-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-ghost" id="ma-test"><i class="fa-solid fa-magnifying-glass"></i> Test</button><button class="btn btn-primary" id="ma-send"><i class="fa-solid fa-rocket"></i> Send</button></div>
+          </div>
+        </section>
+
+        <!-- DISCORD -->
+        <section class="platform-section" id="section-discord">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-discord-bg"><i class="fa-brands fa-discord"></i></div>
+              <div><h2>Discord</h2><span class="conn-pill online"><span class="pulse-dot"></span> Connected</span></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-link"></i> WEBHOOK URL</label>
+              <input type="password" id="dc-webhook" placeholder="https://discord.com/api/webhooks/..." />
+              <small class="field-hint">Auto-saved · Channel webhook</small>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> MESSAGE</label>
+              <div class="textarea-wrap"><textarea id="dc-msg" rows="3" placeholder="Your Discord message...">Hello from Discord! 🚀</textarea><button class="emoji-inject" data-target="dc-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD IMAGE</label>
+              <div class="file-drop"><input type="file" id="dc-file" accept="image/*" /><div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag an image here</span><small>Embedded in webhook</small></div></div>
+              <div class="file-info" id="dc-file-info">No file selected</div>
+            </div>
+            <div class="status-msg" id="dc-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-ghost" id="dc-test"><i class="fa-solid fa-magnifying-glass"></i> Test</button><button class="btn btn-primary" id="dc-send"><i class="fa-solid fa-rocket"></i> Send</button></div>
+          </div>
+        </section>
+
+        <!-- GITHUB GIST -->
+        <section class="platform-section" id="section-github">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-github-bg"><i class="fa-brands fa-github"></i></div>
+              <div><h2>GitHub Gist</h2><span class="conn-pill online"><span class="pulse-dot"></span> Connected</span></div>
+            </div>
+            <div class="field-grid">
+              <div class="field-group"><label><i class="fa-solid fa-key"></i> GITHUB TOKEN</label><input type="password" id="gh-token" placeholder="ghp_..." /><small class="field-hint">Auto-saved · Needs gist scope</small></div>
+              <div class="field-group"><label><i class="fa-solid fa-tag"></i> GIST NAME</label><input type="text" id="gh-name" placeholder="post.md" /><small class="field-hint">File name in gist</small></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> CONTENT</label>
+              <div class="textarea-wrap"><textarea id="gh-msg" rows="5" placeholder="Markdown content for your gist..."># My Post\n\nHello from Fed-Poster! 🚀</textarea><button class="emoji-inject" data-target="gh-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-eye"></i> VISIBILITY</label>
+              <select id="gh-public"><option value="false">Private (secret gist)</option><option value="true">Public</option></select>
+            </div>
+            <div class="status-msg" id="gh-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-ghost" id="gh-test"><i class="fa-solid fa-magnifying-glass"></i> Test</button><button class="btn btn-primary" id="gh-send"><i class="fa-solid fa-rocket"></i> Create Gist</button></div>
+          </div>
+        </section>
+
+        <!-- STOAT -->
+        <section class="platform-section" id="section-stoat">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-stoat-bg"><i class="fa-solid fa-comment-dots"></i></div>
+              <div><h2>Stoat</h2><span class="conn-pill uncertain"><span class="pulse-dot"></span> Image hosting</span></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD IMAGE</label>
+              <div class="file-drop"><input type="file" id="st-file" accept="image/*" /><div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag an image here</span><small>Uploaded via Supabase storage</small></div></div>
+              <div class="file-info" id="st-file-info">No file selected</div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> CAPTION (optional)</label>
+              <div class="textarea-wrap"><textarea id="st-msg" rows="2" placeholder="Image caption...">Check out this image! 📸</textarea><button class="emoji-inject" data-target="st-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+            </div>
+            <div class="status-msg" id="st-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-primary" id="st-send"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Image</button></div>
+          </div>
+        </section>
+
+        <!-- DEVIANTART -->
+        <section class="platform-section" id="section-deviantart">
+          <div class="composer-card">
+            <div class="composer-header">
+              <div class="platform-badge pt-deviantart-bg"><i class="fa-brands fa-deviantart"></i></div>
+              <div><h2>DeviantArt</h2><span class="conn-pill uncertain"><span class="pulse-dot"></span> Needs token</span></div>
+            </div>
+            <div class="field-grid">
+              <div class="field-group"><label><i class="fa-solid fa-key"></i> ACCESS TOKEN</label><input type="password" id="da-token" placeholder="Your DA access token" /><small class="field-hint">Auto-saved</small></div>
+              <div class="field-group"><label><i class="fa-solid fa-tag"></i> CLIENT ID</label><input type="text" id="da-client" placeholder="Your app client ID" /><small class="field-hint">Auto-saved</small></div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-image"></i> UPLOAD ARTWORK</label>
+              <div class="file-drop"><input type="file" id="da-file" accept="image/*" /><div class="file-drop-content"><i class="fa-solid fa-cloud-arrow-up"></i><span>Click or drag an image here</span><small>Your artwork upload</small></div></div>
+              <div class="file-info" id="da-file-info">No file selected</div>
+            </div>
+            <div class="field-group">
+              <label><i class="fa-solid fa-pen"></i> TITLE & DESCRIPTION</label>
+              <input type="text" id="da-title" placeholder="Artwork title" style="margin-bottom:8px" />
+              <div class="textarea-wrap"><textarea id="da-msg" rows="2" placeholder="Description...">New artwork drop! 🎨</textarea><button class="emoji-inject" data-target="da-msg"><i class="fa-solid fa-face-smile"></i></button></div>
+            </div>
+            <div class="status-msg" id="da-status">Ready.</div>
+            <div class="composer-actions"><button class="btn btn-ghost" id="da-test"><i class="fa-solid fa-magnifying-glass"></i> Test</button><button class="btn btn-primary" id="da-send"><i class="fa-solid fa-rocket"></i> Submit</button></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- EMOJI PICKER OVERLAY -->
+  <div id="emojiPicker" class="overlay-panel">
+    <div class="overlay-header"><strong>Quick Emoji</strong><button class="overlay-close" data-close="emojiPicker"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="emoji-grid" id="emojiGrid"></div>
+  </div>
+
+  <!-- HISTORY PANEL -->
+  <div id="historyPanel" class="overlay-panel overlay-right">
+    <div class="overlay-header"><strong><i class="fa-solid fa-clock-rotate-left"></i> Post History</strong><button class="overlay-close" data-close="historyPanel"><i class="fa-solid fa-xmark"></i></button></div>
+    <div id="historyList"></div>
+  </div>
+
+  <!-- SHORTCUTS OVERLAY -->
+  <div id="shortcutsOverlay" class="overlay-panel overlay-center">
+    <div class="overlay-header"><strong><i class="fa-solid fa-keyboard"></i> Keyboard Shortcuts</strong><button class="overlay-close" data-close="shortcutsOverlay"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="shortcuts-list" id="shortcutsList"></div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script src="assets/fedposter.js"></script>
+  <script src="assets/dashboard.js"></script>
+  <script src="assets/kofi-widget.js"></script>
+</body>
+</html>
