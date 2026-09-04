@@ -1,0 +1,1 @@
+95:                    <span class="user-avatar" id="userAvatar">\ud83d\udc64</span>

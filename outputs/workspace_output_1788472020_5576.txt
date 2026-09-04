@@ -1,0 +1,109 @@
+===== E264 index.html (head) =====
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Post to Every Platform from Your Browser</title>
+  <meta name="description" content="Fed-Poster is a privacy-first, browser-native social media posting tool. Post to Telegram, Bluesky, Mastodon, Discord, GitHub Gist, Stoat, and DeviantArt — all from one dashboard. No servers, no tracking, your credentials never leave your device." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <style>
+    /* ---- LANDING PAGE SPECIFIC ---- */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 80px 0 60px;
+      background: var(--bg-body);
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; right: -100px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, var(--glow), transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -200px; left: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, var(--glow), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: var(--radius-full);
+      background: var(--accent-bg); color: var(--accent);
+      font-size: 13px; font-weight: 700; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 56px; font-weight: 900; line-height: 1.1;
+      margin-bottom: 24px; letter-spacing: -1.5px;
+    }
+    .hero h1 .gradient-text { display: inline; }
+    .hero p.lead {
+      font-size: 20px; color: var(--text-secondary);
+      margin-bottom: 32px; max-width: 560px; line-height: 1.7;
+    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+    .hero-trust {
+
+===== E264 dashboard.html (head) =====
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster — Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fedposter.css" />
+  <link rel="stylesheet" href="assets/dashboard.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="settings.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-gear"></i></a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- APP LAYOUT -->
+  <div class="app-layout">
+    <!-- App Sidebar -->
+    <aside class="app-sidebar">
+      <div class="app-sidebar-section">
+        <div class="app-sidebar-label">PLATFORMS</div>
+
+===== E264 JS/CSS file sizes =====
+   205 extracted_e264/site/assets/analytics.js
+   169 extracted_e264/site/assets/calendar.js
+   401 extracted_e264/site/assets/dashboard.js
+   137 extracted_e264/site/assets/fedposter.js
+    93 extracted_e264/site/assets/kofi-widget.js
+   240 extracted_e264/site/assets/settings.js
+   105 extracted_e264/site/assets/analytics.css
+   132 extracted_e264/site/assets/calendar.css
+   281 extracted_e264/site/assets/dashboard.css
+   166 extracted_e264/site/assets/error.css
+   373 extracted_e264/site/assets/fedposter.css
+   303 extracted_e264/site/assets/pricing.css
+   406 extracted_e264/site/assets/settings.css
+  3011 total

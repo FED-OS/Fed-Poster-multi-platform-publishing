@@ -1,0 +1,220 @@
+===== fedposter.js (the core engine) =====
+/* ================================================================
+   FED-POSTER SHARED JAVASCRIPT
+   Theme persistence, mobile nav, scroll reveal, Discord count
+   ================================================================ */
+(function() {
+  'use strict';
+
+  // ---- THEME PERSISTENCE (shared across all pages) ----
+  const THEMES = ['dark','light','blue','green','purple','orange','cyberpunk','sunset','ocean','rose','midnight','synthwave'];
+  const THEME_LABELS = {
+    dark:'Deep Space', light:'Cloud', blue:'Azure Depth', green:'Emerald Forest',
+    purple:'Royal Nebula', orange:'Molten Lava', cyberpunk:'Cyberpunk', sunset:'Sunset',
+    ocean:'Abyssal Teal', rose:'Luxe Blush', midnight:'Cobalt Steel', synthwave:'Synthwave'
+  };
+  const THEME_GRADIENTS = {
+    dark:'linear-gradient(135deg,#0a0e1a,#6c5ce7)',
+    light:'linear-gradient(135deg,#eef1f6,#6c5ce7)',
+    blue:'linear-gradient(135deg,#061a2e,#0a84ff)',
+    green:'linear-gradient(135deg,#06231a,#00b87a)',
+    purple:'linear-gradient(135deg,#160833,#8b5cf6)',
+    orange:'linear-gradient(135deg,#2e1206,#ff6b1a)',
+    cyberpunk:'linear-gradient(135deg,#0d0118,#ff2e88)',
+    sunset:'linear-gradient(135deg,#3d1a2e,#ff4d6d)',
+    ocean:'linear-gradient(135deg,#022829,#00b8a9)',
+    rose:'linear-gradient(135deg,#3d2a28,#e8a0a0)',
+    midnight:'linear-gradient(135deg,#080b1a,#4f8cff)',
+    synthwave:'linear-gradient(135deg,#0d041a,#ff79c6)'
+  };
+
+  function applyTheme(theme) {
+    if (!THEMES.includes(theme)) theme = 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('fedposter_theme', theme);
+    // update swatches
+    document.querySelectorAll('.nav-theme-picker .swatch').forEach(s => {
+      s.classList.toggle('active', s.dataset.theme === theme);
+    });
+  }
+
+  function initTheme() {
+    const saved = localStorage.getItem('fedposter_theme') || 'dark';
+    applyTheme(saved);
+  }
+
+  // Build the theme picker into any .nav-theme-picker container
+  function buildThemePicker(container) {
+    if (!container) return;
+    container.innerHTML = '';
+    THEMES.forEach(t => {
+      const s = document.createElement('div');
+      s.className = 'swatch';
+      s.dataset.theme = t;
+      s.title = THEME_LABELS[t];
+      s.style.background = THEME_GRADIENTS[t];
+      s.addEventListener('click', () => applyTheme(t));
+      container.appendChild(s);
+    });
+    const saved = localStorage.getItem('fedposter_theme') || 'dark';
+    container.querySelectorAll('.swatch').forEach(s => {
+      s.classList.toggle('active', s.dataset.theme === saved);
+    });
+  }
+
+  // ---- MOBILE NAV TOGGLE ----
+  function initMobileNav() {
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', () => links.classList.toggle('open'));
+    }
+  }
+
+  // ---- SCROLL REVEAL ----
+  function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }
+
+  // ---- DISCORD LIVE COUNT (shared) ----
+  const DISCORD_SERVER_ID = '1400235929154879490';
+  function initDiscordCount() {
+    const el = document.getElementById('discord-online-count');
+    if (!el) return;
+    async function fetchCount() {
+      try {
+        const resp = await fetch('https://discord.com/api/guilds/' + DISCORD_SERVER_ID + '/widget.json');
+        if (!resp.ok) throw new Error('widget unavailable');
+        const data = await resp.json();
+        const count = data.presence_count || 0;
+        el.textContent = count.toLocaleString();
+        el.parentElement.style.opacity = '1';
+      } catch(e) {
+        el.textContent = '?';
+        el.parentElement.style.opacity = '0.6';
+      }
+    }
+    fetchCount();
+    setInterval(fetchCount, 60000);
+  }
+
+  // ---- ACTIVE NAV LINK ----
+  function initActiveNav() {
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href === path || (path === '' && href === 'index.html')) {
+        a.classList.add('active');
+      }
+    });
+  }
+
+  // ---- INIT ON DOM READY ----
+  function init() {
+    initTheme();
+    buildThemePicker(document.querySelector('.nav-theme-picker'));
+    initMobileNav();
+    initScrollReveal();
+    initDiscordCount();
+    initActiveNav();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Expose for other scripts
+  window.FedPoster = { applyTheme, THEMES, THEME_LABELS, buildThemePicker };
+})();
+
+===== dashboard.js (head 80) =====
+/* ================================================================
+   FED-POSTER DASHBOARD JAVASCRIPT
+   Tab switching, composer logic, emoji, history, shortcuts, posting
+   ================================================================ */
+(function() {
+  'use strict';
+
+  // ---- DATE DISPLAY ----
+  function updateDate() {
+    const el = document.getElementById('date-display');
+    if (el) el.textContent = new Date().toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric', year:'numeric' });
+  }
+  updateDate();
+
+  // ---- TAB SWITCHING ----
+  const SECTION_TITLES = {
+    multi: ['Multi Platform Post', 'Post to all your connected platforms instantly.'],
+    telegram: ['Telegram', 'Configure your bot and send messages to channels.'],
+    bluesky: ['Bluesky', 'Post via the AT Protocol with rich text support.'],
+    mastodon: ['Mastodon', 'Toot to any instance with media attachments.'],
+    discord: ['Discord', 'Send embedded messages via channel webhooks.'],
+    github: ['GitHub Gist', 'Create gists with your post content as markdown.'],
+    stoat: ['Stoat', 'Upload images to Supabase-hosted storage.'],
+    deviantart: ['DeviantArt', 'Submit artwork with title and description.']
+  };
+
+  function switchSection(name) {
+    document.querySelectorAll('.platform-section').forEach(s => s.classList.remove('active'));
+    const sec = document.getElementById('section-' + name);
+    if (sec) sec.classList.add('active');
+    document.querySelectorAll('.app-nav-item').forEach(n => n.classList.remove('active'));
+    const nav = document.querySelector('.app-nav-item[data-section="' + name + '"]');
+    if (nav) nav.classList.add('active');
+    const titles = SECTION_TITLES[name] || SECTION_TITLES.multi;
+    document.getElementById('page-title').textContent = titles[0];
+    document.getElementById('page-subtitle').textContent = titles[1];
+  }
+
+  document.querySelectorAll('.app-nav-item[data-section]').forEach(btn => {
+    btn.addEventListener('click', () => switchSection(btn.dataset.section));
+  });
+
+  // ---- CREDENTIAL SAVE/LOAD (localStorage) ----
+  const SAVE_FIELDS = ['tg-token','tg-chat','bs-handle','bs-pass','ma-instance','ma-token','dc-webhook','gh-token','gh-name','da-token','da-client'];
+  SAVE_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const saved = localStorage.getItem('fedposter_' + id);
+    if (saved) el.value = saved;
+    el.addEventListener('change', () => localStorage.setItem('fedposter_' + id, el.value));
+  });
+
+  // ---- CHAR COUNTERS ----
+  function setupCharCounter(textareaId, counterId, max) {
+    const ta = document.getElementById(textareaId);
+    const ctr = document.getElementById(counterId);
+    if (!ta || !ctr) return;
+    function update() {
+      ctr.textContent = ta.value.length;
+      if (ta.value.length > max * 0.9) ctr.style.color = 'var(--orange)';
+      else ctr.style.color = 'var(--text-muted)';
+    }
+    ta.addEventListener('input', update);
+    update();
+  }
+  setupCharCounter('multi-msg', 'multi-char', 300);
+  setupCharCounter('bs-msg', 'bs-char', 300);
+  setupCharCounter('ma-msg', 'ma-char', 500);
+
+  // ---- FILE INFO ----
+  function updateFileInfo(input, infoEl) {
+    if (input.files && input.files.length) {
+      const f = input.files[0];
+      infoEl.textContent = '📎 ' + f.name + ' (' + (f.size/1024).toFixed(1) + ' KB)';
+      infoEl.style.color = 'var(--accent)';
+    } else {
+      infoEl.textContent = 'No file selected';
+      infoEl.style.color = 'var(--text-muted)';
+    }
+  }

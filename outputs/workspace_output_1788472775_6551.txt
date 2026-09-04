@@ -1,0 +1,11 @@
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+        <a href="forum.html">Forum</a>
+      </div>
+      <div class="nav-right">
+=== DASHBOARD ===
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+        <a href="forum.html">Forum</a>
+      </div>
+      <div class="nav-right">

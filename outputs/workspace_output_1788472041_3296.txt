@@ -1,0 +1,16 @@
+===== Does standalone have real fetch posting? =====
+21
+fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`)
+fetch(`https://api.telegram.org/bot${t}/getMe`)
+fetch(`https://api.telegram.org/bot${t}/${isVideo?'sendVideo':'sendPhoto'}`, { method:'POST', body:fd })
+fetch(`${inst}/api/v2/media`, { method:'POST', headers:{'Authorization':`Bearer ${tok}`}, body:fd })
+fetch(`${inst}/api/v1/accounts/verify_credentials`, { headers:{'Authorization':`Bearer ${tok}`} })
+fetch(url, {method:'POST', body:fd})
+fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:text||'Hello!'})
+fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content:'Test'})
+fetch('https://api.github.com/user', { headers:{'Authorization':`Bearer ${t}`} })
+fetch(`${API_BASE}/channels/${c}`, { headers:{'X-Bot-Token':t} })
+fetch('https://www.deviantart.com/api/v1/oauth2/user/profile', { headers:{'Authorization':`Bearer ${t}`} })
+
+===== V2 index.html — is it a landing page or app? =====
+0

@@ -1,0 +1,14 @@
+=== Font Awesome link ===
+1
+=== Header comment ===
+2958:    <!-- Header -->
+=== </header> count ===
+1
+=== fedos_theme init ===
+1
+=== setTheme function ===
+1
+=== settings fallback ===
+1
+=== setTheme(currentTheme) call ===
+1

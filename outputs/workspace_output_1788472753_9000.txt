@@ -1,0 +1,42 @@
+=== FORUM setTheme function (lines 4160-4200) ===
+            'Artificial Intelligence', 'Machine Learning', 'Deep Learning',
+            'Natural Language Processing', 'Computer Vision', 'Data Science',
+            'Web Development', 'Mobile Development', 'Cloud Computing',
+            'Cybersecurity', 'Blockchain', 'Internet of Things'
+        ];
+
+        let currentTheme = localStorage.getItem('fedos_theme') || 'dark';
+        function setTheme(theme) {
+            currentTheme = theme;
+            document.documentElement.setAttribute('data-theme', theme);
+            themeIcon.className = THEME_ICONS[theme] || 'fas fa-palette';
+            localStorage.setItem('fedos_theme', theme);
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.themeVal === theme);
+            });
+        }
+        themeToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', (e) => {
+            if (!themeDropdown.contains(e.target) && e.target !== themeToggle) {
+                themeDropdown.classList.remove('open');
+            }
+        });
+        document.querySelectorAll('.theme-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                setTheme(opt.dataset.themeVal);
+                themeDropdown.classList.remove('open');
+            });
+        });
+        setTheme(currentTheme);
+
+        // Shop Modal
+        function openShopModal() { shopModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeShopModal() { shopModal.classList.remove('active'); document.body.style.overflow = ''; }
+        shopItemPoster.addEventListener('click', openShopModal);
+        shopModalClose.addEventListener('click', closeShopModal);
+        shopModal.addEventListener('click', (e) => { if (e.target === shopModal) closeShopModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && shopModal.classList.contains('active')) closeShopModal(); });
+

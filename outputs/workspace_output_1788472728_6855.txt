@@ -1,0 +1,8 @@
+16:  <nav class="navbar">
+17:    <div class="nav-inner">
+18:      <a href="index.html" class="nav-brand"><span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>Fed-Poster</a>
+19:      <div class="nav-links">
+27:      <div class="nav-right">
+28:        <div class="nav-theme-picker"></div>
+30:        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+41:        <button class="app-nav-item active" data-section="multi"><i class="fa-solid fa-layer-group"></i> Multi Post <span class="nav-badge">ALL</span></button>

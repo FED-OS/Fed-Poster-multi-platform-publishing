@@ -1,0 +1,8 @@
+282:  <nav class="navbar">
+283:    <div class="nav-inner">
+284:      <a href="index.html" class="nav-brand">
+288:      <div class="nav-links">
+296:      <div class="nav-right">
+297:        <div class="nav-theme-picker"></div>
+299:        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+622:        <a href="index.html" class="nav-brand">

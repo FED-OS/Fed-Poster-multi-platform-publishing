@@ -1,0 +1,3 @@
+old in content: True
+Done
+95:                    <span class="user-avatar" id="userAvatar">👤</span>

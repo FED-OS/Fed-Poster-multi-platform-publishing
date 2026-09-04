@@ -1,0 +1,346 @@
+#!/usr/bin/env python3
+"""Integrate the forum into the e264 site:
+1. Add site CSS (fedposter.css) and JS (fedposter.js) links to <head>
+2. Replace forum-header with site navbar + preserve forum controls (login, theme, settings, download)
+3. Bridge theme systems: read fedposter_theme, map 12→7, sync back
+4. Add forum-specific navbar CSS overrides so the site navbar uses forum variables
+"""
+import re
+
+forum_path = "/workspace/extracted_e264/site/forum.html"
+
+with open(forum_path, "r", encoding="utf-8") as f:
+    html = f.read()
+
+print(f"Original forum.html: {len(html)} chars, {html.count(chr(10))+1} lines")
+
+# ============================================================
+# 1. Add site CSS and JS links to <head>
+# ============================================================
+# Find the Font Awesome link and add site CSS after it
+fa_link = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />'
+site_css = fa_link + '\n    <link rel="stylesheet" href="assets/fedposter.css" />'
+html = html.replace(fa_link, site_css, 1)
+
+# Add site JS before </body> (but after the forum's own scripts)
+# We'll add it right before the closing </body> tag
+site_js = '    <script src="assets/fedposter.js"></script>\n'
+html = html.replace("</body>", site_js + "</body>", 1)
+
+print("✅ Step 1: Added site CSS and JS links")
+
+# ============================================================
+# 2. Replace forum-header with site navbar + forum controls
+# ============================================================
+# Find the forum header block and replace it
+# The header starts with: <!-- Header -->\n    <header class="forum-header">
+# and ends with: </header>
+
+# Find the exact header block
+header_start = html.find('<!-- Header -->')
+header_end = html.find('</header>', header_start)
+if header_start == -1 or header_end == -1:
+    print("ERROR: Could not find forum header block")
+    exit(1)
+header_end += len('</header>')
+
+old_header = html[header_start:header_end]
+print(f"Found forum header: {len(old_header)} chars")
+
+# Build the new navbar that combines site nav + forum controls
+new_header = """<!-- Integrated Site Navbar + Forum Controls -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>
+                Fed-Poster
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="calendar.html">Calendar</a>
+                <a href="analytics.html">Analytics</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="settings.html">Settings</a>
+                <a href="forum.html">Forum</a>
+            </div>
+            <div class="nav-right">
+                <div class="nav-theme-picker"></div>
+
+                <!-- Forum Download dropdown -->
+                <div class="download-group forum-nav-control">
+                    <button class="download-toggle" id="downloadToggle" aria-label="Download apps">
+                        <i class="fas fa-download"></i>
+                        <span>Download</span>
+                        <i class="fas fa-chevron-down" style="font-size:0.55rem;"></i>
+                    </button>
+                    <div class="download-dropdown" id="downloadDropdown">
+                        <div class="download-label">Get the app</div>
+                        <button class="btn-download" id="downloadDesktop">
+                            <i class="fas fa-desktop"></i> Desktop App
+                        </button>
+                        <button class="btn-download" id="downloadMobile">
+                            <i class="fas fa-mobile-alt"></i> Mobile App
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Forum Settings button -->
+                <button class="theme-toggle forum-nav-control" id="settingsBtn" aria-label="Open settings" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+
+                <!-- Forum Login button -->
+                <button class="login-btn forum-nav-control" id="loginBtn">
+                    <span class="user-avatar" id="userAvatar">\ud83d\udc64</span>
+                    <span id="loginBtnText">Login</span>
+                </button>
+
+                <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>"""
+
+html = html[:header_start] + new_header + html[header_end:]
+print("✅ Step 2: Replaced forum header with site navbar + forum controls")
+
+# ============================================================
+# 3. Add CSS overrides for the navbar to use forum variables
+#    and style the forum controls inside the navbar
+# ============================================================
+# We need the site navbar to look good with the forum's theme.
+# The site's fedposter.css uses --text-primary, --accent, --bg-body etc.
+# But the forum defines --text, --brand, --bg etc.
+# We add a mapping so navbar elements use forum variables.
+
+navbar_overrides = """
+        /* ── Navbar integration: map site navbar to forum theme variables ── */
+        .navbar {
+            background: color-mix(in srgb, var(--bg) 85%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 1.15rem; color: var(--text);
+            letter-spacing: -0.02em; flex-shrink: 0; text-decoration: none;
+        }
+        .nav-brand:hover { color: var(--brand); }
+        .nav-brand .logo-mark {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-hover));
+            border-radius: 9px; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: #fff;
+            box-shadow: 0 3px 12px var(--brand-glow);
+        }
+        .nav-links { display: flex; align-items: center; gap: 2px; }
+        .nav-links a {
+            padding: 8px 14px; border-radius: var(--radius-xs);
+            font-size: 0.85rem; font-weight: 500; color: var(--text-2);
+            text-decoration: none; transition: var(--transition);
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--text); background: var(--surface-hover); }
+        .nav-links a.active { color: var(--brand); background: var(--brand-soft); font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+        .nav-theme-picker { display: flex; gap: 5px; align-items: center; }
+        .nav-theme-picker .swatch {
+            width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
+            border: 2px solid transparent; transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .nav-theme-picker .swatch:hover { transform: scale(1.15); }
+        .nav-theme-picker .swatch.active { border-color: var(--text); transform: scale(1.15); box-shadow: 0 0 0 2px var(--brand-soft); }
+
+        /* Forum controls inside navbar */
+        .forum-nav-control { flex-shrink: 0; }
+        .nav-right .login-btn {
+            padding: 0 14px; height: 36px; font-size: 0.85rem; font-weight: 600;
+            border-radius: var(--radius-sm); border: 1px solid var(--border);
+            color: var(--text-2); background: var(--surface-2); cursor: pointer;
+            transition: var(--transition); font-family: inherit;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-right .login-btn:hover { color: var(--text); background: var(--surface-hover); border-color: var(--border-strong); }
+        .nav-right .login-btn.logged-in { border-color: var(--green); color: var(--green); background: var(--green-soft); }
+        .nav-right .login-btn .user-avatar {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--brand-soft); color: var(--brand);
+            font-size: 11px; font-weight: 700; overflow: hidden;
+        }
+        .nav-right .login-btn.logged-in .user-avatar { background: var(--green-soft); color: var(--green); }
+        .nav-right .download-group { position: relative; display: inline-flex; }
+        .nav-right .download-toggle {
+            background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2);
+            padding: 0 12px; height: 36px; border-radius: var(--radius-sm); cursor: pointer;
+            font-size: 0.82rem; font-weight: 500; font-family: inherit;
+            transition: var(--transition); display: flex; align-items: center; gap: 7px;
+        }
+        .nav-right .download-toggle:hover { border-color: var(--border-strong); color: var(--text); background: var(--surface-hover); }
+        .nav-right .theme-toggle {
+            background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2);
+            width: 36px; height: 36px; border-radius: var(--radius-sm); cursor: pointer;
+            transition: var(--transition); display: flex; align-items: center; justify-content: center;
+            font-size: 0.88rem;
+        }
+        .nav-right .theme-toggle:hover { color: var(--text); background: var(--surface-hover); border-color: var(--border-strong); }
+        .nav-toggle { display: none; font-size: 22px; color: var(--text); background: none; border: none; cursor: pointer; }
+
+        /* Mobile nav */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open {
+                display: flex; flex-direction: column; position: absolute;
+                top: 64px; left: 0; right: 0; background: var(--surface);
+                border-bottom: 1px solid var(--border); padding: 12px 24px; gap: 4px;
+                z-index: 200;
+            }
+            .nav-links.open a { padding: 12px 14px; }
+            .forum-nav-control.download-group { display: none; }
+            #loginBtnText { display: none; }
+        }
+"""
+
+# Insert the overrides right before the closing </style> tag
+# Find the last </style> in the head
+style_close = html.rfind('</style>', 0, html.find('</head>'))
+if style_close == -1:
+    print("ERROR: Could not find </style> in head")
+    exit(1)
+html = html[:style_close] + navbar_overrides + "\n    " + html[style_close:]
+print("✅ Step 3: Added navbar CSS overrides")
+
+# ============================================================
+# 4. Bridge theme systems
+# ============================================================
+# The forum's setTheme function (around line 4167) uses localStorage('fedos_theme')
+# We need to:
+# a) On load, read fedposter_theme first, map to forum theme if needed
+# b) When forum theme changes, also write to fedposter_theme
+# c) Map site-only themes to closest forum theme
+
+# Find the forum's theme initialization line:
+#   let currentTheme = localStorage.getItem('fedos_theme') || 'dark';
+old_theme_init = "let currentTheme = localStorage.getItem('fedos_theme') || 'dark';"
+new_theme_init = """// ── Theme bridge: sync with site's fedposter_theme ──
+        const FORUM_THEMES = ['dark','light','ocean','forest','sunset','midnight','rose'];
+        // Map site-only themes (12-theme system) to closest forum theme (7-theme system)
+        const SITE_TO_FORUM = {
+            'dark':'dark','light':'light','blue':'ocean','green':'forest',
+            'purple':'midnight','orange':'sunset','cyberpunk':'midnight',
+            'sunset':'sunset','ocean':'ocean','rose':'rose','midnight':'midnight',
+            'synthwave':'rose'
+        };
+        // Read site theme first, fall back to forum's own key
+        let _siteTheme = localStorage.getItem('fedposter_theme') || localStorage.getItem('fedos_theme') || 'dark';
+        let currentTheme = SITE_TO_FORUM[_siteTheme] || _siteTheme;
+        if (!FORUM_THEMES.includes(currentTheme)) currentTheme = 'dark';"""
+
+if old_theme_init in html:
+    html = html.replace(old_theme_init, new_theme_init, 1)
+    print("✅ Step 4a: Bridged theme initialization (reads fedposter_theme, maps 12→7)")
+else:
+    print("⚠ Step 4a: Could not find theme init line")
+
+# Find the setTheme function and add fedposter_theme sync
+old_settheme = """function setTheme(theme) {
+            currentTheme = theme;
+            document.documentElement.setAttribute('data-theme', theme);
+            themeIcon.className = THEME_ICONS[theme] || 'fas fa-palette';
+            localStorage.setItem('fedos_theme', theme);
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.themeVal === theme);
+            });
+        }"""
+
+new_settheme = """function setTheme(theme) {
+            if (!FORUM_THEMES.includes(theme)) theme = SITE_TO_FORUM[theme] || 'dark';
+            currentTheme = theme;
+            document.documentElement.setAttribute('data-theme', theme);
+            themeIcon.className = THEME_ICONS[theme] || 'fas fa-palette';
+            localStorage.setItem('fedos_theme', theme);
+            // Sync to site theme key so other pages stay consistent
+            localStorage.setItem('fedposter_theme', theme);
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.themeVal === theme);
+            });
+            // Update navbar theme picker swatches
+            document.querySelectorAll('.nav-theme-picker .swatch').forEach(s => {
+                s.classList.toggle('active', s.dataset.theme === theme);
+            });
+        }"""
+
+if old_settheme in html:
+    html = html.replace(old_settheme, new_settheme, 1)
+    print("✅ Step 4b: Bridged setTheme (syncs to fedposter_theme, updates navbar swatches)")
+else:
+    print("⚠ Step 4b: Could not find setTheme function")
+
+# Also fix the settings modal theme handler that uses fedos_theme as fallback
+old_settings_theme = "else { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('fedos_theme', t); }"
+new_settings_theme = "else { if (typeof setTheme === 'function') setTheme(t); else { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('fedos_theme', t); localStorage.setItem('fedposter_theme', t); } }"
+if old_settings_theme in html:
+    html = html.replace(old_settings_theme, new_settings_theme, 1)
+    print("✅ Step 4c: Fixed settings modal theme fallback")
+
+# ============================================================
+# 5. Prevent fedposter.js from overriding the forum's theme
+#    The site's fedposter.js calls applyTheme() on DOM ready which sets data-theme
+#    from fedposter_theme. Since we now sync fedposter_theme with the forum theme,
+#    this should be consistent. But fedposter.js also calls buildThemePicker()
+#    which builds 12 swatches. We want the navbar to show the forum's 7 themes
+#    OR the site's 12 themes. Let's let fedposter.js build its 12 swatches
+#    but make clicking them map to forum themes.
+#    
+#    Actually, fedposter.js already builds the picker and handles clicks via
+#    applyTheme(). We need applyTheme to also work with the forum.
+#    Since fedposter.js sets data-theme and fedposter_theme, and our setTheme
+#    reads fedposter_theme on load, this creates a nice loop:
+#    - User clicks a site swatch → fedposter.js applyTheme() → sets data-theme + fedposter_theme
+#    - The forum's themeObserver (line 3698) detects data-theme change → updates UI
+#    But the forum theme won't match if user picks "blue" (no forum CSS for it).
+#    We need to intercept. Let's add an observer that maps non-forum themes.
+# ============================================================
+
+# Find a good place to add a theme sync observer - after setTheme(currentTheme) call
+old_init_call = "setTheme(currentTheme);"
+new_init_call = """setTheme(currentTheme);
+
+        // ── Sync when site navbar theme picker changes data-theme ──
+        // fedposter.js may set a 12-theme value (e.g. 'blue') that the forum
+        // doesn't have CSS for. This observer maps it to the closest forum theme.
+        const _themeSyncObs = new MutationObserver(() => {
+            const dt = document.documentElement.getAttribute('data-theme') || 'dark';
+            if (!FORUM_THEMES.includes(dt)) {
+                const mapped = SITE_TO_FORUM[dt] || 'dark';
+                if (mapped !== currentTheme) {
+                    currentTheme = mapped;
+                    themeIcon.className = THEME_ICONS[mapped] || 'fas fa-palette';
+                    localStorage.setItem('fedos_theme', mapped);
+                    document.querySelectorAll('.theme-option').forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.themeVal === mapped);
+                    });
+                    // Set the mapped theme so forum CSS applies
+                    document.documentElement.setAttribute('data-theme', mapped);
+                }
+            }
+        });
+        _themeSyncObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });"""
+
+if old_init_call in html:
+    html = html.replace(old_init_call, new_init_call, 1)
+    print("✅ Step 5: Added theme sync observer for navbar picker")
+else:
+    print("⚠ Step 5: Could not find setTheme(currentTheme) call")
+
+# ============================================================
+# Write the modified file
+# ============================================================
+with open(forum_path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+print(f"\n✅ Modified forum.html: {len(html)} chars, {html.count(chr(10))+1} lines")

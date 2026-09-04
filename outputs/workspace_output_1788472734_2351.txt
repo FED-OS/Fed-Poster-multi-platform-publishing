@@ -1,0 +1,62 @@
+=== FORUM FOOTER HTML (lines 3325-3385) ===
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-glow"></div>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo"><i class="fas fa-comments"></i> FEDPromptly</div>
+                    <div class="footer-tagline">The community hub for FED-OS builders, prompt engineers, and creators. Share ideas, ship faster, and grow together.</div>
+                    <div class="footer-socials">
+                        <a class="footer-social" href="https://discord.com" target="_blank" rel="noopener" title="Discord"><i class="fab fa-discord"></i></a>
+                        <a class="footer-social" href="https://twitter.com" target="_blank" rel="noopener" title="Twitter / X"><i class="fab fa-twitter"></i></a>
+                        <a class="footer-social" href="https://github.com" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="footer-social" href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener" title="Ko-fi"><i class="fas fa-mug-hot"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#" data-footer-action="trending"><i class="fas fa-fire"></i> Trending</a></li>
+                        <li><a href="#" data-footer-action="guides"><i class="fas fa-book-open"></i> Guides</a></li>
+                        <li><a href="#" data-footer-action="questions"><i class="fas fa-question-circle"></i> Questions</a></li>
+                        <li><a href="#" data-footer-action="bookmarks"><i class="fas fa-bookmark"></i> Bookmarks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#" id="footerSettings"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#" data-footer-action="newtopic"><i class="fas fa-pen"></i> New Topic</a></li>
+                        <li><a href="#" id="footerShortcuts"><i class="fas fa-keyboard"></i> Shortcuts</a></li>
+                        <li><a href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener"><i class="fas fa-heart"></i> Support us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay in the loop</h4>
+                    <p>Get the best threads and product updates delivered to your inbox.</p>
+                    <form class="footer-newsletter-form" id="footerNewsletter">
+                        <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-stats">
+                <div class="footer-stat"><span class="stat-value" id="footerStatTopics">—</span><span class="stat-label">Topics</span></div>
+                <div class="footer-stat"><span class="stat-value" id="footerStatReplies">—</span><span class="stat-label">Replies</span></div>
+                <div class="footer-stat"><span class="stat-value" id="footerStatMembers">—</span><span class="stat-label">Online now</span></div>
+                <div class="footer-stat"><span class="stat-value">7</span><span class="stat-label">Themes</span></div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-made">Made with <i class="fas fa-heart"></i> by the FEDPromptly team</div>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div>© <span id="footerYear"></span> FEDPromptly · FED Hub</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Settings Modal -->
+    <div class="settings-overlay" id="settingsOverlay">

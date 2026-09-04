@@ -1,0 +1,51 @@
+=== FORUM HTML STRUCTURE ===
+58:        [data-theme="light"] {
+78:        [data-theme="ocean"] {
+101:        [data-theme="ocean"] .ambient-bg {
+108:        [data-theme="forest"] {
+131:        [data-theme="forest"] .ambient-bg {
+138:        [data-theme="sunset"] {
+161:        [data-theme="sunset"] .ambient-bg {
+168:        [data-theme="midnight"] {
+191:        [data-theme="midnight"] .ambient-bg {
+198:        [data-theme="rose"] {
+221:        [data-theme="rose"] .ambient-bg {
+255:        [data-theme="light"] .liquid-bg { opacity: 0.35; }
+267:        [data-theme="light"] .ambient-bg {
+295:        .forum-header {
+306:        .forum-header .container {
+312:        .forum-header .logo {
+322:        .forum-header .logo-icon {
+334:        .forum-header .right-actions {
+766:        .forum-header .login-btn {
+782:        .forum-header .login-btn:hover {
+787:        .forum-header .login-btn.logged-in {
+792:        .forum-header .login-btn.logged-in:hover {
+795:        .forum-header .login-btn .user-avatar {
+808:        .forum-header .login-btn.logged-in .user-avatar {
+2224:        [data-theme="light"] .modal-card .message.error { color: #b91c1c; }
+2225:        [data-theme="light"] .modal-card .message.success { color: #047857; }
+2226:        [data-theme="light"] .modal-card .message.info { color: #1d4ed8; }
+2628:            .forum-header .logo span:last-child { display: none; }
+2640:            .forum-header .login-btn span#loginBtnText { display: none; }
+2872:        .forum-header .logo-icon {
+2876:        .forum-header .logo:hover .logo-icon {
+2933:<body>
+2959:    <header class="forum-header">
+2989:                        <button class="theme-option" data-theme-val="dark"><span class="theme-swatch" style="background:linear-gradient(135deg,#0e0e14,#7c5cfc);"></span> Dark <i class="fas fa-check theme-check"></i></button>
+2990:                        <button class="theme-option" data-theme-val="light"><span class="theme-swatch" style="background:linear-gradient(135deg,#f7f7fb,#7c5cfc);"></span> Light <i class="fas fa-check theme-check"></i></button>
+2991:                        <button class="theme-option" data-theme-val="ocean"><span class="theme-swatch" style="background:linear-gradient(135deg,#07131c,#22d3ee);"></span> Ocean <i class="fas fa-check theme-check"></i></button>
+2992:                        <button class="theme-option" data-theme-val="forest"><span class="theme-swatch" style="background:linear-gradient(135deg,#0a120c,#4ade80);"></span> Forest <i class="fas fa-check theme-check"></i></button>
+2993:                        <button class="theme-option" data-theme-val="sunset"><span class="theme-swatch" style="background:linear-gradient(135deg,#1a0d10,#fb923c);"></span> Sunset <i class="fas fa-check theme-check"></i></button>
+2994:                        <button class="theme-option" data-theme-val="midnight"><span class="theme-swatch" style="background:linear-gradient(135deg,#05060f,#818cf8);"></span> Midnight <i class="fas fa-check theme-check"></i></button>
+2995:                        <button class="theme-option" data-theme-val="rose"><span class="theme-swatch" style="background:linear-gradient(135deg,#160a12,#e879f9);"></span> Rose <i class="fas fa-check theme-check"></i></button>
+3325:    <footer class="site-footer">
+3382:    </footer>
+3404:                        <div class="settings-theme-card" data-theme-val="dark"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#0e0e14,#7c5cfc);"></div><div class="settings-theme-name">Dark</div></div>
+3405:                        <div class="settings-theme-card" data-theme-val="light"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#f7f7fb,#7c5cfc);"></div><div class="settings-theme-name">Light</div></div>
+3406:                        <div class="settings-theme-card" data-theme-val="ocean"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#07131c,#22d3ee);"></div><div class="settings-theme-name">Ocean</div></div>
+3407:                        <div class="settings-theme-card" data-theme-val="forest"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#0a120c,#4ade80);"></div><div class="settings-theme-name">Forest</div></div>
+3408:                        <div class="settings-theme-card" data-theme-val="sunset"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#1a0d10,#fb923c);"></div><div class="settings-theme-name">Sunset</div></div>
+3409:                        <div class="settings-theme-card" data-theme-val="midnight"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#05060f,#818cf8);"></div><div class="settings-theme-name">Midnight</div></div>
+3410:                        <div class="settings-theme-card" data-theme-val="rose"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#160a12,#e879f9);"></div><div class="settings-theme-name">Rose</div></div>
+3601:            const theme = document.documentElement.getAttribute('data-theme') || 'dark';

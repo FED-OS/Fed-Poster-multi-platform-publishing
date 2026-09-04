@@ -1,0 +1,5 @@
+=== FORUM setTheme function context ===
+3830:                if (typeof setTheme === 'function') setTheme(t);
+4167:        function setTheme(theme) {
+4187:                setTheme(opt.dataset.themeVal);
+4191:        setTheme(currentTheme);

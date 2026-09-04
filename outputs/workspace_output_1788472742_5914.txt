@@ -1,0 +1,29 @@
+=== FORUM BODY OPENING + first elements (lines 2933-2960) ===
+<body>
+
+    <!-- Animated liquid background canvas -->
+    <canvas id="liquidBg" class="liquid-bg"></canvas>
+    <div class="ambient-bg"></div>
+
+    <!-- Reading Progress -->
+    <div class="reading-progress" id="readingProgress">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="close-lightbox" id="closeLightbox">&times;</button>
+        <img id="lightboxImage" src="" alt="Full size preview" />
+    </div>
+
+    <!-- Shop Modal (Ko-fi embed) -->
+    <div class="shop-modal-overlay" id="shopModal">
+        <div class="shop-modal-content">
+            <button class="shop-close" id="shopModalClose">&times;</button>
+            <iframe src="https://ko-fi.com/fedpromptly/?hidefeed=true&widget=true&embed=true&preview=true" title="fedpromptly - FED-Poster V1"></iframe>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="forum-header">
+        <div class="container">

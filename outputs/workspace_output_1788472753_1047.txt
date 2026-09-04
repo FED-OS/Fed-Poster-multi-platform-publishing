@@ -1,0 +1,31 @@
+=== FORUM closing tags (last 30 lines) ===
+            const footerShortcuts = document.getElementById('footerShortcuts');
+            if (footerShortcuts) footerShortcuts.addEventListener('click', (e) => { e.preventDefault(); keyboardHelp.classList.add('visible'); setTimeout(() => keyboardHelp.classList.remove('visible'), 3000); });
+            document.querySelectorAll('[data-footer-action]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const action = a.dataset.footerAction;
+                    if (action === 'newtopic') { const b = document.getElementById('stickyNewTopic'); if (b) b.click(); return; }
+                    const tab = document.querySelector('.cat-tab[data-cat="' + action + '"]');
+                    if (tab) { tab.click(); window.scrollTo({ top: document.querySelector('.category-tabs').offsetTop - 80, behavior: 'smooth' }); }
+                });
+            });
+            // Footer stats
+            const ft = document.getElementById('footerStatTopics');
+            const fr = document.getElementById('footerStatReplies');
+            const fm = document.getElementById('footerStatMembers');
+            const onlineNum = document.getElementById('online-number');
+            function updateFooterStats() {
+                if (ft) ft.textContent = allTopics.length || '—';
+                if (fr) fr.textContent = allTopics.reduce((s, t) => s + (t.replyCount || 0), 0) || '—';
+                if (fm && onlineNum) fm.textContent = onlineNum.textContent || '—';
+            }
+            updateFooterStats();
+            setInterval(updateFooterStats, 5000);
+            window.updateFooterStats = updateFooterStats;
+        })();
+
+        console.log('💬 FEDPromptly — redesigned with a calmer, more focused aesthetic.');
+    </script>
+</body>
+</html>

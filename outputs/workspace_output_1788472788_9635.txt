@@ -1,0 +1,27 @@
+180:.navbar {
+187:[data-theme="dark"] .navbar,
+188:[data-theme="cyberpunk"] .navbar,
+189:[data-theme="midnight"] .navbar,
+190:[data-theme="synthwave"] .navbar { border-bottom-color: rgba(255,255,255,0.06); }
+191:.nav-inner {
+196:.nav-brand {
+200:.nav-brand .logo-mark {
+206:.nav-links {
+209:.nav-links a {
+214:.nav-links a:hover { color: var(--accent); background: var(--accent-bg); }
+215:.nav-links a.active { color: var(--accent); background: var(--accent-bg); font-weight: 600; }
+216:.nav-right { display: flex; align-items: center; gap: 12px; }
+219:.nav-theme-picker {
+224:.nav-theme-picker .swatch {
+228:.nav-theme-picker .swatch.active { border-color: var(--text-primary); transform: scale(1.15); }
+237:.btn-primary {
+241:.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--glow); }
+242:.btn-ghost {
+245:.btn-ghost:hover { background: var(--accent-bg); color: var(--accent); }
+251:.btn-sm { padding: 8px 18px; font-size: 14px; }
+274:.footer-brand .nav-brand { color: #fff; margin-bottom: 16px; }
+350:.nav-toggle { display: none; font-size: 22px; color: var(--text-primary); }
+352:  .nav-links { display: none; }
+353:  .nav-toggle { display: block; }
+354:  .nav-links.open {
+365:  .nav-inner { padding: 0 16px; }

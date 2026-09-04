@@ -1,0 +1,16 @@
+=== setTheme function (exact) ===
+4167:        function setTheme(theme) {
+4168-            currentTheme = theme;
+4169-            document.documentElement.setAttribute('data-theme', theme);
+4170-            themeIcon.className = THEME_ICONS[theme] || 'fas fa-palette';
+4171-            localStorage.setItem('fedos_theme', theme);
+4172-            document.querySelectorAll('.theme-option').forEach(opt => {
+4173-                opt.classList.toggle('active', opt.dataset.themeVal === theme);
+4174-            });
+4175-        }
+4176-        themeToggle.addEventListener('click', (e) => {
+
+=== setTheme(currentTheme) call context ===
+4190-        });
+4191:        setTheme(currentTheme);
+4192-

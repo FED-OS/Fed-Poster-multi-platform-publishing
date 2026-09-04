@@ -1,0 +1,27 @@
+preview/:
+total 152
+drwxr-xr-x 4 root root   4096 Sep  3 21:47 .
+drwxr-xr-x 9 user user   4096 Sep  3 21:47 ..
+drwxr-xr-x 3 root root   4096 Sep  3 21:47 site
+-rw-r--r-- 1 root root 138096 Sep  3 21:47 standalone-dashboard.html
+drwxr-xr-x 2 root root   4096 Sep  3 21:47 v2-landing
+
+preview/site/:
+total 124
+drwxr-xr-x 3 root root  4096 Sep  3 21:47 .
+drwxr-xr-x 4 root root  4096 Sep  3 21:47 ..
+-rw-r--r-- 1 root root  4824 Sep  3 21:47 404.html
+-rw-r--r-- 1 root root  6032 Sep  3 21:47 analytics.html
+drwxr-xr-x 2 root root  4096 Sep  3 21:47 assets
+-rw-r--r-- 1 root root  7608 Sep  3 21:47 calendar.html
+-rw-r--r-- 1 root root 23423 Sep  3 21:47 dashboard.html
+-rw-r--r-- 1 root root 34310 Sep  3 21:47 index.html
+-rw-r--r-- 1 root root 16210 Sep  3 21:47 pricing.html
+-rw-r--r-- 1 root root  9733 Sep  3 21:47 settings.html
+
+preview/v2-landing/:
+total 56
+drwxr-xr-x 2 root root  4096 Sep  3 21:47 .
+drwxr-xr-x 4 root root  4096 Sep  3 21:47 ..
+-rw-r--r-- 1 root root 24217 Sep  3 21:47 index.html
+-rw-r--r-- 1 root root 21199 Sep  3 21:47 styles.css

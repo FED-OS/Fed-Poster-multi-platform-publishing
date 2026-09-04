@@ -1,0 +1,82 @@
+===== V2 index.html (head) =====
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fed-Poster — open-source multi-channel publishing dashboard. One workspace, every platform, zero hassle." />
+    <meta name="theme-color" content="#07090f" />
+
+    <!-- Open Graph / Social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Fed-Poster · Multi-Channel Publishing" />
+    <meta property="og:description" content="One Dashboard. Every Platform. Zero Hassle. Open-source multi-channel publishing." />
+    <meta property="og:image" content="assets/social-preview/social-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fed-Poster · Multi-Channel Publishing" />
+    <meta name="twitter:description" content="One Dashboard. Every Platform. Zero Hassle." />
+    <meta name="twitter:image" content="assets/social-preview/social-preview.png" />
+
+    <link rel="icon" type="image/png" href="assets/social-preview/social-preview.png" />
+    <title>FED-POSTER · Multi-Channel Publishing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i> FED-OS
+                <span class="badge">BETA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li>
+                    <a href="https://ko-fi.com/fedpromptly" target="_blank" class="btn btn-gold btn-sm">
+                        <i class="fas fa-heart"></i> Subscribe
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/FED-OS/Fed-Poster" target="_blank" class="btn btn-outline btn-sm">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="landingContent">
+
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="tag"><i class="fas fa-rocket"></i> Beta · Early Access</div>
+                <h1>FED<span class="accent">-POSTER</span></h1>
+                <p class="byline">by <span>fedpromptly.com</span></p>
+                <p class="tagline">
+
+===== V2 README/docs list with sizes =====
+-rw-r--r-- 1 root root 10143 Aug 25 02:16 extracted_v2/fed-poster/ADR.md
+-rw-r--r-- 1 root root  6207 Aug 25 02:29 extracted_v2/fed-poster/AGENTS.md
+-rw-r--r-- 1 root root  3811 Aug 25 02:15 extracted_v2/fed-poster/CHANGELOG.md
+-rw-r--r-- 1 root root  3117 Aug 25 02:14 extracted_v2/fed-poster/CITATIONS.md
+-rw-r--r-- 1 root root  5359 Aug 25 02:11 extracted_v2/fed-poster/CODE_OF_CONDUCT.md
+-rw-r--r-- 1 root root  8914 Aug 25 02:12 extracted_v2/fed-poster/CONTRIBUTING.md
+-rw-r--r-- 1 root root  3686 Aug 25 02:12 extracted_v2/fed-poster/COPYING.md
+-rw-r--r-- 1 root root  8819 Aug 25 02:19 extracted_v2/fed-poster/DEPLOYMENT.md
+-rw-r--r-- 1 root root  5392 Aug 25 02:12 extracted_v2/fed-poster/GOVERNANCE.md
+-rw-r--r-- 1 root root  3453 Aug 25 02:09 extracted_v2/fed-poster/PRICING.md
+-rw-r--r-- 1 root root  1901 Aug 25 02:31 extracted_v2/fed-poster/PULL_REQUEST_TEMPLATE.md
+-rw-r--r-- 1 root root  5268 Aug 25 02:15 extracted_v2/fed-poster/ROADMAP.md
+-rw-r--r-- 1 root root  6214 Aug 25 02:11 extracted_v2/fed-poster/SECURITY.md
+-rw-r--r-- 1 root root  5328 Aug 25 02:14 extracted_v2/fed-poster/SUPPORT.md
+-rw-r--r-- 1 root root  1060 Aug 25 02:31 extracted_v2/fed-poster/bug_report.md
+-rw-r--r-- 1 root root  8978 Aug 25 02:24 extracted_v2/fed-poster/usage.md
+
+===== styles.css size =====
+1010 extracted_v2/fed-poster/styles.css

@@ -1,0 +1,33 @@
+total 11M
+drwxr-xr-x  6 user user 4.0K Sep  3 21:46 .
+drwxr-xr-x 20 root root 4.0K Jun 22 03:39 ..
+drwxr-xr-x  4 user user 4.0K Jun 19 10:20 .agent_hooks
+drwxr-xr-x 10 root root 4.0K Sep  3 21:25 .browser_data
+drwxr-xr-x  3 root root 4.0K Jun 22 03:37 .psiphon_data
+-rw-r--r--  1 root root 9.3M Sep  3 21:46 e2644098-55b6-4b9f-b06b-7ea13c9c28dd.zip
+-rw-r--r--  1 root root    0 Sep  3 21:45 fed-poster
+-rw-r--r--  1 root root 1.5M Sep  3 21:45 fed-poster-v2.zip
+-rw-r--r--  1 root root 135K Sep  3 21:45 fed_poster_dashboard_upgraded.html
+drwxr-xr-x  2 root root 4.0K Sep  3 21:46 outputs
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_14932
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_1621
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_98f4
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_e264
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_ff49
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_gh
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_main
+-rw-r--r--  1 root root    0 Sep  3 21:44 v_multi
+---FILE TYPES---
+/workspace/e2644098-55b6-4b9f-b06b-7ea13c9c28dd.zip: Zip archive data, at least v1.0 to extract, compression method=store
+/workspace/fed-poster:                               empty
+/workspace/fed-poster-v2.zip:                        Zip archive data, at least v1.0 to extract, compression method=store
+/workspace/fed_poster_dashboard_upgraded.html:       HTML document, Unicode text, UTF-8 text
+/workspace/outputs:                                  directory
+/workspace/v_14932:                                  empty
+/workspace/v_1621:                                   empty
+/workspace/v_98f4:                                   empty
+/workspace/v_e264:                                   empty
+/workspace/v_ff49:                                   empty
+/workspace/v_gh:                                     empty
+/workspace/v_main:                                   empty
+/workspace/v_multi:                                  empty

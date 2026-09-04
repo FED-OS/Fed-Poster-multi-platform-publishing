@@ -1,0 +1,31 @@
+=== FORUM THEME JS ===
+58:        [data-theme="light"] {
+78:        [data-theme="ocean"] {
+101:        [data-theme="ocean"] .ambient-bg {
+108:        [data-theme="forest"] {
+131:        [data-theme="forest"] .ambient-bg {
+138:        [data-theme="sunset"] {
+161:        [data-theme="sunset"] .ambient-bg {
+168:        [data-theme="midnight"] {
+191:        [data-theme="midnight"] .ambient-bg {
+198:        [data-theme="rose"] {
+221:        [data-theme="rose"] .ambient-bg {
+255:        [data-theme="light"] .liquid-bg { opacity: 0.35; }
+267:        [data-theme="light"] .ambient-bg {
+2224:        [data-theme="light"] .modal-card .message.error { color: #b91c1c; }
+2225:        [data-theme="light"] .modal-card .message.success { color: #047857; }
+2226:        [data-theme="light"] .modal-card .message.info { color: #1d4ed8; }
+3601:            const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+3698:        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+3731:        let settings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'));
+3733:        function saveSettings() { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+3820:            if (sel) { sel.value = sort; if (typeof currentSort !== 'undefined') { currentSort = sort; localStorage.setItem('forum_sort', sort); } }
+3830:                if (typeof setTheme === 'function') setTheme(t);
+3831:                else { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('fedos_theme', t); }
+3918:            const bm = JSON.parse(localStorage.getItem('fedos_bookmarks') || '[]');
+3927:            localStorage.setItem('fedos_bookmarks', '[]');
+3935:            ['fedos_draft_topic', 'fedos_draft_reply'].forEach(k => localStorage.removeItem(k));
+3967:                const bm = JSON.parse(localStorage.getItem('fedos_bookmarks') || '[]');
+3974:            document.querySelectorAll('.settings-theme-card').forEach(c => c.classList.toggle('active', c.dataset.themeVal === (document.documentElement.getAttribute('data-theme') || 'dark')));
+4019:            const t = document.documentElement.getAttribute('data-theme') || 'dark';
+4022:        obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

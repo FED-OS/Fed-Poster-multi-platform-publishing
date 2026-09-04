@@ -1,0 +1,60 @@
+/* ================================================================
+   FED-POSTER SHARED DESIGN SYSTEM
+   Used across all pages: landing, dashboard, calendar, analytics, etc.
+   ================================================================ */
+
+/* ====== ROOT / DEFAULT (Light - Cloud) ====== */
+:root {
+  --bg-body: #f0f2f5;
+  --bg-sidebar: #1a1a2e;
+  --bg-card: #ffffff;
+  --bg-input: #f5f6fa;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --text-muted: #8a8aaa;
+  --accent: #6c5ce7;
+  --accent-hover: #5a4bd1;
+  --accent-light: #a29bfe;
+  --accent-bg: rgba(108,92,231,0.08);
+  --green: #00b894;
+  --green-bg: rgba(0,184,148,0.12);
+  --red: #e17055;
+  --red-bg: rgba(225,112,85,0.12);
+  --orange: #fdcb6e;
+  --orange-bg: rgba(253,203,110,0.15);
+  --blue: #0984e3;
+  --blue-bg: rgba(9,132,227,0.10);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-full: 50px;
+  --transition: 0.2s ease;
+  --font: 'Inter', sans-serif;
+  --sidebar-width: 260px;
+}
+
+/* ====== DARK — Deep Space ====== */
+[data-theme="dark"] {
+  --bg-body: #0a0e1a;
+  --bg-sidebar: #060810;
+  --bg-card: #111726;
+  --bg-input: #1a2138;
+  --text-primary: #e8edf5;
+  --text-secondary: #9aabbb;
+  --text-muted: #5a6b7d;
+  --accent: #6c5ce7;
+  --accent-hover: #5a4bd1;
+  --accent-light: #a29bfe;
+  --accent-bg: rgba(108,92,231,0.10);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.5);
+  --glow: rgba(108,92,231,0.15);
+}
+
+/* ====== LIGHT — Cloud ====== */
+[data-theme="light"] {
+  --bg-body: #eef1f6;
+  --bg-sidebar: #1a1a2e;
+  --bg-card: #ffffff;

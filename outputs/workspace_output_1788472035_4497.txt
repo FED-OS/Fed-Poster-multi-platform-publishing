@@ -1,0 +1,69 @@
+===== STANDALONE UPGRADED HTML =====
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed-Poster – Full Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ================================================================
+       THEME & BASE (YOUR ORIGINAL + UPGRADES)
+       ================================================================ */
+    :root {
+      --bg-body: #f0f2f5;
+      --bg-sidebar: #1a1a2e;
+      --bg-card: #ffffff;
+      --bg-input: #f5f6fa;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a6a;
+      --text-muted: #8a8aaa;
+      --accent: #6c5ce7;
+      --accent-hover: #5a4bd1;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108,92,231,0.08);
+      --green: #00b894;
+      --green-bg: rgba(0,184,148,0.12);
+      --red: #e17055;
+      --red-bg: rgba(225,112,85,0.12);
+      --orange: #fdcb6e;
+      --orange-bg: rgba(253,203,110,0.15);
+      --blue: #0984e3;
+      --blue-bg: rgba(9,132,227,0.10);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+      --radius: 16px;
+      --radius-sm: 10px;
+
+===== SIZE / LINE COUNT =====
+2939 fed_poster_dashboard_upgraded.html
+
+===== What platforms does it mention? =====
+     51 github
+     47 stoat
+     44 deviantart
+     39 mastodon
+     38 discord
+     13 Discord
+     12 Mastodon
+     11 telegram
+     11 Bluesky
+     10 Telegram
+     10 Stoat
+     10 GitHub
+     10 BLUESKY
+      9 DeviantArt
+      6 bluesky
+      5 DISCORD
+      2 TELEGRAM
+      2 STOAT
+      2 MASTODON
+      2 Github
+      2 GITHUB
+      2 Deviantart
+      2 DEVIANTART

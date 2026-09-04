@@ -1,0 +1,2 @@
+old in content: False
+emoji present: True

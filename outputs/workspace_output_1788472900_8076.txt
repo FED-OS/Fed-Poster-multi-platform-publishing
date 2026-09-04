@@ -1,0 +1,2 @@
+'\ud83d\udc64'
+is surrogate: True

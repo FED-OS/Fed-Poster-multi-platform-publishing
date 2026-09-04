@@ -1,0 +1,28 @@
+481:        .theme-option {
+497:        .theme-option:hover {
+501:        .theme-option.active {
+514:        .theme-option.active .theme-swatch {
+517:        .theme-option .theme-check {
+523:        .theme-option.active .theme-check {
+2984:                    <button class="theme-toggle" id="themeToggle" aria-label="Choose theme">
+2987:                    <div class="theme-dropdown" id="themeDropdown">
+2989:                        <button class="theme-option" data-theme-val="dark"><span class="theme-swatch" style="background:linear-gradient(135deg,#0e0e14,#7c5cfc);"></span> Dark <i class="fas fa-check theme-check"></i></button>
+2990:                        <button class="theme-option" data-theme-val="light"><span class="theme-swatch" style="background:linear-gradient(135deg,#f7f7fb,#7c5cfc);"></span> Light <i class="fas fa-check theme-check"></i></button>
+2991:                        <button class="theme-option" data-theme-val="ocean"><span class="theme-swatch" style="background:linear-gradient(135deg,#07131c,#22d3ee);"></span> Ocean <i class="fas fa-check theme-check"></i></button>
+2992:                        <button class="theme-option" data-theme-val="forest"><span class="theme-swatch" style="background:linear-gradient(135deg,#0a120c,#4ade80);"></span> Forest <i class="fas fa-check theme-check"></i></button>
+2993:                        <button class="theme-option" data-theme-val="sunset"><span class="theme-swatch" style="background:linear-gradient(135deg,#1a0d10,#fb923c);"></span> Sunset <i class="fas fa-check theme-check"></i></button>
+2994:                        <button class="theme-option" data-theme-val="midnight"><span class="theme-swatch" style="background:linear-gradient(135deg,#05060f,#818cf8);"></span> Midnight <i class="fas fa-check theme-check"></i></button>
+2995:                        <button class="theme-option" data-theme-val="rose"><span class="theme-swatch" style="background:linear-gradient(135deg,#160a12,#e879f9);"></span> Rose <i class="fas fa-check theme-check"></i></button>
+3831:                else { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('fedos_theme', t); }
+4132:        const themeToggle = document.getElementById('themeToggle');
+4134:        const themeDropdown = document.getElementById('themeDropdown');
+4166:        let currentTheme = localStorage.getItem('fedos_theme') || 'dark';
+4167:        function setTheme(theme) {
+4171:            localStorage.setItem('fedos_theme', theme);
+4172:            document.querySelectorAll('.theme-option').forEach(opt => {
+4176:        themeToggle.addEventListener('click', (e) => {
+4178:            themeDropdown.classList.toggle('open');
+4181:            if (!themeDropdown.contains(e.target) && e.target !== themeToggle) {
+4182:                themeDropdown.classList.remove('open');
+4185:        document.querySelectorAll('.theme-option').forEach(opt => {
+4188:                themeDropdown.classList.remove('open');

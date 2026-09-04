@@ -1,0 +1,45 @@
+total 11152
+drwxr-xr-x 11 user user    4096 Sep  3 21:57 .
+drwxr-xr-x 20 root root    4096 Jun 22 03:39 ..
+drwxr-xr-x  4 user user    4096 Jun 19 10:20 .agent_hooks
+drwxr-xr-x 10 root root    4096 Sep  3 21:25 .browser_data
+drwxr-xr-x  3 root root    4096 Jun 22 03:37 .psiphon_data
+drwxr-xr-x  2 root root    4096 Sep  3 21:49 .screenshots
+-rw-r--r--  1 root root 9671735 Sep  3 21:46 e2644098-55b6-4b9f-b06b-7ea13c9c28dd.zip
+drwxr-xr-x  6 root root    4096 Sep  3 21:46 extracted_e264
+drwxr-xr-x  3 root root    4096 Sep  3 21:46 extracted_v2
+-rw-r--r--  1 root root       0 Sep  3 21:45 fed-poster
+-rw-r--r--  1 root root 1556929 Sep  3 21:45 fed-poster-v2.zip
+-rw-r--r--  1 root root  138096 Sep  3 21:45 fed_poster_dashboard_upgraded.html
+drwxr-xr-x  2 root root    4096 Sep  3 21:57 outputs
+drwxr-xr-x  4 root root    4096 Sep  3 21:47 preview
+drwxr-xr-x  2 root root    4096 Sep  3 21:57 summarized_conversations
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_14932
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_1621
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_98f4
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_e264
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_ff49
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_gh
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_main
+-rw-r--r--  1 root root       0 Sep  3 21:44 v_multi
+---PREVIEW---
+total 152
+drwxr-xr-x  4 root root   4096 Sep  3 21:47 .
+drwxr-xr-x 11 user user   4096 Sep  3 21:57 ..
+drwxr-xr-x  3 root root   4096 Sep  3 21:47 site
+-rw-r--r--  1 root root 138096 Sep  3 21:47 standalone-dashboard.html
+drwxr-xr-x  2 root root   4096 Sep  3 21:47 v2-landing
+---E264 SITE---
+total 124
+drwxr-xr-x 3 root root  4096 Sep  3 21:46 .
+drwxr-xr-x 6 root root  4096 Sep  3 21:46 ..
+-rw-r--r-- 1 root root  4824 Aug 26 16:11 404.html
+-rw-r--r-- 1 root root  6032 Aug 26 16:11 analytics.html
+drwxr-xr-x 2 root root  4096 Sep  3 21:46 assets
+-rw-r--r-- 1 root root  7608 Aug 26 16:11 calendar.html
+-rw-r--r-- 1 root root 23423 Aug 26 16:11 dashboard.html
+-rw-r--r-- 1 root root 34310 Aug 26 16:11 index.html
+-rw-r--r-- 1 root root 16210 Aug 26 16:11 pricing.html
+-rw-r--r-- 1 root root  9733 Aug 26 16:11 settings.html
+---PREVIEW SERVER---
+200

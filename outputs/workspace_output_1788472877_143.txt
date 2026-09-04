@@ -1,0 +1,27 @@
+# Task: Integrate Forum as a Tab in the Fed-Poster Site
+
+## Phase 1: Analysis & Planning
+- [x] Recover the forum HTML from conversation transcript
+- [x] Extract forum HTML to `/workspace/extracted_e264/site/forum.html` (254KB, 5290 lines)
+- [x] Analyze the e264 site's shared navbar structure (fedposter.js + nav HTML in all pages)
+- [x] Analyze the forum HTML structure (header, body, footer, theme system)
+- [x] Determine integration approach (embed forum in site nav vs keep standalone with nav links)
+
+## Phase 2: Integration
+- [x] Add "Forum" nav link to all e264 site pages (index, dashboard, calendar, analytics, pricing, settings, 404)
+- [ ] Adapt forum.html: add site CSS/JS links to head
+- [ ] Adapt forum.html: replace forum-header with site navbar (preserve forum functionality)
+- [ ] Bridge theme systems: forum reads fedposter_theme, maps 12→7 themes, syncs back
+- [ ] Copy updated files to preview directory
+
+## Phase 3: Verification
+- [ ] Verify forum.html renders correctly in live preview
+- [ ] Verify all nav links work across all pages
+- [ ] Take screenshot of the forum page in the site
+- [ ] Present results to user
+---SCRIPT EXISTS---
+-rw-r--r-- 1 root root 18146 Sep  3 22:00 /workspace/integrate_forum.py
+---FORUM EXISTS---
+-rw-r--r-- 1 root root 254967 Sep  3 21:58 /workspace/extracted_e264/site/forum.html
+---PREVIEW SERVER---
+200
