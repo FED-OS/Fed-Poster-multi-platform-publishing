@@ -1,0 +1,244 @@
+name: Build Desktop Packages
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-extensions:
+    name: Validate built-in extensions
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify Tauri configuration
+        run: |
+          test -f package.json
+          test -f package-lock.json
+          test -f src-tauri/Cargo.toml
+          test -f src-tauri/tauri.conf.json
+          npm run tauri -- --version
+
+      - name: Validate manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ ! -d extensions/builtin ]; then
+            echo "No builtin extensions folder found."
+            exit 0
+          fi
+
+          ok=1
+
+          for dir in extensions/builtin/*/; do
+            if [ ! -f "${dir}manifest.json" ]; then
+              echo "::error::Missing manifest.json in $dir"
+              ok=0
+              continue
+            fi
+
+            if ! node -e "JSON.parse(require('fs').readFileSync('${dir}manifest.json', 'utf8'))" 2>/dev/null; then
+              echo "::error::Invalid JSON in ${dir}manifest.json"
+              ok=0
+              continue
+            fi
+
+            name=$(node -e "console.log(JSON.parse(require('fs').readFileSync('${dir}manifest.json', 'utf8')).name || 'unknown')")
+            version=$(node -e "console.log(JSON.parse(require('fs').readFileSync('${dir}manifest.json', 'utf8')).version || '0')")
+
+            echo "OK: ${name} v${version} (${dir})"
+          done
+
+          [ "$ok" = "1" ]
+
+  build-electron:
+    name: Electron (${{ matrix.name }})
+    needs: validate-extensions
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            os: windows-2022
+            dist_flags: --win
+            artifact_name: Surf-FED-Windows
+            artifact_globs: |
+              dist/*.exe
+              dist/latest*.yml
+
+          - name: Linux
+            os: ubuntu-24.04
+            dist_flags: --linux
+            artifact_name: Surf-FED-Linux
+            artifact_globs: |
+              dist/*.AppImage
+              dist/*.deb
+              dist/*.snap
+              dist/latest*.yml
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk-3-dev \
+            libnotify-dev \
+            libnss3 \
+            libxss1 \
+            libxtst6 \
+            xauth \
+            libavcodec-extra \
+            libgbm1 \
+            libasound2t64
+
+      - name: Build Electron package
+        run: npm run dist -- ${{ matrix.dist_flags }} --publish never
+
+      - name: Upload Electron artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.artifact_globs }}
+          if-no-files-found: error
+          retention-days: 30
+
+  build-tauri-macos:
+    name: Tauri macOS (${{ matrix.arch }})
+    needs: validate-extensions
+    runs-on: macos-14
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: Apple-Silicon
+            rust_target: aarch64-apple-darwin
+
+          - arch: Intel
+            rust_target: x86_64-apple-darwin
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rust_target }}
+
+      - name: Cache Rust build files
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> src-tauri/target
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Verify Tauri project
+        run: |
+          test -f src-tauri/Cargo.toml
+          test -f src-tauri/tauri.conf.json
+          npm run tauri -- --version
+
+      - name: Build Tauri macOS DMG
+        run: |
+          npm run tauri build -- \
+            --target ${{ matrix.rust_target }} \
+            --bundles dmg
+
+      - name: Upload Tauri macOS artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Surf-FED-macOS-${{ matrix.arch }}
+          path: |
+            src-tauri/target/${{ matrix.rust_target }}/release/bundle/dmg/*.dmg
+            src-tauri/target/${{ matrix.rust_target }}/release/bundle/macos/*.app
+          if-no-files-found: error
+          retention-days: 30
+
+  release:
+    name: Publish GitHub Release
+    needs:
+      - build-electron
+      - build-tauri-macos
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Collect release files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p release
+
+          find artifacts -type f \
+            \( \
+              -name "*.exe" -o \
+              -name "*.dmg" -o \
+              -name "*.AppImage" -o \
+              -name "*.deb" -o \
+              -name "*.snap" -o \
+              -name "latest*.yml" \
+            \) \
+            -exec cp {} release/ \;
+
+          echo "Release files:"
+          ls -lah release
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Surf FED ${{ github.ref_name }}
+          generate_release_notes: true
+          files: release/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
