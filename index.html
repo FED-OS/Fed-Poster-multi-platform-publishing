@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fed-Poster — Post to Every Platform from Your Browser</title>
-  <meta name="description" content="Fed-Poster is a privacy-first, browser-native social media posting tool. Post to Telegram, Bluesky, Mastodon, Discord, Reddit, X, LinkedIn, Facebook, Instagram, YouTube, TikTok, Snapchat, WhatsApp, Slack, Medium, WordPress, Pinterest, Threads, Tumblr, VKontakte, Weibo, Nextdoor, Flickr, Google Business, Farcaster, Nostr, GitHub Gist, Stoat, and DeviantArt — all from one dashboard. No servers, no tracking, your credentials never leave your device." />
+  <meta name="description" content="Fed-Poster is a privacy-first, browser-native social media posting tool. Post to Telegram, Bluesky, Mastodon, Discord, GitHub Gist, Stoat, and DeviantArt — all from one dashboard. No servers, no tracking, your credentials never leave your device." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/fedposter.css" />
@@ -168,28 +168,6 @@
     .pt-github { background: linear-gradient(135deg, #24292e, #444c56); }
     .pt-stoat { background: linear-gradient(135deg, #FF6B35, #FF9558); }
     .pt-deviantart { background: linear-gradient(135deg, #00E59B, #05CC87); }
-    .pt-reddit { background: linear-gradient(135deg, #FF4500, #FF6633); }
-    .pt-x { background: linear-gradient(135deg, #000000, #1a1a1a); }
-    .pt-linkedin { background: linear-gradient(135deg, #0A66C2, #0077B5); }
-    .pt-facebook { background: linear-gradient(135deg, #1877F2, #2D88FF); }
-    .pt-pinterest { background: linear-gradient(135deg, #E60023, #BD081C); }
-    .pt-threads { background: linear-gradient(135deg, #000000, #333333); }
-    .pt-tumblr { background: linear-gradient(135deg, #001935, #36465D); }
-    .pt-nostr { background: linear-gradient(135deg, #7C3AED, #A855F7); }
-    .pt-instagram { background: linear-gradient(135deg, #E1306C, #F77737, #FCAF45); }
-    .pt-youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
-    .pt-tiktok { background: linear-gradient(135deg, #25F4EE, #000000, #FE2C55); }
-    .pt-snapchat { background: linear-gradient(135deg, #FFFC00, #FFD600); }
-    .pt-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
-    .pt-slack { background: linear-gradient(135deg, #611F69, #E01E5A); }
-    .pt-medium { background: linear-gradient(135deg, #12100E, #2B2B2B); }
-    .pt-wordpress { background: linear-gradient(135deg, #21759B, #00A0D2); }
-    .pt-vk { background: linear-gradient(135deg, #0077FF, #4A76A8); }
-    .pt-weibo { background: linear-gradient(135deg, #E6162D, #FF6B35); }
-    .pt-nextdoor { background: linear-gradient(135deg, #8BC53F, #5B9C18); }
-    .pt-flickr { background: linear-gradient(135deg, #FF0084, #0063DC); }
-    .pt-gbp { background: linear-gradient(135deg, #4285F4, #34A853); }
-    .pt-farcaster { background: linear-gradient(135deg, #855DCD, #6F3FF5); }
     .pt-more { background: linear-gradient(135deg, var(--accent), var(--accent-light)); }
 
     /* How it works */
@@ -311,11 +289,11 @@
         <a href="index.html">Home</a>
         <a href="dashboard.html">Dashboard</a>
         <a href="calendar.html">Calendar</a>
-        <a href="analytics.html">Analytics</a>
-        <a href="inbox.html">Inbox</a>
+        <a href="analytics.html">FAQ</a>
         <a href="pricing.html">Pricing</a>
         <a href="settings.html">Settings</a>
-      </div>
+        <a href="forum.html">Forum</a>
+        </div>
       <div class="nav-right">
         <div class="nav-theme-picker"></div>
         <a href="dashboard.html" class="btn btn-primary btn-sm">Open App <i class="fa-solid fa-arrow-right"></i></a>
@@ -331,7 +309,7 @@
         <div class="hero-content animate-up">
           <span class="hero-eyebrow"><i class="fa-solid fa-shield-halved"></i> 100% Client-Side · Zero Servers</span>
           <h1>Post to <span class="gradient-text">every platform</span> from one private dashboard</h1>
-          <p class="lead">Fed-Poster is a browser-native, privacy-first social media tool. Write once, publish to Telegram, Bluesky, Mastodon, Discord, Reddit, X, LinkedIn, Facebook, Instagram, YouTube, TikTok, Snapchat, WhatsApp, Slack, Medium, WordPress, Pinterest, Threads, Tumblr, VKontakte, Weibo, Nextdoor, Flickr, Google Business, Farcaster, Nostr, GitHub Gist, Stoat, and DeviantArt. Your credentials never leave your device — no accounts, no tracking, no SaaS.</p>
+          <p class="lead">Fed-Poster is a browser-native, privacy-first social media tool. Write once, publish to Telegram, Bluesky, Mastodon, Discord, GitHub Gist, Stoat, and DeviantArt. Your credentials never leave your device — no accounts, no tracking, no SaaS.</p>
           <div class="hero-cta">
             <a href="dashboard.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-rocket"></i> Launch Dashboard</a>
             <a href="#how-it-works" class="btn btn-ghost btn-lg"><i class="fa-solid fa-circle-play"></i> See How It Works</a>
@@ -357,20 +335,10 @@
                 <span class="mp-chip"><i class="fa-brands fa-mastodon" style="color:#6364FF"></i> Mastodon</span>
                 <span class="mp-chip"><i class="fa-brands fa-discord" style="color:#5865F2"></i> Discord</span>
                 <span class="mp-chip"><i class="fa-brands fa-github" style="color:#333"></i> Gist</span>
-                <span class="mp-chip"><i class="fa-brands fa-reddit" style="color:#FF4500"></i> Reddit</span>
-                <span class="mp-chip"><i class="fa-brands fa-x-twitter" style="color:#fff"></i> X</span>
-                <span class="mp-chip"><i class="fa-brands fa-linkedin" style="color:#0A66C2"></i> LinkedIn</span>
-                <span class="mp-chip"><i class="fa-brands fa-threads" style="color:#fff"></i> Threads</span>
-                <span class="mp-chip"><i class="fa-solid fa-bolt" style="color:#A855F7"></i> Nostr</span>
-                <span class="mp-chip"><i class="fa-brands fa-instagram" style="color:#E1306C"></i> Instagram</span>
-                <span class="mp-chip"><i class="fa-brands fa-youtube" style="color:#FF0000"></i> YouTube</span>
-                <span class="mp-chip"><i class="fa-brands fa-tiktok" style="color:#fff"></i> TikTok</span>
-                <span class="mp-chip"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i> WhatsApp</span>
-                <span class="mp-chip"><i class="fa-brands fa-slack" style="color:#E01E5A"></i> Slack</span>
               </div>
             </div>
             <div class="mock-row">
-              <div class="mock-stat"><div class="num">29</div><div class="lbl">Platforms</div></div>
+              <div class="mock-stat"><div class="num">7</div><div class="lbl">Platforms</div></div>
               <div class="mock-stat"><div class="num">0</div><div class="lbl">Servers</div></div>
               <div class="mock-stat"><div class="num">∞</div><div class="lbl">Privacy</div></div>
             </div>
@@ -414,7 +382,7 @@
         <div class="feature-card reveal">
           <div class="ficon"><i class="fa-solid fa-layer-group"></i></div>
           <h3>Multi-Platform Composer</h3>
-          <p>Write your message once and broadcast to all 29 connected platforms simultaneously. Toggle individual platforms on or off per post. Images and video supported.</p>
+          <p>Write your message once and broadcast to all 7 connected platforms simultaneously. Toggle individual platforms on or off per post. Images and video supported.</p>
         </div>
         <div class="feature-card reveal">
           <div class="ficon"><i class="fa-solid fa-palette"></i></div>
@@ -445,7 +413,7 @@
     <div class="container">
       <div class="platforms-head reveal">
         <span class="section-tag">Integrations</span>
-        <h2>Twenty-nine platforms, one composer</h2>
+        <h2>Seven platforms, one composer</h2>
         <p>Direct API integrations — no middlemen, no relay servers, your tokens talk straight to each platform.</p>
       </div>
       <div class="platforms-grid">
@@ -477,7 +445,7 @@
         <div class="platform-tile reveal">
           <div class="pt-icon pt-stoat"><i class="fa-solid fa-comment-dots"></i></div>
           <h4>Stoat</h4>
-          <p>Local image handling</p>
+          <p>Image hosting · Supabase</p>
         </div>
         <div class="platform-tile reveal">
           <div class="pt-icon pt-deviantart"><i class="fa-brands fa-deviantart"></i></div>
@@ -485,119 +453,9 @@
           <p>Art uploads · Status posts</p>
         </div>
         <div class="platform-tile reveal">
-          <div class="pt-icon pt-reddit"><i class="fa-brands fa-reddit"></i></div>
-          <h4>Reddit</h4>
-          <p>Subreddit posts · Self/text</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-x"><i class="fa-brands fa-x-twitter"></i></div>
-          <h4>X (Twitter)</h4>
-          <p>API v2 · 280-char tweets</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-linkedin"><i class="fa-brands fa-linkedin"></i></div>
-          <h4>LinkedIn</h4>
-          <p>Profile & company shares</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-facebook"><i class="fa-brands fa-facebook"></i></div>
-          <h4>Facebook</h4>
-          <p>Page feed posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-pinterest"><i class="fa-brands fa-pinterest"></i></div>
-          <h4>Pinterest</h4>
-          <p>Pins · Images & links</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-threads"><i class="fa-brands fa-threads"></i></div>
-          <h4>Threads</h4>
-          <p>Meta API · Text threads</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-tumblr"><i class="fa-brands fa-tumblr"></i></div>
-          <h4>Tumblr</h4>
-          <p>Text · Link · Quote posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-nostr"><i class="fa-solid fa-bolt"></i></div>
-          <h4>Nostr</h4>
-          <p>NIP-07 · Relay broadcasts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-instagram"><i class="fa-brands fa-instagram"></i></div>
-          <h4>Instagram</h4>
-          <p>Meta Graph API · Feed & reels</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-youtube"><i class="fa-brands fa-youtube"></i></div>
-          <h4>YouTube</h4>
-          <p>Community tab posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-tiktok"><i class="fa-brands fa-tiktok"></i></div>
-          <h4>TikTok</h4>
-          <p>Content Posting API</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-snapchat"><i class="fa-brands fa-snapchat"></i></div>
-          <h4>Snapchat</h4>
-          <p>Marketing API · Snaps</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
-          <h4>WhatsApp</h4>
-          <p>Business Cloud API</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-slack"><i class="fa-brands fa-slack"></i></div>
-          <h4>Slack</h4>
-          <p>Webhooks · Channel posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-medium"><i class="fa-brands fa-medium"></i></div>
-          <h4>Medium</h4>
-          <p>Publish long-form articles</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-wordpress"><i class="fa-brands fa-wordpress"></i></div>
-          <h4>WordPress</h4>
-          <p>REST API · Blog posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-vk"><i class="fa-brands fa-vk"></i></div>
-          <h4>VKontakte</h4>
-          <p>VK API · Wall posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-weibo"><i class="fa-solid fa-weibo"></i></div>
-          <h4>Weibo</h4>
-          <p>China's top microblog</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-nextdoor"><i class="fa-solid fa-house"></i></div>
-          <h4>Nextdoor</h4>
-          <p>Neighborhood posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-flickr"><i class="fa-brands fa-flickr"></i></div>
-          <h4>Flickr</h4>
-          <p>Photo uploads + tags</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-gbp"><i class="fa-brands fa-google"></i></div>
-          <h4>Google Business</h4>
-          <p>Local business posts</p>
-        </div>
-        <div class="platform-tile reveal">
-          <div class="pt-icon pt-farcaster"><i class="fa-solid fa-paper-plane"></i></div>
-          <h4>Farcaster</h4>
-          <p>Decentralized Web3 social</p>
-        </div>
-        <div class="platform-tile reveal">
           <div class="pt-icon pt-more"><i class="fa-solid fa-plus"></i></div>
-          <h4>More via Zapier</h4>
-          <p>450+ additional platforms</p>
+          <h4>More Coming</h4>
+          <p>X, Threads, Nostr & more</p>
         </div>
       </div>
     </div>
@@ -636,63 +494,20 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item reveal">
-          <div class="stat-num" data-counter="15">0</div>
+          <div class="stat-num">7</div>
           <div class="stat-lbl">Platforms Supported</div>
         </div>
         <div class="stat-item reveal">
-          <div class="stat-num" data-counter="0">0</div>
+          <div class="stat-num">0</div>
           <div class="stat-lbl">Servers Involved</div>
         </div>
         <div class="stat-item reveal">
-          <div class="stat-num" data-counter="12">0</div>
+          <div class="stat-num">12</div>
           <div class="stat-lbl">Theme Variations</div>
         </div>
         <div class="stat-item reveal">
           <div class="stat-num"><span id="discord-online-count">…</span></div>
           <div class="stat-lbl">Discord Online Now</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== WHAT'S NEW (v2 upgrade) ====== -->
-  <section class="section" id="whatsnew">
-    <div class="container">
-      <div class="pricing-head reveal">
-        <span class="section-tag">What's New in v2</span>
-        <h2>Built for power users</h2>
-        <p>A wave of upgrades that make Fed-Poster feel like a native app — command palette, unified inbox, live previews, and full keyboard control.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card reveal">
-          <div class="ficon" style="background:var(--accent-bg);color:var(--accent)"><i class="fa-solid fa-keyboard"></i></div>
-          <h3>Command Palette</h3>
-          <p>Press <kbd style="font-size:12px;padding:2px 7px;border-radius:6px;background:var(--bg-input);border:1px solid var(--accent-bg)">⌘K</kbd> anywhere to jump between pages, switch themes, or trigger actions — all from the keyboard, no mouse needed.</p>
-        </div>
-        <div class="feature-card reveal">
-          <div class="ficon" style="background:var(--green-bg);color:var(--green)"><i class="fa-solid fa-inbox"></i></div>
-          <h3>Unified Inbox</h3>
-          <p>Every mention, reply, and reaction across all your platforms aggregated into a single feed. Filter by platform, search, pin, and mark read — your engagement in one place.</p>
-        </div>
-        <div class="feature-card reveal">
-          <div class="ficon" style="background:var(--blue-bg);color:var(--blue)"><i class="fa-solid fa-eye"></i></div>
-          <h3>Live Post Preview</h3>
-          <p>See exactly how your post renders on each platform before you hit send — Telegram bubbles, Discord embeds, Mastodon toots, GitHub gists, and more, updating as you type.</p>
-        </div>
-        <div class="feature-card reveal">
-          <div class="ficon" style="background:var(--orange-bg);color:var(--orange)"><i class="fa-solid fa-gauge-high"></i></div>
-          <h3>Per-Platform Limits</h3>
-          <p>Live character-remaining badges for every connected platform so you never get cut off mid-post. Color-coded warnings before you exceed a limit.</p>
-        </div>
-        <div class="feature-card reveal">
-          <div class="ficon" style="background:var(--red-bg);color:var(--red)"><i class="fa-solid fa-bolt"></i></div>
-          <h3>Keyboard Shortcuts</h3>
-          <p>Press <kbd style="font-size:12px;padding:2px 7px;border-radius:6px;background:var(--bg-input);border:1px solid var(--accent-bg)">?</kbd> for the full shortcut overlay. Two-key jumps like <kbd style="font-size:12px;padding:2px 7px;border-radius:6px;background:var(--bg-input);border:1px solid var(--accent-bg)">g d</kbd> take you anywhere in a heartbeat.</p>
-        </div>
-        <div class="feature-card reveal">
-          <div class="ficon" style="background:var(--accent-bg);color:var(--accent-light)"><i class="fa-solid fa-file-csv"></i></div>
-          <h3>CSV Export & Ranges</h3>
-          <p>Switch between 7, 30, and 90-day analytics views with animated charts, then export your per-platform breakdown to CSV for your own spreadsheets and reports.</p>
         </div>
       </div>
     </div>
@@ -764,7 +579,7 @@
       <div class="testimonials-grid">
         <div class="testimonial-card reveal">
           <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-          <p class="quote">"Fed-Poster saved me 10 hours a week. I post to 29 platforms in seconds, and I love that my tokens never touch a server. This is how social tools should work."</p>
+          <p class="quote">"Fed-Poster saved me 10 hours a week. I post to 7 platforms in seconds, and I love that my tokens never touch a server. This is how social tools should work."</p>
           <div class="author">
             <div class="avatar">A</div>
             <div><div class="name">Alex Rivera</div><div class="role">Content Creator · 120K followers</div></div>
@@ -815,8 +630,7 @@
         <h4>Product</h4>
         <a href="dashboard.html">Dashboard</a>
         <a href="calendar.html">Calendar</a>
-        <a href="analytics.html">Analytics</a>
-        <a href="inbox.html">Inbox</a>
+        <a href="analytics.html">FAQ</a>
         <a href="pricing.html">Pricing</a>
       </div>
       <div class="footer-col">
@@ -825,17 +639,6 @@
         <a href="dashboard.html">Bluesky</a>
         <a href="dashboard.html">Mastodon</a>
         <a href="dashboard.html">Discord</a>
-        <a href="dashboard.html">Reddit</a>
-        <a href="dashboard.html">X (Twitter)</a>
-        <a href="dashboard.html">LinkedIn</a>
-        <a href="dashboard.html">Nostr</a>
-        <a href="dashboard.html">Instagram</a>
-        <a href="dashboard.html">YouTube</a>
-        <a href="dashboard.html">TikTok</a>
-        <a href="dashboard.html">WhatsApp</a>
-        <a href="dashboard.html">Slack</a>
-        <a href="dashboard.html">WordPress</a>
-        <a href="dashboard.html">Farcaster</a>
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
@@ -865,7 +668,6 @@
 
   <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
   <script src="assets/fedposter.js"></script>
-  <script src="assets/discord-badge.js"></script>
   <script src="assets/kofi-widget.js"></script>
 </body>
 </html>
