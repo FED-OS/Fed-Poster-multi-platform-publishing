@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""
+Thin CLI wrapper around Phantom browser automation toolkit.
+
+Usage:
+    python /workspace/browser-tool/browser_tool.py <action> [args...] [--ocr]
+
+Each invocation connects to the already-running Chromium via CDP (port 9222),
+performs one action, observes the page, prints structured output, and disconnects.
+
+Use see-image on the screenshot path to view the page visually.
+Add --ocr flag to any command to also extract text via Tesseract OCR.
+
+Actions:
+    observe                     - Just observe the current page state
+    navigate <url>              - Navigate to a URL
+    click <selector>            - Click an element (use [N] for element index)
+    fill <selector> <text>      - Clear and fill a form field
+    type <selector> <text>      - Type text into an element (key by key)
+    press <key>                 - Press a keyboard key (e.g. Enter, Tab)
+    select <selector> <value>   - Select a dropdown option
+    scroll_down [px]            - Scroll down (default 500px)
+    scroll_up [px]              - Scroll up (default 500px)
+    scroll_to_text <text>       - Scroll until text is visible
+    go_back                     - Navigate back
+    wait [seconds]              - Wait (default 2s)
+    extract_text [selector]     - Extract text content
+    extract_links [selector]    - Extract all links
+    screenshot [filename]       - Take a screenshot
+    dismiss_overlay             - Dismiss cookie banners / modals
+    js <script>                 - Execute JavaScript
+    ocr [path]                  - Run OCR on latest screenshot (or given path)
+"""
+
+import json
+import sys
+import os
+
+# Ensure this directory is on the path so local imports work
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from browser_interface import BrowserInterface
+from browser_observer import observe
+from browser_actions import execute_action, set_elements
+from browser_server import ensure_running
+from constant import SCREENSHOTS_DIR
+from pathlib import Path
+
+
+SCREENSHOTS_DIR.mkdir(exist_ok=True)
+
+ELEMENTS_FILE = SCREENSHOTS_DIR / ".last_elements.json"
+STEP_FILE = SCREENSHOTS_DIR / ".step_counter"
+LAST_SCREENSHOT_FILE = SCREENSHOTS_DIR / ".last_screenshot"
+
+
+def load_elements():
+    """Load persisted interactive elements from previous invocation."""
+    if ELEMENTS_FILE.exists():
+        try:
+            with open(ELEMENTS_FILE, "r") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            pass
+    return []
+
+
+def save_elements(elements):
+    """Persist interactive elements for next invocation."""
+    try:
+        with open(ELEMENTS_FILE, "w") as f:
+            json.dump(elements, f)
+    except IOError:
+        pass
+
+
+def get_step():
+    """Get and increment step counter for screenshot naming."""
+    step = 0
+    if STEP_FILE.exists():

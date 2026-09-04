@@ -1,0 +1,8 @@
+=== Object-style cards in about.html ===
+      7 class="object-card fade-up"
+      1 class="object-card promptly-glow span-2 fade-up"
+--- card titles/labels ---
+--- section headings ---
+--- Ko-fi ---
+15
+--- featured slides ---

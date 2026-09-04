@@ -1,0 +1,16 @@
+        elif action == "wait":
+            seconds = params.get("seconds", 2)
+            browser.sleep(seconds)
+            return f"Waited {seconds}s"
+
+        elif action == "screenshot":
+            filename = params.get("filename", "manual.png")
+            path = str(SCREENSHOTS_DIR / filename)
+            browser.screenshot(path)
+            return f"Screenshot saved to {path}"
+
+        elif action == "done":
+            result = params.get("result", "Task completed")
+            return f"DONE: {result}"
+
+        elif action == "fail":

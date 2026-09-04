@@ -1,0 +1,15 @@
+=== Featured carousel slides ===
+      3 class="carousel-slide"
+=== All h2/h3 headings ===
+=== Section labels (looking for product names) ===
+      1 FED-AI
+      1 FED-BOT
+      3 FED-D
+      1 FED-E
+      1 FED-FANS
+      2 FED-NET
+      3 FED-OS
+      4 FED-P
+      2 FED-SEND
+      1 FED-TAKU
+      3 FED-V

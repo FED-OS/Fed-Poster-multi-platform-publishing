@@ -1,0 +1,38 @@
+# Task: Integrate About (FED Ecosystem) as a Tab in the Fed-Poster Site
+
+## Phase 1: Save & Analyze
+- [x] Save the provided HTML to `/workspace/extracted_e264/site/about.html`
+- [x] Analyze the about page structure (CSS, JS, layout, animations)
+- [x] Identify integration points (fixed-dark page, navbar + neon CSS overrides + theme bridge)
+
+## Phase 2: Integration
+- [x] Add "About" nav link to all site pages (after Forum link)
+- [x] Adapt about.html: add site CSS/JS links, insert site navbar with About(active)
+- [x] Bridge theme system (MutationObserver keeps about page dark; data-theme=dark)
+- [x] Reposition .header-actions below navbar; body padding-top for navbar
+- [ ] Fix any JS null references from layout changes
+
+## Phase 3: Verification
+- [ ] Copy updated files to preview directory
+- [ ] Verify about.html renders correctly in live preview
+- [ ] Verify all nav links work across all pages (9 pages total)
+- [ ] Take screenshot of the about page
+- [ ] Present results to user
+---PREVIEW SERVER---
+root         668  0.0  0.4 173340 19772 ?        S    22:58   0:00 python3 -m http.server 8765
+---CHROME---
+root        2993  2.2  5.3 51021676 214088 ?     S<l  23:12   0:04 /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome --remote-debugging-port=9222 --remote-allow-origins=* --user-data-dir=/workspace/.browser_data --display=:99 --no-sandbox --disable-dev-shm-usage --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --disable-default-apps --disable-extensions --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-sync --disable-infobars --disable-search-engine-choice-screen --enable-features=CDPScreenshotNewSurface --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --disable-blink-features=AutomationControlled --enable-unsafe-swiftshader --ignore-certificate-errors --window-size=1600,900 --proxy-server=http://127.0.0.1:18080 about:blank
+root        2995  0.0  0.0 50345224 3212 ?       Sl   23:12   0:00 /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome_crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/tmp/.config/google-chrome-for-testing/Crash Reports --annotation=lsb-release=Debian GNU/Linux 12 (bookworm) --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=147.0.7727.15 --initial-client-fd=5 --shared-client-connection
+root        2997  0.0  1.7 50998916 70236 ?      S    23:12   0:00 /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome --type=zygote --no-zygote-sandbox --no-sandbox --crashpad-handler-pid=0 --enable-crash-reporter=, --user-data-dir=/workspace/.browser_data --change-stack-guard-on-fork=enable
+---PORT 9222---
+{
+   "Browser": "Chrome/147.0.7727.15",
+   "Protocol-Version": "1.3",
+   "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+   "V8-Version": "14.7.173.6",
+   "WebKit-Version": "537.36 (@6b5a1b80ccc1e8a4967901d8e58fc2e162cdf050)",
+  
+---XVFB DISPLAY---
+root         645  0.8  2.1 258508 86428 ?        S    22:58   0:08 Xvfb :99 -screen 0 1600x900x24 -ac +extension GLX +render -noreset
+root         647  0.0  0.4  45760 16436 ?        S    22:58   0:00 x11vnc -display :99 -forever -shared -rfbauth /root/.vnc/passwd -rfbport 5901 -o /var/log/x11vnc.log
+root        2993  2.2  5.3 51021676 214088 ?     S<l  23:12   0:04 /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome --remote-debugging-port=9222 --remote-allow-origins=* --user-data-dir=/workspace/.browser_data --display=:99 --no-sandbox --disable-dev-shm-usage --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --disable-default-apps --disable-extensions --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-sync --disable-infobars --disable-search-engine-choice-screen --enable-features=CDPScreenshotNewSurface --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --disable-blink-features=AutomationControlled --enable-unsafe-swiftshader --ignore-certificate-errors --window-size=1600,900 --proxy-server=http://127.0.0.1:18080 about:blank

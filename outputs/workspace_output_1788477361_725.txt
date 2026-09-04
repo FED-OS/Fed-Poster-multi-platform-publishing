@@ -1,0 +1,5 @@
+E: Failed to fetch http://deb.debian.org/debian-security/pool/updates/main/i/imagemagick/libmagickcore-6.q16-6_6.9.11.60%2bdfsg-1.6%2bdeb12u10_amd64.deb  404  Not Found [IP: 151.101.194.132 80]
+E: Failed to fetch http://deb.debian.org/debian-security/pool/updates/main/i/imagemagick/libmagickwand-6.q16-6_6.9.11.60%2bdfsg-1.6%2bdeb12u10_amd64.deb  404  Not Found [IP: 151.101.194.132 80]
+E: Failed to fetch http://deb.debian.org/debian-security/pool/updates/main/i/imagemagick/imagemagick-6.q16_6.9.11.60%2bdfsg-1.6%2bdeb12u10_amd64.deb  404  Not Found [IP: 151.101.194.132 80]
+E: Failed to fetch http://deb.debian.org/debian-security/pool/updates/main/i/imagemagick/imagemagick_6.9.11.60%2bdfsg-1.6%2bdeb12u10_amd64.deb  404  Not Found [IP: 151.101.194.132 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?

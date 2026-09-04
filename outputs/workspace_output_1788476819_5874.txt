@@ -1,0 +1,38 @@
+goto load: Page.goto: Timeout 12000ms exceeded.
+Call log:
+  - navigating to "http://127.0.0
+goto domcontentloaded: Page.goto: Timeout 12000ms exceeded.
+Call log:
+  - navigating to "http://127.0.0
+goto commit: Page.goto: Timeout 12000ms exceeded.
+Call log:
+  - navigating to "http://127.0.0
+
+=== Render checks ===
+URL: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+Title: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+Navbar: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+Nav links: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+About active: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+Theme swatches: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+data-theme: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+orb-canvas: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+ecosystem: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+carousel: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+FedPoster: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+FedPoster.THEMES: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+header-actions: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+body padding-top: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+nav-brand: ERR: Page.evaluate() got an unexpected keyword argument 'timeout'
+
+=== Console errors: 3 ===
+   [error] Failed to load resource: net::ERR_FAILED
+   [error] Failed to load resource: net::ERR_FAILED
+   [error] Failed to load resource: net::ERR_FAILED
+
+=== Screenshot ===
+Viewport screenshot failed: Page.screenshot: Timeout 45000ms exceeded.
+Call log:
+  - taking page screenshot
+
+EXIT: 124

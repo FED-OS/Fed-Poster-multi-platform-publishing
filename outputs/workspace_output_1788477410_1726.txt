@@ -1,0 +1,5 @@
+page | http://localhost:8765/site/about.html | ws://127.0.0.1:9222/devtools/page/2656AF8764A4A4C213788A2D67
+iframe | https://ko-fi.com/fedpromptly/?hidefeed=true&widget=true&embed=true&preview=true | ws://127.0.0.1:9222/devtools/page/E91BB36B14A4F30ED7EAC3899B
+iframe | https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=https | ws://127.0.0.1:9222/devtools/page/9A661C9AC3B282672F6B2443F7
+iframe | https://m.stripe.network/inner.html#url=https%3A%2F%2Fko-fi.com%2Ffedpromptly%2F | ws://127.0.0.1:9222/devtools/page/BAF6FA3A19D42B6B015D0E5A70
+page | about:blank | ws://127.0.0.1:9222/devtools/page/486313B387DDAE81B759D09B81

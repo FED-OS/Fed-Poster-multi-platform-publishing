@@ -1,0 +1,2 @@
+-rw-r--r-- 1 root root 21542 Sep  3 23:17 /workspace/about_clean.png
+OK captured

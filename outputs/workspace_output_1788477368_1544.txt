@@ -1,0 +1,4 @@
+--- updating apt ---
+Get:8 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [336 kB]
+Fetched 9372 kB in 1s (6804 kB/s)
+Reading package lists...

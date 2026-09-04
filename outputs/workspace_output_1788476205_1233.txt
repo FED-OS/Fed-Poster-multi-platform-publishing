@@ -1,0 +1,2 @@
+remaining chrome: 10
+after kill: 0

@@ -1,0 +1,6 @@
+190:        elif action == "screenshot":
+191:            filename = params.get("filename", "manual.png")
+193:            browser.screenshot(path)
+194:            return f"Screenshot saved to {path}"
+210:        elif action == "save_pdf":
+214:            return f"PDF saved to {path}"

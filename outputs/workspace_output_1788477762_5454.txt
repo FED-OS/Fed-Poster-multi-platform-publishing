@@ -1,0 +1,19 @@
+=== Nav link verification across all 9 pages ===
+index.html      : about.html refs=1
+                 forum.html refs=1
+dashboard.html  : about.html refs=1
+                 forum.html refs=1
+calendar.html   : about.html refs=1
+                 forum.html refs=1
+analytics.html  : about.html refs=1
+                 forum.html refs=1
+pricing.html    : about.html refs=1
+                 forum.html refs=1
+settings.html   : about.html refs=1
+                 forum.html refs=1
+404.html        : about.html refs=1
+                 forum.html refs=1
+forum.html      : about.html refs=1
+                 forum.html refs=1
+about.html      : about.html refs=1
+                 forum.html refs=1

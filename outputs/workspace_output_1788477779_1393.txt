@@ -1,0 +1,2 @@
+created about_nogfx.html: 120641
+pause inserted: 0

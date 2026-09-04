@@ -1,0 +1,6 @@
+/opt/ninja-browser-use/browser_server.py:35:PSIPHON_PROXY = "http://127.0.0.1:18080"
+/opt/ninja-browser-use/browser_server.py:213:        psiphon_port = int(PSIPHON_PROXY.split(":")[-1])
+/opt/ninja-browser-use/browser_server.py:216:        proxy_server = PSIPHON_PROXY
+---psiphon running?---
+root         655  0.0  0.7 1771432 31484 ?       Sl   22:58   0:00 /opt/ninja-browser-use/psiphon-tunnel-core-x86_64 -config /opt/ninja-browser-use/psiphon.config.json
+root        3119  6.0  0.6 1620512 27628 ?       Sl   23:12   0:00 /opt/ninja-browser-use/psiphon-tunnel-core-x86_64 -config /opt/ninja-browser-use/psiphon.config.json

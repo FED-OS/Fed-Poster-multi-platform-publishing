@@ -1,0 +1,5 @@
+---
+---DISPLAY CONTENT CHECK---
+Keyboard Control:
+  auto repeat:  on    key click percent:  0    LED mask:  00000000
+  XKB indicators:

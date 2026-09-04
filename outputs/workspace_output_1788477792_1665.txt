@@ -1,0 +1,3 @@
+current: http://localhost:8765/site/about.html
+---opening new tab to about_nogfx---
+new tab via /json/new failed

@@ -1,0 +1,9 @@
+root         668  0.0  0.4 173340 19644 ?        S    22:58   0:00 python3 -m http.server 8765
+---
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.11.15
+Date: Thu, 03 Sep 2026 23:01:29 GMT
+Content-type: text/html
+Content-Length: 120641
+Last-Modified: Thu, 03 Sep 2026 22:34:11 GMT
+

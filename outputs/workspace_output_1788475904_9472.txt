@@ -1,0 +1,20 @@
+total 9844
+drwxr-xr-x  2 root root   4096 Sep  3 22:08 .
+drwxr-xr-x 11 user user   4096 Sep  3 22:47 ..
+-rw-r--r--  1 root root  15074 Sep  3 22:08 .last_elements.json
+-rw-r--r--  1 root root     36 Sep  3 22:08 .last_screenshot
+-rw-r--r--  1 root root      2 Sep  3 22:40 .step_counter
+-rw-r--r--  1 root root 120495 Sep  3 22:07 dashboard_nav_check.png
+-rw-r--r--  1 root root 333253 Sep  3 22:05 forum_final.png
+-rw-r--r--  1 root root 404897 Sep  3 22:03 forum_initial.png
+-rw-r--r--  1 root root 373304 Sep  3 22:06 forum_ocean_theme.png
+-rw-r--r--  1 root root 263923 Sep  3 22:06 home_with_forum.png
+-rw-r--r--  1 root root 141417 Sep  3 21:47 step_000.png
+-rw-r--r--  1 root root 158130 Sep  3 21:47 step_001.png
+-rw-r--r--  1 root root 166118 Sep  3 21:48 step_002.png
+-rw-r--r--  1 root root 166118 Sep  3 21:48 step_003.png
+-rw-r--r--  1 root root 262540 Sep  3 21:48 step_004.png
+-rw-r--r--  1 root root 261483 Sep  3 21:48 step_005.png
+-rw-r--r--  1 root root 121301 Sep  3 21:49 step_006.png
+-rw-r--r--  1 root root 121444 Sep  3 21:49 step_007.png
+-rw-r--r--  1 root root 398876 Sep  3 22:03 step_008.png

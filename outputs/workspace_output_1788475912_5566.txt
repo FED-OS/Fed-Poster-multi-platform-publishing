@@ -1,0 +1,121 @@
+    if STEP_FILE.exists():
+        try:
+            step = int(STEP_FILE.read_text().strip())
+        except (ValueError, IOError):
+            pass
+    try:
+        STEP_FILE.write_text(str(step + 1))
+    except IOError:
+        pass
+    return step
+
+
+def save_last_screenshot(path):
+    """Save the path of the most recent screenshot."""
+    try:
+        LAST_SCREENSHOT_FILE.write_text(str(path))
+    except IOError:
+        pass
+
+
+def get_last_screenshot():
+    """Get the path of the most recent screenshot."""
+    if LAST_SCREENSHOT_FILE.exists():
+        try:
+            return LAST_SCREENSHOT_FILE.read_text().strip()
+        except IOError:
+            pass
+    return None
+
+
+def run_ocr(screenshot_path):
+    """Run Tesseract OCR on a screenshot, return text or empty string."""
+    try:
+        import pytesseract
+        from PIL import Image
+        img = Image.open(screenshot_path)
+        return pytesseract.image_to_string(img).strip()
+    except Exception as e:
+        return f"OCR error: {e}"
+
+
+def print_state(obs, action_result=None, ocr_text=None):
+    """Print structured browser state output."""
+    print("=== BROWSER STATE ===")
+    print(f"URL: {obs.get('url', 'N/A')}")
+    print(f"Title: {obs.get('title', 'N/A')}")
+    if action_result:
+        print(f"Result: {action_result}")
+    if obs.get("has_overlay"):
+        print("Warning: Overlay/modal detected - consider using dismiss_overlay")
+    # Interactive elements
+    elements = obs.get("interactive_elements", [])
+    if elements:
+        print(f"\nInteractive elements ({len(elements)}):")
+        for el in elements:
+            idx = el.get("index", "?")
+            tag = el.get("tag", "")
+            text = el.get("text", "").strip()
+            el_type = el.get("type", "")
+            role = el.get("role", "")
+            href = el.get("href", "")
+            desc_parts = [tag]
+            if el_type:
+                desc_parts.append(f'type="{el_type}"')
+            if role:
+                desc_parts.append(f'role="{role}"')
+            if text:
+                desc_parts.append(f'"{text}"')
+            if href:
+                desc_parts.append(f"-> {href}")
+            print(f"  [{idx}] {' '.join(desc_parts)}")
+    # Accessibility tree (truncated)
+    a11y = obs.get("accessibility_tree", "")
+    if a11y:
+        lines = a11y.split("\n")
+        if len(lines) > 50:
+            a11y = "\n".join(lines[:50]) + f"\n... ({len(lines) - 50} more lines)"
+        print(f"\nAccessibility tree:\n{a11y}")
+    # OCR text (only if --ocr was used)
+    if ocr_text:
+        if len(ocr_text) > 1500:
+            ocr_text = ocr_text[:1500] + "... (truncated)"
+        print(f"\nOCR text:\n{ocr_text}")
+    # Errors
+    if obs.get("errors"):
+        print(f"\nErrors: {obs['errors']}")
+    # Screenshot path + hint
+    if obs.get("screenshot_path"):
+        print(f"\nScreenshot: {obs['screenshot_path']}")
+        print(f"Use see-image to view: {obs['screenshot_path']}")
+    print("=== END ===")
+
+
+def main():
+    if len(sys.argv) < 2:
+        print(f"Usage: {sys.argv[0]} <action> [args...] [--ocr]")
+        print("Run with 'observe' for current page state.")
+        print("Add --ocr to any command to include Tesseract OCR text.")
+        sys.exit(1)
+
+    # Extract --ocr flag from anywhere in args
+    all_args = sys.argv[1:]
+    use_ocr = "--ocr" in all_args
+    all_args = [a for a in all_args if a != "--ocr"]
+
+    action = all_args[0] if all_args else "observe"
+    args = all_args[1:]
+
+    # Standalone OCR action — doesn't need browser connection
+    if action == "ocr":
+        path = args[0] if args else get_last_screenshot()
+        if not path or not os.path.exists(path):
+            print("ERROR: No screenshot found. Provide a path or run a browser action first.")
+            sys.exit(1)
+        text = run_ocr(path)
+        print(f"=== OCR RESULT ===")
+        print(f"File: {path}")
+        print(text)
+        print(f"=== END ===")
+        return
+

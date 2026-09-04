@@ -1,0 +1,4 @@
+lrwxrwxrwx 1 root root 0 Sep  3 23:01 /proc/668/cwd -> /workspace/preview
+---
+ls: cannot access '/workspace/site/about.html': No such file or directory
+/workspace/preview/site/about.html

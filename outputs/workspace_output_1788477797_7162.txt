@@ -1,0 +1,3 @@
+window=25165827
+-rw-r--r-- 1 root root 28330 Sep  3 23:23 /workspace/nogfx_top.png
+CAPTURED

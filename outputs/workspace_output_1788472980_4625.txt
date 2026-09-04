@@ -1,0 +1,18 @@
+'extracted_e264/site/forum.html' -> 'preview/site/forum.html'
+'extracted_e264/site/index.html' -> 'preview/site/index.html'
+'extracted_e264/site/dashboard.html' -> 'preview/site/dashboard.html'
+'extracted_e264/site/calendar.html' -> 'preview/site/calendar.html'
+'extracted_e264/site/analytics.html' -> 'preview/site/analytics.html'
+'extracted_e264/site/pricing.html' -> 'preview/site/pricing.html'
+'extracted_e264/site/settings.html' -> 'preview/site/settings.html'
+'extracted_e264/site/404.html' -> 'preview/site/404.html'
+
+=== Verify preview now has Forum links ===
+index.html: 34349 bytes
+dashboard.html: 23462 bytes
+calendar.html: 7647 bytes
+analytics.html: 6071 bytes
+pricing.html: 16249 bytes
+settings.html: 9772 bytes
+404.html: 4863 bytes
+forum.html: 261705 bytes

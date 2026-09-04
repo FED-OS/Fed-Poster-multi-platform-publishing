@@ -1,0 +1,3 @@
+killing 14 procs
+remaining chrome: 0
+cleaned locks

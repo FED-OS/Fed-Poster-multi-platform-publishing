@@ -1,0 +1,7 @@
+Browser WS: ws://127.0.0.1:9222/devtools/browser/2bc6b105-0dab-4ae9-b78d-b0d00c71a78a
+Got 1 messages, targets found: True
+  page target: 8F90A9FE992F67875B4C FED Ecosystem — Living Objects http://localhost:8765/site/about.html
+Attached! sessionId: 52142A3EFDAC5A27D0A4
+eval recv err: Connection timed out
+done
+EXIT: 0

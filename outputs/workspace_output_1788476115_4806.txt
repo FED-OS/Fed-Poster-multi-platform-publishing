@@ -1,0 +1,48 @@
+    def connect_cdp(cls, endpoint="http://localhost:9222", viewport_width=1600,
+                    viewport_height=900, timeout=30000, capture_console=True):
+        """Connect to an already-running Chromium via Chrome DevTools Protocol.
+
+        This is the preferred way to use the browser in Phantom tasks.
+        The browser process persists across tasks -- tabs, cookies, and state
+        are preserved between runs.
+
+        Args:
+            endpoint: CDP endpoint URL (default http://localhost:9222).
+            viewport_width/height: Viewport size for new pages.
+            timeout: Default timeout in ms.
+            capture_console: Capture console/network events.
+
+        Returns:
+            A BrowserInterface instance connected to the running browser.
+
+        Raises:
+            ConnectionError: If no browser is running on the endpoint.
+        """
+        import urllib.request
+        # Quick health check
+        try:
+            urllib.request.urlopen(f"{endpoint}/json/version", timeout=3)
+        except Exception as e:
+            raise ConnectionError(
+                f"No browser found at {endpoint}. "
+                f"Start one with: python phantom/browser_server.py start"
+            ) from e
+
+        inst = cls.__new__(cls)
+        inst._headless = False
+        inst._viewport = {"width": viewport_width, "height": viewport_height}
+        inst._timeout = timeout
+        inst._slow_mo = 0
+        inst._user_agent = None
+        inst._capture_console = capture_console
+        inst._user_data_dir = None
+        inst._proxy = None
+        inst._persistent = False
+        inst._cdp = True  # Flag: connected via CDP, don't kill browser on stop()
+        inst.devtools = DevTools()
+
+        inst._playwright = sync_playwright().start()
+        inst.browser = inst._playwright.chromium.connect_over_cdp(endpoint)
+
+        # Reuse existing context/page if available, else create new
+        contexts = inst.browser.contexts

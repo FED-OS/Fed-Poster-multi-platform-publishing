@@ -1,0 +1,2 @@
+launched pid 3164
+[('page', 'FED Ecosystem — Living Objects', 'http://localhost:8765/site/about.html'), ('page', 'about:blank', 'about:blank')]

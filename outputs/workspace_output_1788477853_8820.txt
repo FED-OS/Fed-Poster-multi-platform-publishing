@@ -1,0 +1,62 @@
+=== Looking at object-card structure (lines around them) ===
+1999:        .object-card {
+2013:        .object-card:hover {
+2019:        .object-card .name {
+2025:        .object-card .sub {
+2030:        .object-card .emoji {
+2034:        .object-card .explanation {
+2148:        .object-card.promptly-glow {
+2156:        .object-card.promptly-glow::before {
+2170:        .object-card.promptly-glow::after {
+2181:        .object-card.promptly-glow:hover::before {
+=== Sample object card content ===
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation-play-state: paused;
+        }
+        .object-dashboard .dash-header {
+            background: #0d1120;
+            padding: 6px 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+        }
+        .object-dashboard .dash-body {
+            padding: 14px 16px 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            flex: 1;
+        }
+        .object-dashboard .dash-body .metric {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 6px 8px;
+            text-align: center;
+        }
+        .object-dashboard .dash-body .metric .num {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+        .object-dashboard .dash-body .metric .label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .object-dashboard .explanation {
+            padding: 6px 16px 10px;
+            margin-top: 0;
+            border-top: 1px solid var(--border-subtle);
+            border-left: none;
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* ───────────── OBJECT: BILLBOARD (FEDsense) ───────────── */
+        .object-billboard {

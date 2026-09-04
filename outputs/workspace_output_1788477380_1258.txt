@@ -1,0 +1,2 @@
+-rw-r--r-- 1 root root 269428 Sep  3 23:16 /workspace/display_current.png
+Screenshot captured

@@ -1,0 +1,37 @@
+/opt/ninja-browser-use/constant.py:4:SCREENSHOTS_DIR = Path("/workspace/.screenshots")
+/opt/ninja-browser-use/browser_actions.py:16:from constant import SCREENSHOTS_DIR
+/opt/ninja-browser-use/browser_actions.py:192:            path = str(SCREENSHOTS_DIR / filename)
+/opt/ninja-browser-use/browser_actions.py:212:            path = str(SCREENSHOTS_DIR / filename)
+---
+6:    python /workspace/browser-tool/browser_tool.py <action> [args...] [--ocr]
+/usr/bin/browser-tool: symbolic link to /opt/ninja-browser-use/browser_tool.py
+#!/usr/bin/env python3
+"""
+Thin CLI wrapper around Phantom browser automation toolkit.
+
+Usage:
+    python /workspace/browser-tool/browser_tool.py <action> [args...] [--ocr]
+
+Each invocation connects to the already-running Chromium via CDP (port 9222),
+performs one action, observes the page, prints structured output, and disconnects.
+
+Use see-image on the screenshot path to view the page visually.
+Add --ocr flag to any command to also extract text via Tesseract OCR.
+
+Actions:
+    observe                     - Just observe the current page state
+    navigate <url>              - Navigate to a URL
+    click <selector>            - Click an element (use [N] for element index)
+    fill <selector> <text>      - Clear and fill a form field
+    type <selector> <text>      - Type text into an element (key by key)
+    press <key>                 - Press a keyboard key (e.g. Enter, Tab)
+    select <selector> <value>   - Select a dropdown option
+    scroll_down [px]            - Scroll down (default 500px)
+    scroll_up [px]              - Scroll up (default 500px)
+    scroll_to_text <text>       - Scroll until text is visible
+    go_back                     - Navigate back
+    wait [seconds]              - Wait (default 2s)
+    extract_text [selector]     - Extract text content
+    extract_links [selector]    - Extract all links
+    screenshot [filename]       - Take a screenshot
+    dismiss_overlay             - Dismiss cookie banners / modals

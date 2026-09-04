@@ -1,0 +1,5 @@
+launched
+{
+   "Browser": "Chrome/147.0.7727.15",
+---chrome flag check---
+remote-allow-origins

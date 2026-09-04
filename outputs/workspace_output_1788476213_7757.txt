@@ -1,0 +1,2 @@
+removed SingletonSocket
+cleaned

@@ -1,0 +1,2 @@
+-rw-r--r-- 1 root root 28661 Sep  3 23:23 /workspace/nogfx_top2.png
+CAPTURED

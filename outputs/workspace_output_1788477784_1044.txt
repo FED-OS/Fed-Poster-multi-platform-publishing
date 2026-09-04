@@ -1,0 +1,5 @@
+2863:        function animate() {
+2882:            requestAnimationFrame(animate);
+2884:        animate();
+2934:        let autoSlide = setInterval(() => {
+2944:            autoSlide = setInterval(() => {

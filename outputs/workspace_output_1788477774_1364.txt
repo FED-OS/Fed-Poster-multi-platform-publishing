@@ -1,0 +1,22 @@
+=== Syncing source -> preview ===
+Copied. Verifying sizes match:
+  index.html: 34388 bytes  [MATCH]
+  dashboard.html: 23501 bytes  [MATCH]
+  calendar.html: 7686 bytes  [MATCH]
+  analytics.html: 6110 bytes  [MATCH]
+  pricing.html: 16288 bytes  [MATCH]
+  settings.html: 9811 bytes  [MATCH]
+  forum.html: 263709 bytes  [MATCH]
+  about.html: 120641 bytes  [MATCH]
+  404.html: 4902 bytes  [MATCH]
+--- assets ---
+total 144
+drwxr-xr-x 2 root root  4096 Sep  3 21:47 .
+drwxr-xr-x 3 root root  4096 Sep  3 22:34 ..
+-rw-r--r-- 1 root root  5092 Sep  3 23:22 analytics.css
+-rw-r--r-- 1 root root  8372 Sep  3 23:22 analytics.js
+-rw-r--r-- 1 root root  5877 Sep  3 23:22 calendar.css
+-rw-r--r-- 1 root root  8350 Sep  3 23:22 calendar.js
+-rw-r--r-- 1 root root 12066 Sep  3 23:22 dashboard.css
+-rw-r--r-- 1 root root 19596 Sep  3 23:22 dashboard.js
+-rw-r--r-- 1 root root  3507 Sep  3 23:22 error.css

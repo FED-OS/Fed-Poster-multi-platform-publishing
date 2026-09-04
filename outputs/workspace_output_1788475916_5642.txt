@@ -1,0 +1,81 @@
+
+    # Ensure browser is running
+    if not ensure_running():
+        print("ERROR: Could not start or connect to browser")
+        sys.exit(1)
+
+    browser = None
+    try:
+        browser = BrowserInterface.connect_cdp()
+
+        # Load persisted elements for self-healing selectors
+        prev_elements = load_elements()
+        if prev_elements:
+            set_elements(prev_elements)
+
+        action_result = None
+        step = get_step()
+
+        # Dispatch action
+        if action == "observe":
+            pass  # Just observe below
+
+        elif action == "navigate":
+            url = args[0] if args else "about:blank"
+            action_result = execute_action(browser, "goto", {"url": url})
+
+        elif action == "click":
+            selector = args[0] if args else "body"
+            action_result = execute_action(browser, "click", {"selector": selector})
+
+        elif action == "fill":
+            selector = args[0] if len(args) > 0 else "input"
+            text = args[1] if len(args) > 1 else ""
+            action_result = execute_action(browser, "fill", {"selector": selector, "value": text})
+
+        elif action == "type":
+            selector = args[0] if len(args) > 0 else "input"
+            text = args[1] if len(args) > 1 else ""
+            action_result = execute_action(browser, "type_text", {"selector": selector, "text": text})
+
+        elif action == "press":
+            key = args[0] if args else "Enter"
+            action_result = execute_action(browser, "press", {"key": key})
+
+        elif action == "select":
+            selector = args[0] if len(args) > 0 else "select"
+            value = args[1] if len(args) > 1 else ""
+            action_result = execute_action(browser, "select_option", {"selector": selector, "value": value})
+
+        elif action == "scroll_down":
+            px = int(args[0]) if args else 500
+            action_result = execute_action(browser, "scroll_down", {"px": px})
+
+        elif action == "scroll_up":
+            px = int(args[0]) if args else 500
+            action_result = execute_action(browser, "scroll_up", {"px": px})
+
+        elif action == "scroll_to_text":
+            text = " ".join(args) if args else ""
+            try:
+                browser.page.locator(f"text={text}").scroll_into_view_if_needed(timeout=5000)
+                action_result = f"Scrolled to text: {text}"
+            except Exception as e:
+                action_result = f"ERROR: Could not scroll to text '{text}' - {e}"
+
+        elif action == "go_back":
+            action_result = execute_action(browser, "go_back", {})
+
+        elif action == "wait":
+            seconds = int(args[0]) if args else 2
+            action_result = execute_action(browser, "wait", {"seconds": seconds})
+
+        elif action == "extract_text":
+            selector = args[0] if args else "body"
+            action_result = execute_action(browser, "extract_text", {"selector": selector})
+
+        elif action == "extract_links":
+            selector = args[0] if args else "body"
+            action_result = execute_action(browser, "extract_links", {"selector": selector})
+
+        elif action == "screenshot":

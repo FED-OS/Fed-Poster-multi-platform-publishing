@@ -1,0 +1,10 @@
+4940 bash -lc { cd /workspace ; mkdir -p /workspace/outputs ; } { cd /workspace && rm -rf /workspace/.mychrome && setsid /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome \   --remote-debugging-port=9223 --remote-allow-origins=* \   --user-data-dir=/workspace/.mychrome --display=:99 --no-sandbox \   --disable-dev-shm-usage --enable-unsafe-swiftshader --use-gl=angle \   --use-angle=swiftshader --disable-gpu --ignore-certificate-errors \   --no-first-run --no-default-browser-check --disable-session-crashed-bubble \   --disable-restore-tab-state --window-size=1440,900 \   "http://localhost:8765/site/about.html" > /workspace/mychrome.log 2>&1 & echo "launched my chrome pid=$!"; sleep 1; echo "done" __ec=$? } >"/workspace/outputs/workspace_output_1788477514_318.txt" 2>&1 head -c 80000 "/workspace/outputs/workspace_output_1788477514_318.txt" ( exit "$__ec" )
+4943 /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome --remote-debugging-port=9223 --remote-allow-origins=* --user-data-dir=/workspace/.mychrome --display=:99 --no-sandbox --disable-dev-shm-usage --enable-unsafe-swiftshader --use-gl=angle --use-angle=swiftshader --disable-gpu --ignore-certificate-errors --no-first-run --no-default-browser-check --disable-session-crashed-bubble --disable-restore-tab-state --window-size=1440,900 http://localhost:8765/site/about.html
+---9223---
+{
+   "Browser": "Chrome/147.0.7727.15",
+   "Protocol-Version
+---log---
+[5703:5754:0903/232024.080205:ERROR:net/socket/socket_posix.cc:153] bind() failed: Address already in use (98)
+[5703:5754:0903/232024.080215:ERROR:content/browser/devtools/devtools_http_handler.cc:313] Cannot start http server for devtools.
+[5703:5703:0903/232024.516800:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files

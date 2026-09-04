@@ -1,0 +1,18 @@
+=== about.html integration checks ===
+data-theme=dark: 1
+fedposter.css link: 1
+fedposter.js script: 1
+Font Awesome: 1
+navbar present: 1
+About link active: 1
+theme bridge MutationObserver: 1
+Open App btn: 1
+--- navbar links in about.html ---
+      1 href="about.html"
+      1 href="analytics.html"
+      1 href="calendar.html"
+      2 href="dashboard.html"
+      1 href="forum.html"
+      2 href="index.html"
+      1 href="pricing.html"
+      1 href="settings.html"

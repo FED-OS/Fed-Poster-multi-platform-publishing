@@ -1,0 +1,2 @@
+/opt/ninja-browser-use/browser_server.py:299:def ensure_running():
+/opt/ninja-browser-use/browser_interface.py:213:    def connect_cdp(cls, endpoint="http://localhost:9222", viewport_width=1600,

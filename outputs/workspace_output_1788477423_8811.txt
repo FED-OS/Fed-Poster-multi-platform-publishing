@@ -1,0 +1,4 @@
+Connecting to page WS: ws://127.0.0.1:9222/devtools/page/2656AF8764A4A4C213788A2D67DEC5C4...
+Connected.
+  -> sent Page.captureScreenshot (id=1)
+Total messages received: 0
