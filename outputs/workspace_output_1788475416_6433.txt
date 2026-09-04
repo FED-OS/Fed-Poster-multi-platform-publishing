@@ -1,0 +1,46 @@
+        sock.close()
+        proxy_server = PSIPHON_PROXY
+    except Exception:
+        pass
+
+    args = [
+        chromium,
+        f"--remote-debugging-port={CDP_PORT}",
+        f"--user-data-dir={BROWSER_DATA_DIR}",
+        f"--display={DISPLAY}",
+        # Standard Playwright flags for compatibility
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-background-networking",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-breakpad",
+        "--disable-component-extensions-with-background-pages",
+        "--disable-component-update",
+        "--disable-default-apps",
+        "--disable-extensions",
+        "--disable-hang-monitor",
+        "--disable-ipc-flooding-protection",
+        "--disable-popup-blocking",
+        "--disable-prompt-on-repost",
+        "--disable-renderer-backgrounding",
+        "--disable-sync",
+        "--disable-infobars",
+        "--disable-search-engine-choice-screen",
+        "--enable-features=CDPScreenshotNewSurface",
+        "--force-color-profile=srgb",
+        "--metrics-recording-only",
+        "--no-first-run",
+        "--password-store=basic",
+        "--use-mock-keychain",
+        "--disable-blink-features=AutomationControlled",
+        "--enable-unsafe-swiftshader",
+        "--ignore-certificate-errors",
+        "--window-size=1600,900",
+        # Start with a blank tab
+        "about:blank",
+    ]
+
+    # Add proxy if configured
+    if proxy_server:
+        args.insert(-1, f"--proxy-server={proxy_server}")

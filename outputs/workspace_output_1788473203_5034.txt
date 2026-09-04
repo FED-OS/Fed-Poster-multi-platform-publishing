@@ -1,0 +1,3 @@
+Result: JS result: clicked blue swatch
+---
+Result: JS result: data-theme: ocean, fedposter_theme: blue

@@ -1,0 +1,33 @@
+'/workspace/extracted_e264/site/404.html' -> '/workspace/preview/site/404.html'
+'/workspace/extracted_e264/site/about.html' -> '/workspace/preview/site/about.html'
+'/workspace/extracted_e264/site/analytics.html' -> '/workspace/preview/site/analytics.html'
+'/workspace/extracted_e264/site/calendar.html' -> '/workspace/preview/site/calendar.html'
+'/workspace/extracted_e264/site/dashboard.html' -> '/workspace/preview/site/dashboard.html'
+'/workspace/extracted_e264/site/forum.html' -> '/workspace/preview/site/forum.html'
+'/workspace/extracted_e264/site/index.html' -> '/workspace/preview/site/index.html'
+'/workspace/extracted_e264/site/pricing.html' -> '/workspace/preview/site/pricing.html'
+'/workspace/extracted_e264/site/settings.html' -> '/workspace/preview/site/settings.html'
+=== Copied. Preview dir now: ===
+-rw-r--r-- 1 root root   4902 Sep  3 22:34 /workspace/preview/site/404.html
+-rw-r--r-- 1 root root 120641 Sep  3 22:34 /workspace/preview/site/about.html
+-rw-r--r-- 1 root root   6110 Sep  3 22:34 /workspace/preview/site/analytics.html
+-rw-r--r-- 1 root root   7686 Sep  3 22:34 /workspace/preview/site/calendar.html
+-rw-r--r-- 1 root root  23501 Sep  3 22:34 /workspace/preview/site/dashboard.html
+-rw-r--r-- 1 root root 263709 Sep  3 22:34 /workspace/preview/site/forum.html
+-rw-r--r-- 1 root root  34388 Sep  3 22:34 /workspace/preview/site/index.html
+-rw-r--r-- 1 root root  16288 Sep  3 22:34 /workspace/preview/site/pricing.html
+-rw-r--r-- 1 root root   9811 Sep  3 22:34 /workspace/preview/site/settings.html
+=== Assets ===
+analytics.css
+analytics.js
+calendar.css
+calendar.js
+dashboard.css
+dashboard.js
+error.css
+fedposter.css
+fedposter.js
+kofi-widget.js
+pricing.css
+settings.css
+settings.js

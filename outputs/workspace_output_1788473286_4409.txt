@@ -1,0 +1,5 @@
+URL: http://localhost:8765/site/forum.html
+Title: FEDPromptly · FED Hub
+Result: Navigated to http://localhost:8765/site/forum.html (title: FEDPromptly · FED Hub, status: 200)
+--- Forum loaded, now check all nav links ---
+Result: JS result: [{"text":"Home","href":"index.html"},{"text":"Dashboard","href":"dashboard.html"},{"text":"Calendar","href":"calendar.html"},{"text":"Analytics","href":"analytics.html"},{"text":"Pricing","href":"pricing.html"},{"text":"Settings","href":"settings.html"},{"text":"Forum","href":"forum.html"}]

@@ -1,0 +1,60 @@
+=== BROWSER STATE ===
+URL: http://localhost:8765/site/forum.html
+Title: FEDPromptly · FED Hub
+Result: Navigated to http://localhost:8765/site/forum.html (title: FEDPromptly · FED Hub, status: 200)
+
+Interactive elements (42):
+  [2] a "Fed-Poster" -> index.html
+  [3] a "Home" -> index.html
+  [4] a "Dashboard" -> dashboard.html
+  [5] a "Calendar" -> calendar.html
+  [6] a "Analytics" -> analytics.html
+  [7] a "Pricing" -> pricing.html
+  [8] a "Settings" -> settings.html
+  [9] a "Forum" -> forum.html
+  [10] button "Download"
+  [13] button
+  [14] button "👤
+                    Login"
+  [23] input type="text"
+  [24] select "Latest
+                        Hot
+                        T"
+  [25] button "New Topic"
+  [26] a "Support on Ko-fi" -> https://ko-fi.com/fedpromptly
+  [29] button "Preview & Get"
+  [30] button "All 0"
+  [31] button "Trending 0"
+  [32] button "Announcements 0"
+  [33] button "Questions 0"
+  [34] button "Guides 0"
+  [35] button "Icons 0"
+  [36] button "Notes 0"
+  [37] button "Feed 0"
+  [39] button "Bookmarks 0"
+  [61] a -> https://discord.com
+  [62] a -> https://twitter.com
+  [63] a -> https://github.com
+  [64] a -> https://ko-fi.com/fedpromptly
+  [65] a "Trending" -> #
+  [66] a "Guides" -> #
+  [67] a "Questions" -> #
+  [68] a "Bookmarks" -> #
+  [69] a "Settings" -> #
+  [70] a "New Topic" -> #
+  [71] a "Shortcuts" -> #
+  [72] a "Support us" -> https://ko-fi.com/fedpromptly
+  [73] input type="email"
+  [74] button type="submit"
+  [75] a "Privacy" -> #
+  [76] a "Terms" -> #
+  [77] a "Contact" -> #
+
+Accessibility tree:
+Page text: Fed-Poster Home Dashboard Calendar Analytics Pricing Settings Forum Download 👤 Login FED-OS Forum Total views: 0 · 0 topics Latest Hot Top (likes) Most commented New Topic 27 online Support on Ko-fi — LATEST POST — ACTIVITY LEVEL — TOTAL REPLIES — AVG READ TIME MINI SAAS SHOP HOT FED-Poster V1 v1.0 Generate stunning social media posters with AI — built for FED-OS. AI-powered poster generation FED-OS native integration One-click export to PNG $4.99 ONE-TIME Preview & Get AVAILABLE All 0 Trending 0 Announcements 0 Questions 0 Guides 0 Icons 0 Notes 0 Feed 0 Bookmarks 0 FEDPromptly The community hub for FED-OS builders, prompt engineers, and creators. Share ideas, ship faster, and grow together. EXPLORE Trending Guides Questions Bookmarks RESOURCES Settings New Topic Shortcuts Support us STAY IN THE LOOP Get the best threads and product updates delivered to your inbox. — TOPICS — REPLIES — ONLINE NOW 7 THEMES Made with by the FEDPromptly team Privacy Terms Contact © FEDPromptly · FED Hub New Topic N New topic · R Reply · ? Help
+
+Errors: JS Errors (1):
+   • Cannot read properties of null (reading 'addEventListener')
+     TypeError: Cannot read properties of null (reading 'addEventListener')
+     at http://localhost:8765/site/forum.html:4287:21
+Network Errors (1):

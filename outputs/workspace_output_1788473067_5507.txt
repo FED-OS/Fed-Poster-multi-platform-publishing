@@ -1,0 +1,10 @@
+=== Settings modal theme options ===
+482:        .theme-option {
+498:        .theme-option:hover {
+502:        .theme-option.active {
+515:        .theme-option.active .theme-swatch {
+518:        .theme-option .theme-check {
+524:        .theme-option.active .theme-check {
+4279:            document.querySelectorAll('.theme-option').forEach(opt => {
+4296:        document.querySelectorAll('.theme-option').forEach(opt => {
+4315:                    document.querySelectorAll('.theme-option').forEach(opt => {

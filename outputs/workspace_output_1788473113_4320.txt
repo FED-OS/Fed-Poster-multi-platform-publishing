@@ -1,0 +1,30 @@
+=== BROWSER STATE ===
+URL: http://localhost:8765/site/forum.html
+Title: FEDPromptly · FED Hub
+Result: Navigated to http://localhost:8765/site/forum.html (title: FEDPromptly · FED Hub, status: 200)
+
+Interactive elements (55):
+  [2] a "Fed-Poster" -> index.html
+  [3] a "Home" -> index.html
+  [4] a "Dashboard" -> dashboard.html
+  [5] a "Calendar" -> calendar.html
+  [6] a "Analytics" -> analytics.html
+  [7] a "Pricing" -> pricing.html
+  [8] a "Settings" -> settings.html
+  [9] a "Forum" -> forum.html
+  [10] button "Download"
+  [13] button
+  [14] button "👤
+                    Login"
+  [30] input type="text"
+  [31] select "Latest
+                        Hot
+                        T"
+  [32] button "New Topic"
+  [33] a "Support on Ko-fi" -> https://ko-fi.com/fedpromptly
+  [34] button
+  [35] button
+  [36] button
+  [37] button
+  [38] button
+  [39] button

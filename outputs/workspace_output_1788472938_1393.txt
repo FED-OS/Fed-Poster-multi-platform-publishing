@@ -1,0 +1,31 @@
+Total lines: 52
+Found 'add this forum as a tab' on line index 51 (line #52)
+Line length: 261687 chars
+✅ ast.literal_eval succeeded. Content length: 254335 chars
+Removed prefix. HTML length: 254310 chars
+Starts with DOCTYPE: True
+Ends with </html>: True
+First 80 chars: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta n
+Last 80 chars: ...designed with a calmer, more focused aesthetic.');
+    </script>
+</body>
+</html>
+
+✅ Forum HTML written to /workspace/extracted_e264/site/forum.html
+File size: 254310 characters, ~5290 lines
+-rw-r--r-- 1 root root 254967 Sep  3 22:02 extracted_e264/site/forum.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FEDPromptly · FED Hub</title>
+    <script ...
+� FEDPromptly — redesigned with a calmer, more focused aesthetic.');
+    </script>
+</body>
+</html>

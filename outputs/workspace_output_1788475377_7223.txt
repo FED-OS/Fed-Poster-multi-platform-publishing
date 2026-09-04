@@ -1,0 +1,16 @@
+Initial page: about:blank
+Traceback (most recent call last):
+  File "/workspace/screenshot_about.py", line 12, in <module>
+    ws = create_connection(page["webSocketDebuggerUrl"], timeout=30)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/usr/local/lib/python3.11/site-packages/websocket/_core.py", line 284, in connect
+    self.handshake_response = handshake(self.sock, url, *addrs, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/websocket/_handshake.py", line 73, in handshake
+    status, resp = _get_resp_headers(sock)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/websocket/_handshake.py", line 173, in _get_resp_headers
+    raise WebSocketBadStatusException(
+websocket._exceptions.WebSocketBadStatusException: Handshake status 403 Forbidden -+-+- {'content-length': '239', 'content-type': 'text/html'} -+-+- Rejected an incoming WebSocket connection from the http://127.0.0.1:9222 origin. Use the command line flag --remote-allow-origins=http://127.0.0.1:9222 to allow connections from this origin or --remote-allow-origins=* to allow all origins.

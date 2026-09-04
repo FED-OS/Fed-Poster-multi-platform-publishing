@@ -1,0 +1,10 @@
+=== BROWSER STATE ===
+URL: http://localhost:8765/site/forum.html
+Title: FEDPromptly · FED Hub
+Result: ERROR: screenshot failed — Error: Unsupported screenshot mime type for path "/workspace/.screenshots/forum_initial": None
+
+Interactive elements (42):
+  [2] a "Fed-Poster" -> index.html
+  [3] a "Home" -> index.html
+  [4] a "Dashboard" -> dashboard.html
+  [5] a "Calendar" -> calendar.html

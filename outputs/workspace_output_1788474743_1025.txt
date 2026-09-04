@@ -1,0 +1,23 @@
+=== SITE NAVBAR in index.html ===
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-mark"><i class="fa-solid fa-paper-plane"></i></span>
+        Fed-Poster
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="settings.html">Settings</a>
+        <a href="forum.html">Forum</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-theme-picker"></div>
+        <a href="dashboard.html" class="btn btn-primary btn-sm">Open App <i class="fa-solid fa-arrow-right"></i></a>
+        <button class="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>

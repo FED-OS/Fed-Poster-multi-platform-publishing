@@ -1,0 +1,9 @@
+index.html: 1
+dashboard.html: 1
+calendar.html: 1
+analytics.html: 1
+pricing.html: 1
+settings.html: 1
+404.html: 1
+forum.html: 1
+about.html: 1

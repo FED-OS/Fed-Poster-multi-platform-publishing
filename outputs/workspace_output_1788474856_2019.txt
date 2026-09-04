@@ -1,0 +1,4 @@
+=== HTTP status ===
+200
+=== Title ===
+<title>FED Ecosystem — Living Objects</title>

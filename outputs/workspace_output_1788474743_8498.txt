@@ -1,0 +1,26 @@
+=== HEADER-ACTIONS CSS ===
+105:        .header-actions {
+114:        .header-actions a {
+126:        .header-actions .btn-subscribe {
+131:        .header-actions .btn-subscribe:hover {
+136:        .header-actions .btn-sponsor {
+141:        .header-actions .btn-sponsor:hover {
+147:            .header-actions {
+154:            .header-actions a {
+2245:    <div class="header-actions">
+2246:        <a href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener noreferrer" class="btn-subscribe">❤️ Subscribe</a>
+2247:        <a href="https://github.com/sponsors/FED-OS" target="_blank" rel="noopener noreferrer" class="btn-sponsor">⭐ Sponsor</a>
+
+=== BODY CSS ===
+39:        body {
+50:            body {
+680:        .object-modem-premium .modem-body {
+772:        .object-appstore .appstore-body {
+1109:        .object-truck-fixed .truck-body {
+1312:        .object-mailbox .mailbox-body {
+1479:        .object-browser .browser-body {
+1540:        .object-terminal .term-body {
+1610:        .object-folder .folder-body {
+1811:        .object-dashboard .dash-body {
+
+=== FONT AWESOME CHECK ===

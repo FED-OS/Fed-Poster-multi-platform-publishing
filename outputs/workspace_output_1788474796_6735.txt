@@ -1,0 +1,23 @@
+=== HEAD links ===
+2:<html lang="en" data-theme="dark">
+11:    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+12:    <link rel="stylesheet" href="assets/fedposter.css" />
+2964:                document.documentElement.setAttribute('data-theme','dark');
+2965:                // Keep the about page's dark base regardless of fedposter.css theme variables
+2968:            // Observe data-theme changes made by fedposter.js theme picker
+2970:            obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+=== Navbar present? ===
+2318:    <nav class="navbar">
+=== About active link ===
+2332:          <a href="about.html" class="active">About</a>
+=== header-actions top ===
+110:            top: 84px;
+151:                top: 76px;
+2244:        body { padding-top: 84px; }
+2245:        @media (max-width: 768px) { body { padding-top: 76px; } }
+=== bridge js ===
+2961:        // ── Theme bridge: About page stays dark (neon showcase) regardless of site theme picker ──
+2963:            function keepDark(){
+2969:            const obs = new MutationObserver(keepDark);
+2971:            window.addEventListener('DOMContentLoaded', keepDark);

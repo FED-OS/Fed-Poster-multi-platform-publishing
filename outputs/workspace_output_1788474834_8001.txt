@@ -1,0 +1,9 @@
+  index.html: added About link (standard)
+  dashboard.html: added About link (standard)
+  calendar.html: added About link (standard)
+  analytics.html: added About link (standard)
+  pricing.html: added About link (standard)
+  settings.html: added About link (standard)
+  404.html: added About link (standard)
+  forum.html: added About link (standard)
+Done.

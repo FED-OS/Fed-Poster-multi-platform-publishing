@@ -1,0 +1,9 @@
+=== Any remaining themeDropdown references without null check ===
+3105:        <div class="theme-dropdown" id="themeDropdown">
+4240:        const themeDropdown = document.getElementById('themeDropdown');
+4304:                if (themeDropdown) themeDropdown.classList.toggle('open');
+4308:            if (themeDropdown && !themeDropdown.contains(e.target) && e.target !== themeToggle) {
+4309:                themeDropdown.classList.remove('open');
+4315:                if (themeDropdown) themeDropdown.classList.remove('open');
+
+=== themeOption references ===

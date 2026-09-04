@@ -1,0 +1,11 @@
+        const shareBtn = document.getElementById('shareBtn');
+        const wordCountDisplay = document.getElementById('wordCountDisplay');
+        const readingTimeDisplay = document.getElementById('readingTimeDisplay');
+        const keyboardHelp = document.getElementById('keyboardHelp');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeDropdown = document.getElementById('themeDropdown');
+        const THEME_ICONS = {
+            dark: 'fas fa-moon', light: 'fas fa-sun', ocean: 'fas fa-water',
+            forest: 'fas fa-tree', sunset: 'fas fa-sun', midnight: 'fas fa-star',
+            rose: 'fas fa-heart'

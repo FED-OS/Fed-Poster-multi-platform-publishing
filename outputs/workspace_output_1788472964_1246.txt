@@ -1,0 +1,27 @@
+=== Site CSS/JS links ===
+10:    <link rel="stylesheet" href="assets/fedposter.css" />
+4305:        // fedposter.js may set a 12-theme value (e.g. 'blue') that the forum
+5421:    <script src="assets/fedposter.js"></script>
+
+=== Site navbar (new header) ===
+3051:    <nav class="navbar">
+
+=== Forum link in navbar ===
+3064:                <a href="forum.html">Forum</a>
+
+=== Theme bridge code ===
+3923:                else { if (typeof setTheme === 'function') setTheme(t); else { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('fedos_theme', t); localStorage.setItem('fedposter_theme', t); } }
+4258:        // ── Theme bridge: sync with site's fedposter_theme ──
+4259:        const FORUM_THEMES = ['dark','light','ocean','forest','sunset','midnight','rose'];
+4261:        const SITE_TO_FORUM = {
+4268:        let _siteTheme = localStorage.getItem('fedposter_theme') || localStorage.getItem('fedos_theme') || 'dark';
+4269:        let currentTheme = SITE_TO_FORUM[_siteTheme] || _siteTheme;
+4270:        if (!FORUM_THEMES.includes(currentTheme)) currentTheme = 'dark';
+4272:            if (!FORUM_THEMES.includes(theme)) theme = SITE_TO_FORUM[theme] || 'dark';
+4278:            localStorage.setItem('fedposter_theme', theme);
+4309:            if (!FORUM_THEMES.includes(dt)) {
+4310:                const mapped = SITE_TO_FORUM[dt] || 'dark';
+
+=== Theme sync observer ===
+4307:        const _themeSyncObs = new MutationObserver(() => {
+4323:        _themeSyncObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

@@ -1,0 +1,13 @@
+2910:        #settingsBtn { transition: var(--transition); }
+2911:        #settingsBtn:hover { color: var(--brand); border-color: var(--brand); }
+2912:        #settingsBtn:hover i { transform: rotate(90deg); transition: transform 0.4s ease; }
+3088:                <button class="theme-toggle forum-nav-control" id="settingsBtn" aria-label="Open settings" title="Settings">
+3477:    <div class="settings-overlay" id="settingsOverlay">
+3829:        const settingsBtn = document.getElementById('settingsBtn');
+3831:        const settingsOverlay = document.getElementById('settingsOverlay');
+3837:            settingsOverlay.classList.add('active');
+3842:            settingsOverlay.classList.remove('active');
+3845:        if (settingsBtn) settingsBtn.addEventListener('click', openSettings);
+3847:        if (settingsOverlay) settingsOverlay.addEventListener('click', (e) => { if (e.target === settingsOverlay) closeSettings(); });
+3848:        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && settingsOverlay.classList.contains('active')) closeSettings(); });
+5392:            if (footerSettings) footerSettings.addEventListener('click', (e) => { e.preventDefault(); const b = document.getElementById('settingsBtn'); if (b) b.click(); });

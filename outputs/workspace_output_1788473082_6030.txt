@@ -1,0 +1,84 @@
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-card" style="position:relative;">
+            <button class="settings-close" id="settingsClose">&times;</button>
+            <div class="settings-sidebar">
+                <div class="settings-sidebar-head">Settings</div>
+                <button class="settings-nav-btn active" data-settings-section="appearance"><i class="fas fa-palette"></i> Appearance</button>
+                <button class="settings-nav-btn" data-settings-section="behavior"><i class="fas fa-sliders-h"></i> Behavior</button>
+                <button class="settings-nav-btn" data-settings-section="notifications"><i class="fas fa-bell"></i> Notifications</button>
+                <button class="settings-nav-btn" data-settings-section="data"><i class="fas fa-database"></i> Data &amp; Privacy</button>
+                <button class="settings-nav-btn" data-settings-section="about"><i class="fas fa-info-circle"></i> About</button>
+            </div>
+            <div class="settings-body">
+
+                <!-- Appearance -->
+                <div class="settings-section active" id="settingsAppearance">
+                    <div class="settings-panel-title"><i class="fas fa-palette"></i> Appearance</div>
+                    <div class="settings-panel-desc">Customize how the forum looks. Changes apply instantly.</div>
+
+                    <div class="settings-theme-grid" id="settingsThemeGrid">
+                        <div class="settings-theme-card" data-theme-val="dark"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#0e0e14,#7c5cfc);"></div><div class="settings-theme-name">Dark</div></div>
+                        <div class="settings-theme-card" data-theme-val="light"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#f7f7fb,#7c5cfc);"></div><div class="settings-theme-name">Light</div></div>
+                        <div class="settings-theme-card" data-theme-val="ocean"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#07131c,#22d3ee);"></div><div class="settings-theme-name">Ocean</div></div>
+                        <div class="settings-theme-card" data-theme-val="forest"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#0a120c,#4ade80);"></div><div class="settings-theme-name">Forest</div></div>
+                        <div class="settings-theme-card" data-theme-val="sunset"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#1a0d10,#fb923c);"></div><div class="settings-theme-name">Sunset</div></div>
+                        <div class="settings-theme-card" data-theme-val="midnight"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#05060f,#818cf8);"></div><div class="settings-theme-name">Midnight</div></div>
+                        <div class="settings-theme-card" data-theme-val="rose"><div class="settings-theme-preview" style="background:linear-gradient(135deg,#160a12,#e879f9);"></div><div class="settings-theme-name">Rose</div></div>
+                    </div>
+
+                    <div style="height:18px;"></div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Accent color</div><div class="setting-hint">Override the theme's default brand accent.</div></div>
+                        <div class="accent-swatches" id="accentSwatches">
+                            <div class="accent-swatch" data-accent="default" style="background:linear-gradient(135deg,#7c5cfc,#f472b6);" title="Default"></div>
+                            <div class="accent-swatch" data-accent="#7c5cfc" style="background:#7c5cfc;" title="Purple"></div>
+                            <div class="accent-swatch" data-accent="#3b82f6" style="background:#3b82f6;" title="Blue"></div>
+                            <div class="accent-swatch" data-accent="#10b981" style="background:#10b981;" title="Green"></div>
+                            <div class="accent-swatch" data-accent="#f59e0b" style="background:#f59e0b;" title="Amber"></div>
+                            <div class="accent-swatch" data-accent="#ef4444" style="background:#ef4444;" title="Red"></div>
+                            <div class="accent-swatch" data-accent="#ec4899" style="background:#ec4899;" title="Pink"></div>
+                            <div class="accent-swatch" data-accent="#06b6d4" style="background:#06b6d4;" title="Cyan"></div>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Density</div><div class="setting-hint">Comfortable adds more padding; compact fits more on screen.</div></div>
+                        <select class="setting-select" id="settingDensity">
+                            <option value="comfortable">Comfortable</option>
+                            <option value="compact">Compact</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Font size</div><div class="setting-hint">Base text size for the entire forum.</div></div>
+                        <div class="setting-range">
+                            <input type="range" id="settingFontSize" min="13" max="20" step="1" value="16" />
+                            <span class="range-val" id="fontSizeVal">16px</span>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Animated liquid background</div><div class="setting-hint">Flowing gradient blobs behind the content. Turn off for performance.</div></div>
+                        <label class="toggle-switch"><input type="checkbox" id="settingLiquidBg" checked /><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Reduced motion</div><div class="setting-hint">Minimize animations and transitions across the forum.</div></div>
+                        <label class="toggle-switch"><input type="checkbox" id="settingReducedMotion" /><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+
+                <!-- Behavior -->
+                <div class="settings-section" id="settingsBehavior">
+                    <div class="settings-panel-title"><i class="fas fa-sliders-h"></i> Behavior</div>
+                    <div class="settings-panel-desc">Control how the forum loads and displays content.</div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Carousel autoplay</div><div class="setting-hint">Automatically rotate trending topics in the carousel.</div></div>
+                        <label class="toggle-switch"><input type="checkbox" id="settingCarouselAutoplay" checked /><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Autoplay speed</div><div class="setting-hint">Time each trending slide stays visible.</div></div>
+                        <div class="setting-range">
+                            <input type="range" id="settingCarouselSpeed" min="3000" max="10000" step="1000" value="5000" />
+                            <span class="range-val" id="carouselSpeedVal">5s</span>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-info"><div class="setting-label">Show ETA / activity panel</div><div class="setting-hint">Display the stats cards (latest post, activity, replies, read time).</div></div>
+                        <label class="toggle-switch"><input type="checkbox" id="settingShowEta" checked /><span class="toggle-slider"></span></label>

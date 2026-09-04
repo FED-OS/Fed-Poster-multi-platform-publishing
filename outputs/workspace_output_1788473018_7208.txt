@@ -1,0 +1,5 @@
+=== BROWSER STATE ===
+URL: http://localhost:8765/site/forum.html
+Title: FEDPromptly · FED Hub
+Result: Screenshot saved to /workspace/.screenshots/forum_initial.png
+

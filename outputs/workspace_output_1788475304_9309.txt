@@ -1,0 +1,45 @@
+{
+   "Browser": "Chrome/147.0.7727.15",
+   "Protocol-Version": "1.3",
+   "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+   "V8-Version": "14.7.173.6",
+   "WebKit-Version": "537.36 (@6b5a1b80ccc1e8a4967901d8e58fc2e162cdf050)",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/browser/b7339111-7967-4b8e-acda-6e003eea256d"
+}
+---
+[ {
+   "description": "",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@6b5a1b80ccc1e8a4967901d8e58fc2e162cdf050/inspector.html?ws=127.0.0.1:9222/devtools/page/5AE4E333349A2AA1BED30328F0FBB2B6",
+   "id": "5AE4E333349A2AA1BED30328F0FBB2B6",
+   "title": "FED Ecosystem — Living Objects",
+   "type": "page",
+   "url": "http://localhost:8765/site/about.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/5AE4E333349A2AA1BED30328F0FBB2B6"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@6b5a1b80ccc1e8a4967901d8e58fc2e162cdf050/inspector.html?ws=127.0.0.1:9222/devtools/page/874640BA2B23FF37A478AA5E0F765F1C",
+   "id": "874640BA2B23FF37A478AA5E0F765F1C",
+   "parentId": "5AE4E333349A2AA1BED30328F0FBB2B6",
+   "title": "https://ko-fi.com/fedpromptly/?hidefeed=true&amp;widget=true&amp;embed=true&amp;preview=true",
+   "type": "iframe",
+   "url": "https://ko-fi.com/fedpromptly/?hidefeed=true&widget=true&embed=true&preview=true",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/874640BA2B23FF37A478AA5E0F765F1C"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@6b5a1b80ccc1e8a4967901d8e58fc2e162cdf050/inspector.html?ws=127.0.0.1:9222/devtools/page/27BA4B12E4ACF9B3A88E6113CDAC7F0E",
+   "id": "27BA4B12E4ACF9B3A88E6113CDAC7F0E",
+   "parentId": "874640BA2B23FF37A478AA5E0F765F1C",
+   "title": "https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=https%3A%2F%2Fko-fi.com%2Ffedpromptly%2F%3Fhidefeed%3Dtrue%26widget%3Dtrue%26embed%3Dtrue%26preview%3Dtrue&amp;title=Buy%20FED-OS%20by%20FEDPromptly%20a%20Coffee&amp;referrer=http%3A%2F%2Flocalhost%3A8765%2F&amp;muid=NA&amp;sid=NA&amp;version=6&amp;preview=false&amp;__shared_params__[version]=v3",
+   "type": "iframe",
+   "url": "https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=https%3A%2F%2Fko-fi.com%2Ffedpromptly%2F%3Fhidefeed%3Dtrue%26widget%3Dtrue%26embed%3Dtrue%26preview%3Dtrue&title=Buy%20FED-OS%20by%20FEDPromptly%20a%20Coffee&referrer=http%3A%2F%2Flocalhost%3A8765%2F&muid=NA&sid=NA&version=6&preview=false&__shared_params__[version]=v3",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/27BA4B12E4ACF9B3A88E6113CDAC7F0E"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@6b5a1b80ccc1e8a4967901d8e58fc2e162cdf050/inspector.html?ws=127.0.0.1:9222/devtools/page/865338D17100A05F09B28F588541C542",
+   "id": "865338D17100A05F09B28F588541C542",
+   "parentId": "27BA4B12E4ACF9B3A88E6113CDAC7F0E",
+   "title": "https://m.stripe.network/inner.html#url=https%3A%2F%2Fko-fi.com%2Ffedpromptly%2F%3Fhidefeed%3Dtrue%26widget%3Dtrue%26embed%3Dtrue%26preview%3Dtrue&amp;title=Buy%20FED-OS%20by%20FEDPromptly%20a%20Coffee&amp;referrer=http%3A%2F%2Flocalhost%3A8765%2F&amp;muid=NA&amp;sid=NA&amp;version=6&amp;preview=false&amp;__shared_params__[version]=v3",
+   "type": "iframe",
+   "url": "https://m.stripe.network/inner.html#url=https%3A%2F%2Fko-fi.com%2Ffedpromptly%2F%3Fhidefeed%3Dtrue%26widget%3Dtrue%26embed%3Dtrue%26preview%3Dtrue&title=Buy%20FED-OS%20by%20FEDPromptly%20a%20Coffee&referrer=http%3A%2F%2Flocalhost%3A8765%2F&muid=NA&sid=NA&version=6&preview=false&__shared_params__[version]=v3",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/865338D17100A05F09B28F588541C542"
+} ]

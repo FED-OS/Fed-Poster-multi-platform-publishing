@@ -1,0 +1,3 @@
+Result: JS result: clicked ocean swatch
+---
+Result: JS result: data-theme: ocean, fedposter_theme: ocean, fedos_theme: dark

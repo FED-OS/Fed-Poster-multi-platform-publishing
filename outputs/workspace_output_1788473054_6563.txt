@@ -1,0 +1,24 @@
+=== themeToggle references ===
+4224:        const themeToggle = document.getElementById('themeToggle');
+4287:        themeToggle.addEventListener('click', (e) => {
+4292:            if (!themeDropdown.contains(e.target) && e.target !== themeToggle) {
+
+=== themeDropdown references ===
+4226:        const themeDropdown = document.getElementById('themeDropdown');
+4289:            themeDropdown.classList.toggle('open');
+4292:            if (!themeDropdown.contains(e.target) && e.target !== themeToggle) {
+4293:                themeDropdown.classList.remove('open');
+4299:                themeDropdown.classList.remove('open');
+
+=== themeIcon references ===
+4225:        const themeIcon = document.getElementById('themeIcon');
+4275:            themeIcon.className = THEME_ICONS[theme] || 'fas fa-palette';
+4313:                    themeIcon.className = THEME_ICONS[mapped] || 'fas fa-palette';
+
+=== Where are they defined? ===
+4224:        const themeToggle = document.getElementById('themeToggle');
+4225:        const themeIcon = document.getElementById('themeIcon');
+4226:        const themeDropdown = document.getElementById('themeDropdown');
+4227:        const THEME_ICONS = {
+4275:            themeIcon.className = THEME_ICONS[theme] || 'fas fa-palette';
+4313:                    themeIcon.className = THEME_ICONS[mapped] || 'fas fa-palette';

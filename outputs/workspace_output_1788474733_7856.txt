@@ -1,0 +1,48 @@
+total 496
+drwxr-xr-x 3 root root   4096 Sep  3 22:31 .
+drwxr-xr-x 6 root root   4096 Sep  3 21:46 ..
+-rw-r--r-- 1 root root   4863 Sep  3 21:59 404.html
+-rw-r--r-- 1 root root 114293 Sep  3 22:31 about.html
+-rw-r--r-- 1 root root   6071 Sep  3 21:59 analytics.html
+drwxr-xr-x 2 root root   4096 Sep  3 21:46 assets
+-rw-r--r-- 1 root root   7647 Sep  3 21:59 calendar.html
+-rw-r--r-- 1 root root  23462 Sep  3 21:59 dashboard.html
+-rw-r--r-- 1 root root 263670 Sep  3 22:05 forum.html
+-rw-r--r-- 1 root root  34349 Sep  3 21:59 index.html
+-rw-r--r-- 1 root root  16249 Sep  3 21:59 pricing.html
+-rw-r--r-- 1 root root   9772 Sep  3 21:59 settings.html
+---TODO---
+# Task: Integrate About (FED Ecosystem) as a Tab in the Fed-Poster Site
+
+## Phase 1: Save & Analyze
+- [ ] Save the provided HTML to `/workspace/extracted_e264/site/about.html`
+- [ ] Analyze the about page structure (CSS, JS, layout, animations)
+- [ ] Identify integration points (add site navbar, site CSS/JS, theme bridge)
+
+## Phase 2: Integration
+- [ ] Add "About" nav link to all site pages (after Forum link)
+- [ ] Adapt about.html: add site CSS/JS links, replace top area with site navbar
+- [ ] Bridge theme system (use fedposter_theme, map 12→about's dark aesthetic)
+- [ ] Fix any JS null references from layout changes
+
+## Phase 3: Verification
+- [ ] Copy updated files to preview directory
+- [ ] Verify about.html renders correctly in live preview
+- [ ] Verify all nav links work across all pages (9 pages total)
+- [ ] Take screenshot of the about page
+- [ ] Present results to user
+---ABOUT SIZE---
+2864 /workspace/extracted_e264/site/about.html
+---PREVIEW---
+total 384
+drwxr-xr-x 3 root root   4096 Sep  3 22:03 .
+drwxr-xr-x 4 root root   4096 Sep  3 21:47 ..
+-rw-r--r-- 1 root root   4863 Sep  3 22:03 404.html
+-rw-r--r-- 1 root root   6071 Sep  3 22:03 analytics.html
+drwxr-xr-x 2 root root   4096 Sep  3 21:47 assets
+-rw-r--r-- 1 root root   7647 Sep  3 22:03 calendar.html
+-rw-r--r-- 1 root root  23462 Sep  3 22:03 dashboard.html
+-rw-r--r-- 1 root root 263670 Sep  3 22:05 forum.html
+-rw-r--r-- 1 root root  34349 Sep  3 22:03 index.html
+-rw-r--r-- 1 root root  16249 Sep  3 22:03 pricing.html
+-rw-r--r-- 1 root root   9772 Sep  3 22:03 settings.html

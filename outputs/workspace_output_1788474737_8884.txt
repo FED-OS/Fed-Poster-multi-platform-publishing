@@ -1,0 +1,50 @@
+=== HEAD ===
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FED Ecosystem — Living Objects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ───────────── ROOT ───────────── */
+        :root {
+            --bg-base: #05070e;
+            --bg-card: rgba(6, 8, 18, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.04);
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --neon-cyan: #00d4ff;
+            --neon-purple: #b084ff;
+            --neon-orange: #ff6a3d;
+            --neon-green: #00f5a0;
+            --neon-pink: #ff4d94;
+            --silver-start: #d0d5dd;
+            --silver-end: #a0a8b5;
+            --text-primary: #f0f4ff;
+            --text-secondary: #b0bcdd;
+            --text-muted: #5f7299;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --radius: 14px;
+            --radius-pill: 40px;
+
+=== BODY START (first 80 lines after <body>) ===
+2242:<body>
+<body>
+
+    <!-- ─── FIXED HEADER BUTTONS ─── -->
+    <div class="header-actions">
+        <a href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener noreferrer" class="btn-subscribe">❤️ Subscribe</a>
+        <a href="https://github.com/sponsors/FED-OS" target="_blank" rel="noopener noreferrer" class="btn-sponsor">⭐ Sponsor</a>
+    </div>
+
+    <!-- ─── BG LAYERS ─── -->
+    <canvas id="orb-canvas"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="ambient-glow g1"></div>
+    <div class="ambient-glow g2"></div>
+
+    <!-- ─── ECOSYSTEM ─── -->
+    <div class="ecosystem">

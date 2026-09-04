@@ -1,0 +1,6 @@
+Result: JS result: reset to dark
+---
+=== Test navigation: forum -> dashboard -> forum ===
+URL: http://localhost:8765/site/dashboard.html
+Title: Fed-Poster — Dashboard
+Result: Screenshot saved to /workspace/.screenshots/dashboard_nav_check.png

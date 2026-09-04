@@ -1,0 +1,24 @@
+=== Check Forum link in extracted site pages ===
+index.html: 1
+dashboard.html: 1
+calendar.html: 1
+analytics.html: 1
+pricing.html: 1
+settings.html: 1
+404.html: 1
+
+=== Check Forum link in preview site pages ===
+index.html: 0
+0
+dashboard.html: 0
+0
+calendar.html: 0
+0
+analytics.html: 0
+0
+pricing.html: 0
+0
+settings.html: 0
+0
+404.html: 0
+0

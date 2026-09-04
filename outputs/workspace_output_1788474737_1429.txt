@@ -1,0 +1,121 @@
+=== SCRIPT END ===
+                else if (this.y < 0) this.y = h;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.colorBase + this.alpha + ')';
+                ctx.fill();
+                if (this.size > 1.8) {
+                    ctx.shadowColor = this.colorBase + '0.06)';
+                    ctx.shadowBlur = 14;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+        for (let i = 0; i < 50; i++) particles.push(new Orb());
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => { p.update();
+                p.draw(); });
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = 'rgba(0,212,255,0.015)';
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // ─── Fade-up on scroll ───
+        document.addEventListener('DOMContentLoaded', () => {
+            const els = document.querySelectorAll('.fade-up');
+            if ('IntersectionObserver' in window) {
+                const obs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+                els.forEach(el => obs.observe(el));
+            } else {
+                els.forEach(el => el.classList.add('visible'));
+            }
+        });
+
+        // ─── Carousel Logic ───
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('#carouselDots .dot');
+        let currentIndex = 0;
+        const totalSlides = 3;
+
+        function updateCarousel(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            updateCarousel(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            updateCarousel(currentIndex + 1);
+        });
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                updateCarousel(i);
+            });
+        });
+
+        // Auto-slide
+        let autoSlide = setInterval(() => {
+            updateCarousel(currentIndex + 1);
+        }, 6000);
+
+        // Pause on hover
+        const carouselContainer = document.querySelector('.featured-carousel');
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoSlide);
+        });
+        carouselContainer.addEventListener('mouseleave', () => {
+            autoSlide = setInterval(() => {
+                updateCarousel(currentIndex + 1);
+            }, 6000);
+        });
+
+        // ─── Ko-fi Toggle Logic ───
+        document.getElementById('toggleKofiBtn').addEventListener('click', function() {
+            var card = document.getElementById('kofiCard');
+            var btnText = this.querySelector('.btn-overlay span');
+            if (card.style.display === 'none' || card.style.display === '') {
+                card.style.display = 'block';
+                btnText.innerText = '✦ Close ✦';
+            } else {
+                card.style.display = 'none';
+                btnText.innerText = '✦ Join Now ✦';
+            }
+        });
+    </script>
+
+</body>
+</html>

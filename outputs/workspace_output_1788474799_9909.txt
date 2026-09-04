@@ -1,0 +1,1 @@
+2968:            // Observe data-theme changes made by fedposter.js theme picker

@@ -1,0 +1,79 @@
+        body {
+            background: var(--bg-base);
+            background-image: radial-gradient(ellipse at 10% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 90% 80%, rgba(176, 132, 255, 0.04) 0%, transparent 50%);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            padding: 40px 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+        }
+
+        /* ───────────── BG LAYERS ───────────── */
+        #orb-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+=== HEADER-ACTIONS ===
+        .header-actions {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .header-actions a {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 8px 18px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            transition: all var(--transition);
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+        }
+        .header-actions .btn-subscribe {
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--neon-cyan);
+            border-color: rgba(0, 212, 255, 0.15);
+        }
+        .header-actions .btn-subscribe:hover {
+            background: rgba(0, 212, 255, 0.16);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+        }
+        .header-actions .btn-sponsor {
+            background: rgba(176, 132, 255, 0.08);
+            color: var(--neon-purple);
+            border-color: rgba(176, 132, 255, 0.15);
+        }
+        .header-actions .btn-sponsor:hover {
+            background: rgba(176, 132, 255, 0.16);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(176, 132, 255, 0.08);
+        }
+        @media (max-width: 600px) {
+            .header-actions {
+                top: 12px;
+                right: 12px;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            .header-actions a {
+                font-size: 0.6rem;
+                padding: 6px 12px;
+            }
+        }
+
+        /* ───────────── ECOSYSTEM GRID ───────────── */

@@ -1,0 +1,18 @@
+root         635  0.0  0.7  37212 31028 ?        Ss   21:22   0:00 /usr/bin/python3 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+root         661  0.0  0.5  26700 20344 ?        S    21:22   0:00 python browser_server.py start --foreground
+root         662  1.9  1.0  51344 44336 ?        S    21:22   0:47 python /app/server.py
+root         665  0.0  1.7 1524956 72604 ?       Sl   21:22   0:00 /usr/lib/code-server/lib/node /usr/lib/code-server --bind-addr 127.0.0.1:4000 --auth none --user-data-dir /opt/code-server --extensions-dir /opt/code-server/extensions
+root         736  0.0  0.2  15616 11700 ?        S    21:22   0:00 /usr/local/bin/python -c from multiprocessing.resource_tracker import main;main(4)
+root         737  0.1  1.1 127276 46336 ?        Sl   21:22   0:04 /usr/local/bin/python -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7) --multiprocessing-fork
+root         738  0.0  1.8 1525352 75200 ?       Sl   21:22   0:00 /usr/lib/code-server/lib/node /usr/lib/code-server/out/node/entry
+root         778  0.3  6.6 51176332 267788 ?     S<l  21:22   0:09 /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome --remote-debugging-port=9222 --user-data-dir=/workspace/.browser_data --display=:99 --no-sandbox --disable-dev-shm-usage --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --disable-default-apps --disable-extensions --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-sync --disable-infobars --disable-search-engine-choice-screen --enable-features=CDPScreenshotNewSurface --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --disable-blink-features=AutomationControlled --enable-unsafe-swiftshader --ignore-certificate-errors --window-size=1600,900 --proxy-server=http://127.0.0.1:18080 about:blank
+root         922  0.0  0.5  29072 23024 ?        S    21:22   0:00 python3 -m websockify --web /opt/novnc 0.0.0.0:6080 localhost:5901
+root        1536  0.0  0.0   4352  1696 ?        S    21:47   0:00 bash -lc  cd /workspace/preview && python3 -m http.server 8765 > /tmp/preview_server.log 2>&1 & sleep 2 && echo "Server started on port 8765" && curl -s -o /dev/null -w "standalone: %{http_code}\n" http://localhost:8765/standalone-dashboard.html && curl -s -o /dev/null -w "e264-site index: %{http_code}\n" http://localhost:8765/site/index.html && curl -s -o /dev/null -w "e264-site dashboard: %{http_code}\n" http://localhost:8765/site/dashboard.html && curl -s -o /dev/null -w "v2-landing: %{http_code}\n" http://localhost:8765/v2-landing/index.html 
+root        1538  0.0  0.4 181532 19736 ?        S    21:47   0:00 python3 -m http.server 8765
+---
+=== Check what dir the server serves ===
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Directory listing for /</title>

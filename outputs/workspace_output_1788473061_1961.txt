@@ -1,0 +1,53 @@
+=== Original header from extraction (before modification) ===
+<!-- Header -->
+    <header class="forum-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon"><i class="fas fa-comments"></i></span>
+                <span>FEDPromptly</span>
+            </div>
+            <div class="right-actions">
+                <div class="download-group">
+                    <button class="download-toggle" id="downloadToggle" aria-label="Download apps">
+                        <i class="fas fa-download"></i>
+                        <span>Download</span>
+                        <i class="fas fa-chevron-down" style="font-size:0.55rem;"></i>
+                    </button>
+                    <div class="download-dropdown" id="downloadDropdown">
+                        <div class="download-label">Get the app</div>
+                        <button class="btn-download" id="downloadDesktop">
+                            <i class="fas fa-desktop"></i> Desktop App
+                        </button>
+                        <button class="btn-download" id="downloadMobile">
+                            <i class="fas fa-mobile-alt"></i> Mobile App
+                        </button>
+                    </div>
+                </div>
+
+                <div class="theme-group">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Choose theme">
+                        <i class="fas fa-palette" id="themeIcon"></i>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <div class="theme-dropdown-label">Theme</div>
+                        <button class="theme-option" data-theme-val="dark"><span class="theme-swatch" style="background:linear-gradient(135deg,#0e0e14,#7c5cfc);"></span> Dark <i class="fas fa-check theme-check"></i></button>
+                        <button class="theme-option" data-theme-val="light"><span class="theme-swatch" style="background:linear-gradient(135deg,#f7f7fb,#7c5cfc);"></span> Light <i class="fas fa-check theme-check"></i></button>
+                        <button class="theme-option" data-theme-val="ocean"><span class="theme-swatch" style="background:linear-gradient(135deg,#07131c,#22d3ee);"></span> Ocean <i class="fas fa-check theme-check"></i></button>
+                        <button class="theme-option" data-theme-val="forest"><span class="theme-swatch" style="background:linear-gradient(135deg,#0a120c,#4ade80);"></span> Forest <i class="fas fa-check theme-check"></i></button>
+                        <button class="theme-option" data-theme-val="sunset"><span class="theme-swatch" style="background:linear-gradient(135deg,#1a0d10,#fb923c);"></span> Sunset <i class="fas fa-check theme-check"></i></button>
+                        <button class="theme-option" data-theme-val="midnight"><span class="theme-swatch" style="background:linear-gradient(135deg,#05060f,#818cf8);"></span> Midnight <i class="fas fa-check theme-check"></i></button>
+                        <button class="theme-option" data-theme-val="rose"><span class="theme-swatch" style="background:linear-gradient(135deg,#160a12,#e879f9);"></span> Rose <i class="fas fa-check theme-check"></i></button>
+                    </div>
+                </div>
+
+                <button class="theme-toggle" id="settingsBtn" aria-label="Open settings" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+
+                <button class="login-btn" id="loginBtn">
+                    <span class="user-avatar" id="userAvatar">👤</span>
+                    <span id="loginBtnText">Login</span>
+                </button>
+            </div>
+        </div>
+    </header>

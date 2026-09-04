@@ -1,0 +1,2 @@
+Integrated About page. Size: 112056 -> 118340 bytes (+6284).
+Done.

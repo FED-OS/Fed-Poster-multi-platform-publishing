@@ -1,0 +1,20 @@
+  [62] a "Admin" -> #
+  [63] button
+  [64] a "Admin" -> #
+  [65] button
+  [66] a "Admin" -> #
+  [67] button
+  [68] a "Admin" -> #
+  [69] button
+  [70] a "Admin" -> #
+  [71] button
+  [72] a "Admin" -> #
+  [73] button
+  [74] a "Admin" -> #
+
+Accessibility tree:
+Page text: Fed-Poster Home Dashboard Calendar Analytics Pricing Settings Forum Download 👤 Login FED-OS Forum Total views: 451 · 10 topics · 🕐 3d ago Latest Hot Top (likes) Most commented New Topic 28 online Support on Ko-fi Admin posted: "Welcome to the fedpromptly social feed!!!" Admin posted: "SURF‑FED: A FASTER, PRIVATE INTERNET BROWSER" Admin posted: "FED-NET: The Plan to Bring Affordable Internet to Florida for Less Than a Slice of Pizza 🍕" Admin posted: "FED-POSTER 100+ PLATFORM MILESTONE & DESKTOP APP LAUNCH !!! 🎉" Admin posted: "Post to 40+ Platforms for Free with Fed-Poster: The Ultimate Cross-Platform Publishing Tool" Admin posted: "GitHub Gists: The Free Nerd Store You Didn't Know You Needed" Admin posted: "Building a Multi-Platform Social Media Poster: A Comprehensive Guide" Admin posted: "Building a Telegram Buffer Clone: A Full-Stack Journey" Admin posted: "July 29, 2026 — Simple Tech Tip of the Day" Admin posted: "Supabase SQL: A Beginner's Journey" 🚀 Welcome to FEDPromptly! Admin posted: "Welcome to the fedpromptly social feed!!!" Admin posted: "SURF‑FED: A FASTER, PRIVATE INTERNET BROWSER" Admin posted: "FED-NET: The Plan to Bring Affordable Internet to Florida for Less Than a Slice of Pizza 🍕" Admin posted: "FED-POSTER 100+ PLATFORM MILESTONE & DESKTOP APP LAUNCH !!! 🎉" Admin posted: "Post to 40+ Platforms for Free with Fed-Poster: The Ultimate Cross-Platform Publishing Tool" Admin posted: "GitHub Gists: The Free Nerd Store You Didn't Know You Needed" Admin posted: "Building a Multi-Platform Social Media Poster: A Comprehensive Guide" Admin posted: "Building a Telegram Buffer Clone: A Full-Stack Journey" Admin posted: "July 29, 2026 — Simple Tech Tip of the Day" Admin posted: "Supabase SQL: A Beginner's Journey" 🚀 Welcome to FEDPromptly! 3d ago LATEST POST Low ACTIVITY LEVEL 0 TOTAL REPLIES 1 min AVG READ TIME TRENDING NOW LIVE 1 Welcome to the fedpromptly social feed!!! 0 0 FEED 2 SURF‑FED: A FASTER, PRIVATE INTERNET BROWSER 0 1 3 FED-NET: The Plan to Bring 
+
+Screenshot: /workspace/.screenshots/step_013.png
+Use see-image to view: /workspace/.screenshots/step_013.png
+=== END ===

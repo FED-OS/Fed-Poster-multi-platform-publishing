@@ -1,0 +1,79 @@
+        /* ── Navbar integration: map site navbar to forum theme variables ── */
+        .navbar {
+            background: color-mix(in srgb, var(--bg) 85%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 1.15rem; color: var(--text);
+            letter-spacing: -0.02em; flex-shrink: 0; text-decoration: none;
+        }
+        .nav-brand:hover { color: var(--brand); }
+        .nav-brand .logo-mark {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-hover));
+            border-radius: 9px; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: #fff;
+            box-shadow: 0 3px 12px var(--brand-glow);
+        }
+        .nav-links { display: flex; align-items: center; gap: 2px; }
+        .nav-links a {
+            padding: 8px 14px; border-radius: var(--radius-xs);
+            font-size: 0.85rem; font-weight: 500; color: var(--text-2);
+            text-decoration: none; transition: var(--transition);
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--text); background: var(--surface-hover); }
+        .nav-links a.active { color: var(--brand); background: var(--brand-soft); font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+        .nav-theme-picker { display: flex; gap: 5px; align-items: center; }
+        .nav-theme-picker .swatch {
+            width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
+            border: 2px solid transparent; transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .nav-theme-picker .swatch:hover { transform: scale(1.15); }
+        .nav-theme-picker .swatch.active { border-color: var(--text); transform: scale(1.15); box-shadow: 0 0 0 2px var(--brand-soft); }
+
+        /* Forum controls inside navbar */
+        .forum-nav-control { flex-shrink: 0; }
+        .nav-right .login-btn {
+            padding: 0 14px; height: 36px; font-size: 0.85rem; font-weight: 600;
+            border-radius: var(--radius-sm); border: 1px solid var(--border);
+            color: var(--text-2); background: var(--surface-2); cursor: pointer;
+            transition: var(--transition); font-family: inherit;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-right .login-btn:hover { color: var(--text); background: var(--surface-hover); border-color: var(--border-strong); }
+        .nav-right .login-btn.logged-in { border-color: var(--green); color: var(--green); background: var(--green-soft); }
+        .nav-right .login-btn .user-avatar {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--brand-soft); color: var(--brand);
+            font-size: 11px; font-weight: 700; overflow: hidden;
+        }
+        .nav-right .login-btn.logged-in .user-avatar { background: var(--green-soft); color: var(--green); }
+        .nav-right .download-group { position: relative; display: inline-flex; }
+        .nav-right .download-toggle {
+            background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2);
+            padding: 0 12px; height: 36px; border-radius: var(--radius-sm); cursor: pointer;
+            font-size: 0.82rem; font-weight: 500; font-family: inherit;
+            transition: var(--transition); display: flex; align-items: center; gap: 7px;
+        }
+        .nav-right .download-toggle:hover { border-color: var(--border-strong); color: var(--text); background: var(--surface-hover); }
+        .nav-right .theme-toggle {
+            background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2);
+            width: 36px; height: 36px; border-radius: var(--radius-sm); cursor: pointer;
+            transition: var(--transition); display: flex; align-items: center; justify-content: center;
+            font-size: 0.88rem;
+        }
+        .nav-right .theme-toggle:hover { color: var(--text); background: var(--surface-hover); border-color: var(--border-strong); }
+        .nav-toggle { display: none; font-size: 22px; color: var(--text); background: none; border: none; cursor: pointer; }
+
+        /* Mobile nav */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }

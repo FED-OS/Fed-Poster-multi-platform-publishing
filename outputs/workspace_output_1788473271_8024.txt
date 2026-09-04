@@ -1,0 +1,4 @@
+=== Navigate from dashboard to forum via link ===
+URL: http://localhost:8765/site/dashboard.html
+Title: Fed-Poster — Dashboard
+Result: ERROR: click failed — TimeoutError: Page.click: Timeout 5000ms exceeded.

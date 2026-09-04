@@ -1,0 +1,7 @@
+2813:    <script src="assets/fedposter.js"></script>
+2969:            // Observe data-theme changes made by fedposter.js theme picker
+--- verify navbar + links ---
+12:    <link rel="stylesheet" href="assets/fedposter.css" />
+2813:    <script src="assets/fedposter.js"></script>
+2966:                // Keep the about page's dark base regardless of fedposter.css theme variables
+2969:            // Observe data-theme changes made by fedposter.js theme picker

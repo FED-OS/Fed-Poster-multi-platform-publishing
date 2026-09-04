@@ -1,0 +1,5 @@
+/opt/ninja-browser-use/browser_server.py:5:Launches a Chromium instance with --remote-debugging-port=9222 that persists
+/opt/ninja-browser-use/browser_server.py:138:            ["pkill", "-f", f"--remote-debugging-port={CDP_PORT}"],
+/opt/ninja-browser-use/browser_server.py:200:        ["pkill", "-9", "-f", f"remote-debugging-port={CDP_PORT}"],
+/opt/ninja-browser-use/browser_server.py:222:        f"--remote-debugging-port={CDP_PORT}",
+/opt/ninja-browser-use/browser_server.py:226:        "--no-sandbox",

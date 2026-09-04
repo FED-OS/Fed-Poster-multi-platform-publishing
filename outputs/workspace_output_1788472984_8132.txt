@@ -1,0 +1,5 @@
+=== Preview server status ===
+index.html: 200
+forum.html: 404
+fedposter.css: 404
+fedposter.js: 404

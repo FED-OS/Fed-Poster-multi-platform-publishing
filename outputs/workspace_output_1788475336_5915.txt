@@ -1,0 +1,7 @@
+root         645  1.6  2.1 258504 86428 ?        S    21:22   1:19 Xvfb :99 -screen 0 1600x900x24 -ac +extension GLX +render -noreset
+root         647  0.0  0.4  45760 16196 ?        S    21:22   0:02 x11vnc -display :99 -forever -shared -rfbauth /root/.vnc/passwd -rfbport 5901 -o /var/log/x11vnc.log
+root        7183  0.0  0.0   2920   900 ?        Ss   22:42   0:00 timeout --preserve-status --signal=KILL 10s bash -lc { cd /workspace ; mkdir -p /workspace/outputs ; } { ps aux | grep -E "[X]vfb|[X]org|display :99" | head; echo "---DISPLAY---"; echo $DISPLAY __ec=$? } >"/workspace/outputs/workspace_output_1788475336_5915.txt" 2>&1 head -c 80000 "/workspace/outputs/workspace_output_1788475336_5915.txt" ( exit "$__ec" )
+root        7184  0.0  0.0   4352  3240 ?        S    22:42   0:00 bash -lc { cd /workspace ; mkdir -p /workspace/outputs ; } { ps aux | grep -E "[X]vfb|[X]org|display :99" | head; echo "---DISPLAY---"; echo $DISPLAY __ec=$? } >"/workspace/outputs/workspace_output_1788475336_5915.txt" 2>&1 head -c 80000 "/workspace/outputs/workspace_output_1788475336_5915.txt" ( exit "$__ec" )
+root        7189  0.0  0.0   3884  2096 ?        S    22:42   0:00 grep -E [X]vfb|[X]org|display :99
+---DISPLAY---
+

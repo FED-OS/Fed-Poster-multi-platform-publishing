@@ -1,0 +1,9 @@
+total 740
+drwxr-xr-x  2 root root   4096 Sep  3 22:01 .
+drwxr-xr-x 11 user user   4096 Sep  3 22:01 ..
+-rw-r--r--  1 root root 413681 Sep  3 21:57 original_conversation_1788472642_641.txt
+-rw-r--r--  1 root root 332634 Sep  3 22:01 original_conversation_1788472874_6171.txt
+---
+-rw-r--r-- 1 root root 413681 Sep  3 21:57 /workspace/summarized_conversations/original_conversation_1788472642_641.txt
+--- new transcript ---
+-rw-r--r-- 1 root root 332634 Sep  3 22:01 /workspace/summarized_conversations/original_conversation_1788472874_6171.txt

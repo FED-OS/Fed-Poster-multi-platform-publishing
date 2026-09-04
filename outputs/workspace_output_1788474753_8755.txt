@@ -1,0 +1,7 @@
+=== FORUM CSS OVERRIDES (navbar) ===
+2932:        /* ── Navbar integration: map site navbar to forum theme variables ── */
+2972:        /* Forum controls inside navbar */
+=== Search for site navbar override block ===
+2932:        /* ── Navbar integration: map site navbar to forum theme variables ── */
+3102:    <!-- Hidden theme elements for forum JS compatibility (header was replaced with site navbar) -->
+4320:        // ── Sync when site navbar theme picker changes data-theme ──

@@ -1,0 +1,28 @@
+total 124
+drwxr-xr-x 3 root root  4096 Sep  3 21:47 .
+drwxr-xr-x 4 root root  4096 Sep  3 21:47 ..
+-rw-r--r-- 1 root root  4824 Sep  3 21:47 404.html
+-rw-r--r-- 1 root root  6032 Sep  3 21:47 analytics.html
+drwxr-xr-x 2 root root  4096 Sep  3 21:47 assets
+-rw-r--r-- 1 root root  7608 Sep  3 21:47 calendar.html
+-rw-r--r-- 1 root root 23423 Sep  3 21:47 dashboard.html
+-rw-r--r-- 1 root root 34310 Sep  3 21:47 index.html
+-rw-r--r-- 1 root root 16210 Sep  3 21:47 pricing.html
+-rw-r--r-- 1 root root  9733 Sep  3 21:47 settings.html
+---
+total 144
+drwxr-xr-x 2 root root  4096 Sep  3 21:47 .
+drwxr-xr-x 3 root root  4096 Sep  3 21:47 ..
+-rw-r--r-- 1 root root  5092 Sep  3 21:47 analytics.css
+-rw-r--r-- 1 root root  8372 Sep  3 21:47 analytics.js
+-rw-r--r-- 1 root root  5877 Sep  3 21:47 calendar.css
+-rw-r--r-- 1 root root  8350 Sep  3 21:47 calendar.js
+-rw-r--r-- 1 root root 12066 Sep  3 21:47 dashboard.css
+-rw-r--r-- 1 root root 19596 Sep  3 21:47 dashboard.js
+-rw-r--r-- 1 root root  3507 Sep  3 21:47 error.css
+-rw-r--r-- 1 root root 15230 Sep  3 21:47 fedposter.css
+-rw-r--r-- 1 root root  4942 Sep  3 21:47 fedposter.js
+-rw-r--r-- 1 root root  2771 Sep  3 21:47 kofi-widget.js
+-rw-r--r-- 1 root root  6173 Sep  3 21:47 pricing.css
+-rw-r--r-- 1 root root  9079 Sep  3 21:47 settings.css
+-rw-r--r-- 1 root root  9425 Sep  3 21:47 settings.js

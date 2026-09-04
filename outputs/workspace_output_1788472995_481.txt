@@ -1,0 +1,5 @@
+=== Test correct paths ===
+site/index.html: 200
+site/forum.html: 200
+site/assets/fedposter.css: 200
+site/assets/fedposter.js: 200

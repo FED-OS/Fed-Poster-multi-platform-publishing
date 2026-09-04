@@ -1,0 +1,8 @@
+    <script>$
+        // M-bM-^TM-^@M-bM-^TM-^@M-bM-^TM-^@ Orb Canvas M-bM-^TM-^@M-bM-^TM-^@M-bM-^TM-^@$
+        const canvas = document.getElementById('orb-canvas');$
+        const ctx = canvas.getContext('2d');$
+        let particles = [];$
+        let w, h;$
+$
+        function resize() {$

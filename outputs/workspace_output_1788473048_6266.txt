@@ -1,0 +1,16 @@
+                opt.classList.toggle('active', opt.dataset.themeVal === theme);
+            });
+            // Update navbar theme picker swatches
+            document.querySelectorAll('.nav-theme-picker .swatch').forEach(s => {
+                s.classList.toggle('active', s.dataset.theme === theme);
+            });
+        }
+        themeToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', (e) => {
+            if (!themeDropdown.contains(e.target) && e.target !== themeToggle) {
+                themeDropdown.classList.remove('open');
+            }
+        });

@@ -1,0 +1,6 @@
+URL: http://localhost:8765/site/forum.html
+Title: FEDPromptly · FED Hub
+---
+Result: JS result: [{"theme":"dark","active":true},{"theme":"light","active":false},{"theme":"blue","active":false},{"theme":"green","active":false},{"theme":"purple","active":false},{"theme":"orange","active":false},{"theme":"cyberpunk","active":false},{"theme":"sunset","active":false},{"theme":"ocean","active":false},{"theme":"rose","active":false},{"theme":"midnight","active":false},{"theme":"synthwave","active":false}]
+
+Interactive elements (55):
